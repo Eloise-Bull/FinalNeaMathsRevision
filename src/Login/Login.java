@@ -3,14 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Login;
-import CalculatingStudentStatistics.StudentStatistics;
-import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
+import Login.CheckLoginDetails;
 import StudentHome.StudentHome;
 import SignUp.LoginOrSignUp;
 import TeacherHome.TeacherHome;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 /**
  *
  * @author elois
@@ -23,6 +20,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         center();
+        CheckLoginDetails check = new CheckLoginDetails();
+        System.out.println(check.checkUsernameReturnID("fn2","Student"));
     }
 
     private static String user;

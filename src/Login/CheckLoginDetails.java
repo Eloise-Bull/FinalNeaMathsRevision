@@ -18,38 +18,55 @@ public class CheckLoginDetails {
     
     // return id compare id to password id thats returned. make false = -1 cause not true. 
     // currently just returns if present in table 
-    public int checkusernameReturnID(String enteredUsername, String user){
+    // when compare do if username id = password id AS LONG AS id =! -1 
+    public int checkUsernameReturnID(String enteredUsername, String user){
         
-            if ("Student".equals(user)) {
-                try (Connection connection = TheConnectionToDatabase()){
-                    Statement statement = connection.createStatement();
-                    ResultSet results = statement.executeQuery("SELECT Student_id FROM Student WHERE Username = " + enteredUsername);
-                    if (results.next()){
-                        int id = results.getInt("username");
-                        return id; 
-                    }
+        if ("Student".equals(user)) {
+            try (Connection connection = TheConnectionToDatabase()){
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery("SELECT Student_id FROM Student WHERE username = " + "'" +  enteredUsername + "'");
+                if (results.next()){
+                    int id = results.getInt("Student_id");
+                    return id; 
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
+                else {
                     return -1;
                 }
-            if ("Teacher".equals(user)) {
-                try (Connection connection = TheConnectionToDatabase()){
-                    Statement statement = connection.createStatement();
-                    ResultSet results = statement.executeQuery("SSELECT Teacher_id FROM Teacher WHERE Username = " + enteredUsername);
-                    if (results.next()){
-                        int id = results.getInt("username");
-                        return id; 
-                    }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return -1;
+            }
+
+        }
+
+        if ("Teacher".equals(user)) {
+            try (Connection connection = TheConnectionToDatabase()){
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery("SSELECT Teacher_id FROM Teacher WHERE username = " + "'" + enteredUsername + "'");
+                if (results.next()){
+                    int id = results.getInt("Teacher_id");
+                    return id; 
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
+                else {
                     return -1;
                 }
-                 
-    } 
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return -1;
+            }
+
+        }
+        else {
+            return -1;
+        }
+            
+            
+    }
+    
     public Boolean checkpassword(){
-        
+       return true; 
     }
 
 }
