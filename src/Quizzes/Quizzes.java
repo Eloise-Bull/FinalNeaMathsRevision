@@ -229,7 +229,7 @@ public class Quizzes extends javax.swing.JFrame {
             jLabelMark.setText("Marked: Correct");
         }
         else {
-            jLabelMark.setText("Marked: False");
+            jLabelMark.setText("Marked: Incorrect");
             
         }
         
@@ -243,7 +243,7 @@ public class Quizzes extends javax.swing.JFrame {
         int count = QuizQuestions.count();
         jLabelQuestion.setText("Question: " + count);
         float stats = QuizQuestions.CountingQuizStats(count-1,correct);
-        jLabelStats.setText ("Stats: " + stats);
+        jLabelStats.setText ("Stats: " + stats + "%");
         
         
         

@@ -111,7 +111,7 @@ public class ConnectTheDatabase {
         ArrayList<Float> StudentStatslist = new ArrayList<>();
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT StudentStats.StudentStatistics FROM StudentStats Join Student ON StudentStats.Student_Id = Student.Student_Id WHERE Student.Class_Id = '" + Class_id + "' ;");
+            ResultSet results = statement.executeQuery("SELECT S FROM StudentStats Join Student ON StudentStats.Student_Id = Student.Student_Id WHERE Student.Class_Id = '" + Class_id + "' ;");
             while (results.next()){
                 float StatsValue = results.getFloat("StudentStatistics");
                 StudentStatslist.add(StatsValue);

@@ -166,7 +166,7 @@ public class Settings extends javax.swing.JFrame {
         if (User.equals("Student")){
             StudentHome submitButton = new StudentHome();  
             submitButton.setVisible(true);
-            
+            this.dispose();
         }   
         
             // TODO add your handling code here:
