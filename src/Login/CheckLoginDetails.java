@@ -110,7 +110,47 @@ public class CheckLoginDetails {
         }
             
             
-    } 
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///this is to get the class id for either student or teacher to be used in later methods
+    ///
+    
+    public int getClassIdStudent(int StudentID){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Class_id FROM Student WHERE Student_id = " + "'" + StudentID + "'");
+            if (results.next()){
+                int id = results.getInt("Class_id");
+                return id; 
+            }
+            else {
+                return -1;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    
+    public int getClassIdTeacher(int TeacherID){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Class_id FROM Class WHERE Teacher_id = " + "'" + TeacherID + "'");
+            if (results.next()){
+                int id = results.getInt("Class_id");
+                return id; 
+            }
+            else {
+                return -1;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 
 }
 

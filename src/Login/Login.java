@@ -32,23 +32,17 @@ public class Login extends javax.swing.JFrame {
         return user;
     }
 
-
-    
-    
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     ///FOR NOW SET  THIS TO ID = 1 BUT WHEN DO LOGIN GET CLASS ID FROM DATABASSE AND PUT IT IN HERE INSTEAD
     
     public static int classId(){
-        UserClassID = 1;
         return UserClassID;
     }
     
     public static int StudentID() {
-        StudentId = 1;
         return StudentId;
     }
     public static int TeacherID() {
-        TeacherId =1;
         return TeacherId;
     }
 
@@ -153,19 +147,25 @@ public class Login extends javax.swing.JFrame {
 
     private void jtxtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPasswordActionPerformed
         jtxtPassword.getPassword();
-        
-    
-    // TODO add your handling code here:
     }//GEN-LAST:event_jtxtPasswordActionPerformed
 
     private void jtxtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSubmitActionPerformed
+        // getting all detail need to comapare data 
+        
+        // resets the important data incase people log out then log back in as someone else. 
+        TeacherId = -1;
+        UserClassID = -1;
+        StudentId = -1;
+        
         String usernameInputed = jtxtUsername.getText();
         String passwordEntered = jtxtPassword.getText();
         CheckLoginDetails check = new CheckLoginDetails();
         int UsernameId = check.checkUsernameReturnID(usernameInputed,user);
-
         int PasswordId = check.checkPasswordReturnID(passwordEntered,user);
         
+        // getting user id so can use in later methods when accessing database
+        
+        // comparing data check its correct before login
         boolean CheckDetails= false;
         // || = or is syntax
         // could change to add two more if statments so they know if username or passwords is incorrect. security issie ??
@@ -184,20 +184,26 @@ public class Login extends javax.swing.JFrame {
             jtxtPassword.setText("");
         }
         
+        // if correct takes user to correct screen. 
         if ( CheckDetails == true) {
             if ("Student".equals(user)) {
+            StudentId = UsernameId;
+            UserClassID = check.getClassIdStudent(UsernameId);
             StudentHome ToStudentScreen = new StudentHome();  
             ToStudentScreen.setVisible(true);
             this.dispose();
             }
             if ("Teacher".equals(user)) {
+            TeacherId = UsernameId;
+            UserClassID = check.getClassIdTeacher(UsernameId);
             TeacherHome ToTeacherScreen = new TeacherHome();  
             ToTeacherScreen.setVisible(true);
             this.dispose();
             }
         }
-        // if correct takes user to correct screen. 
-        
+        System.out.println(TeacherId);
+        System.out.println(UserClassID);
+        System.out.println(StudentId);
 
     }//GEN-LAST:event_jtxtSubmitActionPerformed
 
