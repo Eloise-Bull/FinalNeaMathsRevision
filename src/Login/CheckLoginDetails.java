@@ -16,33 +16,41 @@ import java.sql.Statement;
  */
 public class CheckLoginDetails {
     
-}
-
-    public Boolean checkusername(){
+    // return id compare id to password id thats returned. make false = -1 cause not true. 
+    // currently just returns if present in table 
+    public int checkusernameReturnID(String enteredUsername, String user){
         
-        float score = StudentStatistics.PushScore();
-        try (Connection connection = TheConnectionToDatabase()){
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT Topic_Id FROM TopicStats WHERE Student_id = " + Student_id + " ORDER BY Score ASC LIMIT 1");
-            // was suggested coulf be rounding errors for database as to why <=
-            if (results.next()){
-               int topicID = results.getInt("Topic_Id");
-               return topicID ; 
-            } 
-            else{ 
-                //cause results.next checks if query returns at least one row, need this here
-                return 0;
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            
-            //fix later idk what else to put for that
-            
-            return 0;
-        }         
+            if ("Student".equals(user)) {
+                try (Connection connection = TheConnectionToDatabase()){
+                    Statement statement = connection.createStatement();
+                    ResultSet results = statement.executeQuery("SELECT Student_id FROM Student WHERE Username = " + enteredUsername);
+                    if (results.next()){
+                        int id = results.getInt("username");
+                        return id; 
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    return -1;
+                }
+            if ("Teacher".equals(user)) {
+                try (Connection connection = TheConnectionToDatabase()){
+                    Statement statement = connection.createStatement();
+                    ResultSet results = statement.executeQuery("SSELECT Teacher_id FROM Teacher WHERE Username = " + enteredUsername);
+                    if (results.next()){
+                        int id = results.getInt("username");
+                        return id; 
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    return -1;
+                }
+                 
     } 
-    }
     public Boolean checkpassword(){
         
     }
+
+}
+
