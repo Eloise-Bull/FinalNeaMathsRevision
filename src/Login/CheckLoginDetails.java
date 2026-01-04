@@ -43,7 +43,7 @@ public class CheckLoginDetails {
         if ("Teacher".equals(user)) {
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery("SSELECT Teacher_id FROM Teacher WHERE username = " + "'" + enteredUsername + "'");
+                ResultSet results = statement.executeQuery("SELECT Teacher_id FROM Teacher WHERE username = " + "'" + enteredUsername + "'");
                 if (results.next()){
                     int id = results.getInt("Teacher_id");
                     return id; 
@@ -65,9 +65,52 @@ public class CheckLoginDetails {
             
     }
     
-    public Boolean checkpassword(){
-       return true; 
-    }
+    // smae code swap out the username and stuff for password
+    // need to encrypt code but thats laters problem.
+    public int checkPasswordReturnID(String enteredPassword, String user){
+       if ("Student".equals(user)) {
+            try (Connection connection = TheConnectionToDatabase()){
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery("SELECT Student_id FROM Student WHERE password_hash = " + "'" +  enteredPassword + "'");
+                if (results.next()){
+                    int id = results.getInt("Student_id");
+                    return id; 
+                }
+                else {
+                    return -1;
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return -1;
+            }
+
+        }
+
+        if ("Teacher".equals(user)) {
+            try (Connection connection = TheConnectionToDatabase()){
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery("SELECT Teacher_id FROM Teacher WHERE password_hash = " + "'" + enteredPassword + "'");
+                if (results.next()){
+                    int id = results.getInt("Teacher_id");
+                    return id; 
+                }
+                else {
+                    return -1;
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return -1;
+            }
+
+        }
+        else {
+            return -1;
+        }
+            
+            
+    } 
 
 }
 

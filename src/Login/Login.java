@@ -20,11 +20,10 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         center();
-        CheckLoginDetails check = new CheckLoginDetails();
-        System.out.println(check.checkUsernameReturnID("fn2","Student"));
+        
     }
 
-    private static String user;
+    private static String user = "";
     private static int UserClassID;
     private static int StudentId;
     private static int TeacherId;
@@ -77,6 +76,7 @@ public class Login extends javax.swing.JFrame {
         jButtonBack = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
@@ -114,7 +114,7 @@ public class Login extends javax.swing.JFrame {
                 jtxtSubmitActionPerformed(evt);
             }
         });
-        getContentPane().add(jtxtSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, 100, 20));
+        getContentPane().add(jtxtSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 540, 100, 20));
 
         jButtonBack.setText("Back");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
@@ -141,17 +141,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 300, -1, -1));
+        getContentPane().add(jWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, 320, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtxtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtUsernameActionPerformed
-        String Username = jtxtUsername.getText();
-        if (Username.length() < 5 ){
-            jtxtUsername.setText("Username must be larger than 5 characters");
-        }
-        // compare database
-        
+
     }//GEN-LAST:event_jtxtUsernameActionPerformed
 
     private void jtxtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPasswordActionPerformed
@@ -162,17 +158,46 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtPasswordActionPerformed
 
     private void jtxtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSubmitActionPerformed
-        if ("Student".equals(user)) {
+        String usernameInputed = jtxtUsername.getText();
+        String passwordEntered = jtxtPassword.getText();
+        CheckLoginDetails check = new CheckLoginDetails();
+        int UsernameId = check.checkUsernameReturnID(usernameInputed,user);
+
+        int PasswordId = check.checkPasswordReturnID(passwordEntered,user);
+        
+        boolean CheckDetails= false;
+        // || = or is syntax
+        // could change to add two more if statments so they know if username or passwords is incorrect. security issie ??
+        if ("".equals(user)) {
+            jWarning.setText("Select Student or Teacher");
+        }
+        else if ((UsernameId == -1) || (PasswordId == -1 )){
+            jWarning.setText("Either password or Username is incorrect");
+            jtxtPassword.setText("");
+        }
+        else if ( UsernameId == PasswordId) {
+            CheckDetails = true;
+        }
+        else {
+            jWarning.setText("Username and Password do not match");
+            jtxtPassword.setText("");
+        }
+        
+        if ( CheckDetails == true) {
+            if ("Student".equals(user)) {
             StudentHome ToStudentScreen = new StudentHome();  
             ToStudentScreen.setVisible(true);
             this.dispose();
-        }
-        if ("Teacher".equals(user)) {
+            }
+            if ("Teacher".equals(user)) {
             TeacherHome ToTeacherScreen = new TeacherHome();  
             ToTeacherScreen.setVisible(true);
-            this.dispose();// TODO add your handling code here:
+            this.dispose();
+            }
         }
-// TODO add your handling code here:
+        // if correct takes user to correct screen. 
+        
+
     }//GEN-LAST:event_jtxtSubmitActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
@@ -222,6 +247,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel jWarning;
     private javax.swing.JLabel jtxtLogin;
     private javax.swing.JPasswordField jtxtPassword;
     private javax.swing.JButton jtxtSubmit;
