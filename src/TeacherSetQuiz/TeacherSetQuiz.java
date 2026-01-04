@@ -148,7 +148,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         String Topic = jTopics.getSelectedItem().toString();
         AssigningQuiz.PuttingQuizDataIntoDataBase(NumOfQuestions,ClassID,DueDate,Topic);
         jNumberInput.setText("");
-        jDueDateLabel.setText("");
+        jdueDate.setText("");
     }//GEN-LAST:event_jAssignButtonActionPerformed
 
     /**
