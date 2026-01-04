@@ -3,9 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Login;
+import CalculatingStudentStatistics.StudentStatistics;
+import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
 import StudentHome.StudentHome;
 import SignUp.LoginOrSignUp;
 import TeacherHome.TeacherHome;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 /**
  *
  * @author elois
@@ -75,7 +80,6 @@ public class Login extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -99,7 +103,7 @@ public class Login extends javax.swing.JFrame {
         jtxtLogin.setText("Login");
         getContentPane().add(jtxtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, 200, 70));
 
-        jLabel2.setText("Username ( 5+ characters) ");
+        jLabel2.setText("Username");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, 230, 30));
 
         jLabel3.setText("Password");
