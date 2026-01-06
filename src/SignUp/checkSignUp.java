@@ -20,7 +20,7 @@ public class checkSignUp {
         //////////////// STUDENT
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            statement.execute("INSERT INTO Student ( Name, Username, Password, Class) VALUES ( '" + name+ "," +Username +"," +"'" +Password + "'" + "," + "'" + Email + "'" + "," + ClassCode + ")");        
+            statement.execute("INSERT INTO Student ( S_name, username,email, password_hash) VALUES ( '" + name+ "','" + Username +"','" + Email + "','"+Password  + "')");        
         
         }
         catch(Exception e) {
@@ -34,7 +34,7 @@ public class checkSignUp {
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
             // inserting into teacher table
-            statement.execute("INSERT INTO Teacher ( Name, Username, Password) VALUES ( '" + name+ "," +Username +"," +"'" +Password + "'" + "," + "'" + Email + "'" + ")");        
+            statement.execute("INSERT INTO Teacher ( T_name, username,email, password_hash) VALUES ( '" + name+ "'," + Username +",'" + Email + "'"+Password  + "')");        
             // cuase of how i made database need to also add to class table 
             ResultSet results = statement.executeQuery("SELECT LAST_INSERT_ID() AS id;");
             if (results.next()){
@@ -47,4 +47,35 @@ public class checkSignUp {
             e.printStackTrace();
         }
     }
+    
+    
+    ///// check username is unique
+    ///
+    ///
+    public boolean UniquenessCheck(String user,String EnteredUsername ){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Count(*) FROM "+ user +" WHERE Username = '" + EnteredUsername+ "'");
+            if (results.next()){
+                int count = results.getInt(1);
+                if (count > 0){
+                    return false;
+                }
+                else{ 
+                return true;
+                }
+            } 
+            else {
+                return false;
+            }
+            
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            // false as smth went  bad
+            return false;
+        }    
+    }
+    
+    
 }
