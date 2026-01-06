@@ -17,11 +17,31 @@ public class checkSignUp {
     public void AddStudent(String name, String Username, String Password, String Email, int ClassCode ){
         
         
-        //////////////// unfinished 
+        //////////////// STUDENT
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
             statement.execute("INSERT INTO Student ( Name, Username, Password, Class) VALUES ( '" + name+ "," +Username +"," +"'" +Password + "'" + "," + "'" + Email + "'" + "," + ClassCode + ")");        
         
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void AddTeacher(String name, String Username, String Password, String Email ){
+        
+        
+        //////////////// TEACHER 
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            // inserting into teacher table
+            statement.execute("INSERT INTO Teacher ( Name, Username, Password) VALUES ( '" + name+ "," +Username +"," +"'" +Password + "'" + "," + "'" + Email + "'" + ")");        
+            // cuase of how i made database need to also add to class table 
+            ResultSet results = statement.executeQuery("SELECT LAST_INSERT_ID() AS id;");
+            if (results.next()){
+               /// this should get the teacher last ~instered in and then get theyre id so i can add to class
+                int TeacherId = results.getInt("id");
+               statement.execute("INSERT INTO Class (Teacher_id) VALUES ('" + TeacherId + "')"); 
+            }
         }
         catch(Exception e) {
             e.printStackTrace();
