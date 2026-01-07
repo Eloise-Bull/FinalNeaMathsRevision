@@ -282,15 +282,13 @@ public class SignUp extends javax.swing.JFrame {
         else if (Username.length()>20){
             jWarning.setText("Password must be less than 20 characters");
         } 
-        else if (check.UniquenessCheck(user, Username)) {
-            jWarning.setText("Username must be unique");
-        }
+        
         else {
             if ( "Student".equals(user)){
                 check.AddStudent(name, Username, Email, Password, Classcode);
             }
-            if ( "Student".equals(user)){
-                check.AddTeacher(name, Username, Email,  Password);
+            if ( "Teacher".equals(user)){
+                check.AddTeacher(name, Username, Email,  Password, School);
             }
             Login ToLoginScreen = new Login();  
             ToLoginScreen.setVisible(true);

@@ -20,27 +20,27 @@ public class checkSignUp {
         //////////////// STUDENT
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            statement.execute("INSERT INTO Student ( S_name, username,email, password_hash) VALUES ( '" + name+ "','" + Username +"','" + Email + "','"+Password  + "')");        
+            statement.execute("INSERT INTO Student ( S_name, username,email, password_hash, Class) VALUES ( '" + name+ "','" + Username +"','" + Email + "','"+Password  + "'," + ClassCode + ")");        
         
         }
         catch(Exception e) {
             e.printStackTrace();
         }
     }
-    public void AddTeacher(String name, String Username, String Password, String Email ){
+    public void AddTeacher(String name, String Username, String Password, String Email, String School ){
         
         
         //////////////// TEACHER 
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
             // inserting into teacher table
-            statement.execute("INSERT INTO Teacher ( T_name, username,email, password_hash) VALUES ( '" + name+ "'," + Username +",'" + Email + "'"+Password  + "')");        
+            statement.execute("INSERT INTO Teacher ( T_name, username,email, password_hash) VALUES ( '" + name+ "', '" + Username +"' ,'" + Email + "','"+Password  + "')");        
             // cuase of how i made database need to also add to class table 
             ResultSet results = statement.executeQuery("SELECT LAST_INSERT_ID() AS id;");
             if (results.next()){
                /// this should get the teacher last ~instered in and then get theyre id so i can add to class
                 int TeacherId = results.getInt("id");
-               statement.execute("INSERT INTO Class (Teacher_id) VALUES ('" + TeacherId + "')"); 
+               statement.execute("INSERT INTO Class (Teacher_id, School) VALUES ('" + TeacherId + "' " + School + ")"); 
             }
         }
         catch(Exception e) {
