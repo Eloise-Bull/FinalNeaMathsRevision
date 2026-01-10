@@ -49,18 +49,6 @@ public class ConnectTheDatabase {
         }
     }
     
-    
-    // making array lists for the stuff so that can call upon method instead of in code
-    //// FOR LOGIN / CHANGE USERNAME /PASSWORD / DEATILS#
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void ArrayListTeacherUsernames(){
-        
-    }
-    
-    public void ArrayListStudentUsernames(){
-        
-    }
-    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// for the quizzes creats an array list all the answers and the questions i then search for them
     

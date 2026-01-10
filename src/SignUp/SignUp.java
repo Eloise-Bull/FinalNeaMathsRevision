@@ -309,14 +309,31 @@ public class SignUp extends javax.swing.JFrame {
         } 
         else {
             if ( "Student".equals(user)){
-                check.AddStudent(name, Username, Email, Password, Integer.valueOf(Classcode));
+                Boolean worked = check.AddStudent(name, Username, Email, Password, Integer.valueOf(Classcode));
+                System.out.println(worked);
+                if (worked){
+                    Login ToLoginScreen = new Login();  
+                    ToLoginScreen.setVisible(true);
+                    this.dispose();
+                }
+                else {
+                    LWarning.setText("There has been an issue please retry");
+                    jtxtName.setText("");
+                    jtxtUsername.setText("");
+                    jtxtEmail.setText("");
+                    jtxtClassCode.setText("");
+                    jtxtSchool.setText("");
+                    jtxtPassword.setText("");
+                    jtxtCheckpassword.setText("");
+                }
             }
             if ( "Teacher".equals(user)){
                 check.AddTeacher(name, Username, Email,  Password, School);
+                Login ToLoginScreen = new Login();  
+                ToLoginScreen.setVisible(true);
+                this.dispose();
             }
-            Login ToLoginScreen = new Login();  
-            ToLoginScreen.setVisible(true);
-            this.dispose();
+            
         }
         
     }//GEN-LAST:event_jbuttonSubmitActionPerformed
