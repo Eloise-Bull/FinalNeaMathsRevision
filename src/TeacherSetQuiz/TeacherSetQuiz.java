@@ -7,6 +7,7 @@ package TeacherSetQuiz;
 import Login.Login;
 import TeacherHome.TeacherHome;
 import TeacherSetQuiz.AssigningQuiz;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +19,12 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
      * Creates new form TeacherSetQuiz
      */
     public TeacherSetQuiz() {
-        initComponents();        
+        initComponents();  
+        AssigningQuiz Topic = new AssigningQuiz();
+        ArrayList<String> Topics = Topic.TopicsForDropDownBox();
+        for ( int i = 0; i < (Topics).size()- 1; i++){
+            jTopics.addItem(Topics.get(i));
+        }
     }
 
     /**

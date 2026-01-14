@@ -19,13 +19,25 @@ public class AssigningQuiz {
         private static int NumOfStudents;
         private static int AssignmentIdLastUpdated;
         private static int TeacherID = Login.TeacherID();
-
-
-
-    
-    public static void AssigningTheQuizToDataBase() {
         
+    public ArrayList<String> TopicsForDropDownBox(){
+        ArrayList<String> TopicList = new ArrayList<>();
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Topics FROM Topic");
+            while (results.next()){
+                String Topic = results.getString("Topics");
+                TopicList.add(Topic);
+            }
+            return TopicList;
+            
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
+        
     public static void PuttingQuizDataIntoDataBase(int numOfQuestions, int ClassID,String DueDate, String Topic){
         
         ArrayList<String> StudentList = new ArrayList<>();
