@@ -136,9 +136,9 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
     }//GEN-LAST:event_jTopicsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    TeacherHome ToHome = new TeacherHome();
-    ToHome.setVisible(true);
-    this.dispose();        // TODO add your handling code here:
+        TeacherHome ToHome = new TeacherHome();
+        ToHome.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jAssignButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAssignButtonActionPerformed
