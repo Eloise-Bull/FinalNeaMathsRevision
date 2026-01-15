@@ -96,7 +96,7 @@ public class StudentStatistics {
     
     
     public static float PushScore(){
-        int Student_id = Login.StudentID();
+        int Student_id = Login.InfoOfUserForThisLoginSession.StudentId;
         ArrayList<Float> UpdatedList = getNewTopicStatsList(Student_id);
         ArrayList<Float> SortedList = SortingTheStats(UpdatedList);
         float score = SortedList.get(0);

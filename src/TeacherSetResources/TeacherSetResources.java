@@ -195,8 +195,8 @@ public class TeacherSetResources extends javax.swing.JFrame {
         
         String TypeOfResource = jPickResourceType.getSelectedItem().toString();
         String Duedate = jDueDate.getText();
-        int ClassID = Login.classId();
-        AssigningAResource.SetResourceToClassOrStudent(TypeOfResource,resourceNum,ClassID,Duedate );
+        int ClassId = Login.InfoOfUserForThisLoginSession.UserClassID ;
+        AssigningAResource.SetResourceToClassOrStudent(TypeOfResource,resourceNum,ClassId,Duedate );
         jResourceNum.setText("");
         jDueDate.setText("");
         

@@ -23,39 +23,20 @@ public class Login extends javax.swing.JFrame {
         
     }
 
-    private static String user = "";
-    private static int UserClassID;
-    private static int StudentId;
-    private static int TeacherId;
     
-    public static String userType() {
-        return user;
-    }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///FOR NOW SET  THIS TO ID = 1 BUT WHEN DO LOGIN GET CLASS ID FROM DATABASSE AND PUT IT IN HERE INSTEA
-    /// @return D
-    
-    public static int classId(){
-        return UserClassID;
-    }
-    ///// fix this its not working god knows why.
-    ///
-    ///
-    
-    public static int StudentID() {
-        return StudentId;
-    }
-
-    public static int TeacherID() {
-        return TeacherId;
+    public class InfoOfUserForThisLoginSession{
+        public static String user = "";
+        public static int UserClassID = -1;
+        public static int StudentId = -1;
+        public static int TeacherId = -1;
     }
 
     public void center() {
         initComponents(); 
-        
- 
     }
+    
+    String user;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,11 +137,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jtxtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSubmitActionPerformed
         // getting all detail need to comapare data 
-        
         // resets the important data incase people log out then log back in as someone else. 
-        TeacherId = -1;
-        UserClassID = -1;
-        StudentId = -1;
         
         String usernameInputed = jtxtUsername.getText();
         String passwordEntered = jtxtPassword.getText();
@@ -192,23 +169,20 @@ public class Login extends javax.swing.JFrame {
         // if correct takes user to correct screen. 
         if ( CheckDetails == true) {
             if ("Student".equals(user)) {
-            StudentId = UsernameId;
-            UserClassID = check.getClassIdStudent(UsernameId);
+            InfoOfUserForThisLoginSession.StudentId = UsernameId;
+            InfoOfUserForThisLoginSession.UserClassID = check.getClassIdStudent(UsernameId);
             StudentHome ToStudentScreen = new StudentHome();  
             ToStudentScreen.setVisible(true);
             this.dispose();
             }
             if ("Teacher".equals(user)) {
-            TeacherId = UsernameId;
-            UserClassID = check.getClassIdTeacher(UsernameId);
+            InfoOfUserForThisLoginSession.TeacherId = UsernameId;
+            InfoOfUserForThisLoginSession.UserClassID = check.getClassIdTeacher(UsernameId);
             TeacherHome ToTeacherScreen = new TeacherHome();  
             ToTeacherScreen.setVisible(true);
             this.dispose();
             }
         }
-        System.out.println(TeacherId);
-        System.out.println(UserClassID);
-        System.out.println(StudentId);
 
     }//GEN-LAST:event_jtxtSubmitActionPerformed
 

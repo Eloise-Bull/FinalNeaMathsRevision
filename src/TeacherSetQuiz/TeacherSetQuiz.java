@@ -147,7 +147,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
 
     private void jAssignButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAssignButtonActionPerformed
         int NumOfQuestions = Integer.valueOf(jNumberInput.getText());  
-        int ClassID = Login.classId();
+        int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID ;
         String DueDate = jdueDate.getText();
         String Topic = jTopics.getSelectedItem().toString();
         AssigningQuiz.PuttingQuizDataIntoDataBase(NumOfQuestions,ClassID,DueDate,Topic);

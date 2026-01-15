@@ -157,13 +157,17 @@ public class Settings extends javax.swing.JFrame {
     }//GEN-LAST:event_jChangeUsernameActionPerformed
 
     private void jtxtHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtHomeActionPerformed
-        String User = Login.userType();
+        String User = Login.InfoOfUserForThisLoginSession.user ;
+        System.out.println("Works");
         if (User.equals("Teacher")){
+            System.out.println("Works");
             TeacherHome ToTeacherScreen = new TeacherHome();  
             ToTeacherScreen.setVisible(true);
             this.dispose();
         }
+        System.out.println("Works");
         if (User.equals("Student")){
+            System.out.println("Works");
             StudentHome submitButton = new StudentHome();  
             submitButton.setVisible(true);
             this.dispose();

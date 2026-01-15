@@ -94,8 +94,9 @@ public class ConnectTheDatabase {
     // returns the array for the stats. temporaty storage, a float cause stats = decimal
     // temporary class_id = set to one cause then i can test wihtout them loging in 
     
-    static int Class_id = Login.classId() ;
+    
     public static ArrayList<Float> ArrayListStudentStats(){
+        int Class_id = Login.InfoOfUserForThisLoginSession.UserClassID ;
         ArrayList<Float> StudentStatslist = new ArrayList<>();
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
@@ -116,8 +117,9 @@ public class ConnectTheDatabase {
     ///outputs topic stats for the student and from that i can work out their worst topic 
     // temp set studnet_id to one so i font have to do log in for my prototpyr but will change later
     // just to test it works
-    static int Student_id = Login.StudentID();
+    
     public static ArrayList<Float> ArrayListTopicStats(){
+        int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
         ArrayList<Float> TopicStatslist = new ArrayList<>();
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
@@ -138,7 +140,7 @@ public class ConnectTheDatabase {
     ///
     // for the specific questions thingy it return the the topic id
     public static int ReturnTopicID(){
-        
+        int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
         float score = StudentStatistics.PushScore();
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();

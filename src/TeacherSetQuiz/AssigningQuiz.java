@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class AssigningQuiz {
         private static int NumOfStudents;
         private static int AssignmentIdLastUpdated;
-        private static int TeacherID = Login.TeacherID();
+        
         
     public ArrayList<String> TopicsForDropDownBox(){
         ArrayList<String> TopicList = new ArrayList<>();
@@ -55,6 +55,8 @@ public class AssigningQuiz {
         }
         
         try (Connection connection = TheConnectionToDatabase()){
+            // gets the teacher id from login in a more organised way
+            int TeacherID = Login.InfoOfUserForThisLoginSession.TeacherId ;
             Statement statement = connection.createStatement();
             statement.execute("INSERT INTO AssignmentInfo ( ClassID, NumOfQuizQuestions, Title, DueDate) VALUES ( " + ClassID+ "," +numOfQuestions +"," +"'" +Topic + "'" + "," + "'" + DueDate + "'" +");");        
 

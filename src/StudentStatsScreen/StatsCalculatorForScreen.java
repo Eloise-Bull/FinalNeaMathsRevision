@@ -37,9 +37,9 @@ public class StatsCalculatorForScreen {
     }
     
     public static float CalculatingAverageStats(){
-        int StudentID = Login.StudentID();
-        System.out.println(StudentID);
-        ArrayList<Float> AllStats = averageStatsForStudent(StudentID);
+        int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
+        System.out.println(Student_id);
+        ArrayList<Float> AllStats = averageStatsForStudent(Student_id);
         System.out.println(AllStats);
         float AverageStats = 0;
         int count = 0;

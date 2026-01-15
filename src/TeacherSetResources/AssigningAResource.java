@@ -18,7 +18,6 @@ public class AssigningAResource {
     private static int count = 0;
     private static int AssignmentIdLastUpdated;
     private static int NumOfStudents;
-    private static int TeacherID = Login.TeacherID();
     
     public static ListModel<String> ResourceListToScreen(String ResourceType){
         DefaultListModel<String> ResourceList = new DefaultListModel<>();
@@ -117,6 +116,7 @@ public class AssigningAResource {
         
         
         try (Connection connection = TheConnectionToDatabase()){
+            int TeacherID = Login.InfoOfUserForThisLoginSession.TeacherId ;
             Statement statement = connection.createStatement();
             statement.execute("INSERT INTO AssignmentInfo ( ClassID, ResourceID, Title, DueDate) VALUES ( " + classID+ "," +resourceID +"," +"'" +ResourceType + "'" + "," + "'" + DueDate + "'" +");");        
             // gets the assignmentinfoid for the last thing added so i can add it into the assigned table 

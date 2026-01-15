@@ -247,16 +247,16 @@ public class Quizzes extends javax.swing.JFrame {
         
         
         
-        int studentID = Login.StudentID();
+        int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
         /// get topicID
         System.out.println("done");
         QuizQuestions quiz = new QuizQuestions();
         int topicID = quiz.ReturnTopicID(Question);
         System.out.println("done");
         /// adds one to the numofquestionsdoen in databse for specific topic
-        quiz.AddOneToNumOfQuestionsDone(topicID, studentID);
+        quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
         System.out.println("done");
-        quiz.updateStats(correct, topicID, studentID);
+        quiz.updateStats(correct, topicID, Student_id);
         System.out.println("done");
         jtxtUserAnswer.setText("");
         

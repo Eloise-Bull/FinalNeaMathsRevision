@@ -142,7 +142,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //completed = true means that its the doen assignments
         // add into table   
-        int studentid = Login.StudentID();
+        int studentid = Login.InfoOfUserForThisLoginSession.StudentId;
         DefaultTableModel AssignmentsTable = new DefaultTableModel();
         AssignmentsTable = GettingAssignmentsForTheTable.RowsInTable(studentid,completed);
         jTableAssignments.setModel(AssignmentsTable);
