@@ -10,12 +10,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
+import java.util.ArrayList;
 
 /**
  *
  * @author 4-EBULL
  */
 public class VeiwResources {
+    
+    // when click the select button it goes to this method which pulls all the topics resource they selected
     private static int count = 0;
     public static ListModel<String> ResourceListToScreen(String ResourceType){
         DefaultListModel<String> ResourceList = new DefaultListModel<>();
@@ -47,8 +50,25 @@ public class VeiwResources {
         catch (Exception e) {
             e.printStackTrace();
             return null;
+        }   
+    }
+    // this is for when the user clicks on the screen it gets topics from databse and puts into combo box
+    // this means that new topics and resources can be addd wiht no nee to change the system 
+    //takes from database and adds to combo box
+    public static ArrayList<String> SetBox(){
+        ArrayList<String> ListOfTopicNames = new ArrayList<>();
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Topic FROM Topic");
+            while (results.next()){
+                String TopicForList = results.getString("Topic");
+                ListOfTopicNames.add(TopicForList);
+            }
+            return ListOfTopicNames;
         }
-        
-        
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

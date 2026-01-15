@@ -29,7 +29,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                          <Component id="jPickResourceType" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxTopics" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -41,14 +41,14 @@
                               <Component id="jSelect" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="664" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="815" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="823" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="71" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -66,7 +66,7 @@
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jPickResourceType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBoxTopics" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jSelect" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="58" max="32767" attributes="0"/>
@@ -126,14 +126,11 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSelectActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jPickResourceType">
+    <Component class="javax.swing.JComboBox" name="jComboBoxTopics">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="1">
             <StringItem index="0" value="All"/>
-            <StringItem index="1" value="Integration"/>
-            <StringItem index="2" value="Algebra"/>
-            <StringItem index="3" value="Quadratics"/>
           </StringArray>
         </Property>
       </Properties>

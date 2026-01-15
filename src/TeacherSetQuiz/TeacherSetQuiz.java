@@ -6,7 +6,6 @@ package TeacherSetQuiz;
 
 import Login.Login;
 import TeacherHome.TeacherHome;
-import TeacherSetQuiz.AssigningQuiz;
 import java.util.ArrayList;
 
 /**
@@ -20,10 +19,9 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
      */
     public TeacherSetQuiz() {
         initComponents();  
-        AssigningQuiz Topic = new AssigningQuiz();
-        ArrayList<String> Topics = Topic.TopicsForDropDownBox();
-        for ( int i = 0; i < (Topics).size()- 1; i++){
-            jTopics.addItem(Topics.get(i));
+        ArrayList<String> ListOfTopics = AssigningQuiz.SetBox();
+        for (int i = 0; i < ListOfTopics.size(); i ++ ){
+            jTopics.addItem(ListOfTopics.get(i));
         }
     }
 
@@ -52,7 +50,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         jLabel1.setText("Set Quiz");
 
         jTopics.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTopics.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Integration", "Algebra", "Quadratics" }));
+        jTopics.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
         jTopics.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTopicsActionPerformed(evt);

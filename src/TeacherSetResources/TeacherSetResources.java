@@ -5,6 +5,7 @@
 package TeacherSetResources;
 import Login.Login;
 import TeacherHome.TeacherHome;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,7 +20,11 @@ public class TeacherSetResources extends javax.swing.JFrame {
      */
     public TeacherSetResources() {
         initComponents();
-        
+        // jPickResourceType
+        ArrayList<String> ListOfTopics = AssigningAResource.SetBox();
+        for (int i = 0; i < ListOfTopics.size(); i ++ ){
+            jPickResourceType.addItem(ListOfTopics.get(i));
+        }
         
     }
     String Resource = null;
@@ -53,7 +58,7 @@ public class TeacherSetResources extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Set Resources");
 
-        jPickResourceType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Integration", "Algebra", "Quadratics" }));
+        jPickResourceType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
         jPickResourceType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPickResourceTypeActionPerformed(evt);

@@ -136,5 +136,22 @@ public class AssigningAResource {
             e.printStackTrace();
         }
     }  
-
+    // resued code from resources as is the same thing. 
+    // gets topic for combo box allowing it to be easier when topics / resources are added
+    public static ArrayList<String> SetBox(){
+        ArrayList<String> ListOfTopicNames = new ArrayList<>();
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Topic FROM Topic");
+            while (results.next()){
+                String TopicForList = results.getString("Topic");
+                ListOfTopicNames.add(TopicForList);
+            }
+            return ListOfTopicNames;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

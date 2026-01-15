@@ -9,6 +9,7 @@ import Login.Login;
 import TeacherSetResources.AssigningAResource;
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
+import java.util.ArrayList;
 /**
  *
  * @author 4-EBULL
@@ -20,7 +21,12 @@ public class Resources extends javax.swing.JFrame {
      */
     public Resources() {
         initComponents();
+        ArrayList<String> ListOfTopics = VeiwResources.SetBox();
+        for (int i = 0; i < ListOfTopics.size(); i ++ ){
+            jComboBoxTopics.addItem(ListOfTopics.get(i));
+        }
     }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +42,7 @@ public class Resources extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jResourceList = new javax.swing.JList<>();
         jSelect = new javax.swing.JButton();
-        jPickResourceType = new javax.swing.JComboBox<>();
+        jComboBoxTopics = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,7 +72,7 @@ public class Resources extends javax.swing.JFrame {
             }
         });
 
-        jPickResourceType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Integration", "Algebra", "Quadratics" }));
+        jComboBoxTopics.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
 
         jLabel2.setText("Topics: ");
 
@@ -80,7 +86,7 @@ public class Resources extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPickResourceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxTopics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -88,12 +94,12 @@ public class Resources extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(jSelect)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(664, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 71, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 823, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +112,7 @@ public class Resources extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPickResourceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTopics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSelect))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,7 +128,7 @@ public class Resources extends javax.swing.JFrame {
         this.dispose();    }//GEN-LAST:event_jtxtHomeActionPerformed
 
     private void jSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSelectActionPerformed
-        String ResourceType = jPickResourceType.getSelectedItem().toString();
+        String ResourceType = jComboBoxTopics.getSelectedItem().toString();
         ListModel<String> URLS = AssigningAResource.ResourceListToScreen(ResourceType);
         jResourceList.setModel(URLS);
     }//GEN-LAST:event_jSelectActionPerformed
@@ -197,9 +203,9 @@ public class Resources extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBoxTopics;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JComboBox<String> jPickResourceType;
     private javax.swing.JList<String> jResourceList;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jSelect;

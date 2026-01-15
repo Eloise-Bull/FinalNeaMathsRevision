@@ -76,5 +76,21 @@ public class AssigningQuiz {
         }
     }
     
-    //public static void 
+    // resued code from resources as is the same thing. 
+    public static ArrayList<String> SetBox(){
+        ArrayList<String> ListOfTopicNames = new ArrayList<>();
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Topic FROM Topic");
+            while (results.next()){
+                String TopicForList = results.getString("Topic");
+                ListOfTopicNames.add(TopicForList);
+            }
+            return ListOfTopicNames;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
