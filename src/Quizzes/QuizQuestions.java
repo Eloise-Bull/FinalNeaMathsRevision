@@ -76,7 +76,7 @@ public class QuizQuestions {
         }
     }    
         
-    // not finished :( FIX IT 
+    
     
     public int RandomNumForTargetedQuiz(){
         int CurrentTopicId = ConnectTheDatabase.ReturnTopicID();

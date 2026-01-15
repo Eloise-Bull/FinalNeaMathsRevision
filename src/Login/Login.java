@@ -33,15 +33,17 @@ public class Login extends javax.swing.JFrame {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///FOR NOW SET  THIS TO ID = 1 BUT WHEN DO LOGIN GET CLASS ID FROM DATABASSE AND PUT IT IN HERE INSTEAD
+    ///FOR NOW SET  THIS TO ID = 1 BUT WHEN DO LOGIN GET CLASS ID FROM DATABASSE AND PUT IT IN HERE INSTEA
+    /// @return D
     
     public static int classId(){
         return UserClassID;
     }
-    
+
     public static int StudentID() {
         return StudentId;
     }
+
     public static int TeacherID() {
         return TeacherId;
     }

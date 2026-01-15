@@ -15,6 +15,7 @@ public class StudentStatsScreen extends javax.swing.JFrame {
      */
     public StudentStatsScreen() {
         initComponents();
+        jtxtOverallStats.setText(String.valueOf(StatsCalculatorForScreen.CalculatingAverageStats()));
     }
     
 

@@ -17,6 +17,7 @@ public class TeacherClassStats extends javax.swing.JFrame {
     /**
      * Creates new form TeacherClassStats
      */
+    
     public TeacherClassStats() {
         initComponents();
         float averageClassStat = CalculatingClassStats.CalculatingAverageClassStats();

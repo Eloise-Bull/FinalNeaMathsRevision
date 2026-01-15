@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import Login.Login;
 
 /**
  *
@@ -17,16 +18,16 @@ import java.util.ArrayList;
  */
 public class StatsCalculatorForScreen {
     
-    public static ArrayList<String> SpecificTopicQuestions(int topic){
-        ArrayList<String> QuestionsList = new ArrayList<>();
+    public static ArrayList<Float> averageStatsForStudent(int StudentID){
+        ArrayList<Float> StatsList = new ArrayList<>();
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT Question FROM Questions WHERE Topic_Id = '" + topic + "'");
+            ResultSet results = statement.executeQuery("SELECT Score FROM TopicStats WHERE Student_id = " + StudentID );
             while (results.next()){
-                String StatsValue = results.getString("Question");
-                QuestionsList.add(StatsValue);
+                Float StatsValue = results.getFloat("Score");
+                StatsList.add(StatsValue);
             }
-            return QuestionsList;
+            return StatsList;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -36,7 +37,10 @@ public class StatsCalculatorForScreen {
     }
     
     public static float CalculatingAverageStats(){
-        ArrayList<Float> AllStats = ConnectTheDatabase.ArrayListStudentStats();
+        int StudentID = Login.StudentID();
+        System.out.println(StudentID);
+        ArrayList<Float> AllStats = averageStatsForStudent(StudentID);
+        System.out.println(AllStats);
         float AverageStats = 0;
         int count = 0;
         for ( int i = 0; i < AllStats.size(); i ++){
