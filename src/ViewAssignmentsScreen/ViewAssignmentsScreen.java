@@ -4,6 +4,7 @@
  */
 package ViewAssignmentsScreen;
 import StudentHome.StudentHome;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author 4-EBULL
@@ -16,6 +17,8 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
     public ViewAssignmentsScreen() {
         initComponents();
     }
+    
+    static boolean completed;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,7 +36,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableAssignments = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,11 +59,21 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Completed");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Uncompleted");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAssignments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -71,7 +84,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTableAssignments);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,8 +140,28 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtHomeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        //completed;
+        // add into table 
+        DefaultTableModel AssignmentsTable = new DefaultTableModel();
+        AssignmentsTable.addColumn("Stats");
+        int row = AssignmentsTable.getRowCount()+1;
+        AssignmentsTable.insertRow ( row, new Object [] { 22, "15", 2 } );
+        jTableAssignments.setModel(AssignmentsTable);
+        if ( completed ) {
+            
+        }
+        else {
+            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        completed = true;
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        completed = false;
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,7 +205,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableAssignments;
     private javax.swing.JButton jtxtHome;
     // End of variables declaration//GEN-END:variables
 }

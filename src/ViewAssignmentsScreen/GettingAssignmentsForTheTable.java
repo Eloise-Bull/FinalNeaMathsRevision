@@ -31,7 +31,7 @@ public class GettingAssignmentsForTheTable {
     ///
     ///
     // so im using this for the colum names
-    public static ArrayList<String> ColumsInTable(int StudentID){
+    public static ArrayList<String> ColumsInTable(int StudentID, boolean completed){
         ArrayList<String> ListOfColumnNames = new ArrayList<>();
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
