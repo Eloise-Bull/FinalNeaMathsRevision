@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,20 +32,82 @@ public class GettingAssignmentsForTheTable {
     ///
     ///
     // so im using this for the colum names
-    public static ArrayList<String> ColumsInTable(int StudentID, boolean completed){
-        ArrayList<String> ListOfColumnNames = new ArrayList<>();
+    public static DefaultTableModel RowsInTable(int StudentID, boolean completed){
+        ArrayList<String> row = new ArrayList<>();
+        DefaultTableModel AssignmentsTable = new DefaultTableModel();
+        AssignmentsTable.addColumn("Id");
+        AssignmentsTable.addColumn("Number Of Quiz Questions");
+        AssignmentsTable.addColumn("Title");
+        AssignmentsTable.addColumn("Due-Date");
+        
+        int count = 0;
         try (Connection connection = TheConnectionToDatabase()){
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT AssignmentInfoId,Resource, NumOfQuizQuestions, quiz_percentage, DueDate, Done FROM AssignmentInfo WHERE Assigned_id = (SELECT AssignedId FROM Assigned WHERE StudentId = " + StudentID + ")");
-            while (results.next()){
-                String TopicForList = results.getString("Topic");
-                ListOfColumnNames.add(TopicForList);
+            System.out.println("Done");
+            if (completed){
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery("SELECT AssignmentInfo_Id,NumOfQuizQuestions,Title, DueDate FROM AssignmentInfo WHERE AssignmentInfo_Id IN (SELECT AssignmentInfo_Id FROM Assigned WHERE StudentId = " + StudentID + ")");
+                System.out.println("Done");
+                while (results.next()){
+                    //(results).getClass();
+                    //Object Value = results.getObject("count");
+                    //System.out.println("Done");
+                    //row.add(String.valueOf(Value));
+                    
+                    int id = results.getInt("AssignmentInfo_Id");
+                    int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
+                    String Title = results.getString("Title");
+                    String duedate = results.getString("DueDate");
+                    System.out.println("Done");
+                    count = count + 1;
+                    if ( count == 5) {
+                        AssignmentsTable.addRow(new Object [] { id, NumOfQuizQuestions, Title, duedate});
+                        row = null;
+                        System.out.println("Done");
+                    }
+                }
             }
-            return ListOfColumnNames;
+            
+            return AssignmentsTable;
         }
         catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+public static DefaultTableModel TheRowsInTable(int StudentID, boolean completed){
+        ArrayList<String> row = new ArrayList<>();
+        DefaultTableModel AssignmentsTable = new DefaultTableModel();
+        AssignmentsTable.addColumn("Id");
+        AssignmentsTable.addColumn("Title");
+        AssignmentsTable.addColumn("Resource");
+        AssignmentsTable.addColumn("Number Of Quiz Questions");
+        AssignmentsTable.addColumn("Percentage Done");
+        AssignmentsTable.addColumn("Done");
+        AssignmentsTable.addColumn("Due-Date");
+        
+        int count = 0;
+        try (Connection connection = TheConnectionToDatabase()){
+            
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery("SELECT * FROM AssignmentInfo WHERE AssignmentInfo_Id IN (SELECT AssignmentInfo_Id FROM Assigned WHERE StudentId = " + 1 + ")");
+                System.out.println("Done");
+                while (results.next()){
+                    row.add(results.getString("*"));
+                    count = count + 1;
+                    if ( count == 5) {
+                        AssignmentsTable.addRow(new Object [] {});
+                        row = null;
+                        System.out.println("Done");
+                    }
+                }
+                return AssignmentsTable;
+                
+            }
+            
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
         }
     }
 }

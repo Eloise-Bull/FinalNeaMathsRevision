@@ -39,7 +39,10 @@ public class Login extends javax.swing.JFrame {
     public static int classId(){
         return UserClassID;
     }
-
+    ///// fix this its not working god knows why.
+    ///
+    ///
+    
     public static int StudentID() {
         return StudentId;
     }

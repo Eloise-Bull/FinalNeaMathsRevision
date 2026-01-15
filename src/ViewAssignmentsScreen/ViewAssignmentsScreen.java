@@ -5,6 +5,8 @@
 package ViewAssignmentsScreen;
 import StudentHome.StudentHome;
 import javax.swing.table.DefaultTableModel;
+import ViewAssignmentsScreen.GettingAssignmentsForTheTable;
+import Login.Login;
 /**
  *
  * @author 4-EBULL
@@ -18,7 +20,8 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         initComponents();
     }
     
-    static boolean completed;
+    // auto set to assignments to do 
+    static boolean completed = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,43 +94,40 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addComponent(jtxtHome)
-                .addGap(14, 14, 14))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jRadioButton1)
-                        .addGap(39, 39, 39)
-                        .addComponent(jRadioButton2)
-                        .addGap(72, 72, 72)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(325, 325, 325)
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtxtHome))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(203, 203, 203)
+                            .addComponent(jRadioButton1)
+                            .addGap(231, 231, 231)
+                            .addComponent(jRadioButton2)
+                            .addGap(163, 163, 163)
+                            .addComponent(jButton1))))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jtxtHome)))
-                .addGap(37, 37, 37)
+                    .addComponent(jLabel1)
+                    .addComponent(jtxtHome))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jRadioButton1))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,19 +140,12 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtHomeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //completed;
-        // add into table 
+        //completed = true means that its the doen assignments
+        // add into table   
+        int studentid = Login.StudentID();
         DefaultTableModel AssignmentsTable = new DefaultTableModel();
-        AssignmentsTable.addColumn("Stats");
-        int row = AssignmentsTable.getRowCount()+1;
-        AssignmentsTable.insertRow ( row, new Object [] { 22, "15", 2 } );
+        AssignmentsTable = GettingAssignmentsForTheTable.RowsInTable(studentid,completed);
         jTableAssignments.setModel(AssignmentsTable);
-        if ( completed ) {
-            
-        }
-        else {
-            
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
