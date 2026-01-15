@@ -7,6 +7,8 @@ package Resources;
 import StudentHome.StudentHome;
 import Login.Login;
 import TeacherSetResources.AssigningAResource;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 /**
  *
  * @author 4-EBULL
@@ -19,6 +21,7 @@ public class Resources extends javax.swing.JFrame {
     public Resources() {
         initComponents();
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +51,12 @@ public class Resources extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Resources");
 
+        jResourceList.setForeground(new java.awt.Color(51, 153, 255));
+        jResourceList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MouseClickedOnUrl(evt);
+            }
+        });
         jScrollPane1.setViewportView(jResourceList);
 
         jSelect.setText("Select");
@@ -69,23 +78,22 @@ public class Resources extends javax.swing.JFrame {
                 .addGap(87, 87, 87)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPickResourceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jtxtHome))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jPickResourceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
                                 .addComponent(jSelect)))
-                        .addGap(97, 97, 97))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(87, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 71, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,8 +106,8 @@ public class Resources extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSelect)
-                    .addComponent(jPickResourceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPickResourceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSelect))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48))
@@ -115,8 +123,43 @@ public class Resources extends javax.swing.JFrame {
 
     private void jSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSelectActionPerformed
         String ResourceType = jPickResourceType.getSelectedItem().toString();
-        jResourceList.setModel(AssigningAResource.ResourceListToScreen(ResourceType));        // TODO add your handling code here:
+        ListModel<String> URLS = AssigningAResource.ResourceListToScreen(ResourceType);
+        jResourceList.setModel(URLS);
     }//GEN-LAST:event_jSelectActionPerformed
+
+    private void MouseClickedOnUrl(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseClickedOnUrl
+        // incase want to redo this in future i did mouseclick -> handlers. 
+        // then i did double just cause i felt like it 
+        // get location on screen and then the index on the list
+        // -1 = bad cause means return nothing so do if statement for it 
+        // make sure it is only the url or its gonna mess up. i had to get rid of 4:
+        // then try desktop 
+        // on and set colour on properties to blue to give the universal URL colour
+
+        // this is for double click 
+        if ( evt.getClickCount() == 2) {
+            // set it to null cause the later line was having an issue with it not being initalised 
+            String url = null;
+            
+            // evt = the mouse event object 'click'
+            int index = jResourceList.locationToIndex(evt.getPoint());
+            // ive put this cause index returns -1 if not found
+            if ( index !=-1) {
+                // gets the rest of the url after https: cause i put a num infornt of it before hand 
+                // cause i reused code from teacher.set resource
+                url = jResourceList.getModel().getElementAt(index);
+                url = url.substring(url.indexOf("http"));
+            }
+
+            try {
+                java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+            }
+            catch ( Exception e ){
+                // brings up neew temp screen
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid URL");
+            } 
+        }
+    }//GEN-LAST:event_MouseClickedOnUrl
 
     /**
      * @param args the command line arguments

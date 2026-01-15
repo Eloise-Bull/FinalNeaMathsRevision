@@ -67,6 +67,12 @@ public class TeacherSetResources extends javax.swing.JFrame {
             }
         });
 
+        jResourceList.setForeground(new java.awt.Color(0, 153, 255));
+        jResourceList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MouseClickedForURL(evt);
+            }
+        });
         jScrollPane1.setViewportView(jResourceList);
 
         jLabel2.setText("Resources: ");
@@ -205,6 +211,33 @@ public class TeacherSetResources extends javax.swing.JFrame {
     private void jResourceNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jResourceNumActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jResourceNumActionPerformed
+
+    private void MouseClickedForURL(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseClickedForURL
+        // reused code from Resourrces Student screen. 
+        // this is for double click 
+        if ( evt.getClickCount() == 2) {
+            // set it to null cause the later line was having an issue with it not being initalised 
+            String url = null;
+            
+            // evt = the mouse event object 'click'
+            int index = jResourceList.locationToIndex(evt.getPoint());
+            // ive put this cause index returns -1 if not found
+            if ( index !=-1) {
+                // gets the rest of the url after https: cause i put a num infornt of it before hand 
+                // cause i reused code from teacher.set resource
+                url = jResourceList.getModel().getElementAt(index);
+                url = url.substring(url.indexOf("http"));
+            }
+
+            try {
+                java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+            }
+            catch ( Exception e ){
+                // brings up neew temp screen
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid URL");
+            } 
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_MouseClickedForURL
 
     /**
      * @param args the command line arguments
