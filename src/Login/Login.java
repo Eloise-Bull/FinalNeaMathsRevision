@@ -26,7 +26,7 @@ public class Login extends javax.swing.JFrame {
     
 
     public class InfoOfUserForThisLoginSession{
-        public static String user = "";
+        public static String userType = "";
         public static int UserClassID = -1;
         public static int StudentId = -1;
         public static int TeacherId = -1;
@@ -167,9 +167,11 @@ public class Login extends javax.swing.JFrame {
         }
         
         // if correct takes user to correct screen. 
+        InfoOfUserForThisLoginSession.userType = user;
         if ( CheckDetails == true) {
             if ("Student".equals(user)) {
             InfoOfUserForThisLoginSession.StudentId = UsernameId;
+            // check. etc is the method used to get the class id using the usernameid
             InfoOfUserForThisLoginSession.UserClassID = check.getClassIdStudent(UsernameId);
             StudentHome ToStudentScreen = new StudentHome();  
             ToStudentScreen.setVisible(true);

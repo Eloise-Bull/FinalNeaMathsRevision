@@ -157,7 +157,7 @@ public class Settings extends javax.swing.JFrame {
     }//GEN-LAST:event_jChangeUsernameActionPerformed
 
     private void jtxtHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtHomeActionPerformed
-        String User = Login.InfoOfUserForThisLoginSession.user ;
+        String User = Login.InfoOfUserForThisLoginSession.userType ;
         System.out.println("Works");
         if (User.equals("Teacher")){
             System.out.println("Works");
