@@ -4,7 +4,9 @@
  */
 package TeacherClassStats;
 import ConnectTheDatabase.ConnectTheDatabase;
+import Login.Login;
 import TeacherHome.TeacherHome;
+import ViewAssignmentsScreen.GettingAssignmentsForTheTable;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
@@ -20,8 +22,15 @@ public class TeacherClassStats extends javax.swing.JFrame {
     
     public TeacherClassStats() {
         initComponents();
+        // this calculate class stats and displays it 
         float averageClassStat = CalculatingClassStats.CalculatingAverageClassStats();
         jLabelClassStats.setText("Class Average: " + averageClassStat + " %");
+        
+        // this fills in the table
+        int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+        DefaultTableModel ClassStatsTable = new DefaultTableModel();
+        ClassStatsTable = CalculatingClassStats.RowsInTable(ClassID);
+        jTableStats.setModel(ClassStatsTable);
     }
     
     // FINISH !!? MESSED THIS UP FIX IT 
@@ -63,24 +72,16 @@ public class TeacherClassStats extends javax.swing.JFrame {
 
         jTableStats.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Student", "Students Statistics", "Integration", "Algebra", "Quadratics"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         jScrollPane1.setViewportView(jTableStats);
         jTableStats.getAccessibleContext().setAccessibleName("");
 

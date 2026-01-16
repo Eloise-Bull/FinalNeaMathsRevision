@@ -74,40 +74,4 @@ public class GettingAssignmentsForTheTable {
             return null;
         }
     }
-
-public static DefaultTableModel TheRowsInTable(int StudentID, boolean completed){
-        ArrayList<String> row = new ArrayList<>();
-        DefaultTableModel AssignmentsTable = new DefaultTableModel();
-        AssignmentsTable.addColumn("Id");
-        AssignmentsTable.addColumn("Title");
-        AssignmentsTable.addColumn("Resource");
-        AssignmentsTable.addColumn("Number Of Quiz Questions");
-        AssignmentsTable.addColumn("Percentage Done");
-        AssignmentsTable.addColumn("Done");
-        AssignmentsTable.addColumn("Due-Date");
-        
-        int count = 0;
-        try (Connection connection = TheConnectionToDatabase()){
-            
-                Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery("SELECT * FROM AssignmentInfo WHERE AssignmentInfo_Id IN (SELECT AssignmentInfo_Id FROM Assigned WHERE StudentId = " + 1 + ")");
-                System.out.println("Done");
-                while (results.next()){
-                    row.add(results.getString("*"));
-                    count = count + 1;
-                    if ( count == 5) {
-                        AssignmentsTable.addRow(new Object [] {});
-                        row = null;
-                        System.out.println("Done");
-                    }
-                }
-                return AssignmentsTable;
-                
-            }
-            
-            catch (Exception e) {
-                e.printStackTrace();
-                return null;
-        }
-    }
 }
