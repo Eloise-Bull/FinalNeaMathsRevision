@@ -53,9 +53,10 @@ public class CalculatingClassStats {
                 int StudentID = results.getInt("Student_id");
                 Float Score = results.getFloat("Score");
                 
-                String Topic = null;
+                String Topic = returnTopic(Topicid);
                 String Username = null;
                 String Name = null;
+                
                 ResultSet Results2 = statement.executeQuery("SELECT Topic FROM Topic WHERE Topic_Id = " + Topicid);
                     if (Results2.next()){
                         Topic = results.getString("Topic");
@@ -84,7 +85,45 @@ public class CalculatingClassStats {
         }
     }
     
+    // had to make two more methods cause basically u cant have 2 results sets cause the first one has to be finished 
+    //java.sql.SQLException: Operation not allowed after ResultSet closed
+    public static String returnTopic (int Topicid) {
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Topic FROM Topic WHERE Topic_Id = " + Topicid);
+            String Topic = null;
+            if (results.next()){
+                Topic = results.getString("Topic");
+            }
+            return Topic;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
+    public static String[] returnStudentData (int StudentID) {
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT username, S_name FROM Student WHERE StudentId = " + StudentID);
+            String username = null;
+            String name = null;
+            String [] userNameThenName = new String[2];
+            if (results.next()){
+                username = results.getString("username");
+                name = results.getString("S_name");
+                userNameThenName[1] = username;
+                userNameThenName[2] = name;
+            }
+            // cant return 2 thigns from a method so i just made it a tiny array
+            return userNameThenName;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
              
         
 }
