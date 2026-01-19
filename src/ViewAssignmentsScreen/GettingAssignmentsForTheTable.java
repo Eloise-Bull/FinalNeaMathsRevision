@@ -33,7 +33,6 @@ public class GettingAssignmentsForTheTable {
     ///
     // so im using this for the colum names
     public static DefaultTableModel RowsInTable(int StudentID, boolean completed){
-        ArrayList<String> row = new ArrayList<>();
         DefaultTableModel AssignmentsTable = new DefaultTableModel();
         AssignmentsTable.addColumn("Id");
         AssignmentsTable.addColumn("Number Of Quiz Questions");
@@ -61,7 +60,7 @@ public class GettingAssignmentsForTheTable {
                     count = count + 1;
                     if ( count == 5) {
                         AssignmentsTable.addRow(new Object [] { id, NumOfQuizQuestions, Title, duedate});
-                        row = null;
+                        
                         System.out.println("Done");
                     }
                 }

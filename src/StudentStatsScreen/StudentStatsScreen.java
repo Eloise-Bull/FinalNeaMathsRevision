@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package StudentStatsScreen;
+import Login.Login;
 import StudentHome.StudentHome;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author 4-EBULL
@@ -15,7 +17,14 @@ public class StudentStatsScreen extends javax.swing.JFrame {
      */
     public StudentStatsScreen() {
         initComponents();
-        jtxtOverallStats.setText(String.valueOf(StatsCalculatorForScreen.CalculatingAverageStats()));
+        // this is for the average stats
+        jtxtOverallStats.setText("Overall Statitsics : " + String.valueOf(StatsCalculatorForScreen.CalculatingAverageStats()) + " %");
+        
+        // this is for the table
+        int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+        DefaultTableModel StatsTable = new DefaultTableModel();
+        StatsTable = StatsCalculatorForScreen.RowsInTable(ClassID);
+        jStatsTable.setModel(StatsTable);
     }
     
 
@@ -33,9 +42,10 @@ public class StudentStatsScreen extends javax.swing.JFrame {
         jtxtOverallStats = new javax.swing.JTextField();
         jtxtHome = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jStatsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Student Statistics");
@@ -55,18 +65,19 @@ public class StudentStatsScreen extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jStatsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jStatsTable.setEnabled(false);
+        jScrollPane2.setViewportView(jStatsTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,11 +92,12 @@ public class StudentStatsScreen extends javax.swing.JFrame {
                         .addComponent(jtxtHome))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(4, 4, 4))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jtxtOverallStats, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +168,7 @@ public class StudentStatsScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jStatsTable;
     private javax.swing.JButton jtxtHome;
     private javax.swing.JTextField jtxtOverallStats;
     // End of variables declaration//GEN-END:variables
