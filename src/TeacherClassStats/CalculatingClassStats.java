@@ -30,53 +30,37 @@ public class CalculatingClassStats {
     }
     
     
+    
+             
+ 
+    
     // this creates a default table so that i can put it in the table
     
     public static DefaultTableModel RowsInTable(int ClassID){
-        ArrayList<String> row = new ArrayList<>();
-        ArrayList<String> DataFromTopicStats = new ArrayList<>();
+
         DefaultTableModel StatsTable = new DefaultTableModel();
-        StatsTable.addColumn("Topic");
+        
         StatsTable.addColumn("Student Username");
         StatsTable.addColumn("Student Name");
+        StatsTable.addColumn("Topic");
         StatsTable.addColumn("Topic Stats");
-        
-        
-        int count = 0;
+
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            // to get -  TOpicId, Studentid, Score
-            ResultSet results = statement.executeQuery("SELECT Topic_Id, Student_id, Score FROM TopicStats WHERE Student_id IN (SELECT Student_id FROM Student WHERE Class_id = " + ClassID + ")");
+            // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever class 
+            //teacher was and then orders by name so that the students names / scores and stuff are together
+            // i also put the statement over 3 lines cause it was soo long
+            ResultSet results = statement.executeQuery("SELECT Score, username, S_Name, Topic FROM TopicStats ts JOIN Student s "
+                    + "ON ts.Student_id = s.Student_id JOIN Topic t ON ts.Topic_id = t.Topic_id  WHERE s.Class_id = "+ ClassID +" "
+                            + "ORDER BY s.S_Name ASC ");
 
             while (results.next()){
-                    
-                int Topicid = results.getInt("Topic_Id");
-                int StudentID = results.getInt("Student_id");
+                String Topic = results.getString("Topic");
+                String NAME = results.getString("S_name");
                 Float Score = results.getFloat("Score");
+                String Username = results.getString("username");
                 
-                DataFromTopicStats.add();
-                String Topic = returnTopic(Topicid);
-                String Username = null;
-                String Name = null;
-                
-                ResultSet Results2 = statement.executeQuery("SELECT Topic FROM Topic WHERE Topic_Id = " + Topicid);
-                    if (Results2.next()){
-                        Topic = results.getString("Topic");
-                    }
-                    
-                
-                ResultSet Results3 = statement.executeQuery("SELECT username, S_name FROM Student WHERE StudentId = " + StudentID);
-                    if (Results3.next()){
-                        Username = results.getString("username");
-                        Name = results.getString("S_name");
-                    }
-                
-                count = count + 1;
-                if ( count == 4) {
-                    StatsTable.addRow(new Object [] { Topic, Username,Name, Score});
-                    row = null;
-                }
-                
+                StatsTable.addRow(new Object [] {Username ,NAME,  Topic, Score}); 
             }
             
             return StatsTable;
@@ -87,45 +71,4 @@ public class CalculatingClassStats {
         }
     }
     
-    // had to make two more methods cause basically u cant have 2 results sets cause the first one has to be finished 
-    //java.sql.SQLException: Operation not allowed after ResultSet closed
-    public static String returnTopic (int Topicid) {
-        try (Connection connection = TheConnectionToDatabase()){
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT Topic FROM Topic WHERE Topic_Id = " + Topicid);
-            String Topic = null;
-            if (results.next()){
-                Topic = results.getString("Topic");
-            }
-            return Topic;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    
-    public static String[] returnStudentData (int StudentID) {
-        try (Connection connection = TheConnectionToDatabase()){
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT username, S_name FROM Student WHERE StudentId = " + StudentID);
-            String username = null;
-            String name = null;
-            String [] userNameThenName = new String[2];
-            if (results.next()){
-                username = results.getString("username");
-                name = results.getString("S_name");
-                userNameThenName[1] = username;
-                userNameThenName[2] = name;
-            }
-            // cant return 2 thigns from a method so i just made it a tiny array
-            return userNameThenName;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-             
-        
 }

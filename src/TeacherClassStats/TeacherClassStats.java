@@ -59,6 +59,7 @@ public class TeacherClassStats extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Class Stats");
 
         jButton1.setText("Back");
@@ -82,6 +83,7 @@ public class TeacherClassStats extends javax.swing.JFrame {
 
             }
         ));
+        jTableStats.setEnabled(false);
         jScrollPane1.setViewportView(jTableStats);
         jTableStats.getAccessibleContext().setAccessibleName("");
 
@@ -92,7 +94,7 @@ public class TeacherClassStats extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(178, 178, 178)
+                .addGap(133, 133, 133)
                 .addComponent(jButton1)
                 .addGap(17, 17, 17))
             .addGroup(layout.createSequentialGroup()
@@ -115,7 +117,7 @@ public class TeacherClassStats extends javax.swing.JFrame {
                 .addComponent(jLabelClassStats)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
