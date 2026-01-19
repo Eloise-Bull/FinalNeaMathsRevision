@@ -34,6 +34,7 @@ public class CalculatingClassStats {
     
     public static DefaultTableModel RowsInTable(int ClassID){
         ArrayList<String> row = new ArrayList<>();
+        ArrayList<String> DataFromTopicStats = new ArrayList<>();
         DefaultTableModel StatsTable = new DefaultTableModel();
         StatsTable.addColumn("Topic");
         StatsTable.addColumn("Student Username");
@@ -53,6 +54,7 @@ public class CalculatingClassStats {
                 int StudentID = results.getInt("Student_id");
                 Float Score = results.getFloat("Score");
                 
+                DataFromTopicStats.add();
                 String Topic = returnTopic(Topicid);
                 String Username = null;
                 String Name = null;
