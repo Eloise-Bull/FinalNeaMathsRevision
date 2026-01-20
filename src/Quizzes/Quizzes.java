@@ -35,6 +35,7 @@ public class Quizzes extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup2 = new javax.swing.ButtonGroup();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jtxtQuizQuestion = new javax.swing.JTextField();
         jtxtUserAnswer = new javax.swing.JTextField();
@@ -47,6 +48,10 @@ public class Quizzes extends javax.swing.JFrame {
         jButtonTargeted = new javax.swing.JRadioButton();
         jPanelCorrrectOrWrong = new javax.swing.JPanel();
         jLabelMark = new javax.swing.JLabel();
+        jFinishQuiz = new javax.swing.JButton();
+        jWarning = new javax.swing.JLabel();
+
+        jButton2.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,65 +118,73 @@ public class Quizzes extends javax.swing.JFrame {
 
         jLabelMark.setText("Marked:");
 
+        jFinishQuiz.setText("Finish");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jtxtCheatToGetAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(527, 527, 527)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelQuestion)
-                                    .addGap(220, 220, 220)
-                                    .addComponent(jLabelStats, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButtonRandom)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(5, 5, 5)
-                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(49, 49, 49)
-                                                .addComponent(jtxtHome))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(160, 160, 160)
-                                                .addComponent(jButtonTargeted)))
-                                        .addGap(33, 33, 33))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jtxtQuizQuestion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
-                                        .addComponent(jtxtUserAnswer, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelMark, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jPanelCorrrectOrWrong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanelCorrrectOrWrong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(664, 664, 664)
-                        .addComponent(jButtonSubmit)))
-                .addContainerGap(558, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelQuestion)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonRandom)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(5, 5, 5)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(49, 49, 49)
+                                        .addComponent(jtxtHome))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(160, 160, 160)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabelStats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButtonTargeted, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabelMark, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(220, 220, 220))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jtxtQuizQuestion, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtxtUserAnswer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(49, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtxtCheatToGetAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(168, 168, 168)
+                            .addComponent(jButtonSubmit)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jFinishQuiz))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(37, 37, 37)
+                            .addComponent(jWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButtonRandom))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(29, 29, 29)
                                         .addComponent(jtxtHome)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(82, 82, 82)
                                 .addComponent(jPanelCorrrectOrWrong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonTargeted)))
@@ -183,12 +196,16 @@ public class Quizzes extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jLabelMark)))
-                .addGap(21, 21, 21)
-                .addComponent(jtxtQuizQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(jtxtQuizQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtxtUserAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jButtonSubmit)
+                .addGap(27, 27, 27)
+                .addComponent(jWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSubmit)
+                    .addComponent(jFinishQuiz))
                 .addGap(54, 54, 54)
                 .addComponent(jtxtCheatToGetAnswer))
         );
@@ -216,54 +233,57 @@ public class Quizzes extends javax.swing.JFrame {
         boolean correct;
         // does the on screen stuff 
         String Question = jtxtQuizQuestion.getText();
-        if ( targeted == false) {
-            String answer = (jtxtUserAnswer.getText());
-            correct = quiz.CheckAnswer(answer);
+        String answer = (jtxtUserAnswer.getText());
+        // need to get rid of any spaces that could be inputted
+        if ("".equals(answer)){
+            jWarning.setText("Please Enter An Answer");
         }
         else{
-            String answer = (jtxtUserAnswer.getText());
-            correct = quiz.CheckTargetedAnswer(answer, Question);
-        }
+            if ( targeted == false) {
+                correct = quiz.CheckAnswer(answer);
+            }
+            else{
+                correct = quiz.CheckTargetedAnswer(answer, Question);
+            }
         
-        if ( correct == true) {            
-            jLabelMark.setText("Marked: Correct");
-        }
-        else {
-            jLabelMark.setText("Marked: Incorrect");
+            if ( correct == true) {            
+                jLabelMark.setText("Marked: Correct");
+            }
+            else {
+                jLabelMark.setText("Marked: Incorrect");
+            }
+        
+            if ( targeted == false ) {
+                quiz = new QuizQuestions();
+                jtxtQuizQuestion.setText(quiz.RandomQuiz());
+            }
+            else {
+                jtxtQuizQuestion.setText(quiz.TargetedQuestions());
+            }
+            int count = QuizQuestions.count();
+            jLabelQuestion.setText("Question: " + count);
+            float stats = QuizQuestions.CountingQuizStats(count-1,correct);
+            jLabelStats.setText ("Stats: " + stats + "%");
+        
+        
+        
+            int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
+            /// get topicID
+            System.out.println("done");
+            QuizQuestions quiz = new QuizQuestions();
+            int topicID = quiz.ReturnTopicID(Question);
+            System.out.println("done");
+            /// adds one to the numofquestionsdoen in databse for specific topic
+            quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
+            System.out.println("done");
+            quiz.updateStats(correct, topicID, Student_id);
+            System.out.println("done");
+            jtxtUserAnswer.setText("");
+            //int num = Integer.valueOf(jLabelQuestion.getText());
+            //jLabelQuestion.setText("Question: " + ( num + 1 ));
             
         }
         
-        if ( targeted == false ) {
-            quiz = new QuizQuestions();
-            jtxtQuizQuestion.setText(quiz.RandomQuiz());
-        }
-        else {
-            jtxtQuizQuestion.setText(quiz.TargetedQuestions());
-        }
-        int count = QuizQuestions.count();
-        jLabelQuestion.setText("Question: " + count);
-        float stats = QuizQuestions.CountingQuizStats(count-1,correct);
-        jLabelStats.setText ("Stats: " + stats + "%");
-        
-        
-        
-        int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
-        /// get topicID
-        System.out.println("done");
-        QuizQuestions quiz = new QuizQuestions();
-        int topicID = quiz.ReturnTopicID(Question);
-        System.out.println("done");
-        /// adds one to the numofquestionsdoen in databse for specific topic
-        quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
-        System.out.println("done");
-        quiz.updateStats(correct, topicID, Student_id);
-        System.out.println("done");
-        jtxtUserAnswer.setText("");
-        
-        
-
-        //int num = Integer.valueOf(jLabelQuestion.getText());
-        //jLabelQuestion.setText("Question: " + ( num + 1 ));
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     private void jtxtHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtHomeActionPerformed
@@ -311,14 +331,17 @@ public class Quizzes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton jButton2;
     private javax.swing.JRadioButton jButtonRandom;
     private javax.swing.JButton jButtonSubmit;
     private javax.swing.JRadioButton jButtonTargeted;
+    private javax.swing.JButton jFinishQuiz;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelMark;
     private javax.swing.JLabel jLabelQuestion;
     private javax.swing.JLabel jLabelStats;
     private javax.swing.JPanel jPanelCorrrectOrWrong;
+    private javax.swing.JLabel jWarning;
     private javax.swing.JLabel jtxtCheatToGetAnswer;
     private javax.swing.JButton jtxtHome;
     private javax.swing.JTextField jtxtQuizQuestion;
