@@ -7,7 +7,7 @@ package Settings;
 import Login.Login;
 import StudentHome.StudentHome;
 import TeacherHome.TeacherHome;
-import SignUp.SignUp;
+
 
 /**
  *
@@ -22,6 +22,11 @@ public class Settings extends javax.swing.JFrame {
     
     public Settings() {
         initComponents();
+        int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+        int StudentId = Login.InfoOfUserForThisLoginSession.StudentId;
+        int TeacherID = Login.InfoOfUserForThisLoginSession.TeacherId;
+        String userType = Login.InfoOfUserForThisLoginSession.userType ;
+        
     }
 
     /**
@@ -158,16 +163,12 @@ public class Settings extends javax.swing.JFrame {
 
     private void jtxtHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtHomeActionPerformed
         String User = Login.InfoOfUserForThisLoginSession.userType ;
-        System.out.println("Works");
         if (User.equals("Teacher")){
-            System.out.println("Works");
             TeacherHome ToTeacherScreen = new TeacherHome();  
             ToTeacherScreen.setVisible(true);
             this.dispose();
         }
-        System.out.println("Works");
         if (User.equals("Student")){
-            System.out.println("Works");
             StudentHome submitButton = new StudentHome();  
             submitButton.setVisible(true);
             this.dispose();

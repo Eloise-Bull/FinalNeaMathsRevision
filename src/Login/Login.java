@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Login;
-import Login.CheckLoginDetails;
 import StudentHome.StudentHome;
 import SignUp.LoginOrSignUp;
 import TeacherHome.TeacherHome;
