@@ -22,55 +22,66 @@ public class GettingAssignmentsForTheTable {
     // wjhat i want in the table = id, done, resource or quiz, num of questoins, percent done, date, topic.
     
     
-    
-    ///////////// THIS IS UNFINISHED I DIDNT HAVE ACCESS TO MY SQL SO FIX IT !!
+    ///  this does the table contents basically pulls from database important things about the stats
+    /// reused and edited code from teacehr stats package
     ///
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
-    // so im using this for the colum names
-    public static DefaultTableModel RowsInTable(int StudentID, boolean completed){
-        DefaultTableModel AssignmentsTable = new DefaultTableModel();
-        AssignmentsTable.addColumn("Id");
-        AssignmentsTable.addColumn("Number Of Quiz Questions");
-        AssignmentsTable.addColumn("Title");
-        AssignmentsTable.addColumn("Due-Date");
         
-        int count = 0;
+    public static DefaultTableModel RowsInTable(int StudentID, boolean completed){
+
+        DefaultTableModel AssignmentTable = new DefaultTableModel();
+        
+        // kept columns in order the whole class so as to not mess around the 
+        AssignmentTable.addColumn("Topic");
+        AssignmentTable.addColumn("resource");
+        AssignmentTable.addColumn("Num of quiz questions");
+        AssignmentTable.addColumn("percentage of quiz done");
+        AssignmentTable.addColumn("Done");
+        AssignmentTable.addColumn("DueDate");
+        
+
         try (Connection connection = TheConnectionToDatabase()){
-            System.out.println("Done");
-            if (completed){
-                Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery("SELECT AssignmentInfo_Id,NumOfQuizQuestions,Title, DueDate FROM AssignmentInfo WHERE AssignmentInfo_Id IN (SELECT AssignmentInfo_Id FROM Assigned WHERE StudentId = " + StudentID + ")");
-                System.out.println("Done");
-                while (results.next()){
-                    //(results).getClass();
-                    //Object Value = results.getObject("count");
-                    //System.out.println("Done");
-                    //row.add(String.valueOf(Value));
-                    
-                    int id = results.getInt("AssignmentInfo_Id");
-                    int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
-                    String Title = results.getString("Title");
-                    String duedate = results.getString("DueDate");
-                    System.out.println("Done");
-                    count = count + 1;
-                    if ( count == 5) {
-                        AssignmentsTable.addRow(new Object [] { id, NumOfQuizQuestions, Title, duedate});
+            Statement statement = connection.createStatement();
+            // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
+            //then orders by topic
+            // i also put the statement over 3 lines cause it was soo long
+            ResultSet results = statement.executeQuery("SELECT Title, Resource, "
+                    + "NumOfQuizQuestions,PercentageOfQuizDone, Done, DueDate FROM Assigned a "
+                    + "JOIN Student s "
+                    + "ON a.Student_id = s.Student_id "
+                    + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id"
+                    + "  WHERE s.Student_id = "+ StudentID
+                    + "ORDER BY DueDate ASC ");
+
+            while (results.next()){
+                String Topic = results.getString("Title");
+                String Resource = results.getString("Resource");
+                int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
+                Float PercentageOfQuizDone = results.getFloat("PercentageOfQuizDone");
+                Boolean Done = results.getBoolean("Done");
+                String DueDate = results.getString("DueDate");
+                // change from boolean to String to make readability easier for user
+                if (completed = false) {
+                    if (Done = false) {
+                        AssignmentTable.addRow(new Object [] {Topic,Resource,NumOfQuizQuestions,
+                        PercentageOfQuizDone,completed,DueDate }); 
+                    }
                         
-                        System.out.println("Done");
+                }
+                else{
+                    if (Done) {
+                        AssignmentTable.addRow(new Object [] {Topic,Resource,NumOfQuizQuestions,
+                        PercentageOfQuizDone,completed,DueDate });  
                     }
                 }
             }
             
-            return AssignmentsTable;
+            return AssignmentTable;
         }
         catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        
+        
     }
 }
