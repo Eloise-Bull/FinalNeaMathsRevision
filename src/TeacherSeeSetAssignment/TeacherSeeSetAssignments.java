@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package TeacherSeeSetAssignment;
-import javax.swing.*;
+import Login.Login;
 import TeacherHome.TeacherHome;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author 4-EBULL
@@ -16,6 +17,11 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
      */
     public TeacherSeeSetAssignments() {
         initComponents();
+        // this fills in the table
+        int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+        DefaultTableModel ClassStatsTable = new DefaultTableModel();
+        ClassStatsTable = SeeSetAssignmentsFromDatabase.RowsInTable(ClassID);
+        jAssignmentsTable.setModel(ClassStatsTable);
     }
 
     /**
@@ -32,7 +38,7 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jAssignmentsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,7 +56,7 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
 
         jButton3.setText("Extend deadline");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jAssignmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -61,8 +67,8 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
 
             }
         ));
-        jTable1.setEnabled(false);
-        jScrollPane2.setViewportView(jTable1);
+        jAssignmentsTable.setEnabled(false);
+        jScrollPane2.setViewportView(jAssignmentsTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,11 +155,11 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable jAssignmentsTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
