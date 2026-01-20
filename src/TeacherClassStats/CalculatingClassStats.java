@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package TeacherClassStats;
-import ConnectTheDatabase.ConnectTheDatabase;
 import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
+import Login.Login;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -18,7 +18,7 @@ public class CalculatingClassStats {
     private static float AverageClass;
     
     public static float CalculatingAverageClassStats(){
-        ArrayList<Float> AllStudents = ConnectTheDatabase.ArrayListStudentStats();
+        ArrayList<Float> AllStudents = ArrayListStudentStats();
         int count = 0;
         for ( int i = 0; i < AllStudents.size(); i ++){
             AverageClass = AllStudents.get(i) + AverageClass;
@@ -30,9 +30,29 @@ public class CalculatingClassStats {
     }
     
     
-    
-             
- 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// creates an array list for the student stats so i can calculate the averages of a class
+
+    // returns the array for the stats. temporaty storage, a float cause stats = decimal
+    // temporary class_id = set to one cause then i can test wihtout them loging in         
+    public static ArrayList<Float> ArrayListStudentStats(){
+        int Class_id = Login.InfoOfUserForThisLoginSession.UserClassID ;
+        ArrayList<Float> StudentStatslist = new ArrayList<>();
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Score FROM TopicStats "
+                    + "WHERE Student_id IN ( SELECT Student_id FROM Student WHERE Class_id = " + Class_id+")");
+            while (results.next()){
+                float StatsValue = results.getFloat("Score");
+                StudentStatslist.add(StatsValue);
+            }
+            return StudentStatslist;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
     // this creates a default table so that i can put it in the table
     

@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package TeacherClassStats;
-import ConnectTheDatabase.ConnectTheDatabase;
 import Login.Login;
 import TeacherHome.TeacherHome;
-import ViewAssignmentsScreen.GettingAssignmentsForTheTable;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
@@ -33,10 +31,10 @@ public class TeacherClassStats extends javax.swing.JFrame {
         jTableStats.setModel(ClassStatsTable);
     }
     
-    // FINISH !!? MESSED THIS UP FIX IT 
+
     public void putDataIntoTable(){
         DefaultTableModel model = (DefaultTableModel) jTableStats.getModel();
-        ArrayList<Float> Stats = ConnectTheDatabase.ArrayListStudentStats();
+        ArrayList<Float> Stats = CalculatingClassStats.ArrayListStudentStats();
         for ( int i = 1; i < Stats.size(); i++)
             model.addRow(new Object[] {Stats.get(i)});
     }
