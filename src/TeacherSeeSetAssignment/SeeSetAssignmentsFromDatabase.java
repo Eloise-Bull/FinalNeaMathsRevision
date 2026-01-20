@@ -39,13 +39,13 @@ public class SeeSetAssignmentsFromDatabase {
             // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
             //then orders by topic
             // i also put the statement over 3 lines cause it was soo long
-            ResultSet results = statement.executeQuery("SELECT username, S_Name, Title, Resource, "
-                    + "NumOfQuizQuestions,PercentageOfQuizDone, Done, DueDate FROM Assigned a "
-                    + "JOIN Student s "
-                    + "ON a.Student_id = s.Student_id "
-                    + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id"
-                    + "  WHERE ai.ClassID = "+ ClassID
-                    + "ORDER BY DueDate ASC ");
+            ResultSet results = statement.executeQuery("SELECT username, S_Name, Title, Resource, NumOfQuizQuestions,"
+                    + "PercentageOfQuizDone, Done, DueDate FROM Assigned a "
+                    + "JOIN Student s ON a.StudentId = s.Student_id "
+                    + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
+                    + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
+                    + "WHERE ai.ClassID = " + ClassID
+                    + " ORDER BY DueDate ASC ;");
 
             while (results.next()){
                 String Username = results.getString("username");

@@ -26,6 +26,12 @@ public class Settings extends javax.swing.JFrame {
         int StudentId = Login.InfoOfUserForThisLoginSession.StudentId;
         int TeacherID = Login.InfoOfUserForThisLoginSession.TeacherId;
         String userType = Login.InfoOfUserForThisLoginSession.userType ;
+        String[] DataArray = new String[3];
+        GetOrChangeUserInfo get = new GetOrChangeUserInfo();
+        DataArray = get.GetUserInfo(ClassID,userType,StudentId,TeacherID);
+        jtxtUsername.setText("Username : " + DataArray[0]);
+        jtxtEmail.setText("Email : " + DataArray[1]);
+        jtxtClass.setText("Class : " + ClassID );
         
     }
 

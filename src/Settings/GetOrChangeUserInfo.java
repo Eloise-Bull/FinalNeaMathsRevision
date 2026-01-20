@@ -5,7 +5,6 @@
 package Settings;
 
 import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -16,9 +15,9 @@ import java.sql.Statement;
  */
 public class GetOrChangeUserInfo {
     // finish the array
-    public Array[] GetUserInfo(int ClassID, String User, int Studentid,int TeacherId){
-        int id = -1;
-        String idFormat;
+    public String[] GetUserInfo(int ClassID, String User, int Studentid,int TeacherId){
+        String[] arrayForDetails = new String[2];
+        int id;
         if ("Student".equals(User)){
             id = Studentid;  
         }
@@ -28,18 +27,20 @@ public class GetOrChangeUserInfo {
         
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT username, Email, Class_id  "
+            ResultSet results = statement.executeQuery("SELECT username, Email  "
                     + "FROM "+ User +" WHERE " + User+ "_id = " + id);
 
             while (results.next()){
 
                 String Username = results.getString("username");
-                String Topic = results.getString("Email");
-                String NAME = results.getString("S_name");
-                Float Score = results.getFloat("Score");
+                String Email = results.getString("Email");
+                
+                arrayForDetails[0] = Username;
+                arrayForDetails[1] = Email;
+
 
             }
-            return 
+            return arrayForDetails;
             
         }
         catch (Exception e) {
@@ -47,6 +48,4 @@ public class GetOrChangeUserInfo {
             return null;
         }
     }
-    }
-    
 }
