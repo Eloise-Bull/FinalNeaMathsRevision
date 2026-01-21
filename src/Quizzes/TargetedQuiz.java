@@ -110,10 +110,6 @@ public class TargetedQuiz {
             //fix later idk what else to put for that
             
             return null;
-        } 
-        
-    
-        
-        
+        }   
     }   
 }

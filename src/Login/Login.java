@@ -59,7 +59,6 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
-        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -69,7 +68,7 @@ public class Login extends javax.swing.JFrame {
                 jtxtUsernameActionPerformed(evt);
             }
         });
-        getContentPane().add(jtxtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 320, 40));
+        getContentPane().add(jtxtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 320, 40));
 
         jtxtPassword.setForeground(new java.awt.Color(255, 102, 204));
         jtxtPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -77,17 +76,17 @@ public class Login extends javax.swing.JFrame {
                 jtxtPasswordActionPerformed(evt);
             }
         });
-        getContentPane().add(jtxtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 460, 320, 40));
+        getContentPane().add(jtxtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 320, 40));
 
         jtxtLogin.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jtxtLogin.setText("Login");
-        getContentPane().add(jtxtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, 200, 70));
+        getContentPane().add(jtxtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 200, 70));
 
         jLabel2.setText("Username");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, 230, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 230, 30));
 
         jLabel3.setText("Password");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 170, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 170, 40));
 
         jtxtSubmit.setText("Submit");
         jtxtSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +94,7 @@ public class Login extends javax.swing.JFrame {
                 jtxtSubmitActionPerformed(evt);
             }
         });
-        getContentPane().add(jtxtSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 540, 100, 20));
+        getContentPane().add(jtxtSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, 100, 20));
 
         jButtonBack.setText("Back");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +102,7 @@ public class Login extends javax.swing.JFrame {
                 jButtonBackActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 260, -1, -1));
+        getContentPane().add(jButtonBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, -1, -1));
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Student");
@@ -112,7 +111,7 @@ public class Login extends javax.swing.JFrame {
                 jRadioButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, -1, -1));
+        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Teacher");
@@ -121,8 +120,8 @@ public class Login extends javax.swing.JFrame {
                 jRadioButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 300, -1, -1));
-        getContentPane().add(jWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, 320, 20));
+        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
+        getContentPane().add(jWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 320, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

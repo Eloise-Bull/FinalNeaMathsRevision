@@ -118,7 +118,6 @@
                               <Component id="jPanelCorrrectOrWrong" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonTargeted" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -246,6 +245,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Finish"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFinishQuizActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jWarning">
     </Component>

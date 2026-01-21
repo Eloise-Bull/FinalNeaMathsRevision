@@ -5,6 +5,7 @@
 package Quizzes;
 import StudentHome.StudentHome;
 import Login.Login;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,11 +19,19 @@ public class Quizzes extends javax.swing.JFrame {
     /**
      * Creates new form Quizzes
      */
+    
+    public class QuizDetails{
+        public static ArrayList<String> ListOfQuestionsWrong; 
+        public static ArrayList<String> ListOfAnswers; 
+        public static Float CurrentStats;
+    }
+    
     public Quizzes() {
         
         initComponents();   
         targeted = false;
         quiz = new QuizQuestions();
+        QuizDetails.CurrentStats = null;
         
     }
     /**
@@ -119,6 +128,11 @@ public class Quizzes extends javax.swing.JFrame {
         jLabelMark.setText("Marked:");
 
         jFinishQuiz.setText("Finish");
+        jFinishQuiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFinishQuizActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,7 +200,6 @@ public class Quizzes extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(82, 82, 82)
                                 .addComponent(jPanelCorrrectOrWrong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonTargeted)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,14 +232,12 @@ public class Quizzes extends javax.swing.JFrame {
         //take user input then 
         //boolean check = CheckAnswers(3,5);
         
-        
-// TODO add your handling code here:
+       
     }//GEN-LAST:event_jtxtUserAnswerActionPerformed
 
     private void jtxtQuizQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtQuizQuestionActionPerformed
         
         // move to the main when u get the connection to work 
-        // TODO add your handling code here:
     }//GEN-LAST:event_jtxtQuizQuestionActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
@@ -251,6 +262,8 @@ public class Quizzes extends javax.swing.JFrame {
             }
             else {
                 jLabelMark.setText("Marked: Incorrect");
+                String QuizQuestion = jtxtQuizQuestion.getText();
+                QuizDetails.ListOfQuestionsWrong.add(QuizQuestion);
             }
         
             if ( targeted == false ) {
@@ -263,21 +276,19 @@ public class Quizzes extends javax.swing.JFrame {
             int count = QuizQuestions.count();
             jLabelQuestion.setText("Question: " + count);
             float stats = QuizQuestions.CountingQuizStats(count-1,correct);
+            // updates the temp stored data of this quiz
+            QuizDetails.CurrentStats = stats;
             jLabelStats.setText ("Stats: " + stats + "%");
         
         
         
             int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
             /// get topicID
-            System.out.println("done");
             QuizQuestions quiz = new QuizQuestions();
             int topicID = quiz.ReturnTopicID(Question);
-            System.out.println("done");
             /// adds one to the numofquestionsdoen in databse for specific topic
             quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
-            System.out.println("done");
             quiz.updateStats(correct, topicID, Student_id);
-            System.out.println("done");
             jtxtUserAnswer.setText("");
             //int num = Integer.valueOf(jLabelQuestion.getText());
             //jLabelQuestion.setText("Question: " + ( num + 1 ));
@@ -303,6 +314,10 @@ public class Quizzes extends javax.swing.JFrame {
         jtxtQuizQuestion.setText(quiz.TargetedQuestions());
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTargetedActionPerformed
+
+    private void jFinishQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFinishQuizActionPerformed
+        
+    }//GEN-LAST:event_jFinishQuizActionPerformed
 
     /**
      * @param args the command line arguments

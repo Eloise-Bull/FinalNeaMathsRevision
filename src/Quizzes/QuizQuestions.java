@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Quizzes;
-import ConnectTheDatabase.ConnectTheDatabase;
 import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -76,7 +75,10 @@ public class QuizQuestions {
             return true;
         }
         else {
+            //if wrong adds to the list of wrong answers for my quiz output
+            Quizzes.QuizDetails.ListOfAnswers.add(CorrectAnswer);
             return false;
+            
         }
     }    
         
@@ -111,7 +113,10 @@ public class QuizQuestions {
             return true;
         }
         else {
+            //if wrong adds to the list of wrong answers for my quiz output
+            Quizzes.QuizDetails.ListOfAnswers.add(ActualAnswer);
             return false;
+            
         }
     }
     
