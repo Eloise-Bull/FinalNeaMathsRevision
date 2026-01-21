@@ -4,7 +4,9 @@
  */
 package Quizzes;
 
+import StudentHome.StudentHome;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,12 +21,28 @@ public class QuizOutput extends javax.swing.JFrame {
      */
     public QuizOutput() {
         initComponents();
+        
+        //gets temp stored values from Quizzes
         ArrayList<String> ListOfCorrectAnswers = Quizzes.QuizDetails.ListOfAnswers;
-        ArrayList<String> ListOfQuestionsWrong = Quizzes.QuizDetails.ListOfAnswers;
+        ArrayList<String> ListOfQuestionsWrong = Quizzes.QuizDetails.ListOfQuestionsWrong;
         Float OverallStats = Quizzes.QuizDetails.CurrentStats;
         
+        // sets up the table on screen 
+        DefaultTableModel QuizOutputTable = new DefaultTableModel();
+        QuizOutputTable.addColumn("Question Wrong");
+        QuizOutputTable.addColumn("Answer");
+        QuizOutputTable.addColumn("Topic");
+        for ( int i = 0; i < ListOfQuestionsWrong.size(); i++){
+            QuizOutputTable.addRow(new Object [] {ListOfQuestionsWrong.get(i),ListOfCorrectAnswers.get(i), "Do TOPic" }); 
+            
+        }
         
+        jTableResults.setModel(QuizOutputTable);
+        // sets labels for the output of quiz
+        jScore.setText("Score : " + String.valueOf(OverallStats) + " %");
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,69 +54,81 @@ public class QuizOutput extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jScore = new javax.swing.JLabel();
+        jNumOfQuestions = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
+        jTableResults = new javax.swing.JTable();
+        jtopicToImproveOn = new javax.swing.JLabel();
+        ToHomeScreen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Quiz Results");
 
-        jLabel2.setText("Score : ");
+        jScore.setText("Score : ");
 
-        jLabel4.setText("Num Of Questions : ");
+        jNumOfQuestions.setText("Num Of Questions : ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableResults.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Question Wrong", "Answer", "Topic"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableResults);
 
-        jLabel3.setText("Overall Topic To Improve On : ");
+        jtopicToImproveOn.setText("Overall Topic To Improve On : ");
+
+        ToHomeScreen.setText("Home");
+        ToHomeScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ToHomeScreenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(218, 218, 218)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(179, 179, 179)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ToHomeScreen))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jNumOfQuestions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(218, 218, 218)
+                                .addComponent(jtopicToImproveOn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jScrollPane1)))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jLabel1)
-                .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel1)
+                    .addComponent(ToHomeScreen))
+                .addGap(67, 67, 67)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jNumOfQuestions, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtopicToImproveOn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScore, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(45, Short.MAX_VALUE))
@@ -106,6 +136,12 @@ public class QuizOutput extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ToHomeScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToHomeScreenActionPerformed
+        StudentHome submitButton = new StudentHome();  
+        submitButton.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_ToHomeScreenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,11 +169,12 @@ public class QuizOutput extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ToHomeScreen;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jNumOfQuestions;
+    private javax.swing.JLabel jScore;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableResults;
+    private javax.swing.JLabel jtopicToImproveOn;
     // End of variables declaration//GEN-END:variables
 }

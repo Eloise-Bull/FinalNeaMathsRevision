@@ -78,9 +78,9 @@ public class QuizQuestions {
             //if wrong adds to the list of wrong answers for my quiz output
             Quizzes.QuizDetails.ListOfAnswers.add(CorrectAnswer);
             return false;
-            
         }
     }    
+        
         
     //////////////////////////////////////////////////////////////////
     /// for Targeted quiz

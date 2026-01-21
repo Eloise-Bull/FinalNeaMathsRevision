@@ -20,9 +20,9 @@ public class Quizzes extends javax.swing.JFrame {
      * Creates new form Quizzes
      */
     
-    public class QuizDetails{
-        public static ArrayList<String> ListOfQuestionsWrong; 
-        public static ArrayList<String> ListOfAnswers; 
+    public static class QuizDetails{
+        public static ArrayList<String> ListOfQuestionsWrong = new ArrayList(); 
+        public static ArrayList<String> ListOfAnswers = new ArrayList(); 
         public static Float CurrentStats;
     }
     
@@ -31,8 +31,6 @@ public class Quizzes extends javax.swing.JFrame {
         initComponents();   
         targeted = false;
         quiz = new QuizQuestions();
-        QuizDetails.CurrentStats = null;
-        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -242,21 +240,40 @@ public class Quizzes extends javax.swing.JFrame {
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         boolean correct;
+        String ActualAnswer = null;
+        String[] AnswerAndCorrect = new String[2];
+        
         // does the on screen stuff 
         String Question = jtxtQuizQuestion.getText();
         String answer = (jtxtUserAnswer.getText());
         // need to get rid of any spaces that could be inputted
+        
         if ("".equals(answer)){
             jWarning.setText("Please Enter An Answer");
         }
         else{
+            // this is for the random quiz
+            // returns 1 if correct
+            // and returns actual answer
             if ( targeted == false) {
                 correct = quiz.CheckAnswer(answer);
+                if (correct){
+                    correct = true;
+                }
+                else {
+                    correct = false;
+                }
             }
+
+            // this is for specific quiz
             else{
                 correct = quiz.CheckTargetedAnswer(answer, Question);
             }
-        
+            // adds wrong answers to the list for quiz output
+            if (!correct){
+                QuizDetails.ListOfAnswers.add(ActualAnswer);
+            }
+            
             if ( correct == true) {            
                 jLabelMark.setText("Marked: Correct");
             }
@@ -265,7 +282,6 @@ public class Quizzes extends javax.swing.JFrame {
                 String QuizQuestion = jtxtQuizQuestion.getText();
                 QuizDetails.ListOfQuestionsWrong.add(QuizQuestion);
             }
-        
             if ( targeted == false ) {
                 quiz = new QuizQuestions();
                 jtxtQuizQuestion.setText(quiz.RandomQuiz());
@@ -273,13 +289,14 @@ public class Quizzes extends javax.swing.JFrame {
             else {
                 jtxtQuizQuestion.setText(quiz.TargetedQuestions());
             }
+            System.out.println("hello");
             int count = QuizQuestions.count();
             jLabelQuestion.setText("Question: " + count);
             float stats = QuizQuestions.CountingQuizStats(count-1,correct);
             // updates the temp stored data of this quiz
             QuizDetails.CurrentStats = stats;
             jLabelStats.setText ("Stats: " + stats + "%");
-        
+            System.out.println("hello");
         
         
             int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
@@ -316,7 +333,9 @@ public class Quizzes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTargetedActionPerformed
 
     private void jFinishQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFinishQuizActionPerformed
-        
+        QuizOutput NewScreen = new QuizOutput();  
+        NewScreen.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jFinishQuizActionPerformed
 
     /**
