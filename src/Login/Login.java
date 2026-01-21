@@ -44,6 +44,7 @@ public class Login extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jtxtUsername = new javax.swing.JTextField();
@@ -58,8 +59,9 @@ public class Login extends javax.swing.JFrame {
         jWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAutoRequestFocus(false);
         setSize(new java.awt.Dimension(0, 0));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jtxtUsername.setForeground(new java.awt.Color(255, 102, 204));
         jtxtUsername.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +69,15 @@ public class Login extends javax.swing.JFrame {
                 jtxtUsernameActionPerformed(evt);
             }
         });
-        getContentPane().add(jtxtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 320, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 25;
+        gridBagConstraints.ipadx = 256;
+        gridBagConstraints.ipady = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 130, 0, 177);
+        getContentPane().add(jtxtUsername, gridBagConstraints);
 
         jtxtPassword.setForeground(new java.awt.Color(255, 102, 204));
         jtxtPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -75,17 +85,49 @@ public class Login extends javax.swing.JFrame {
                 jtxtPasswordActionPerformed(evt);
             }
         });
-        getContentPane().add(jtxtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 320, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 25;
+        gridBagConstraints.ipadx = 256;
+        gridBagConstraints.ipady = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 130, 0, 177);
+        getContentPane().add(jtxtPassword, gridBagConstraints);
 
         jtxtLogin.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jtxtLogin.setText("Login");
-        getContentPane().add(jtxtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 200, 70));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 14;
+        gridBagConstraints.ipadx = 104;
+        gridBagConstraints.ipady = 28;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(60, 26, 0, 0);
+        getContentPane().add(jtxtLogin, gridBagConstraints);
 
         jLabel2.setText("Username");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 230, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 177;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 130, 0, 0);
+        getContentPane().add(jLabel2, gridBagConstraints);
 
         jLabel3.setText("Password");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 170, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 120;
+        gridBagConstraints.ipady = 24;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 130, 0, 0);
+        getContentPane().add(jLabel3, gridBagConstraints);
 
         jtxtSubmit.setText("Submit");
         jtxtSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +135,15 @@ public class Login extends javax.swing.JFrame {
                 jtxtSubmitActionPerformed(evt);
             }
         });
-        getContentPane().add(jtxtSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, 100, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 28;
+        gridBagConstraints.ipady = -3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 46, 42, 0);
+        getContentPane().add(jtxtSubmit, gridBagConstraints);
 
         jButtonBack.setText("Back");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +151,14 @@ public class Login extends javax.swing.JFrame {
                 jButtonBackActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(110, 10, 0, 0);
+        getContentPane().add(jButtonBack, gridBagConstraints);
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Student");
@@ -110,7 +167,12 @@ public class Login extends javax.swing.JFrame {
                 jRadioButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 130, 0, 0);
+        getContentPane().add(jRadioButton1, gridBagConstraints);
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Teacher");
@@ -119,10 +181,25 @@ public class Login extends javax.swing.JFrame {
                 jRadioButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
-        getContentPane().add(jWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 320, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 0, 0, 0);
+        getContentPane().add(jRadioButton2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 25;
+        gridBagConstraints.ipadx = 320;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 130, 0, 177);
+        getContentPane().add(jWarning, gridBagConstraints);
 
-        pack();
+        setSize(new java.awt.Dimension(553, 460));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtxtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtUsernameActionPerformed
