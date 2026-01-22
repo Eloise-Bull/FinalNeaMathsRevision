@@ -19,9 +19,9 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
     public TeacherSeeSetAssignments() {
         initComponents();
         int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
-        ArrayList<String> ListOfTopics = SeeSetAssignmentsFromDatabase.SetBox(ClassID);
-        for (int i = 0; i < ListOfTopics.size(); i ++ ){
-            ComboBox.addItem(ListOfTopics.get(i));
+        ArrayList<String> ListOfUsernames = SeeSetAssignmentsFromDatabase.SetBox(ClassID);
+        for (int i = 0; i < ListOfUsernames.size(); i ++ ){
+            ComboBox.addItem(ListOfUsernames.get(i));
         }
     }
 
@@ -74,7 +74,7 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         jAssignmentsTable.setEnabled(false);
         jScrollPane2.setViewportView(jAssignmentsTable);
 
-        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MostRecent", "Uncompleted", "Completed", "All", "Specific Students" }));
+        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MostRecent", "Uncompleted", "Completed", "All" }));
 
         jLabel2.setText("Sort Assignments: ");
 
@@ -160,9 +160,16 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         }
         if ("All".equals(HowToSort)){
             
+            int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+            DefaultTableModel ClassStatsTable = new DefaultTableModel();
+            ClassStatsTable = SeeSetAssignmentsFromDatabase.AllAssignments(ClassID);
+            jAssignmentsTable.setModel(ClassStatsTable);
         }
         else{
-            
+            int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+            DefaultTableModel ClassStatsTable = new DefaultTableModel();
+            ClassStatsTable = SeeSetAssignmentsFromDatabase.SpecificStudentAssignment(HowToSort, ClassID);
+            jAssignmentsTable.setModel(ClassStatsTable);
         }
 
         

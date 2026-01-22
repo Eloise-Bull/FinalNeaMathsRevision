@@ -49,7 +49,7 @@ public class GettingAssignmentsForTheTable {
                     + "JOIN Student s ON a.StudentId = s.Student_id "
                     + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
                     + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
-                    + "WHERE s.Student_id = 1 ORDER BY DueDate DESC;");
+                    + "WHERE s.Student_id = " +StudentID+" ORDER BY DueDate ASC;");
 
             while (results.next()){
                 String Topic = results.getString("Title");
