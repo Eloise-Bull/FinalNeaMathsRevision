@@ -25,24 +25,26 @@ public class QuizOutput extends javax.swing.JFrame {
         
         ArrayList<String> ListOfCorrectAnswers = Quizzes.QuizDetails.ListOfAnswers;
         ArrayList<String> ListOfQuestionsWrong = Quizzes.QuizDetails.ListOfQuestionsWrong;
+        ArrayList<String> ListOfUserAnswers = Quizzes.QuizDetails.ListOfUserAnswers;
         Float OverallStats = Quizzes.QuizDetails.CurrentStats;
         int QuestionsDone = Quizzes.QuizDetails.questionsDone;
-        System.out.println(ListOfCorrectAnswers);
-        System.out.println(ListOfQuestionsWrong);
+        
+
         // sets up the table on screen 
         DefaultTableModel QuizOutputTable = new DefaultTableModel();
         QuizOutputTable.addColumn("Question Wrong");
         QuizOutputTable.addColumn("Answer");
+        QuizOutputTable.addColumn("Your Answer");
         QuizOutputTable.addColumn("Topic");
         for ( int i = 0; i < ListOfQuestionsWrong.size(); i++){
             // gets the topic for the Questions 
             String Question = ListOfQuestionsWrong.get(i);
             String Answer = ListOfCorrectAnswers.get(i);
- 
+            String UserAnswer = ListOfUserAnswers.get(i);
             
             QuizOutputClass output = new QuizOutputClass();
             String Topic = output.ReturnTopic(Question);
-            QuizOutputTable.addRow(new Object [] {Question,Answer, Topic }); 
+            QuizOutputTable.addRow(new Object [] {Question,Answer,UserAnswer,Topic }); 
             
         }
         
@@ -74,7 +76,6 @@ public class QuizOutput extends javax.swing.JFrame {
         jNumOfQuestions = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableResults = new javax.swing.JTable();
-        jtopicToImproveOn = new javax.swing.JLabel();
         ToHomeScreen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,8 +101,6 @@ public class QuizOutput extends javax.swing.JFrame {
         jTableResults.setEnabled(false);
         jScrollPane1.setViewportView(jTableResults);
 
-        jtopicToImproveOn.setText("Overall Topic To Improve On : ");
-
         ToHomeScreen.setText("Home");
         ToHomeScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,10 +123,9 @@ public class QuizOutput extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jNumOfQuestions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(218, 218, 218)
-                                .addComponent(jtopicToImproveOn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jNumOfQuestions, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jScrollPane1)))
@@ -141,9 +139,7 @@ public class QuizOutput extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(ToHomeScreen))
                 .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jNumOfQuestions, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtopicToImproveOn))
+                .addComponent(jNumOfQuestions, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScore, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -192,6 +188,5 @@ public class QuizOutput extends javax.swing.JFrame {
     private javax.swing.JLabel jScore;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableResults;
-    private javax.swing.JLabel jtopicToImproveOn;
     // End of variables declaration//GEN-END:variables
 }

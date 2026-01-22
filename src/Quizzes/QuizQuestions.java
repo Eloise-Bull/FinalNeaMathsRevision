@@ -76,6 +76,7 @@ public class QuizQuestions {
         }
         else {
             //if wrong adds to the list of wrong answers for my quiz output
+            Quizzes.QuizDetails.ListOfUserAnswers.add(answer);
             Quizzes.QuizDetails.ListOfAnswers.add(CorrectAnswer);
             return false;
         }
@@ -116,6 +117,7 @@ public class QuizQuestions {
         else {
             //if wrong adds to the list of wrong answers for my quiz output
             Quizzes.QuizDetails.ListOfAnswers.add(ActualAnswer);
+            Quizzes.QuizDetails.ListOfUserAnswers.add(answer);
             return false;
         }
     }

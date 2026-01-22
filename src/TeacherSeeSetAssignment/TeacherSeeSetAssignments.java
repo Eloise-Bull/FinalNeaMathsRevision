@@ -5,6 +5,7 @@
 package TeacherSeeSetAssignment;
 import Login.Login;
 import TeacherHome.TeacherHome;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -17,11 +18,11 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
      */
     public TeacherSeeSetAssignments() {
         initComponents();
-        // this fills in the table
         int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
-        DefaultTableModel ClassStatsTable = new DefaultTableModel();
-        ClassStatsTable = SeeSetAssignmentsFromDatabase.RowsInTable(ClassID);
-        jAssignmentsTable.setModel(ClassStatsTable);
+        ArrayList<String> ListOfTopics = SeeSetAssignmentsFromDatabase.SetBox(ClassID);
+        for (int i = 0; i < ListOfTopics.size(); i ++ ){
+            ComboBox.addItem(ListOfTopics.get(i));
+        }
     }
 
     /**
@@ -39,6 +40,9 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jAssignmentsTable = new javax.swing.JTable();
+        ComboBox = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,7 +54,7 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel1.setText("Set Assignments");
+        jLabel1.setText("Assignments");
 
         jButton2.setText("Delete");
 
@@ -70,6 +74,17 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         jAssignmentsTable.setEnabled(false);
         jScrollPane2.setViewportView(jAssignmentsTable);
 
+        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MostRecent", "Uncompleted", "Completed", "All", "Specific Students" }));
+
+        jLabel2.setText("Sort Assignments: ");
+
+        jButton4.setText("Choose");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,16 +93,21 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))))
+                                .addGap(39, 39, 39)
+                                .addComponent(jButton1))
+                            .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
+                        .addGap(108, 108, 108)
                         .addComponent(jButton2)
-                        .addGap(99, 99, 99)
+                        .addGap(54, 54, 54)
                         .addComponent(jButton3)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -97,16 +117,22 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jLabel1)))
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addGap(30, 30, 30))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -117,6 +143,30 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
     ToHome.setVisible(true);
     this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        String HowToSort = ComboBox.getSelectedItem().toString();
+        
+        if ("Most Recent".equals(HowToSort)){
+            // sort by date and then limit one 
+        }    
+        if ("Uncompleted".equals(HowToSort)|| "Completed".equals(HowToSort)){
+            // this fills in the table
+            int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+            DefaultTableModel ClassStatsTable = new DefaultTableModel();
+            ClassStatsTable = SeeSetAssignmentsFromDatabase.BothCompletedAndUncompletedAssignmentsTable(ClassID, HowToSort);
+            jAssignmentsTable.setModel(ClassStatsTable);
+        }
+        if ("All".equals(HowToSort)){
+            
+        }
+        else{
+            
+        }
+
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,11 +205,14 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboBox;
     private javax.swing.JTable jAssignmentsTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

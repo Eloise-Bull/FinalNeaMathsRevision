@@ -23,6 +23,7 @@ public class Quizzes extends javax.swing.JFrame {
     public static class QuizDetails{
         public static ArrayList<String> ListOfQuestionsWrong = new ArrayList(); 
         public static ArrayList<String> ListOfAnswers = new ArrayList(); 
+        public static ArrayList<String> ListOfUserAnswers = new ArrayList(); 
         public static Float CurrentStats;
         public static int questionsDone;
         public static String RealAnswer;

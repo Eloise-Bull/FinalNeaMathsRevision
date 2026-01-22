@@ -8,6 +8,7 @@ import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,19 +20,19 @@ public class SeeSetAssignmentsFromDatabase {
     /// reused and edited code from teacehr stats package
     ///
         
-        public static DefaultTableModel RowsInTable(int ClassID){
+        public static DefaultTableModel BothCompletedAndUncompletedAssignmentsTable(int ClassID, String TypeOfAssignment){
 
-        DefaultTableModel StatsTable = new DefaultTableModel();
+        DefaultTableModel AssignmentTable = new DefaultTableModel();
         
         // kept columns in order the whole class so as to not mess around the 
-        StatsTable.addColumn("Username");
-        StatsTable.addColumn("Name");
-        StatsTable.addColumn("Topic");
-        StatsTable.addColumn("resource");
-        StatsTable.addColumn("Num of quiz questions");
-        StatsTable.addColumn("percentage of quiz done");
-        StatsTable.addColumn("Done");
-        StatsTable.addColumn("DueDate");
+        AssignmentTable.addColumn("Username");
+        AssignmentTable.addColumn("Name");
+        AssignmentTable.addColumn("Topic");
+        AssignmentTable.addColumn("resource");
+        AssignmentTable.addColumn("Num of quiz questions");
+        AssignmentTable.addColumn("percentage of quiz done");
+        AssignmentTable.addColumn("Done");
+        AssignmentTable.addColumn("DueDate");
         
 
         try (Connection connection = TheConnectionToDatabase()){
@@ -45,7 +46,7 @@ public class SeeSetAssignmentsFromDatabase {
                     + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
                     + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
                     + "WHERE ai.ClassID = " + ClassID
-                    + " ORDER BY DueDate ASC ;");
+                    + " ORDER BY DueDate DESC ;");
 
             while (results.next()){
                 String Username = results.getString("username");
@@ -62,12 +63,40 @@ public class SeeSetAssignmentsFromDatabase {
                 }
                 String DueDate = results.getString("DueDate");
                 
-                
-                StatsTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuizQuestions,
-                    PercentageOfQuizDone,completed,DueDate }); 
+                // wants completed assignments and gives ones that are done
+                if ("Completed".equals(TypeOfAssignment)&&Done){
+                    AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuizQuestions,
+                    PercentageOfQuizDone,completed,DueDate });
+                }
+                // wants uncompleted assignments and gives ones that are not done
+                if (("Uncompleted".equals(TypeOfAssignment)&&Done)){
+                    AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuizQuestions,
+                    PercentageOfQuizDone,completed,DueDate });
+                }
+ 
             }
             
-            return StatsTable;
+            return AssignmentTable;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+        
+        
+        
+        
+        public static ArrayList<String> SetBox(int ClassID){
+        ArrayList<String> ListOfTopicNames = new ArrayList<>();
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT S_Name FROM Student WHERE Class_id = "+ ClassID);
+            while (results.next()){
+                String TopicForList = results.getString("S_Name");
+                ListOfTopicNames.add(TopicForList);
+            }
+            return ListOfTopicNames;
         }
         catch (Exception e) {
             e.printStackTrace();
