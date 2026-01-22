@@ -18,10 +18,12 @@ public class QuizOutputClass {
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery("SELECT Topic FROM Topic t JOIN Questions q "
-                    + "ON t.Topic_id = q.Topic_id WHERE Question = ' " + Question + "'");
+                    + "ON t.Topic_id = q.Topic_id WHERE Question = '" + Question + "'");
+            String Topic = null;
             if (results.next()){
+                Topic = results.getString("Topic");
             }
-            return null;
+            return Topic;
         }
         catch (Exception e) {
             e.printStackTrace();

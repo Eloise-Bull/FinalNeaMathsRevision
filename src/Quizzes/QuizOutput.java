@@ -22,11 +22,13 @@ public class QuizOutput extends javax.swing.JFrame {
     public QuizOutput() {
         initComponents();
         //gets temp stored values from Quizzes
+        
         ArrayList<String> ListOfCorrectAnswers = Quizzes.QuizDetails.ListOfAnswers;
         ArrayList<String> ListOfQuestionsWrong = Quizzes.QuizDetails.ListOfQuestionsWrong;
         Float OverallStats = Quizzes.QuizDetails.CurrentStats;
         int QuestionsDone = Quizzes.QuizDetails.questionsDone;
-        
+        System.out.println(ListOfCorrectAnswers);
+        System.out.println(ListOfQuestionsWrong);
         // sets up the table on screen 
         DefaultTableModel QuizOutputTable = new DefaultTableModel();
         QuizOutputTable.addColumn("Question Wrong");
@@ -35,16 +37,25 @@ public class QuizOutput extends javax.swing.JFrame {
         for ( int i = 0; i < ListOfQuestionsWrong.size(); i++){
             // gets the topic for the Questions 
             String Question = ListOfQuestionsWrong.get(i);
+            String Answer = ListOfCorrectAnswers.get(i);
+ 
+            
             QuizOutputClass output = new QuizOutputClass();
             String Topic = output.ReturnTopic(Question);
-            QuizOutputTable.addRow(new Object [] {ListOfQuestionsWrong.get(i),ListOfCorrectAnswers.get(i), Topic }); 
+            QuizOutputTable.addRow(new Object [] {Question,Answer, Topic }); 
             
         }
         
         jTableResults.setModel(QuizOutputTable);
         // sets labels for the output of quiz
         jScore.setText("Score : " + String.valueOf(OverallStats) + " %");
+        
+        // resets all the data after the test
         jNumOfQuestions.setText("Number Of Questions Done : " + QuestionsDone);
+        Quizzes.QuizDetails.ListOfAnswers.clear();
+        Quizzes.QuizDetails.ListOfQuestionsWrong.clear();
+        Quizzes.QuizDetails.CurrentStats = null;
+        Quizzes.QuizDetails.questionsDone = 0;
     }
     
     
@@ -86,6 +97,7 @@ public class QuizOutput extends javax.swing.JFrame {
 
             }
         ));
+        jTableResults.setEnabled(false);
         jScrollPane1.setViewportView(jTableResults);
 
         jtopicToImproveOn.setText("Overall Topic To Improve On : ");

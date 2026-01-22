@@ -110,14 +110,13 @@ public class QuizQuestions {
         int Question_id = TargetedQuiz.ReturnQuestionIdForTargeted(Question);
         String ActualAnswer = TargetedQuiz.ReturnAnswerForTargeted(Question_id);
         Quizzes.QuizDetails.RealAnswer = ActualAnswer;
-        if ( ActualAnswer.equals(answer)) {
+        if (ActualAnswer.equals(answer)) {
             return true;
         }
         else {
             //if wrong adds to the list of wrong answers for my quiz output
             Quizzes.QuizDetails.ListOfAnswers.add(ActualAnswer);
             return false;
-            
         }
     }
     

@@ -251,7 +251,9 @@ public class Quizzes extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtQuizQuestionActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
+        jWarning.setText("");
         // to check it is next not submit
+        
         String ButtonText = jButtonSubmit.getText();
         // this is to move onto the next question
         if ("Next".equals(ButtonText)) {
@@ -268,7 +270,6 @@ public class Quizzes extends javax.swing.JFrame {
         }
         //this is to 
         else {
-            jButtonSubmit.setText("Next");
             boolean correct;
             String ActualAnswer = null;
             // does the on screen stuff 
@@ -296,10 +297,6 @@ public class Quizzes extends javax.swing.JFrame {
                 // this is for specific quiz
                 else{
                     correct = quiz.CheckTargetedAnswer(answer, Question);
-                }
-                // adds wrong answers to the list for quiz output
-                if (!correct){
-                    QuizDetails.ListOfAnswers.add(ActualAnswer);
                 }
             
                 if ( correct == true) {            
@@ -332,6 +329,7 @@ public class Quizzes extends javax.swing.JFrame {
                 jtxtUserAnswer.setText("");
                 //int num = Integer.valueOf(jLabelQuestion.getText());
                 //jLabelQuestion.setText("Question: " + ( num + 1 ));
+                jButtonSubmit.setText("Next");
             }
             
         }
