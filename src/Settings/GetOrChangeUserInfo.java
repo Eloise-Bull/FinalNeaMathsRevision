@@ -48,4 +48,25 @@ public class GetOrChangeUserInfo {
             return null;
         }
     }
+    
+    public boolean ChangeUsername(String User, String Username, int ID){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet Results = statement.executeQuery("SELECT username FROM ");
+            // check unique 
+            if (Results.next()){
+                // not unique cant change 
+                return false;
+            }
+            else {
+                // unique so change
+                statement.executeQuery("UPDATE " + User + " SET username = '" + Username + "' WHERE "+User+"_id = " + ID);
+                return true;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

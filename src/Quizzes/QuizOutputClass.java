@@ -17,8 +17,8 @@ public class QuizOutputClass {
     public String ReturnTopic(String Question){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT Topic FROM Topic t JOIN Question q "
-                    + "ON t.Topic_id = q.Topic_id WHERE Questoin = ' " + Question + "'");
+            ResultSet results = statement.executeQuery("SELECT Topic FROM Topic t JOIN Questions q "
+                    + "ON t.Topic_id = q.Topic_id WHERE Question = ' " + Question + "'");
             if (results.next()){
             }
             return null;

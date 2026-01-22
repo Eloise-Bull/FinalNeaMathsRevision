@@ -164,7 +164,9 @@ public class Settings extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtUsernameActionPerformed
 
     private void jChangeUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeUsernameActionPerformed
-
+            ChangeUsername ToNextScreen = new ChangeUsername();  
+            ToNextScreen.setVisible(true);
+            this.dispose();
     }//GEN-LAST:event_jChangeUsernameActionPerformed
 
     private void jtxtHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtHomeActionPerformed
