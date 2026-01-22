@@ -70,7 +70,7 @@ public class QuizQuestions {
     // as questionid = answer id
     public boolean CheckAnswer(String answer){
         String CorrectAnswer = RandomQuiz.ArrayListAnswers().get(num);
-        System.out.println(CorrectAnswer);
+        Quizzes.QuizDetails.RealAnswer = CorrectAnswer;
         if ( CorrectAnswer.equals(answer)) {
             return true;
         }
@@ -109,6 +109,7 @@ public class QuizQuestions {
     public boolean CheckTargetedAnswer(String answer, String Question){
         int Question_id = TargetedQuiz.ReturnQuestionIdForTargeted(Question);
         String ActualAnswer = TargetedQuiz.ReturnAnswerForTargeted(Question_id);
+        Quizzes.QuizDetails.RealAnswer = ActualAnswer;
         if ( ActualAnswer.equals(answer)) {
             return true;
         }

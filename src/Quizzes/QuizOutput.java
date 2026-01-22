@@ -21,7 +21,6 @@ public class QuizOutput extends javax.swing.JFrame {
      */
     public QuizOutput() {
         initComponents();
-
         //gets temp stored values from Quizzes
         ArrayList<String> ListOfCorrectAnswers = Quizzes.QuizDetails.ListOfAnswers;
         ArrayList<String> ListOfQuestionsWrong = Quizzes.QuizDetails.ListOfQuestionsWrong;
