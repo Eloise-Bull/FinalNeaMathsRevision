@@ -21,11 +21,12 @@ public class QuizOutput extends javax.swing.JFrame {
      */
     public QuizOutput() {
         initComponents();
-        
+
         //gets temp stored values from Quizzes
         ArrayList<String> ListOfCorrectAnswers = Quizzes.QuizDetails.ListOfAnswers;
         ArrayList<String> ListOfQuestionsWrong = Quizzes.QuizDetails.ListOfQuestionsWrong;
         Float OverallStats = Quizzes.QuizDetails.CurrentStats;
+        int QuestionsDone = Quizzes.QuizDetails.questionsDone;
         
         // sets up the table on screen 
         DefaultTableModel QuizOutputTable = new DefaultTableModel();
@@ -33,13 +34,18 @@ public class QuizOutput extends javax.swing.JFrame {
         QuizOutputTable.addColumn("Answer");
         QuizOutputTable.addColumn("Topic");
         for ( int i = 0; i < ListOfQuestionsWrong.size(); i++){
-            QuizOutputTable.addRow(new Object [] {ListOfQuestionsWrong.get(i),ListOfCorrectAnswers.get(i), "Do TOPic" }); 
+            // gets the topic for the Questions 
+            String Question = ListOfQuestionsWrong.get(i);
+            QuizOutputClass output = new QuizOutputClass();
+            String Topic = output.ReturnTopic(Question);
+            QuizOutputTable.addRow(new Object [] {ListOfQuestionsWrong.get(i),ListOfCorrectAnswers.get(i), Topic }); 
             
         }
         
         jTableResults.setModel(QuizOutputTable);
         // sets labels for the output of quiz
         jScore.setText("Score : " + String.valueOf(OverallStats) + " %");
+        jNumOfQuestions.setText("Number Of Questions Done : " + QuestionsDone);
     }
     
     
