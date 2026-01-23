@@ -7,6 +7,8 @@ import StudentHome.StudentHome;
 import javax.swing.table.DefaultTableModel;
 import ViewAssignmentsScreen.GettingAssignmentsForTheTable;
 import Login.Login;
+import Quizzes.Quizzes;
+import Resources.Resources;
 /**
  *
  * @author 4-EBULL
@@ -140,9 +142,9 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtxtHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtHomeActionPerformed
-    StudentHome submitButton = new StudentHome();  
-    submitButton.setVisible(true);
-    this.dispose();    // TODO add your handling code here:
+        StudentHome submitButton = new StudentHome();  
+        submitButton.setVisible(true);
+        this.dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jtxtHomeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -168,13 +170,32 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         
         /// TO DO. MAKE SO U CANT PULL WHEN COMPLETED
         
-        if ( evt.getClickCount() == 2) {
+        if (( evt.getClickCount() == 2) && !completed) {
             // this gets the row youve clicked on
             /// ROW STARTS AT ZERO
-            int row = jTableAssignments.rowAtPoint(evt.getPoint());
+            int IdRow = jTableAssignments.rowAtPoint(evt.getPoint());
+            jTableAssignments.getValueAt(IdRow, 1);
+            int ResourceRow = jTableAssignments.rowAtPoint(evt.getPoint());
             
-            jTableAssignments.getValueAt(row, 1);
             
+            
+
+            if (!(jTableAssignments.getValueAt(ResourceRow, 2) == null)){
+                // Do resource
+                String Resource = (String)jTableAssignments.getValueAt(ResourceRow, 2);
+                try {
+                    java.awt.Desktop.getDesktop().browse(new java.net.URI(Resource));
+                }
+                catch ( Exception e ){
+                    // brings up neew temp screen
+                    javax.swing.JOptionPane.showMessageDialog(this, "Invalid URL");
+                } 
+            }
+            else {
+                Quizzes QuizButton = new Quizzes();
+                QuizButton.setVisible(true);
+                this.dispose();
+            }
         }
         
         

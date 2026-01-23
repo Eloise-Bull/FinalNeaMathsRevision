@@ -238,12 +238,8 @@ public class Quizzes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtxtUserAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtUserAnswerActionPerformed
-        
-        
         //take user input then 
         //boolean check = CheckAnswers(3,5);
-        
-       
     }//GEN-LAST:event_jtxtUserAnswerActionPerformed
 
     private void jtxtQuizQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtQuizQuestionActionPerformed
@@ -278,8 +274,11 @@ public class Quizzes extends javax.swing.JFrame {
             String answer = (jtxtUserAnswer.getText());
             // need to get rid of any spaces that could be inputted
         
-            if ("".equals(answer)){
-                jWarning.setText("Please Enter An Answer");
+            if ("".equals(jtxtQuizQuestion.getText())){
+                jWarning.setText("Pick Random Or Targeted");
+            }
+            else if ("".equals(answer)){
+                jWarning.setText("Please Enter An Answer"); 
             }
             else{
                 // this is for the random quiz

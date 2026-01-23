@@ -41,12 +41,12 @@ public class SeeSetAssignmentsFromDatabase {
             //then orders by topic
             // i also put the statement over 3 lines cause it was soo long
             ResultSet results = statement.executeQuery("SELECT username, S_Name, Title, Resource, NumOfQuizQuestions,"
-                    + "PercentageOfQuizDone, Done, DueDate FROM Assigned a "
-                    + "JOIN Student s ON a.StudentId = s.Student_id "
-                    + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
-                    + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
-                    + "WHERE ai.ClassID = " + ClassID
-                    + " ORDER BY DueDate ASC ;");
+                    + "PercentageOfQuizDone, Done, DueDate " 
+                    +"FROM Assigned a JOIN Student s ON a.StudentId = s.Student_id "
+                    +"JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id " 
+                    +"LEFT JOIN Resources r ON ai.ResourceID = r.Resource " 
+                    +"WHERE ai.ClassID = " + ClassID 
+                    +" ORDER BY DueDate ASC;");
 
             while (results.next()){
                 String Username = results.getString("username");
@@ -66,13 +66,13 @@ public class SeeSetAssignmentsFromDatabase {
 
                 if (!Done) {
                     if ("Uncompleted".equals(TypeOfAssignment)) {
-                        AssignmentTable.addRow(new Object [] {Topic,Resource,NumOfQuizQuestions,
+                        AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuizQuestions,
                         PercentageOfQuizDone,completed,DueDate }); 
                     }   
                 }
                 else{
                     if (Done) {
-                        AssignmentTable.addRow(new Object [] {Topic,Resource,NumOfQuizQuestions,
+                        AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuizQuestions,
                         PercentageOfQuizDone,completed,DueDate });  
                     }
                 }
