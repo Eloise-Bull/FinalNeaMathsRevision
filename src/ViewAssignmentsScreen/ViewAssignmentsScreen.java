@@ -87,6 +87,12 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
 
             }
         ));
+        jTableAssignments.setEnabled(false);
+        jTableAssignments.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AssignmentWhenClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableAssignments);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,9 +101,6 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(325, 325, 325)
@@ -110,8 +113,11 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
                             .addGap(231, 231, 231)
                             .addComponent(jRadioButton2)
                             .addGap(163, 163, 163)
-                            .addComponent(jButton1))))
-                .addContainerGap(94, Short.MAX_VALUE))
+                            .addComponent(jButton1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,6 +161,37 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         completed = false;
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void AssignmentWhenClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AssignmentWhenClicked
+        // uses mouse handler 
+        // click select to do assignment
+        
+        /// TO DO. MAKE SO U CANT PULL WHEN COMPLETED
+        
+        if ( evt.getClickCount() == 2) {
+            // this gets the row youve clicked on
+            /// ROW STARTS AT ZERO
+            int row = jTableAssignments.rowAtPoint(evt.getPoint());
+            
+            jTableAssignments.getValueAt(row, 1);
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_AssignmentWhenClicked
 
     /**
      * @param args the command line arguments

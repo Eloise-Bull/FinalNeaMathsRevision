@@ -29,14 +29,26 @@ public class GettingAssignmentsForTheTable {
     public static DefaultTableModel RowsInTable(int StudentID, boolean completed){
 
         DefaultTableModel AssignmentTable = new DefaultTableModel();
-        
+
         // kept columns in order the whole class so as to not mess around the 
-        AssignmentTable.addColumn("Topic");
-        AssignmentTable.addColumn("resource");
-        AssignmentTable.addColumn("Num of quiz questions");
-        AssignmentTable.addColumn("percentage of quiz done");
-        AssignmentTable.addColumn("Done");
-        AssignmentTable.addColumn("DueDate");
+        // if compkleted u dont need the do column 
+        if (completed){
+            AssignmentTable.addColumn("Topic");
+            AssignmentTable.addColumn("resource");
+            AssignmentTable.addColumn("Num of quiz questions");
+            AssignmentTable.addColumn("percentage of quiz done");
+            AssignmentTable.addColumn("Done");
+            AssignmentTable.addColumn("DueDate");
+        }
+        else {
+            AssignmentTable.addColumn("Topic");
+            AssignmentTable.addColumn("resource");
+            AssignmentTable.addColumn("Num of quiz questions");
+            AssignmentTable.addColumn("percentage of quiz done");
+            AssignmentTable.addColumn("Done");
+            AssignmentTable.addColumn("DueDate");
+            AssignmentTable.addColumn("Do");
+        }
         
 
         try (Connection connection = TheConnectionToDatabase()){
@@ -63,13 +75,14 @@ public class GettingAssignmentsForTheTable {
                 if (!completed) {
                     if (!Done) {
                         AssignmentTable.addRow(new Object [] {Topic,Resource,NumOfQuizQuestions,
-                        PercentageOfQuizDone,completed,DueDate }); 
+                        PercentageOfQuizDone,completed,DueDate,"Select"}); 
                     }   
                 }
                 else{
                     if (Done) {
                         AssignmentTable.addRow(new Object [] {Topic,Resource,NumOfQuizQuestions,
-                        PercentageOfQuizDone,completed,DueDate });  
+                        PercentageOfQuizDone,completed,DueDate });
+                        
                     }
                 }
             }
