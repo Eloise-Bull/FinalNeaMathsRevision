@@ -5,10 +5,8 @@
 package ViewAssignmentsScreen;
 import StudentHome.StudentHome;
 import javax.swing.table.DefaultTableModel;
-import ViewAssignmentsScreen.GettingAssignmentsForTheTable;
 import Login.Login;
 import Quizzes.Quizzes;
-import Resources.Resources;
 /**
  *
  * @author 4-EBULL
@@ -22,6 +20,10 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         initComponents();
     }
     
+    public class InfoForAssignment{
+        public static int Assignmentid;
+        public static int Assignedid;
+    }
     // auto set to assignments to do 
     static boolean completed = false;
 
@@ -174,11 +176,13 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
             // this gets the row youve clicked on
             /// ROW STARTS AT ZERO
             int IdRow = jTableAssignments.rowAtPoint(evt.getPoint());
-            jTableAssignments.getValueAt(IdRow, 1);
+            String assignedAndAssignmentInfoid = (String)jTableAssignments.getValueAt(IdRow, 1);
             int ResourceRow = jTableAssignments.rowAtPoint(evt.getPoint());
             
-            
-            
+            // gets assingm3net id and assigned id 1
+            String[] parts = assignedAndAssignmentInfoid.split("-");
+            InfoForAssignment.Assignmentid = Integer.valueOf(parts[0]);
+            InfoForAssignment.Assignedid = Integer.valueOf(parts[1]);
 
             if (!(jTableAssignments.getValueAt(ResourceRow, 2) == null)){
                 // Do resource

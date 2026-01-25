@@ -57,7 +57,7 @@ public class GettingAssignmentsForTheTable {
             // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
             //then orders by topic
             // i also put the statement over 3 lines cause it was soo long
-            ResultSet results = statement.executeQuery("SELECT AssignedId, Title, Resource, NumOfQuizQuestions,PercentageOfQuizDone, Done, "
+            ResultSet results = statement.executeQuery("SELECT AssignedId,AssignmentInfo_Id, Title, Resource, NumOfQuizQuestions,PercentageOfQuizDone, Done, "
                     + "DueDate FROM Assigned a "
                     + "JOIN Student s ON a.StudentId = s.Student_id "
                     + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
@@ -65,7 +65,8 @@ public class GettingAssignmentsForTheTable {
                     + "WHERE s.Student_id = " +StudentID+" ORDER BY DueDate ASC;");
 
             while (results.next()){
-                int ID = results.getInt("AssignedId");
+                int Assignedid = results.getInt("AssignedId");
+                int Assignemntinfoid = results.getInt("AssignmentInfo_Id");
                 String Topic = results.getString("Title");
                 String Resource = results.getString("Resource");
                 int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
@@ -75,13 +76,13 @@ public class GettingAssignmentsForTheTable {
                 // change from boolean to String to make readability easier for user
                 if (!completed) {
                     if (!Done) {
-                        AssignmentTable.addRow(new Object [] {ID, Topic,Resource,NumOfQuizQuestions,
+                        AssignmentTable.addRow(new Object [] {Assignedid+"-"+Assignemntinfoid, Topic,Resource,NumOfQuizQuestions,
                         PercentageOfQuizDone,completed,DueDate,"Select"}); 
                     }   
                 }
                 else{
                     if (Done) {
-                        AssignmentTable.addRow(new Object [] {ID, Topic,Resource,NumOfQuizQuestions,
+                        AssignmentTable.addRow(new Object [] {Assignedid+"-"+Assignemntinfoid, Topic,Resource,NumOfQuizQuestions,
                         PercentageOfQuizDone,completed,DueDate });
                         
                     }

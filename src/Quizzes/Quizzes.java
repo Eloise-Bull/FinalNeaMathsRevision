@@ -5,6 +5,7 @@
 package Quizzes;
 import StudentHome.StudentHome;
 import Login.Login;
+import ViewAssignmentsScreen.ViewAssignmentsScreen;
 import java.util.ArrayList;
 
 /**
@@ -34,6 +35,16 @@ public class Quizzes extends javax.swing.JFrame {
         initComponents();   
         targeted = false;
         quiz = new QuizQuestions();
+        if (!(ViewAssignmentsScreen.InfoForAssignment.Assignmentid == -1 )){
+            
+            
+            // Call METHOD AND USE UR TOPIC AND RUNN ASSIGNEMENT THROUGH IT 
+            // use basically same method as targeted but tweak it 
+            // WHEN FINISH 
+            
+            ViewAssignmentsScreen.InfoForAssignment.Assignmentid = -1;
+            ViewAssignmentsScreen.InfoForAssignment.Assignedid = -1;
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.

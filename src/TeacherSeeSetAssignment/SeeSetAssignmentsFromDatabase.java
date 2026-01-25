@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  * @author elois
  */
 public class SeeSetAssignmentsFromDatabase {
-    ///  this does the table contents basically pulls from database important things about the stats
+    /// this does the table contents basically pulls from database important things about the stats
     /// reused and edited code from teacehr stats package
     ///
         
