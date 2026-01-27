@@ -6,7 +6,6 @@ package Login;
 import StudentHome.StudentHome;
 import SignUp.LoginOrSignUp;
 import TeacherHome.TeacherHome;
-
 /**
  *
  * @author elois
@@ -14,15 +13,13 @@ import TeacherHome.TeacherHome;
 public class Login extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
+
     /**
      * Creates new form Login
      */
     public Login() {
-        center();
-        
+        initComponents();
     }
-
-    
 
     public class InfoOfUserForThisLoginSession{
         public static String userType = "";
@@ -44,50 +41,23 @@ public class Login extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        jButtonBack = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jWarning = new javax.swing.JLabel();
         jtxtUsername = new javax.swing.JTextField();
         jtxtPassword = new javax.swing.JPasswordField();
         jtxtLogin = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtxtSubmit = new javax.swing.JButton();
-        jButtonBack = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAutoRequestFocus(false);
-        setSize(new java.awt.Dimension(0, 0));
-
-        jtxtUsername.setForeground(new java.awt.Color(255, 102, 204));
-        jtxtUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtUsernameActionPerformed(evt);
-            }
-        });
-
-        jtxtPassword.setForeground(new java.awt.Color(255, 102, 204));
-        jtxtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtPasswordActionPerformed(evt);
-            }
-        });
-
-        jtxtLogin.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jtxtLogin.setText("Login");
-
-        jLabel2.setText("Username");
-
-        jLabel3.setText("Password");
-
-        jtxtSubmit.setText("Submit");
-        jtxtSubmit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtSubmitActionPerformed(evt);
-            }
-        });
+        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
+        setResizable(false);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jButtonBack.setText("Back");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
@@ -95,91 +65,149 @@ public class Login extends javax.swing.JFrame {
                 jButtonBackActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(110, 10, 0, 0);
+        getContentPane().add(jButtonBack, gridBagConstraints);
 
-        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Student");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 85, 0, 0);
+        getContentPane().add(jRadioButton1, gridBagConstraints);
 
-        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Teacher");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 0, 0, 0);
+        getContentPane().add(jRadioButton2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 25;
+        gridBagConstraints.ipadx = 320;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 85, 0, 82);
+        getContentPane().add(jWarning, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtxtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(150, 150, 150)
-                                .addComponent(jButtonBack))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jRadioButton1)
-                        .addGap(146, 146, 146)
-                        .addComponent(jRadioButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jtxtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jtxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(jtxtSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(90, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jButtonBack)))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(9, 9, 9)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jtxtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jtxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jtxtSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
+        jtxtUsername.setForeground(new java.awt.Color(255, 102, 204));
+        jtxtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtUsernameActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 25;
+        gridBagConstraints.ipadx = 256;
+        gridBagConstraints.ipady = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 85, 0, 82);
+        getContentPane().add(jtxtUsername, gridBagConstraints);
+
+        jtxtPassword.setForeground(new java.awt.Color(255, 102, 204));
+        jtxtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtPasswordActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 25;
+        gridBagConstraints.ipadx = 256;
+        gridBagConstraints.ipady = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 85, 0, 82);
+        getContentPane().add(jtxtPassword, gridBagConstraints);
+
+        jtxtLogin.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jtxtLogin.setText("Login");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 14;
+        gridBagConstraints.ipadx = 104;
+        gridBagConstraints.ipady = 28;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(60, 26, 0, 0);
+        getContentPane().add(jtxtLogin, gridBagConstraints);
+
+        jLabel2.setText("Username");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 177;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 85, 0, 0);
+        getContentPane().add(jLabel2, gridBagConstraints);
+
+        jLabel3.setText("Password");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 120;
+        gridBagConstraints.ipady = 24;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 85, 0, 0);
+        getContentPane().add(jLabel3, gridBagConstraints);
+
+        jtxtSubmit.setText("Submit");
+        jtxtSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtSubmitActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 28;
+        gridBagConstraints.ipady = -3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 46, 51, 0);
+        getContentPane().add(jtxtSubmit, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        LoginOrSignUp BackScreen = new LoginOrSignUp();
+        BackScreen.setVisible(true);
+        this.dispose();            // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonBackActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        user = "Student";        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        user = "Teacher";
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jtxtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtUsernameActionPerformed
 
@@ -190,17 +218,17 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtPasswordActionPerformed
 
     private void jtxtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSubmitActionPerformed
-        // getting all detail need to comapare data 
-        // resets the important data incase people log out then log back in as someone else. 
-        
+        // getting all detail need to comapare data
+        // resets the important data incase people log out then log back in as someone else.
+
         String usernameInputed = jtxtUsername.getText();
         String passwordEntered = jtxtPassword.getText();
         CheckLoginDetails check = new CheckLoginDetails();
         int UsernameId = check.checkUsernameReturnID(usernameInputed,user);
         int PasswordId = check.checkPasswordReturnID(passwordEntered,user);
-        
+
         // getting user id so can use in later methods when accessing database
-        
+
         // comparing data check its correct before login
         boolean CheckDetails= false;
         // || = or is syntax
@@ -219,42 +247,27 @@ public class Login extends javax.swing.JFrame {
             jWarning.setText("Username and Password do not match");
             jtxtPassword.setText("");
         }
-        
-        // if correct takes user to correct screen. 
+
+        // if correct takes user to correct screen.
         InfoOfUserForThisLoginSession.userType = user;
         if ( CheckDetails == true) {
             if ("Student".equals(user)) {
-            InfoOfUserForThisLoginSession.StudentId = UsernameId;
-            // check. etc is the method used to get the class id using the usernameid
-            InfoOfUserForThisLoginSession.UserClassID = check.getClassIdStudent(UsernameId);
-            StudentHome ToStudentScreen = new StudentHome();  
-            ToStudentScreen.setVisible(true);
-            this.dispose();
+                InfoOfUserForThisLoginSession.StudentId = UsernameId;
+                // check. etc is the method used to get the class id using the usernameid
+                InfoOfUserForThisLoginSession.UserClassID = check.getClassIdStudent(UsernameId);
+                StudentHome ToStudentScreen = new StudentHome();
+                ToStudentScreen.setVisible(true);
+                this.dispose();
             }
             if ("Teacher".equals(user)) {
-            InfoOfUserForThisLoginSession.TeacherId = UsernameId;
-            InfoOfUserForThisLoginSession.UserClassID = check.getClassIdTeacher(UsernameId);
-            TeacherHome ToTeacherScreen = new TeacherHome();  
-            ToTeacherScreen.setVisible(true);
-            this.dispose();
+                InfoOfUserForThisLoginSession.TeacherId = UsernameId;
+                InfoOfUserForThisLoginSession.UserClassID = check.getClassIdTeacher(UsernameId);
+                TeacherHome ToTeacherScreen = new TeacherHome();
+                ToTeacherScreen.setVisible(true);
+                this.dispose();
             }
         }
-
     }//GEN-LAST:event_jtxtSubmitActionPerformed
-
-    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
-        LoginOrSignUp BackScreen = new LoginOrSignUp();  
-        BackScreen.setVisible(true);
-        this.dispose();            // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonBackActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        user = "Student";        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        user = "Teacher";        
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,11 +292,9 @@ public class Login extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonBack;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

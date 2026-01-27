@@ -17,6 +17,7 @@ public class Quizzes extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Quizzes.class.getName());
     private QuizQuestions quiz;
     private boolean targeted;
+    private boolean Assignment;
     /**
      * Creates new form Quizzes
      */
@@ -35,18 +36,9 @@ public class Quizzes extends javax.swing.JFrame {
         initComponents();   
         targeted = false;
         quiz = new QuizQuestions();
+        Assignment = false;
         if (!(ViewAssignmentsScreen.InfoForAssignment.Assignmentid == -1 )){
-            
-            
-            // Call METHOD AND USE UR TOPIC AND RUNN ASSIGNEMENT THROUGH IT 
-            // use basically same method as targeted but tweak it 
-            // WHEN FINISH 
-            int AssignementID = ViewAssignmentsScreen.InfoForAssignment.Assignmentid;
-            int AssignedID = ViewAssignmentsScreen.InfoForAssignment.Assignedid;
-            ViewAssignmentsScreen.InfoForAssignment.Assignmentid = -1;
-            ViewAssignmentsScreen.InfoForAssignment.Assignedid = -1;
-            
-            SpecificTopicQuestions();
+            Assignment = true; 
         }
     }
     /**
@@ -265,88 +257,92 @@ public class Quizzes extends javax.swing.JFrame {
         jWarning.setText("");
         // to check it is next not submit
         
-        String ButtonText = jButtonSubmit.getText();
-        // this is to move onto the next question
-        if ("Next".equals(ButtonText)) {
-            jButtonSubmit.setText("Submit");
-            jLabelMark.setText("");
-            lCorrectAnswer.setText("");
-            if ( targeted == false ) {
-                quiz = new QuizQuestions();
-                jtxtQuizQuestion.setText(quiz.RandomQuiz());
-            }
-            else {
-                jtxtQuizQuestion.setText(quiz.TargetedQuestions());
-            }
-        }
-        //this is to 
-        else {
-            boolean correct;
-            String ActualAnswer = null;
-            // does the on screen stuff 
-            String Question = jtxtQuizQuestion.getText();
-            String answer = (jtxtUserAnswer.getText());
-            // need to get rid of any spaces that could be inputted
-        
-            if ("".equals(jtxtQuizQuestion.getText())){
-                jWarning.setText("Pick Random Or Targeted");
-            }
-            else if ("".equals(answer)){
-                jWarning.setText("Please Enter An Answer"); 
-            }
-            else{
-                // this is for the random quiz
-                // returns 1 if correct
-                // and returns actual answer
-                if ( targeted == false) {
-                    correct = quiz.CheckAnswer(answer);
-                    if (correct){
-                        correct = true;
-                    }
-                    else {
-                        correct = false;
-                    }
-                }
-
-                // this is for specific quiz
-                else{
-                    correct = quiz.CheckTargetedAnswer(answer, Question);
-                }
+        // checks if it is an assignment 
+        // if assignment - it uses the same screen it just has it to the set topic and count down of questions
+        if (Assignment){
             
-                if ( correct == true) {            
-                    jLabelMark.setText("Marked: Correct");
+        }
+        // this means it is not an assignment and just a normal quiz 
+        else {
+            String ButtonText = jButtonSubmit.getText();
+            // this is to move onto the next question
+            if ("Next".equals(ButtonText)) {
+                jButtonSubmit.setText("Submit");
+                jLabelMark.setText("");
+                lCorrectAnswer.setText("");
+                if ( targeted == false ) {
+                    quiz = new QuizQuestions();
+                    jtxtQuizQuestion.setText(quiz.RandomQuiz());
                 }
                 else {
-                    jLabelMark.setText("Marked: Incorrect");
-                    String QuizQuestion = jtxtQuizQuestion.getText();
-                    QuizDetails.ListOfQuestionsWrong.add(QuizQuestion);
+                    jtxtQuizQuestion.setText(quiz.TargetedQuestions());
                 }
+            }
+            //this is to 
+            else {
+                boolean correct;
+                // does the on screen stuff 
+                String Question = jtxtQuizQuestion.getText();
+                String answer = (jtxtUserAnswer.getText());
+                // need to get rid of any spaces that could be inputted
+        
+                if ("".equals(jtxtQuizQuestion.getText())){
+                    jWarning.setText("Pick Random Or Targeted");
+                }
+                else if ("".equals(answer)){
+                    jWarning.setText("Please Enter An Answer"); 
+                }
+                else{
+                    // this is for the random quiz
+                    // returns 1 if correct
+                    // and returns actual answer
+                    if ( targeted == false) {
+                        correct = quiz.CheckAnswer(answer);
+                    }
+
+                    // this is for specific quiz
+                    else{
+                        correct = quiz.CheckTargetedAnswer(answer, Question);
+                    }
+            
+                    if ( correct == true) {            
+                        jLabelMark.setText("Marked: Correct");
+                    }
+                    else {
+                        jLabelMark.setText("Marked: Incorrect");
+                        String QuizQuestion = jtxtQuizQuestion.getText();
+                        QuizDetails.ListOfQuestionsWrong.add(QuizQuestion);
+                    }
            
-                int count = QuizQuestions.count();
-                // -1 cause it displays the current questions ur on not hte one youve done
-                QuizDetails.questionsDone = count - 1;
+                    int count = QuizQuestions.count();
+                    // -1 cause it displays the current questions ur on not hte one youve done
+                    QuizDetails.questionsDone = count - 1;
             
-                 jLabelQuestion.setText("Question: " + count);
-                float stats = QuizQuestions.CountingQuizStats(count-1,correct);
-                // updates the temp stored data of this quiz
-                QuizDetails.CurrentStats = stats;
-                jLabelStats.setText ("Stats: " + stats + "%");
+                    jLabelQuestion.setText("Question: " + count);
+                    float stats = QuizQuestions.CountingQuizStats(count-1,correct);
+                    // updates the temp stored data of this quiz
+                    QuizDetails.CurrentStats = stats;
+                    jLabelStats.setText ("Stats: " + stats + "%");
             
-                int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
-                /// get topicID
-                QuizQuestions quiz = new QuizQuestions();
-                int topicID = quiz.ReturnTopicID(Question);
-                /// adds one to the numofquestionsdoen in databse for specific topic
-                quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
-                quiz.updateStats(correct, topicID, Student_id);
-                lCorrectAnswer.setText("Correct Answer: "  + QuizDetails.RealAnswer );
-                jtxtUserAnswer.setText("");
-                //int num = Integer.valueOf(jLabelQuestion.getText());
-                //jLabelQuestion.setText("Question: " + ( num + 1 ));
-                jButtonSubmit.setText("Next");
+                    int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
+                    /// get topicID
+                    QuizQuestions quiz = new QuizQuestions();
+                    int topicID = quiz.ReturnTopicID(Question);
+                    /// adds one to the numofquestionsdoen in databse for specific topic
+                    quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
+                    quiz.updateStats(correct, topicID, Student_id);
+                    lCorrectAnswer.setText("Correct Answer: "  + QuizDetails.RealAnswer );
+                    jtxtUserAnswer.setText("");
+                    //int num = Integer.valueOf(jLabelQuestion.getText());
+                    //jLabelQuestion.setText("Question: " + ( num + 1 ));
+                    jButtonSubmit.setText("Next");
+                }
+            
             }
             
         }
+        
+        
         
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
