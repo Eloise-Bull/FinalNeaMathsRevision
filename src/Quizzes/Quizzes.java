@@ -41,9 +41,12 @@ public class Quizzes extends javax.swing.JFrame {
             // Call METHOD AND USE UR TOPIC AND RUNN ASSIGNEMENT THROUGH IT 
             // use basically same method as targeted but tweak it 
             // WHEN FINISH 
-            
+            int AssignementID = ViewAssignmentsScreen.InfoForAssignment.Assignmentid;
+            int AssignedID = ViewAssignmentsScreen.InfoForAssignment.Assignedid;
             ViewAssignmentsScreen.InfoForAssignment.Assignmentid = -1;
             ViewAssignmentsScreen.InfoForAssignment.Assignedid = -1;
+            
+            SpecificTopicQuestions();
         }
     }
     /**
