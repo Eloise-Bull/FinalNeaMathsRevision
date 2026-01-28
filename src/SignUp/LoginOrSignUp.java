@@ -50,10 +50,10 @@ public class LoginOrSignUp extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 358;
+        gridBagConstraints.ipadx = 302;
         gridBagConstraints.ipady = 70;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(27, 48, 234, 82);
+        gridBagConstraints.insets = new java.awt.Insets(32, 38, 61, 49);
         getContentPane().add(jButtonSignUP, gridBagConstraints);
 
         jButtonLogin.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
@@ -67,10 +67,10 @@ public class LoginOrSignUp extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 384;
+        gridBagConstraints.ipadx = 328;
         gridBagConstraints.ipady = 70;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(172, 48, 0, 82);
+        gridBagConstraints.insets = new java.awt.Insets(18, 38, 0, 49);
         getContentPane().add(jButtonLogin, gridBagConstraints);
 
         JLabelMathsRevision.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
@@ -80,7 +80,7 @@ public class LoginOrSignUp extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(60, 91, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(71, 51, 0, 0);
         getContentPane().add(JLabelMathsRevision, gridBagConstraints);
 
         pack();

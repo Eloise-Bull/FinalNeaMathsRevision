@@ -52,7 +52,7 @@ public class GetOrChangeUserInfo {
     public boolean ChangeUsername(String User, String Username, int ID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            ResultSet Results = statement.executeQuery("SELECT username FROM ");
+            ResultSet Results = statement.executeQuery("SELECT username FROM " + User );
             // check unique 
             if (Results.next()){
                 // not unique cant change 

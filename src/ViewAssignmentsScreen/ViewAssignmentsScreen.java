@@ -181,8 +181,10 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
             
             // gets assingm3net id and assigned id 1
             String[] parts = assignedAndAssignmentInfoid.split("-");
-            InfoForAssignment.Assignmentid = Integer.valueOf(parts[0]);
-            InfoForAssignment.Assignedid = Integer.valueOf(parts[1]);
+            int AssignmentID = Integer.valueOf(parts[0]);
+            int AssignedID = Integer.valueOf(parts[1]);
+            InfoForAssignment.Assignmentid = AssignmentID;
+            InfoForAssignment.Assignedid = AssignedID;
 
             if (!(jTableAssignments.getValueAt(ResourceRow, 2) == null)){
                 // Do resource
@@ -198,17 +200,17 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
                 } 
             }
             else {
+                
                 // get assignments info 
                 // already have Assignmentid,Assignedid, StudentID
-                // get the Num Of Questions & percentage done
-                
-                
+                // get the NumOfQuestionsLeftToDo
+                int QuestionsLeftToDo = GettingAssignmentsForTheTable.questionsLeftToDo(AssignmentID,AssignedID);
+                Quizzes.QuizDetails.QuestionsLeft = QuestionsLeftToDo;
+                Quizzes.QuizDetails.Assignment = true;
+                // sends to Quzzes screen
                 Quizzes QuizButton = new Quizzes();
                 QuizButton.setVisible(true);
-                this.dispose();
-                
-                
-                
+                this.dispose(); 
             }
         }
         

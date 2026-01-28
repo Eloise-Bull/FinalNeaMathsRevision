@@ -65,7 +65,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" min="-2" pref="156" max="-2" attributes="0"/>
+                                      <Component id="jQuizzesLabel" min="-2" pref="156" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                                       <Component id="jtxtHome" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -112,7 +112,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel1" min="-2" pref="111" max="-2" attributes="0"/>
+                                  <Component id="jQuizzesLabel" min="-2" pref="111" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                       <Component id="jtxtHome" min="-2" max="-2" attributes="0"/>
@@ -159,7 +159,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jQuizzesLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="36" style="1"/>

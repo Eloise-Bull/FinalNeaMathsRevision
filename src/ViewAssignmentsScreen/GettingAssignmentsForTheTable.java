@@ -99,10 +99,31 @@ public class GettingAssignmentsForTheTable {
         
         
     }
-    
-    public void GetAssignmentInfo(){
-        
-        
+    //////////////// getting the num of questions to do
+    ///
+    public static int questionsLeftToDo(int AssignmentID, int AssignedID){
+        // need to get the number of quesitons done and questions left
+        int QuestionsLeftToDo = -1;
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT NumOfQuestionsDone, "
+                    + "NumOfQuizQuestions FROM Assigned a "
+                    + "JOIN AssignmentInfo ai "
+                    + "WHERE ai.AssignmentInfo_id = " + AssignmentID
+                    + " AND a.AssignedId = " + AssignedID);
+            if (results.next()){
+                int NumOfQuestionsDone= results.getInt("NumOfQuestionsDone");
+                int NumOfQuizQuestionsSet =results.getInt("NumOfQuizQuestions");
+                QuestionsLeftToDo = NumOfQuizQuestionsSet - NumOfQuestionsDone;
+               
+            }
+            return QuestionsLeftToDo;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
+    
     
 }

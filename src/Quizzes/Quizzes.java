@@ -5,8 +5,8 @@
 package Quizzes;
 import StudentHome.StudentHome;
 import Login.Login;
-import ViewAssignmentsScreen.ViewAssignmentsScreen;
 import java.util.ArrayList;
+import ViewAssignmentsScreen.ViewAssignmentsScreen;
 
 /**
  *
@@ -17,29 +17,31 @@ public class Quizzes extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Quizzes.class.getName());
     private QuizQuestions quiz;
     private boolean targeted;
-    private boolean Assignment;
     /**
      * Creates new form Quizzes
      */
     
     public static class QuizDetails{
+        // for own quizzes
         public static ArrayList<String> ListOfQuestionsWrong = new ArrayList(); 
         public static ArrayList<String> ListOfAnswers = new ArrayList(); 
         public static ArrayList<String> ListOfUserAnswers = new ArrayList(); 
         public static Float CurrentStats;
         public static int questionsDone;
         public static String RealAnswer;
+        // for assignments 
+        public static int QuestionsLeft;
+        public static Boolean Assignment;
     }
     
     public Quizzes() {
-        
         initComponents();   
         targeted = false;
         quiz = new QuizQuestions();
-        Assignment = false;
-        if (!(ViewAssignmentsScreen.InfoForAssignment.Assignmentid == -1 )){
-            Assignment = true; 
-        }
+        
+        // resets the variables
+        DoAssignment Assign = new DoAssignment();
+        Assign.ResetVariables();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,7 +54,7 @@ public class Quizzes extends javax.swing.JFrame {
 
         buttonGroup2 = new javax.swing.ButtonGroup();
         jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jQuizzesLabel = new javax.swing.JLabel();
         jtxtQuizQuestion = new javax.swing.JTextField();
         jtxtUserAnswer = new javax.swing.JTextField();
         jButtonSubmit = new javax.swing.JButton();
@@ -72,8 +74,8 @@ public class Quizzes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel1.setText("Quizzes");
+        jQuizzesLabel.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jQuizzesLabel.setText("Quizzes");
 
         jtxtQuizQuestion.setEditable(false);
         jtxtQuizQuestion.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +177,7 @@ public class Quizzes extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(5, 5, 5)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jQuizzesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(49, 49, 49)
                                         .addComponent(jtxtHome))
                                     .addGroup(layout.createSequentialGroup()
@@ -207,7 +209,7 @@ public class Quizzes extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jQuizzesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(29, 29, 29)
                                         .addComponent(jtxtHome)))
@@ -255,67 +257,96 @@ public class Quizzes extends javax.swing.JFrame {
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         jWarning.setText("");
-        // to check it is next not submit
-        
         // checks if it is an assignment 
         // if assignment - it uses the same screen it just has it to the set topic and count down of questions
-        if (Assignment){
-             
-
+        if (QuizDetails.Assignment){
             
-            String ButtonText = jButtonSubmit.getText();
-            // this is to move onto the next question
-            if ("Next".equals(ButtonText)) {
-                jButtonSubmit.setText("Submit");
-                jLabelMark.setText("");
-                lCorrectAnswer.setText("");
-
-                jtxtQuizQuestion.setText(quiz.TargetedQuestions());
-            }
-            else {
-                boolean correct;
-                // does the on screen stuff 
-                String Question = jtxtQuizQuestion.getText();
-                String answer = (jtxtUserAnswer.getText());
-                // need to get rid of any spaces that could be inputted
-        
-
-                correct = quiz.CheckTargetedAnswer(answer, Question);
-            
-                if ( correct == true) {            
-                    jLabelMark.setText("Marked: Correct");
+            jButtonRandom.setText("");
+            jButtonTargeted.setText("");
+            jQuizzesLabel.setText("Assignment");
+            int AssignmentQuestioncount = QuizDetails.QuestionsLeft;
+            if (!(AssignmentQuestioncount == 0)){
+                
+                
+                
+                String ButtonText = jButtonSubmit.getText();
+                // this is to move onto the next question
+                if ("Next".equals(ButtonText)) {
+                    jButtonSubmit.setText("Submit");
+                    jLabelMark.setText("");
+                    lCorrectAnswer.setText("");
+                    jtxtQuizQuestion.setText(quiz.TargetedQuestions());
                 }
+                // user submits answer to be checked 
                 else {
-                    jLabelMark.setText("Marked: Incorrect");
-                    String QuizQuestion = jtxtQuizQuestion.getText();
-                    QuizDetails.ListOfQuestionsWrong.add(QuizQuestion);
-                }
+                    boolean correct;
+                    // checks if the answer is correct
+                    String Question = jtxtQuizQuestion.getText();
+                    String answer = (jtxtUserAnswer.getText());
+                    correct = quiz.CheckTargetedAnswer(answer, Question);
+            
+                    // marks the answer 
+                    if ( correct == true) {            
+                        jLabelMark.setText("Marked: Correct");
+                    }
+                    else {
+                        jLabelMark.setText("Marked: Incorrect");
+                        // if incorrect it adds it to the lsit of quesrtions that were wrong
+                        String QuizQuestion = jtxtQuizQuestion.getText();
+                        QuizDetails.ListOfQuestionsWrong.add(QuizQuestion);
+                    }
            
-                int count = QuizQuestions.count();
-                // -1 cause it displays the current questions ur on not hte one youve done
-                QuizDetails.questionsDone = count - 1;
+                    int count = QuizQuestions.count(false);
+                    // -1 cause it displays the current questions ur on not hte one youve done
+                    // amount of questions done
+                    QuizDetails.questionsDone = count - 1;
+                    // questions left to do 
+                    jLabelQuestion.setText("Questions left: " + AssignmentQuestioncount);
+                    float stats = QuizQuestions.CountingQuizStats(count-1,correct, false);
+                    // updates the temp stored data of this quiz
+                    QuizDetails.CurrentStats = stats;
+                    jLabelStats.setText ("Stats: " + stats + "%");
             
-                jLabelQuestion.setText("Question: " + count);
-                float stats = QuizQuestions.CountingQuizStats(count-1,correct);
-                // updates the temp stored data of this quiz
-                QuizDetails.CurrentStats = stats;
-                jLabelStats.setText ("Stats: " + stats + "%");
-            
-                int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
-                /// get topicID
-                QuizQuestions quiz = new QuizQuestions();
-                int topicID = quiz.ReturnTopicID(Question);
-                /// adds one to the numofquestionsdoen in databse for specific topic
-                quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
-                quiz.updateStats(correct, topicID, Student_id);
-                lCorrectAnswer.setText("Correct Answer: "  + QuizDetails.RealAnswer );
-                jtxtUserAnswer.setText("");
-                //int num = Integer.valueOf(jLabelQuestion.getText());
-                //jLabelQuestion.setText("Question: " + ( num + 1 ));
-                jButtonSubmit.setText("Next");
+                    int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
+                    /// get topicID
+                    QuizQuestions quiz = new QuizQuestions();
+                    int topicID = quiz.ReturnTopicID(Question);
+                    /// adds one to the numofquestionsdoen in databse for specific topic
+                    quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
+                    quiz.updateStats(correct, topicID, Student_id);
+                    lCorrectAnswer.setText("Correct Answer: "  + QuizDetails.RealAnswer );
+                    jtxtUserAnswer.setText("");
+                    //int num = Integer.valueOf(jLabelQuestion.getText());
+                    //jLabelQuestion.setText("Question: " + ( num + 1 ));
+                    jButtonSubmit.setText("Next");
+                    
+                    
+                    
+                    QuizDetails.QuestionsLeft = AssignmentQuestioncount - 1;
+                    // insert into database the new Quiz number
+                }
+                
             }
+            else{
+                // set assignment to done cause there is no questions left
+                DoAssignment DoAssigned = new DoAssignment();
+                DoAssigned.setAssignmentToDone(ViewAssignmentsScreen.InfoForAssignment.Assignmentid,
+                        ViewAssignmentsScreen.InfoForAssignment.Assignedid);
+                // moves to finish screen 
+                QuizOutput NewScreen = new QuizOutput();  
+                NewScreen.setVisible(true);
+                this.dispose();
+                
+            }
+            
             
         }
+        
+        
+        
+        
+        
+        
         
         // this means it is not an assignment and just a normal quiz 
         else {
@@ -369,12 +400,12 @@ public class Quizzes extends javax.swing.JFrame {
                         QuizDetails.ListOfQuestionsWrong.add(QuizQuestion);
                     }
            
-                    int count = QuizQuestions.count();
+                    int count = QuizQuestions.count(false);
                     // -1 cause it displays the current questions ur on not hte one youve done
                     QuizDetails.questionsDone = count - 1;
             
                     jLabelQuestion.setText("Question: " + count);
-                    float stats = QuizQuestions.CountingQuizStats(count-1,correct);
+                    float stats = QuizQuestions.CountingQuizStats(count-1,correct, false);
                     // updates the temp stored data of this quiz
                     QuizDetails.CurrentStats = stats;
                     jLabelStats.setText ("Stats: " + stats + "%");
@@ -457,11 +488,11 @@ public class Quizzes extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSubmit;
     private javax.swing.JRadioButton jButtonTargeted;
     private javax.swing.JButton jFinishQuiz;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelMark;
     private javax.swing.JLabel jLabelQuestion;
     private javax.swing.JLabel jLabelStats;
     private javax.swing.JPanel jPanelCorrrectOrWrong;
+    private javax.swing.JLabel jQuizzesLabel;
     private javax.swing.JLabel jWarning;
     private javax.swing.JLabel jtxtCheatToGetAnswer;
     private javax.swing.JButton jtxtHome;

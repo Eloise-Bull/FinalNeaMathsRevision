@@ -26,20 +26,30 @@ public class QuizQuestions {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // on screen stuff
     // for the on screen question count
-    public static int count(){
-            Count = Count + 1;  
+    public static int count(Boolean reset){
+        if (reset){
+            Count = 0;
+        }
+        else {
+            Count = Count + 1; 
+        }    
         return Count;
     }
     // for the on screen quiz stats
-    public static float CountingQuizStats(int Count,Boolean correct){
-        if (correct == true){
-            countStats = (countStats*(Count-1) + 100)/Count;
+    public static float CountingQuizStats(int Count,Boolean correct, Boolean reset){
+        if (reset){
+            countStats = 0;
         }
-        else {
-            countStats = countStats*(Count-1)/Count;
+        else{
+            if (correct == true){
+                countStats = (countStats*(Count-1) + 100)/Count;
+            }
+            else {
+                countStats = countStats*(Count-1)/Count;
+            }
+            countStats = (Math.round(countStats*100f)/100f);
             
         }
-        countStats = (Math.round(countStats*100f)/100f);
         return countStats;
     }
     
