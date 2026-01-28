@@ -4,7 +4,6 @@
  */
 package SignUp;
 import Login.Login;
-import SignUp.checkSignUp;
 
 /**
  *

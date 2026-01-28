@@ -52,17 +52,25 @@ public class GetOrChangeUserInfo {
     public boolean ChangeUsername(String User, String Username, int ID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            ResultSet Results = statement.executeQuery("SELECT username FROM " + User );
-            // check unique 
+            ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
+                    + "SELECT 1 FROM "+User+" WHERE username = '"+ Username+"')");
+            
+
             if (Results.next()){
-                // not unique cant change 
+                // if =1 then there is already a username like it so return false
+                if (Results.getInt(1)==1){
+                    return false;
+                }
+                else{
+                    // is unique 
+                    statement.execute("UPDATE " + User + " SET username = '" + Username + "' WHERE "+User+"_id = " + ID);
+                    return true;
+                }
+            }
+            else{
                 return false;
             }
-            else {
-                // unique so change
-                statement.executeQuery("UPDATE " + User + " SET username = '" + Username + "' WHERE "+User+"_id = " + ID);
-                return true;
-            }
+
         }
         catch (Exception e) {
             e.printStackTrace();

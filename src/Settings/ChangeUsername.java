@@ -108,8 +108,13 @@ public class ChangeUsername extends javax.swing.JFrame {
         }
         GetOrChangeUserInfo change = new GetOrChangeUserInfo();
         boolean success = change.ChangeUsername(userType,NewUsername, id );
+        if (success){
+            JOptionPane.showMessageDialog(this, "Change Successful.", "Username Updated" ,JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Change Unsuccessful. Enter a unique username", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+        }
         
-        JOptionPane.showMessageDialog(this, "Change Unsuccessful. Enter a unique username", "Try Again" ,JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

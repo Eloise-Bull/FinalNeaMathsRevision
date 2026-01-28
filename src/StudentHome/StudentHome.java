@@ -32,6 +32,7 @@ public class StudentHome extends javax.swing.JFrame {
     /// buttons send user to next screen 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();
         jbuttonQuiz = new javax.swing.JButton();
@@ -44,9 +45,17 @@ public class StudentHome extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setResizable(false);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Student Menu");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(87, 223, 0, 0);
+        getContentPane().add(jLabel1, gridBagConstraints);
 
         jbuttonQuiz.setText("QUIZ");
         jbuttonQuiz.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +63,15 @@ public class StudentHome extends javax.swing.JFrame {
                 jbuttonQuizActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 345;
+        gridBagConstraints.ipady = 34;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 97, 0, 80);
+        getContentPane().add(jbuttonQuiz, gridBagConstraints);
 
         jbuttonResources.setText("RESOURCES");
         jbuttonResources.addActionListener(new java.awt.event.ActionListener() {
@@ -61,6 +79,15 @@ public class StudentHome extends javax.swing.JFrame {
                 jbuttonResourcesActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 323;
+        gridBagConstraints.ipady = 36;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 97, 0, 80);
+        getContentPane().add(jbuttonResources, gridBagConstraints);
 
         jbuttonAssignments.setText("ASSIGNMENTS");
         jbuttonAssignments.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +95,15 @@ public class StudentHome extends javax.swing.JFrame {
                 jbuttonAssignmentsActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 308;
+        gridBagConstraints.ipady = 40;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 97, 0, 80);
+        getContentPane().add(jbuttonAssignments, gridBagConstraints);
 
         jbuttonStats.setText("STATISTICS");
         jbuttonStats.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +111,15 @@ public class StudentHome extends javax.swing.JFrame {
                 jbuttonStatsActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 327;
+        gridBagConstraints.ipady = 44;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 97, 0, 80);
+        getContentPane().add(jbuttonStats, gridBagConstraints);
 
         jbuttonSettings.setText("SETTINGS");
         jbuttonSettings.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +127,15 @@ public class StudentHome extends javax.swing.JFrame {
                 jbuttonSettingsActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 335;
+        gridBagConstraints.ipady = 44;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 97, 11, 80);
+        getContentPane().add(jbuttonSettings, gridBagConstraints);
 
         jbuttonLogOut.setText("Log Out");
         jbuttonLogOut.addActionListener(new java.awt.event.ActionListener() {
@@ -89,45 +143,12 @@ public class StudentHome extends javax.swing.JFrame {
                 jbuttonLogOutActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(61, 61, 61)
-                        .addComponent(jbuttonLogOut))
-                    .addComponent(jbuttonSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbuttonStats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbuttonAssignments, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
-                    .addComponent(jbuttonResources, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbuttonQuiz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(80, 80, 80))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel1))
-                    .addComponent(jbuttonLogOut))
-                .addGap(18, 18, 18)
-                .addComponent(jbuttonQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbuttonResources, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbuttonAssignments, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbuttonStats, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbuttonSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(74, 61, 0, 80);
+        getContentPane().add(jbuttonLogOut, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
