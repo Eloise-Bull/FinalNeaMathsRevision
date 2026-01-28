@@ -176,7 +176,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
             // this gets the row youve clicked on
             /// ROW STARTS AT ZERO
             int IdRow = jTableAssignments.rowAtPoint(evt.getPoint());
-            String assignedAndAssignmentInfoid = (String)jTableAssignments.getValueAt(IdRow, 1);
+            String assignedAndAssignmentInfoid = (String)jTableAssignments.getValueAt(IdRow, 0);
             int ResourceRow = jTableAssignments.rowAtPoint(evt.getPoint());
             
             // gets assingm3net id and assigned id 1
@@ -189,6 +189,8 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
                 String Resource = (String)jTableAssignments.getValueAt(ResourceRow, 2);
                 try {
                     java.awt.Desktop.getDesktop().browse(new java.net.URI(Resource));
+                    // maybe add a panel thats like click if u have watched the video 
+                    // sets the assignment to done then 
                 }
                 catch ( Exception e ){
                     // brings up neew temp screen
@@ -196,9 +198,17 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
                 } 
             }
             else {
+                // get assignments info 
+                // already have Assignmentid,Assignedid, StudentID
+                // get the Num Of Questions & percentage done
+                
+                
                 Quizzes QuizButton = new Quizzes();
                 QuizButton.setVisible(true);
                 this.dispose();
+                
+                
+                
             }
         }
         

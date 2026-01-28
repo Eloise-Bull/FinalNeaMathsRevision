@@ -260,8 +260,63 @@ public class Quizzes extends javax.swing.JFrame {
         // checks if it is an assignment 
         // if assignment - it uses the same screen it just has it to the set topic and count down of questions
         if (Assignment){
+             
+
+            
+            String ButtonText = jButtonSubmit.getText();
+            // this is to move onto the next question
+            if ("Next".equals(ButtonText)) {
+                jButtonSubmit.setText("Submit");
+                jLabelMark.setText("");
+                lCorrectAnswer.setText("");
+
+                jtxtQuizQuestion.setText(quiz.TargetedQuestions());
+            }
+            else {
+                boolean correct;
+                // does the on screen stuff 
+                String Question = jtxtQuizQuestion.getText();
+                String answer = (jtxtUserAnswer.getText());
+                // need to get rid of any spaces that could be inputted
+        
+
+                correct = quiz.CheckTargetedAnswer(answer, Question);
+            
+                if ( correct == true) {            
+                    jLabelMark.setText("Marked: Correct");
+                }
+                else {
+                    jLabelMark.setText("Marked: Incorrect");
+                    String QuizQuestion = jtxtQuizQuestion.getText();
+                    QuizDetails.ListOfQuestionsWrong.add(QuizQuestion);
+                }
+           
+                int count = QuizQuestions.count();
+                // -1 cause it displays the current questions ur on not hte one youve done
+                QuizDetails.questionsDone = count - 1;
+            
+                jLabelQuestion.setText("Question: " + count);
+                float stats = QuizQuestions.CountingQuizStats(count-1,correct);
+                // updates the temp stored data of this quiz
+                QuizDetails.CurrentStats = stats;
+                jLabelStats.setText ("Stats: " + stats + "%");
+            
+                int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
+                /// get topicID
+                QuizQuestions quiz = new QuizQuestions();
+                int topicID = quiz.ReturnTopicID(Question);
+                /// adds one to the numofquestionsdoen in databse for specific topic
+                quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
+                quiz.updateStats(correct, topicID, Student_id);
+                lCorrectAnswer.setText("Correct Answer: "  + QuizDetails.RealAnswer );
+                jtxtUserAnswer.setText("");
+                //int num = Integer.valueOf(jLabelQuestion.getText());
+                //jLabelQuestion.setText("Question: " + ( num + 1 ));
+                jButtonSubmit.setText("Next");
+            }
             
         }
+        
         // this means it is not an assignment and just a normal quiz 
         else {
             String ButtonText = jButtonSubmit.getText();

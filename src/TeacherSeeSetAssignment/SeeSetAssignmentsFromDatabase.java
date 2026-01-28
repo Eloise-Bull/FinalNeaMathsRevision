@@ -29,8 +29,8 @@ public class SeeSetAssignmentsFromDatabase {
         AssignmentTable.addColumn("Name");
         AssignmentTable.addColumn("Topic");
         AssignmentTable.addColumn("resource");
+        AssignmentTable.addColumn("Num Of Questions done");
         AssignmentTable.addColumn("Num of quiz questions");
-        AssignmentTable.addColumn("percentage of quiz done");
         AssignmentTable.addColumn("Done");
         AssignmentTable.addColumn("DueDate");
         
@@ -40,8 +40,8 @@ public class SeeSetAssignmentsFromDatabase {
             // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
             //then orders by topic
             // i also put the statement over 3 lines cause it was soo long
-            ResultSet results = statement.executeQuery("SELECT username, S_Name, Title, Resource, NumOfQuizQuestions,"
-                    + "PercentageOfQuizDone, Done, DueDate " 
+            ResultSet results = statement.executeQuery("SELECT username, S_Name, Title, Resource, NumOfQuestionsDone, NumOfQuizQuestions,"
+                    +"Done, DueDate " 
                     +"FROM Assigned a JOIN Student s ON a.StudentId = s.Student_id "
                     +"JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id " 
                     +"LEFT JOIN Resources r ON ai.ResourceID = r.Resource " 
@@ -54,7 +54,7 @@ public class SeeSetAssignmentsFromDatabase {
                 String Topic = results.getString("Title");
                 String Resource = results.getString("Resource");
                 int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
-                Float PercentageOfQuizDone = results.getFloat("PercentageOfQuizDone");
+                int NumOfQuestionsDone = results.getInt("NumOfQuestionsDone");
                 Boolean Done = results.getBoolean("Done");
                 System.out.println(Done);
                 // change from boolean to String to make readability easier for user
@@ -66,14 +66,14 @@ public class SeeSetAssignmentsFromDatabase {
 
                 if (!Done) {
                     if ("Uncompleted".equals(TypeOfAssignment)) {
-                        AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuizQuestions,
-                        PercentageOfQuizDone,completed,DueDate }); 
+                        AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuestionsDone,NumOfQuizQuestions,
+                        completed,DueDate }); 
                     }   
                 }
                 else{
                     if (Done) {
-                        AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuizQuestions,
-                        PercentageOfQuizDone,completed,DueDate });  
+                        AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuestionsDone,NumOfQuizQuestions,
+                        completed,DueDate });  
                     }
                 }
             }
@@ -95,8 +95,8 @@ public class SeeSetAssignmentsFromDatabase {
         AssignmentTable.addColumn("Name");
         AssignmentTable.addColumn("Topic");
         AssignmentTable.addColumn("resource");
+        AssignmentTable.addColumn("Num Of Questions done");
         AssignmentTable.addColumn("Num of quiz questions");
-        AssignmentTable.addColumn("percentage of quiz done");
         AssignmentTable.addColumn("Done");
         AssignmentTable.addColumn("DueDate");
         
@@ -106,8 +106,8 @@ public class SeeSetAssignmentsFromDatabase {
             // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
             //then orders by topic
             // i also put the statement over 3 lines cause it was soo long
-            ResultSet results = statement.executeQuery("SELECT username, S_Name, Title, Resource, NumOfQuizQuestions,"
-                    + "PercentageOfQuizDone, Done, DueDate FROM Assigned a "
+            ResultSet results = statement.executeQuery("SELECT username, S_Name, Title, Resource, NumOfQuestionsDone, NumOfQuizQuestions,"
+                    + " Done, DueDate FROM Assigned a "
                     + "JOIN Student s ON a.StudentId = s.Student_id "
                     + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
                     + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
@@ -120,7 +120,7 @@ public class SeeSetAssignmentsFromDatabase {
                 String Topic = results.getString("Title");
                 String Resource = results.getString("Resource");
                 int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
-                Float PercentageOfQuizDone = results.getFloat("PercentageOfQuizDone");
+                int NumOfQuestionsDone = results.getInt("NumOfQuestionsDone");
                 Boolean Done = results.getBoolean("Done");
                 String DueDate = results.getString("DueDate");
                 String completed;
@@ -130,7 +130,7 @@ public class SeeSetAssignmentsFromDatabase {
                 else{
                     completed = "Not Done";
                 }
-                AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuizQuestions,PercentageOfQuizDone,completed,DueDate });
+                AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuestionsDone, NumOfQuizQuestions,completed,DueDate });
             }
             return AssignmentTable;
         }
@@ -149,8 +149,8 @@ public class SeeSetAssignmentsFromDatabase {
         AssignmentTable.addColumn("Name");
         AssignmentTable.addColumn("Topic");
         AssignmentTable.addColumn("resource");
+        AssignmentTable.addColumn("NumOfQuestionsDone");
         AssignmentTable.addColumn("Num of quiz questions");
-        AssignmentTable.addColumn("percentage of quiz done");
         AssignmentTable.addColumn("Done");
         AssignmentTable.addColumn("DueDate");
         
@@ -160,8 +160,8 @@ public class SeeSetAssignmentsFromDatabase {
             // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
             //then orders by topic
             // i also put the statement over 3 lines cause it was soo long
-            ResultSet results = statement.executeQuery("SELECT username, S_Name, Title, Resource, NumOfQuizQuestions,"
-                    + "PercentageOfQuizDone, Done, DueDate FROM Assigned a "
+            ResultSet results = statement.executeQuery("SELECT username, S_Name, Title, Resource,NumOfQuestionsDone, NumOfQuizQuestions,"
+                    + " Done, DueDate FROM Assigned a "
                     + "JOIN Student s ON a.StudentId = s.Student_id "
                     + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
                     + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
@@ -181,7 +181,7 @@ public class SeeSetAssignmentsFromDatabase {
                 String Topic = results.getString("Title");
                 String Resource = results.getString("Resource");
                 int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
-                Float PercentageOfQuizDone = results.getFloat("PercentageOfQuizDone");
+                int NumOfQuestionsDone = results.getInt("NumOfQuestionsDone");
                 Boolean Done = results.getBoolean("Done");
                 System.out.println(Done);
                 // change from boolean to String to make readability easier for user
@@ -190,7 +190,7 @@ public class SeeSetAssignmentsFromDatabase {
                     completed = "Done";
                 }
                 String DueDate = results.getString("DueDate");
-               
+                AssignmentTable.addRow(new Object [] {username,S_Name,Topic,Resource,NumOfQuestionsDone, NumOfQuizQuestions,completed,DueDate });
             }
             return AssignmentTable;
         }
