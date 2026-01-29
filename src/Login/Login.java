@@ -6,6 +6,7 @@ package Login;
 import StudentHome.StudentHome;
 import SignUp.LoginOrSignUp;
 import TeacherHome.TeacherHome;
+import javax.swing.JOptionPane;
 /**
  *
  * @author elois
@@ -46,7 +47,6 @@ public class Login extends javax.swing.JFrame {
         jButtonBack = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jWarning = new javax.swing.JLabel();
         jtxtUsername = new javax.swing.JTextField();
         jtxtPassword = new javax.swing.JPasswordField();
         jtxtLogin = new javax.swing.JLabel();
@@ -71,7 +71,7 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 15;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(110, 10, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(125, 10, 0, 0);
         getContentPane().add(jButtonBack, gridBagConstraints);
 
         jRadioButton1.setText("Student");
@@ -100,15 +100,6 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(17, 0, 0, 0);
         getContentPane().add(jRadioButton2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 25;
-        gridBagConstraints.ipadx = 320;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 85, 0, 82);
-        getContentPane().add(jWarning, gridBagConstraints);
 
         jtxtUsername.setForeground(new java.awt.Color(255, 102, 204));
         jtxtUsername.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +142,7 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 104;
         gridBagConstraints.ipady = 28;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(60, 26, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(75, 26, 0, 0);
         getContentPane().add(jtxtLogin, gridBagConstraints);
 
         jLabel2.setText("Username");
@@ -184,12 +175,12 @@ public class Login extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 28;
         gridBagConstraints.ipady = -3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 46, 51, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 46, 66, 0);
         getContentPane().add(jtxtSubmit, gridBagConstraints);
 
         pack();
@@ -234,17 +225,17 @@ public class Login extends javax.swing.JFrame {
         // || = or is syntax
         // could change to add two more if statments so they know if username or passwords is incorrect. security issie ??
         if ("".equals(user)) {
-            jWarning.setText("Select Student or Teacher");
+            JOptionPane.showMessageDialog(this, "Select Student or Teacher", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
         else if ((UsernameId == -1) || (PasswordId == -1 )){
-            jWarning.setText("Either password or Username is incorrect");
+            JOptionPane.showMessageDialog(this, "Either Password, Username or User is incorrect", "Try Again" ,JOptionPane.ERROR_MESSAGE);
             jtxtPassword.setText("");
         }
         else if ( UsernameId == PasswordId) {
             CheckDetails = true;
         }
         else {
-            jWarning.setText("Username and Password do not match");
+            JOptionPane.showMessageDialog(this, "Username and Password do not match", "Try Again" ,JOptionPane.ERROR_MESSAGE);
             jtxtPassword.setText("");
         }
 
@@ -300,7 +291,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JLabel jWarning;
     private javax.swing.JLabel jtxtLogin;
     private javax.swing.JPasswordField jtxtPassword;
     private javax.swing.JButton jtxtSubmit;

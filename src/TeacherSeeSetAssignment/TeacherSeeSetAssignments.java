@@ -164,27 +164,32 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         
         String HowToSort = ComboBox.getSelectedItem().toString();
-        
+        int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+        System.out.println(HowToSort);
         if ("Most Recent".equals(HowToSort)){
-            // sort by date and then limit one 
+             // sort by date and then limit one 
+            
+            DefaultTableModel ClassStatsTable = new DefaultTableModel();
+            ClassStatsTable = SeeSetAssignmentsFromDatabase.MostRecentAssignment(ClassID);
+            jAssignmentsTable.setModel(ClassStatsTable);
+            
+           
         }    
         if ("Uncompleted".equals(HowToSort)|| "Completed".equals(HowToSort)){
             // this fills in the table
-            int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
             DefaultTableModel ClassStatsTable = new DefaultTableModel();
             ClassStatsTable = SeeSetAssignmentsFromDatabase.BothCompletedAndUncompletedAssignmentsTable(ClassID, HowToSort);
             jAssignmentsTable.setModel(ClassStatsTable);
         }
         if ("All".equals(HowToSort)){
             
-            int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
             DefaultTableModel ClassStatsTable = new DefaultTableModel();
             ClassStatsTable = SeeSetAssignmentsFromDatabase.AllAssignments(ClassID);
             jAssignmentsTable.setModel(ClassStatsTable);
         }
         else{
-            int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
             DefaultTableModel ClassStatsTable = new DefaultTableModel();
+            // in this context howToSort is the Student USerrname 
             ClassStatsTable = SeeSetAssignmentsFromDatabase.SpecificStudentAssignment(HowToSort, ClassID);
             jAssignmentsTable.setModel(ClassStatsTable);
         }
