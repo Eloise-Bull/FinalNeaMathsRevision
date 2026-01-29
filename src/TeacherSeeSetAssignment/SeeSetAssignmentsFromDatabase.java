@@ -40,7 +40,8 @@ public class SeeSetAssignmentsFromDatabase {
             // sort by date and then limit one 
             ResultSet results = statement.executeQuery("SELECT username, "
                     + "S_Name, Title, Resource, NumOfQuestionsDone,NumOfQuizQuestions,Done, DueDate "
-                    + "FROM Assigned a JOIN Student s ON a.StudentId = s.Student_id JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
+                    + "FROM Assigned a JOIN Student s ON a.StudentId = s.Student_id "
+                    + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
                     + "LEFT JOIN Resources r ON ai.ResourceID = r.Resource "
                     + "WHERE ai.ClassID = " +ClassID+ " AND ai.DueDate = "
                     + "( SELECT DISTINCT DueDate FROM AssignmentInfo "
@@ -57,16 +58,10 @@ public class SeeSetAssignmentsFromDatabase {
                 System.out.println(Done);
                 // change from boolean to String to make readability easier for user
                 String completed = "Not Done";
-                if (Done) {
-                    completed = "Done";
-                }
                 String DueDate = results.getString("DueDate");
 
                 if (Done) {
                     completed = "Done";
-                }
-                else{
-                    completed = "Not Done";
                 }
                 AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuestionsDone, NumOfQuizQuestions,completed,DueDate });
             }
