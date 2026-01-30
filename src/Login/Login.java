@@ -44,6 +44,7 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jButtonBack = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -55,7 +56,6 @@ public class Login extends javax.swing.JFrame {
         jtxtSubmit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -74,6 +74,7 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(125, 10, 0, 0);
         getContentPane().add(jButtonBack, gridBagConstraints);
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Student");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +88,7 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(17, 85, 0, 0);
         getContentPane().add(jRadioButton1, gridBagConstraints);
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Teacher");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,6 +288,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonBack;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

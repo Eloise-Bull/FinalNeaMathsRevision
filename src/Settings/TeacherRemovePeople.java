@@ -5,21 +5,27 @@
 package Settings;
 
 import Login.Login;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author 4-EBULL
  */
-public class ChangeUsername extends javax.swing.JFrame {
+public class TeacherRemovePeople extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ChangeUsername.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TeacherRemovePeople.class.getName());
 
     /**
-     * Creates new form ChangeUsername
+     * Creates new form TeacherRemovePeople
      */
-    public ChangeUsername() {
+    public TeacherRemovePeople() {
         initComponents();
+        int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+        ArrayList<String> ListOfTopics = GetOrChangeUserInfo.SetBox(ClassID);
+        for (int i = 0; i < ListOfTopics.size(); i ++ ){
+            jComboBoxNames.addItem(ListOfTopics.get(i));
+        }
     }
 
     /**
@@ -32,15 +38,21 @@ public class ChangeUsername extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jChangeUsername = new javax.swing.JTextField();
+        jComboBoxNames = new javax.swing.JComboBox<>();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel1.setText("Change Username");
+        jLabel1.setText("Manage Students");
+
+        jToggleButton1.setText("Remove");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -49,73 +61,46 @@ public class ChangeUsername extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Submit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(120, 120, 120)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jLabel1)
-                        .addGap(41, 41, 41)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(jChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(jButton2)))
-                .addGap(47, 47, 47))
+                        .addComponent(jComboBoxNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToggleButton1))
+                    .addComponent(jLabel1))
+                .addContainerGap(146, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel1))
-                    .addComponent(jButton1))
-                .addGap(52, 52, 52)
-                .addComponent(jChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
-                .addComponent(jButton2))
+                .addGap(24, 24, 24)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton1))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(551, 320));
+        pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String NewUsername = jChangeUsername.getText();
-        int StudentId = Login.InfoOfUserForThisLoginSession.StudentId;
-        int TeacherID = Login.InfoOfUserForThisLoginSession.TeacherId;
-        String userType = Login.InfoOfUserForThisLoginSession.userType ;
-        int id;
-        if ("Student".equals(userType)){
-            id = StudentId;
-        }
-        else {
-            id = TeacherID;
-        }
-        GetOrChangeUserInfo change = new GetOrChangeUserInfo();
-        boolean success = change.ChangeUsername(userType,NewUsername, id );
-        if (success){
-            JOptionPane.showMessageDialog(this, "Change Successful.", "Username Updated" ,JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Change Unsuccessful. Enter a unique username", "Try Again" ,JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        String Pupil = jComboBoxNames.getSelectedItem().toString();
+        JOptionPane.showMessageDialog(this, "Are you Sure you would like to remove : " +Pupil," REMOVE " ,JOptionPane.YES_NO_OPTION);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Settings viewSettings = new Settings();
@@ -145,13 +130,13 @@ public class ChangeUsername extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ChangeUsername().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TeacherRemovePeople().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JTextField jChangeUsername;
+    private javax.swing.JComboBox<String> jComboBoxNames;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

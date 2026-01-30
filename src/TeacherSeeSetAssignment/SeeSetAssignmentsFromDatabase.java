@@ -18,8 +18,10 @@ import javax.swing.table.DefaultTableModel;
 public class SeeSetAssignmentsFromDatabase {
     /// this does the table contents basically pulls from database important things about the stats
     /// reused and edited code from teacehr stats package
+    /// @param ClassID
+    /// @return 
     ///
-        public static DefaultTableModel MostRecentAssignment(int ClassID){
+    public static DefaultTableModel MostRecentAssignment(int ClassID){
 
         DefaultTableModel AssignmentTable = new DefaultTableModel();
         
@@ -36,8 +38,9 @@ public class SeeSetAssignmentsFromDatabase {
 
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-
-            // sort by date and then limit one 
+            // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
+            //then orders by topic
+            // i also put the statement over 3 lines cause it was soo long
             ResultSet results = statement.executeQuery("SELECT username, "
                     + "S_Name, Title, Resource, NumOfQuestionsDone,NumOfQuizQuestions,Done, DueDate "
                     + "FROM Assigned a JOIN Student s ON a.StudentId = s.Student_id "
@@ -48,6 +51,7 @@ public class SeeSetAssignmentsFromDatabase {
                     + "WHERE ClassID = "+ClassID+" ORDER BY DueDate DESC LIMIT 1)");
 
             while (results.next()){
+                System.out.println("HELLO");
                 String Username = results.getString("username");
                 String Name = results.getString("S_Name");
                 String Topic = results.getString("Title");
@@ -59,14 +63,14 @@ public class SeeSetAssignmentsFromDatabase {
                 // change from boolean to String to make readability easier for user
                 String completed = "Not Done";
                 String DueDate = results.getString("DueDate");
-
+                System.out.println("hello");
                 if (Done) {
                     completed = "Done";
                 }
                 AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuestionsDone, NumOfQuizQuestions,completed,DueDate });
+                System.out.println("Addexd To Table");
             }
             return AssignmentTable;
-            
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -74,7 +78,7 @@ public class SeeSetAssignmentsFromDatabase {
         }
     }
         
-        public static DefaultTableModel BothCompletedAndUncompletedAssignmentsTable(int ClassID, String TypeOfAssignment){
+    public static DefaultTableModel BothCompletedAndUncompletedAssignmentsTable(int ClassID, String TypeOfAssignment){
 
         DefaultTableModel AssignmentTable = new DefaultTableModel();
         
@@ -175,12 +179,9 @@ public class SeeSetAssignmentsFromDatabase {
                 int NumOfQuestionsDone = results.getInt("NumOfQuestionsDone");
                 Boolean Done = results.getBoolean("Done");
                 String DueDate = results.getString("DueDate");
-                String completed;
+                String completed = "Not Done";
                 if (Done) {
                     completed = "Done";
-                }
-                else{
-                    completed = "Not Done";
                 }
                 AssignmentTable.addRow(new Object [] {Username,Name,Topic,Resource,NumOfQuestionsDone, NumOfQuizQuestions,completed,DueDate });
             }
@@ -191,6 +192,7 @@ public class SeeSetAssignmentsFromDatabase {
             return null;
         }
     }    
+    
         
     public static DefaultTableModel SpecificStudentAssignment(String Name, int ClassID){
 

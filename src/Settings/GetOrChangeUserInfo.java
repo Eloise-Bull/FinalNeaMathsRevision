@@ -8,6 +8,7 @@ import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -75,6 +76,23 @@ public class GetOrChangeUserInfo {
         catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+    // for combo bow gives list of students
+    public static ArrayList<String> SetBox(int ClassID){
+        ArrayList<String> ListOfNames = new ArrayList<>();
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT S_Name FROM Student WHERE Class_id = " + ClassID);
+            while (results.next()){
+                String Name = results.getString("S_Name");
+                ListOfNames.add(Name);
+            }
+            return ListOfNames;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

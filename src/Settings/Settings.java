@@ -17,7 +17,10 @@ public class Settings extends javax.swing.JFrame {
     /**
      * Creates new form Settings
      */
-    
+    public class WhatToChange{
+        public static String Username;
+        public static String Email;
+    }
     
     
     public Settings() {
@@ -61,7 +64,6 @@ public class Settings extends javax.swing.JFrame {
         jTextField2.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -153,6 +155,11 @@ public class Settings extends javax.swing.JFrame {
         getContentPane().add(jChangeUsername, gridBagConstraints);
 
         jChangeClass.setText("Change");
+        jChangeClass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jChangeClassActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
@@ -190,7 +197,7 @@ public class Settings extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtUsernameActionPerformed
 
     private void jChangeUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeUsernameActionPerformed
-            ChangeUsername ToNextScreen = new ChangeUsername();  
+            ChangeUserInfo ToNextScreen = new ChangeUserInfo();  
             ToNextScreen.setVisible(true);
             this.dispose();
     }//GEN-LAST:event_jChangeUsernameActionPerformed
@@ -207,9 +214,21 @@ public class Settings extends javax.swing.JFrame {
             submitButton.setVisible(true);
             this.dispose();
         }   
-        
-            // TODO add your handling code here:
     }//GEN-LAST:event_jtxtHomeActionPerformed
+
+    private void jChangeClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeClassActionPerformed
+        String User = Login.InfoOfUserForThisLoginSession.userType ;
+        if (User.equals("Teacher")){
+            TeacherRemovePeople ToNewScreen = new TeacherRemovePeople();  
+            ToNewScreen.setVisible(true);
+            this.dispose();
+        }
+        else{
+            ChangeUserInfo ToNextScreen = new ChangeUserInfo();  
+            ToNextScreen.setVisible(true);
+            this.dispose();
+        }   
+    }//GEN-LAST:event_jChangeClassActionPerformed
 
     /**
      * @param args the command line arguments
