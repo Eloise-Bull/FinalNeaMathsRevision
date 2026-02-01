@@ -217,22 +217,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
                 QuizButton.setVisible(true);
                 this.dispose(); 
             }
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        }  
     }//GEN-LAST:event_AssignmentWhenClicked
 
     /**

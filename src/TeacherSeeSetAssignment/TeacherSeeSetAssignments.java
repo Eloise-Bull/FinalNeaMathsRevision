@@ -6,6 +6,7 @@ package TeacherSeeSetAssignment;
 import Login.Login;
 import TeacherHome.TeacherHome;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -37,8 +38,6 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jAssignmentsTable = new javax.swing.JTable();
         ComboBox = new javax.swing.JComboBox<>();
@@ -46,6 +45,7 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -57,11 +57,11 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.ipadx = -17;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 39, 0, 45);
+        gridBagConstraints.insets = new java.awt.Insets(6, 18, 0, 57);
         getContentPane().add(jButton1, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -69,29 +69,10 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(19, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(24, 0, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
-
-        jButton2.setText("Delete");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 108, 34, 0);
-        getContentPane().add(jButton2, gridBagConstraints);
-
-        jButton3.setText("Extend deadline");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 54, 34, 0);
-        getContentPane().add(jButton3, gridBagConstraints);
 
         jAssignmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -105,19 +86,24 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
             }
         ));
         jAssignmentsTable.setEnabled(false);
+        jAssignmentsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ChangeAssignmentOrGoResource(evt);
+            }
+        });
         jScrollPane2.setViewportView(jAssignmentsTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 357;
-        gridBagConstraints.ipady = 316;
+        gridBagConstraints.ipadx = 313;
+        gridBagConstraints.ipady = 78;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(18, 26, 0, 45);
+        gridBagConstraints.insets = new java.awt.Insets(18, 26, 87, 57);
         getContentPane().add(jScrollPane2, gridBagConstraints);
 
         ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MostRecent", "Uncompleted", "Completed", "All" }));
@@ -134,7 +120,7 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(17, 26, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(12, 26, 0, 0);
         getContentPane().add(jLabel2, gridBagConstraints);
 
         jButton4.setText("Choose");
@@ -144,12 +130,11 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 6;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 39, 0, 45);
+        gridBagConstraints.insets = new java.awt.Insets(6, 1, 0, 57);
         getContentPane().add(jButton4, gridBagConstraints);
 
         pack();
@@ -166,36 +151,83 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         String HowToSort = ComboBox.getSelectedItem().toString();
         int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
         System.out.println(HowToSort);
-        if ("Most Recent".equals(HowToSort)){
+        if ("MostRecent".equals(HowToSort)){
              // sort by date and then limit one 
             
-            DefaultTableModel ClassStatsTable = new DefaultTableModel();
-            ClassStatsTable = SeeSetAssignmentsFromDatabase.MostRecentAssignment(ClassID);
-            jAssignmentsTable.setModel(ClassStatsTable);
+            DefaultTableModel AssignmentsTable = new DefaultTableModel();
+            AssignmentsTable = SeeSetAssignmentsFromDatabase.MostRecentAssignment(ClassID);
+            jAssignmentsTable.setModel(AssignmentsTable);
             
            
         }    
-        if ("Uncompleted".equals(HowToSort)|| "Completed".equals(HowToSort)){
+        else if ("Uncompleted".equals(HowToSort)|| "Completed".equals(HowToSort)){
             // this fills in the table
-            DefaultTableModel ClassStatsTable = new DefaultTableModel();
-            ClassStatsTable = SeeSetAssignmentsFromDatabase.BothCompletedAndUncompletedAssignmentsTable(ClassID, HowToSort);
-            jAssignmentsTable.setModel(ClassStatsTable);
+            DefaultTableModel AssignmentsTable = new DefaultTableModel();
+            AssignmentsTable = SeeSetAssignmentsFromDatabase.BothCompletedAndUncompletedAssignmentsTable(ClassID, HowToSort);
+            jAssignmentsTable.setModel(AssignmentsTable);
         }
-        if ("All".equals(HowToSort)){
+        else if ("All".equals(HowToSort)){
             
-            DefaultTableModel ClassStatsTable = new DefaultTableModel();
-            ClassStatsTable = SeeSetAssignmentsFromDatabase.AllAssignments(ClassID);
-            jAssignmentsTable.setModel(ClassStatsTable);
+            DefaultTableModel AssignmentsTable = new DefaultTableModel();
+            AssignmentsTable = SeeSetAssignmentsFromDatabase.AllAssignments(ClassID);
+            jAssignmentsTable.setModel(AssignmentsTable);
         }
         else{
-            DefaultTableModel ClassStatsTable = new DefaultTableModel();
+            DefaultTableModel AssignmentsTable = new DefaultTableModel();
             // in this context howToSort is the Student USerrname 
-            ClassStatsTable = SeeSetAssignmentsFromDatabase.SpecificStudentAssignment(HowToSort, ClassID);
-            jAssignmentsTable.setModel(ClassStatsTable);
+            AssignmentsTable = SeeSetAssignmentsFromDatabase.SpecificStudentAssignment(HowToSort, ClassID);
+            jAssignmentsTable.setModel(AssignmentsTable);
         }
 
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void ChangeAssignmentOrGoResource(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChangeAssignmentOrGoResource
+                
+        if (( evt.getClickCount() == 2)) {
+            // this gets the row youve clicked on
+            /// ROW STARTS AT ZERO
+            int IdRow = jAssignmentsTable.rowAtPoint(evt.getPoint());
+            String assignedAndAssignmentInfoid = (String)jAssignmentsTable.getValueAt(IdRow, 0);
+            int ResourceRow = jAssignmentsTable.rowAtPoint(evt.getPoint());
+            
+            // gets assingm3net id and assigned id 1
+            String[] parts = assignedAndAssignmentInfoid.split("-");
+            int AssignmentID = Integer.valueOf(parts[0]);
+            int AssignedID = Integer.valueOf(parts[1]);
+
+            
+            
+            if ((jAssignmentsTable.getValueAt(ResourceRow, 4) == null)){
+                // no resource
+                String[] Options = new String[3];
+                Options[0] = "Access Resource";
+                Options[1] = "Extend Deadline";
+                Options[2] = "Delete Assignment";
+                int choice = JOptionPane.showOptionDialog(null, "What would you like to do ?","",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null,Options,Options[0]);
+                if(){
+                    
+                }
+            }
+            else {
+                
+                    if ()
+                
+                String Resource = (String)jAssignmentsTable.getValueAt(ResourceRow, 4);
+                try {
+                    java.awt.Desktop.getDesktop().browse(new java.net.URI(Resource));
+                    // maybe add a panel thats like click if u have watched the video 
+                    // sets the assignment to done then 
+                }
+                catch ( Exception e ){
+                    // brings up neew temp screen
+                    javax.swing.JOptionPane.showMessageDialog(this, "Invalid URL");
+                } 
+            }
+        } 
+        
+    }//GEN-LAST:event_ChangeAssignmentOrGoResource
 
     /**
      * @param args the command line arguments
@@ -237,8 +269,6 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboBox;
     private javax.swing.JTable jAssignmentsTable;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
