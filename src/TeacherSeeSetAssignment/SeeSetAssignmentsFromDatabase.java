@@ -97,9 +97,9 @@ public class SeeSetAssignmentsFromDatabase {
             //then orders by topic
             // i also put the statement over 3 lines cause it was soo long
             ResultSet results = statement.executeQuery("SELECT AssignmentInfo_Id, AssignedId,username, S_Name, Title, Resource, NumOfQuestionsDone,"
-                    + " NumOfQuizQuestions,Done, DueDate FROM Assigned a JOIN Student s ON a.StudentId = s.Student_id "
-                    + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id " 
-                    +"LEFT JOIN Resources r ON ai.ResourceID = r.Resource " 
+                    +" NumOfQuizQuestions,Done, DueDate FROM Assigned a JOIN Student s ON a.StudentId = s.Student_id "
+                    +"JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id " 
+                    +"LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId " 
                     +"WHERE ai.ClassID = "+ClassID+" ORDER BY DueDate ASC");
             
             while (results.next()){
