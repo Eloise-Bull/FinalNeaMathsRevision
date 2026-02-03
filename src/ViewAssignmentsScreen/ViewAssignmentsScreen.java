@@ -24,8 +24,6 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         public static int Assignmentid;
         public static int Assignedid;
     }
-    // auto set to assignments to do 
-    static boolean completed = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,13 +38,12 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jtxtHome = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableAssignments = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -63,22 +60,6 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Completed");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Uncompleted");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
             }
         });
 
@@ -101,6 +82,10 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableAssignments);
 
+        jLabel3.setText("Double click an assignment to complete it or access a resource.");
+
+        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MostRecent", "Completed", "Uncompleted" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,18 +93,18 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
-                                .addGap(109, 109, 109)
-                                .addComponent(jRadioButton2))
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtxtHome)
-                            .addComponent(jButton1))))
+                                .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(152, 152, 152)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                        .addComponent(jtxtHome)))
                 .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
@@ -127,22 +112,21 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtxtHome)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jRadioButton2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton1))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtxtHome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(21, 21, 21)
+                        .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -158,18 +142,19 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         //completed = true means that its the doen assignments
         // add into table   
         int studentid = Login.InfoOfUserForThisLoginSession.StudentId;
+        String Sort = (String) jComboBox.getSelectedItem();
         DefaultTableModel AssignmentsTable = new DefaultTableModel();
-        AssignmentsTable = GettingAssignmentsForTheTable.RowsInTable(studentid,completed);
+        if ("Completed".equals(Sort)){
+            AssignmentsTable = GettingAssignmentsForTheTable.RowsInTable(studentid,true);
+        }
+        else if ("Uncompleted".equals(Sort)){
+            AssignmentsTable = GettingAssignmentsForTheTable.RowsInTable(studentid,false);
+        }
+        else {
+            AssignmentsTable = GettingAssignmentsForTheTable.MostRecentAssignment(studentid);
+        }
         jTableAssignments.setModel(AssignmentsTable);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        completed = true;
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        completed = false;
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void AssignmentWhenClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AssignmentWhenClicked
         // uses mouse handler 
@@ -177,7 +162,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         
         /// TO DO. MAKE SO U CANT PULL WHEN COMPLETED
         
-        if (( evt.getClickCount() == 2) && !completed) {
+        if (( evt.getClickCount() == 2) && "Uncompleted".equals((String) jComboBox.getSelectedItem())) {
             // this gets the row youve clicked on
             /// ROW STARTS AT ZERO
             int IdRow = jTableAssignments.rowAtPoint(evt.getPoint());
@@ -217,7 +202,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
                 QuizButton.setVisible(true);
                 this.dispose(); 
             }
-        }  
+        }
     }//GEN-LAST:event_AssignmentWhenClicked
 
     /**
@@ -258,9 +243,9 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableAssignments;
     private javax.swing.JButton jtxtHome;

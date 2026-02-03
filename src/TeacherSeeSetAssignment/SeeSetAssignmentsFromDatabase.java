@@ -273,4 +273,29 @@ public class SeeSetAssignmentsFromDatabase {
             return null;
         }
     }
+    
+    public static Boolean UpdateDateForAssignment(int days, int AssignmentID){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            statement.execute("UPDATE AssignmentInfo SET DueDate = "
+                    + "DATE_ADD(DueDate, INTERVAL "+days+ " day ) WHERE AssignmentInfo_id = " + AssignmentID);
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public static Boolean DeleteAssignment(int AssignmentID){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            statement.execute("DELETE FROM AssignmentInfo WHERE AssignmentInfo_id = " + AssignmentID);
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

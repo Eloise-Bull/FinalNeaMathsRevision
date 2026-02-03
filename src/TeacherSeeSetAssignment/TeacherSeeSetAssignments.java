@@ -226,20 +226,36 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
                 Options[1] = "Delete Assignment";
                 int choice = JOptionPane.showOptionDialog(null, "What would you like to do ?","",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null,Options,Options[1]);
+                // choice 0 is extend deadline
                 if(choice == 0){
-                    System.out.println("1");
-                    JOptionPane.showMessageDialog(this, "Are you sure you'd like to extend this assignment for eveyone ?",
-                            "Confirm" ,JOptionPane.YES_NO_OPTION);
+                    String Extend = JOptionPane.showInputDialog("By how many days would you like to extend it? Only Type Numbers");
+                    int ExtendDays = Integer.parseInt(Extend);
+                    boolean Success = SeeSetAssignmentsFromDatabase.UpdateDateForAssignment(ExtendDays, AssignmentID);
+                    if (Success) {
+                        JOptionPane.showMessageDialog(this, "Deadline extended by " + ExtendDays + " days", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Failed", "" ,JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-                else {
-                    // choice == 1
+                else if ( choice == 1){
                     JOptionPane.showMessageDialog(this, "Are you sure you'd like to delete this assignment for eveyone ?",
                             "Confirm" ,JOptionPane.YES_NO_OPTION);
-                
-                    System.out.println("3");
-                    
+                    if (JOptionPane.YES_OPTION ==1){
+                        
+                    }
+                    boolean Success = SeeSetAssignmentsFromDatabase.DeleteAssignment(AssignmentID);
+                    if (Success) {
+                        JOptionPane.showMessageDialog(this, "Assignment deleted", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Failed", "" ,JOptionPane.ERROR_MESSAGE);
+                    }
+
+                        
                 }
             }
+            // ive put this as an else as if there is an assignmetn then they can access the resource
             else {
                 String[] Options = new String[3];
                 Options[0] = "Access Resource";
@@ -248,7 +264,9 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
                 
                 int choice = JOptionPane.showOptionDialog(null, "What would you like to do ?","",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null,Options,Options[1]);
+                
                 if(choice == 0){
+                    // access resource
                     System.out.println("1");
                     String Resource = (String)jAssignmentsTable.getValueAt(ResourceRow, 4);
                     try {
@@ -262,15 +280,30 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
                     } 
                 }
                 else if ( choice == 1 ){
-                    // choice == 1
-                    JOptionPane.showMessageDialog(this, "Are you sure you'd like to extend this assignment for eveyone ?",
-                            "Confirm" ,JOptionPane.YES_NO_OPTION);
-                    System.out.println("2");   
+                    // extend deadline
+                    String Extend = JOptionPane.showInputDialog("By how many days would you like to extend it? Only Type Numbers");
+                    int ExtendDays = Integer.parseInt(Extend);
+                    boolean Success = SeeSetAssignmentsFromDatabase.UpdateDateForAssignment(ExtendDays, AssignmentID);
+                    if (Success) {
+                        JOptionPane.showMessageDialog(this, "Deadline extended by " + ExtendDays + " days", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Failed", "" ,JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-                else {
+                else if (choice == 2){
                     JOptionPane.showMessageDialog(this, "Are you sure you'd like to delete this assignment for eveyone ?",
                             "Confirm" ,JOptionPane.YES_NO_OPTION);
- 
+                    if (JOptionPane.YES_OPTION ==1){
+                        
+                    }
+                    boolean Success = SeeSetAssignmentsFromDatabase.DeleteAssignment(AssignmentID);
+                    if (Success) {
+                        JOptionPane.showMessageDialog(this, "Assignment deleted", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Failed", "" ,JOptionPane.ERROR_MESSAGE);
+                    }
                     System.out.println("3");   
                 }
                 
