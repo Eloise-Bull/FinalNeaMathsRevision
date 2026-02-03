@@ -55,8 +55,6 @@ public class GetOrChangeUserInfo {
             Statement statement = connection.createStatement();
             ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
                     + "SELECT 1 FROM "+User+" WHERE username = '"+ Username+"')");
-            
-
             if (Results.next()){
                 // if =1 then there is already a username like it so return false
                 if (Results.getInt(1)==1){
@@ -71,7 +69,32 @@ public class GetOrChangeUserInfo {
             else{
                 return false;
             }
-
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean ChangeEmail54vy(String User, String Username, int ID){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
+                    + "SELECT 1 FROM "+User+" WHERE username = '"+ Username+"')");
+            if (Results.next()){
+                // if =1 then there is already a username like it so return false
+                if (Results.getInt(1)==1){
+                    return false;
+                }
+                else{
+                    // is unique 
+                    statement.execute("UPDATE " + User + " SET username = '" + Username + "' WHERE "+User+"_id = " + ID);
+                    return true;
+                }
+            }
+            else{
+                return false;
+            }
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -48,7 +48,6 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -111,7 +110,7 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(18, 26, 50, 26);
         getContentPane().add(jScrollPane2, gridBagConstraints);
 
-        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MostRecent", "Uncompleted", "Completed", "All" }));
+        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DueNext", "Uncompleted", "Completed", "All" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -172,11 +171,11 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         String HowToSort = ComboBox.getSelectedItem().toString();
         int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
         System.out.println(HowToSort);
-        if ("MostRecent".equals(HowToSort)){
+        if ("DueNext".equals(HowToSort)){
              // sort by date and then limit one 
             
             DefaultTableModel AssignmentsTable = new DefaultTableModel();
-            AssignmentsTable = SeeSetAssignmentsFromDatabase.MostRecentAssignment(ClassID);
+            AssignmentsTable = SeeSetAssignmentsFromDatabase.DueNext(ClassID);
             jAssignmentsTable.setModel(AssignmentsTable);
             
            
@@ -242,16 +241,15 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Are you sure you'd like to delete this assignment for eveyone ?",
                             "Confirm" ,JOptionPane.YES_NO_OPTION);
                     if (JOptionPane.YES_OPTION ==1){
-                        
+                        boolean Success = SeeSetAssignmentsFromDatabase.DeleteAssignment(AssignmentID);
+                        if (Success) {
+                            JOptionPane.showMessageDialog(this, "Assignment deleted", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(this, "Failed", "" ,JOptionPane.ERROR_MESSAGE);
+                        }
                     }
-                    boolean Success = SeeSetAssignmentsFromDatabase.DeleteAssignment(AssignmentID);
-                    if (Success) {
-                        JOptionPane.showMessageDialog(this, "Assignment deleted", "Success" ,JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this, "Failed", "" ,JOptionPane.ERROR_MESSAGE);
-                    }
-
+                    
                         
                 }
             }
@@ -295,16 +293,15 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Are you sure you'd like to delete this assignment for eveyone ?",
                             "Confirm" ,JOptionPane.YES_NO_OPTION);
                     if (JOptionPane.YES_OPTION ==1){
-                        
+                        boolean Success = SeeSetAssignmentsFromDatabase.DeleteAssignment(AssignmentID);
+                        if (Success) {
+                            JOptionPane.showMessageDialog(this, "Assignment deleted", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(this, "Failed", "" ,JOptionPane.ERROR_MESSAGE);
+                        }
                     }
-                    boolean Success = SeeSetAssignmentsFromDatabase.DeleteAssignment(AssignmentID);
-                    if (Success) {
-                        JOptionPane.showMessageDialog(this, "Assignment deleted", "Success" ,JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this, "Failed", "" ,JOptionPane.ERROR_MESSAGE);
-                    }
-                    System.out.println("3");   
+                    
                 }
                 
             }

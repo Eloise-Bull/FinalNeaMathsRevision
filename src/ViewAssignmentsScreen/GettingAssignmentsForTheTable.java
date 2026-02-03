@@ -100,7 +100,7 @@ public class GettingAssignmentsForTheTable {
         
     }
     
-    public static DefaultTableModel MostRecentAssignment(int StudentID){
+    public static DefaultTableModel DueNext(int StudentID){
 
         DefaultTableModel AssignmentTable = new DefaultTableModel();
 

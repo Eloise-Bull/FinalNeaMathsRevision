@@ -21,7 +21,7 @@ public class SeeSetAssignmentsFromDatabase {
     /// @param ClassID
     /// @return 
     ///
-    public static DefaultTableModel MostRecentAssignment(int ClassID){
+    public static DefaultTableModel DueNext(int ClassID){
 
         DefaultTableModel AssignmentTable = new DefaultTableModel();
 
@@ -290,6 +290,7 @@ public class SeeSetAssignmentsFromDatabase {
     public static Boolean DeleteAssignment(int AssignmentID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
+            statement.execute("DELETE FROM Assigned WHERE AssignmentInfoId = " + AssignmentID);
             statement.execute("DELETE FROM AssignmentInfo WHERE AssignmentInfo_id = " + AssignmentID);
             return true;
         }

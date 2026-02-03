@@ -84,7 +84,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
 
         jLabel3.setText("Double click an assignment to complete it or access a resource.");
 
-        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MostRecent", "Completed", "Uncompleted" }));
+        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DueNext", "Completed", "Uncompleted" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,7 +151,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
             AssignmentsTable = GettingAssignmentsForTheTable.RowsInTable(studentid,false);
         }
         else {
-            AssignmentsTable = GettingAssignmentsForTheTable.MostRecentAssignment(studentid);
+            AssignmentsTable = GettingAssignmentsForTheTable.DueNext(studentid);
         }
         jTableAssignments.setModel(AssignmentsTable);
     }//GEN-LAST:event_jButton1ActionPerformed

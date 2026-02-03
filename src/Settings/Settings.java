@@ -18,8 +18,7 @@ public class Settings extends javax.swing.JFrame {
      * Creates new form Settings
      */
     public class WhatToChange{
-        public static String Username;
-        public static String Email;
+        public static String WhatToChange;
     }
     
     
@@ -134,6 +133,11 @@ public class Settings extends javax.swing.JFrame {
         getContentPane().add(jtxtClass, gridBagConstraints);
 
         jChangePassword.setText("Change");
+        jChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jChangePasswordActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -168,6 +172,11 @@ public class Settings extends javax.swing.JFrame {
         getContentPane().add(jChangeClass, gridBagConstraints);
 
         jChangeEmail.setText("Change");
+        jChangeEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jChangeEmailActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -197,6 +206,7 @@ public class Settings extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtUsernameActionPerformed
 
     private void jChangeUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeUsernameActionPerformed
+        WhatToChange.WhatToChange = "Username";
         ChangeUserInfo ToNextScreen = new ChangeUserInfo();  
         ToNextScreen.setVisible(true);
         this.dispose();
@@ -217,6 +227,8 @@ public class Settings extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtHomeActionPerformed
 
     private void jChangeClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeClassActionPerformed
+        WhatToChange.WhatToChange = "Class";
+
         String User = Login.InfoOfUserForThisLoginSession.userType ;
         if (User.equals("Teacher")){
             TeacherRemovePeople ToNewScreen = new TeacherRemovePeople();  
@@ -229,6 +241,20 @@ public class Settings extends javax.swing.JFrame {
             this.dispose();
         }   
     }//GEN-LAST:event_jChangeClassActionPerformed
+
+    private void jChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangePasswordActionPerformed
+        WhatToChange.WhatToChange = "Password";
+        ChangeUserInfo ToNextScreen = new ChangeUserInfo();  
+        ToNextScreen.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jChangePasswordActionPerformed
+
+    private void jChangeEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeEmailActionPerformed
+        WhatToChange.WhatToChange = "Email";
+        ChangeUserInfo ToNextScreen = new ChangeUserInfo();  
+        ToNextScreen.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jChangeEmailActionPerformed
 
     /**
      * @param args the command line arguments

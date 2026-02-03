@@ -20,7 +20,19 @@ public class ChangeUserInfo extends javax.swing.JFrame {
      */
     public ChangeUserInfo() {
         initComponents();
-        String WhatToChange = Settings.WhatToChange.Username ;
+        String WhatToChange = Settings.WhatToChange.WhatToChange ;
+        if ("Username".equals(WhatToChange)){
+            jChange.setText("Change Username");
+        }
+        else if ("Email".equals(WhatToChange)){
+            jChange.setText("Change Email");
+        }
+        else if ("Class".equals(WhatToChange)){
+            jChange.setText("Change Class");
+        }
+        if ("Password".equals(WhatToChange)){
+            jChange.setText("Change Password");
+        }
     }
 
     /**
@@ -32,7 +44,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jChange = new javax.swing.JLabel();
         jChangeUsername = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -40,8 +52,8 @@ public class ChangeUserInfo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel1.setText("Change");
+        jChange.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jChange.setText("Change");
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,27 +78,26 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(225, 225, 225)
                         .addComponent(jButton2))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(166, 166, 166)
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(123, 123, 123)
-                            .addComponent(jChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(47, 47, 47))
+                            .addComponent(jChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(207, 207, 207)
+                        .addComponent(jChange)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel1))
-                    .addComponent(jButton1))
-                .addGap(52, 52, 52)
+                .addComponent(jButton1)
+                .addGap(7, 7, 7)
+                .addComponent(jChange)
+                .addGap(43, 43, 43)
                 .addComponent(jChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
                 .addComponent(jButton2))
@@ -97,9 +108,6 @@ public class ChangeUserInfo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        
-        String NewUsername = jChangeUsername.getText();
         int StudentId = Login.InfoOfUserForThisLoginSession.StudentId;
         int TeacherID = Login.InfoOfUserForThisLoginSession.TeacherId;
         String userType = Login.InfoOfUserForThisLoginSession.userType ;
@@ -110,14 +118,33 @@ public class ChangeUserInfo extends javax.swing.JFrame {
         else {
             id = TeacherID;
         }
-        GetOrChangeUserInfo change = new GetOrChangeUserInfo();
-        boolean success = change.ChangeUsername(userType,NewUsername, id );
-        if (success){
-            JOptionPane.showMessageDialog(this, "Change Successful.", "Username Updated" ,JOptionPane.INFORMATION_MESSAGE);
+        
+        
+        String WhatToChange = Settings.WhatToChange.WhatToChange ;
+        String UserInput = jChangeUsername.getText();
+        if ("Username".equals(WhatToChange)){
+
+        
+            GetOrChangeUserInfo change = new GetOrChangeUserInfo();
+            boolean success = change.ChangeUsername(userType,UserInput, id );
+            if (success){
+                JOptionPane.showMessageDialog(this, "Change Successful.", 
+                        "Username Updated" ,JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Change Unsuccessful. Enter a unique username", 
+                        "Try Again" ,JOptionPane.ERROR_MESSAGE);
+            }
         }
-        else{
-            JOptionPane.showMessageDialog(this, "Change Unsuccessful. Enter a unique username", "Try Again" ,JOptionPane.ERROR_MESSAGE);
-        }
+        else if ("Email".equals(WhatToChange)){
+            JOptionPane.showMessageDialog(this, "Confirm this is your new email :" + UserInput,
+                            "Confirm" ,JOptionPane.YES_NO_OPTION);
+                    if (JOptionPane.YES_OPTION ==1){
+                        boolean Success = GetOrChangeUserInfo.ChangeEmail(userType, UserInput, id);
+                        
+        }    
+        
+        
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -155,7 +182,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jChange;
     private javax.swing.JTextField jChangeUsername;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
