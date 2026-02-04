@@ -76,11 +76,11 @@ public class GetOrChangeUserInfo {
         }
     }
     
-    public boolean ChangeEmail54vy(String User, String Username, int ID){
+    public boolean ChangeEmail(String User, String Email, int ID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
             ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
-                    + "SELECT 1 FROM "+User+" WHERE username = '"+ Username+"')");
+                    + "SELECT 1 FROM "+User+" WHERE Email = '"+ Email+"')");
             if (Results.next()){
                 // if =1 then there is already a username like it so return false
                 if (Results.getInt(1)==1){
@@ -88,7 +88,7 @@ public class GetOrChangeUserInfo {
                 }
                 else{
                     // is unique 
-                    statement.execute("UPDATE " + User + " SET username = '" + Username + "' WHERE "+User+"_id = " + ID);
+                    statement.execute("UPDATE " + User + " SET Email = '" + Email + "' WHERE "+User+"_id = " + ID);
                     return true;
                 }
             }

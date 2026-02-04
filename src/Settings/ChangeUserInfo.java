@@ -119,13 +119,12 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             id = TeacherID;
         }
         
+        GetOrChangeUserInfo change = new GetOrChangeUserInfo();
         
         String WhatToChange = Settings.WhatToChange.WhatToChange ;
         String UserInput = jChangeUsername.getText();
         if ("Username".equals(WhatToChange)){
-
-        
-            GetOrChangeUserInfo change = new GetOrChangeUserInfo();
+            
             boolean success = change.ChangeUsername(userType,UserInput, id );
             if (success){
                 JOptionPane.showMessageDialog(this, "Change Successful.", 
@@ -137,10 +136,23 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             }
         }
         else if ("Email".equals(WhatToChange)){
-            JOptionPane.showMessageDialog(this, "Confirm this is your new email :" + UserInput,
-                            "Confirm" ,JOptionPane.YES_NO_OPTION);
-                    if (JOptionPane.YES_OPTION ==1){
-                        boolean Success = GetOrChangeUserInfo.ChangeEmail(userType, UserInput, id);
+            System.out.println("OPTION");
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Confirm this is your new email :" + UserInput,
+                            "Confirm" ,JOptionPane.YES_NO_OPTION)){
+                System.out.println("AFTER OPTION");
+                boolean Success = change.ChangeEmail(userType, UserInput, id);
+                System.out.println(Success);
+                if (Success){
+                    JOptionPane.showMessageDialog(this, "Change Successful.", 
+                        "Email Updated" ,JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Change Unsuccessful. Email must not already have an account", 
+                        "Try Again" ,JOptionPane.ERROR_MESSAGE);
+                }
+                jChangeUsername.setText("");
+            }
+            
                         
         }    
         

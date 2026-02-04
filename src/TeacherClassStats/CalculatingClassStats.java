@@ -90,5 +90,89 @@ public class CalculatingClassStats {
             return null;
         }
     }
+    // does the combo box for the Topics
+    public static ArrayList<String> SetTopicsForBox(){
+        ArrayList<String> ListOfTopicNames = new ArrayList<>();
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Topic FROM Topic");
+            while (results.next()){
+                String TopicForList = results.getString("Topic");
+                ListOfTopicNames.add(TopicForList);
+            }
+            return ListOfTopicNames;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public static ArrayList<String> SetUsernamesForBox(int ClassID){
+        ArrayList<String> ListOfTopicNames = new ArrayList<>();
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT S_Name FROM Student WHERE Class_id = "+ ClassID);
+            while (results.next()){
+                String TopicForList = results.getString("S_Name");
+                ListOfTopicNames.add(TopicForList);
+            }
+            return ListOfTopicNames;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public DefaultTableModel GetTheStatsForUsernameOrTopic(int ClassID, String HowToSort){
+        DefaultTableModel StatsTable = new DefaultTableModel();
+        
+        StatsTable.addColumn("Student Username");
+        StatsTable.addColumn("Student Name");
+        StatsTable.addColumn("Topic");
+        StatsTable.addColumn("Topic Stats");
+
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever class 
+            //teacher was and then orders by name so that the students names / scores and stuff are together
+            // i also put the statement over 3 lines cause it was soo long
+            ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
+                    + "SELECT 1 FROM Student WHERE username = '"+ HowToSort+"')");
+            if ( Results.next()){
+                // means there is a username so get their stats
+                ResultSet results = statement.executeQuery("SELECT Score, username, S_Name, Topic FROM TopicStats ts JOIN Student s "
+                    + "ON ts.Student_id = s.Student_id JOIN Topic t ON ts.Topic_id = t.Topic_id  WHERE s.Class_id = "+ ClassID +" "
+                            + "ORDER BY s.S_Name ASC ");
+                while (results.next()){
+                String Topic = results.getString("Topic");
+                String NAME = results.getString("S_name");
+                Float Score = results.getFloat("Score");
+                String Username = results.getString("username");
+                
+                StatsTable.addRow(new Object [] {Username ,NAME,  Topic, Score}); 
+                }
+            }
+            else {
+                // its a topic not a username 
+                ResultSet results = statement.executeQuery("SELECT Score, username, S_Name, Topic FROM TopicStats ts JOIN Student s "
+                    + "ON ts.Student_id = s.Student_id JOIN Topic t ON ts.Topic_id = t.Topic_id  WHERE s.Class_id = "+ ClassID +" "
+                            + "ORDER BY s.S_Name ASC ");
+                while (results.next()){
+                String Topic = results.getString("Topic");
+                String NAME = results.getString("S_name");
+                Float Score = results.getFloat("Score");
+                String Username = results.getString("username");
+                
+                StatsTable.addRow(new Object [] {Username ,NAME,  Topic, Score}); 
+                }
+            }
+            return StatsTable;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

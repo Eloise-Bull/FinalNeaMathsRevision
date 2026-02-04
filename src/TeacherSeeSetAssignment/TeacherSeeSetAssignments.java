@@ -170,7 +170,7 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         
         String HowToSort = ComboBox.getSelectedItem().toString();
         int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
-        System.out.println(HowToSort);
+        
         if ("DueNext".equals(HowToSort)){
              // sort by date and then limit one 
             
@@ -238,9 +238,8 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
                     }
                 }
                 else if ( choice == 1){
-                    JOptionPane.showMessageDialog(this, "Are you sure you'd like to delete this assignment for eveyone ?",
-                            "Confirm" ,JOptionPane.YES_NO_OPTION);
-                    if (JOptionPane.YES_OPTION ==1){
+                    if (JOptionPane.YES_OPTION ==JOptionPane.showConfirmDialog(this, "Are you sure you'd like to delete this assignment for eveyone ?",
+                            "Confirm" ,JOptionPane.YES_NO_OPTION)){
                         boolean Success = SeeSetAssignmentsFromDatabase.DeleteAssignment(AssignmentID);
                         if (Success) {
                             JOptionPane.showMessageDialog(this, "Assignment deleted", "Success" ,JOptionPane.INFORMATION_MESSAGE);
@@ -290,9 +289,8 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
                     }
                 }
                 else if (choice == 2){
-                    JOptionPane.showMessageDialog(this, "Are you sure you'd like to delete this assignment for eveyone ?",
-                            "Confirm" ,JOptionPane.YES_NO_OPTION);
-                    if (JOptionPane.YES_OPTION ==1){
+                    if (JOptionPane.YES_OPTION ==JOptionPane.showConfirmDialog(this, "Are you sure you'd like to delete this assignment for eveyone ?",
+                            "Confirm" ,JOptionPane.YES_NO_OPTION)){
                         boolean Success = SeeSetAssignmentsFromDatabase.DeleteAssignment(AssignmentID);
                         if (Success) {
                             JOptionPane.showMessageDialog(this, "Assignment deleted", "Success" ,JOptionPane.INFORMATION_MESSAGE);

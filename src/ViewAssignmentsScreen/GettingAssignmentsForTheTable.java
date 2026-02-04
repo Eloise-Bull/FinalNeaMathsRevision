@@ -126,7 +126,7 @@ public class GettingAssignmentsForTheTable {
                     + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
                     + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
                     + "WHERE Student_id = " +StudentID 
-                    + " ORDER BY DueDate DESC LIMIT 1)");
+                    + " ORDER BY DueDate DESC LIMIT 1");
 
             while (results.next()){
                 int AssignmentID = results.getInt("AssignmentInfo_Id");

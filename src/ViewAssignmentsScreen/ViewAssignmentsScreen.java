@@ -158,9 +158,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
 
     private void AssignmentWhenClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AssignmentWhenClicked
         // uses mouse handler 
-        // click select to do assignment
-        
-        /// TO DO. MAKE SO U CANT PULL WHEN COMPLETED
+        // click select to do assignment 
         
         if (( evt.getClickCount() == 2) && "Uncompleted".equals((String) jComboBox.getSelectedItem())) {
             // this gets the row youve clicked on
