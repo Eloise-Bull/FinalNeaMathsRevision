@@ -10,12 +10,48 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
  * @author elois
  */
 public class TargetedQuiz {
+    // uses the random number to get the question. 
+    public String TargetedQuestions(){
+        ArrayList<String> TopicQuestionsList = new ArrayList<>();
+        int CurrentTopicId = TargetedQuiz.ReturnTopicID();
+        TopicQuestionsList = SpecificTopicQuestions(CurrentTopicId);
+        int size =(TopicQuestionsList).size();
+        ///// gets random number within the range of questions within that topic
+        Random random = new Random();
+        int randomInt = random.nextInt(size);
+        String Question = TopicQuestionsList.get(randomInt);
+        return Question;
+    }    
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    ///THIS WHOLE SECTIONS IS TO CALCULATE THE STATS FOR EACH TOPIC FOR THE STUDNET 
+    ///
+    ///
+    ///return topicID for question
+    public int ReturnTopicID(String Question){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Topic_id FROM Questions WHERE Question = '" + Question + "';");
+            if (results.next()){
+               return results.getInt("Topic_id");
+            }
+            else {
+                return 0;
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    ///
+    ///
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // for the specific questions thingy it return the the topic id
     public static int ReturnTopicID(){
@@ -62,54 +98,4 @@ public class TargetedQuiz {
         }
         
     }
-    
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /// to find the answer for the question i put in 
-    public static int ReturnQuestionIdForTargeted(String Question ){
-        
-        
-        try (Connection connection = TheConnectionToDatabase()){
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT Question_Id FROM Questions WHERE Question = '" + Question + "'");
-            if (results.next()){
-               int QuestionID = results.getInt("Question_Id");
-               return QuestionID ; 
-            } 
-            else{ 
-                //cause results.next checks if query returns at least one row, need this here
-                return 0;
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            
-            //fix later idk what else to put for that
-            
-            return 0;
-        } 
-    }
-        
-        public static String ReturnAnswerForTargeted(int Question_Id ){
-        
-        
-        try (Connection connection = TheConnectionToDatabase()){
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT Answer FROM Answers WHERE Answer_id = '" + Question_Id + "'");
-            if (results.next()){
-               String Answer = results.getString("Answer");
-               return Answer ; 
-            } 
-            else{ 
-                //cause results.next checks if query returns at least one row, need this here
-                return null;
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            
-            //fix later idk what else to put for that
-            
-            return null;
-        }   
-    }   
 }

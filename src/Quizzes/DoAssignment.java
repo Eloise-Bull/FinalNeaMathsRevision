@@ -6,32 +6,13 @@ package Quizzes;
 
 import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 /**
  *
  * @author elois
  */
 public class DoAssignment {
-    public static ArrayList<String> GetQuestionsForQuizAssignment(int topic){
-        ArrayList<String> QuestionsList = new ArrayList<>();
-        try (Connection connection = TheConnectionToDatabase()){
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT Question FROM Questions WHERE Topic_Id = '" + topic + "'");
-            while (results.next()){
-                String StatsValue = results.getString("Question");
-                QuestionsList.add(StatsValue);
-            }
-            return QuestionsList;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        
-    }
     
     // adds on the the num of assigned quesitons done for an assignment
     public void AddOneToQuestionsDone(int AssingmentId, int AssignedID,int CurrentNumOfQuestions){
@@ -59,13 +40,13 @@ public class DoAssignment {
         }
         
     }
+
     public void ResetVariables(){
         // are static so i can access them but need to reset when new quiz
-        Quizzes.QuizDetails.CurrentStats = null;
+        Quizzes.QuizDetails.CurrentStats = 0f;
         Quizzes.QuizDetails.questionsDone = 0;
         QuizQuestions.CountingQuizStats(0, false, true);
         QuizQuestions.count(true);
 
-    }
-    
+    } 
 }

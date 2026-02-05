@@ -43,7 +43,6 @@ public class StudentHome extends javax.swing.JFrame {
         jbuttonLogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -58,6 +57,9 @@ public class StudentHome extends javax.swing.JFrame {
         getContentPane().add(jLabel1, gridBagConstraints);
 
         jbuttonQuiz.setText("QUIZ");
+        jbuttonQuiz.setMaximumSize(new java.awt.Dimension(94, 23));
+        jbuttonQuiz.setMinimumSize(new java.awt.Dimension(94, 23));
+        jbuttonQuiz.setPreferredSize(new java.awt.Dimension(94, 23));
         jbuttonQuiz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbuttonQuizActionPerformed(evt);
@@ -67,8 +69,8 @@ public class StudentHome extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 345;
-        gridBagConstraints.ipady = 34;
+        gridBagConstraints.ipadx = 323;
+        gridBagConstraints.ipady = 36;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 97, 0, 80);
         getContentPane().add(jbuttonQuiz, gridBagConstraints);

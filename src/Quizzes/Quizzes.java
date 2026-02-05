@@ -40,12 +40,19 @@ public class Quizzes extends javax.swing.JFrame {
         targeted = false;
         quiz = new QuizQuestions();
         
-        ToDoAssignmnet = ViewAssignmentsScreen.InfoForAssignment.Assignment;
-        ViewAssignmentsScreen.InfoForAssignment.Assignment = false;
-        System.out.println(ToDoAssignmnet);
         // resets the variables
         DoAssignment Assign = new DoAssignment();
         Assign.ResetVariables();
+        
+        ToDoAssignmnet = ViewAssignmentsScreen.InfoForAssignment.Assignment;
+        // sets it back to false cause then when they want to do a normal quiz its false
+        ViewAssignmentsScreen.InfoForAssignment.Assignment = false;
+        
+        if (ToDoAssignmnet){
+            jQuizzesLabel.setText("Assignment");
+            jButtonRandom.setVisible(false);
+            jButtonTargeted.setVisible(false);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -277,15 +284,11 @@ public class Quizzes extends javax.swing.JFrame {
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         // checks if it is an assignment 
         // if assignment - it uses the same screen it just has it to the set topic and count down of questions
+
         if (ToDoAssignmnet){
-            jQuizzesLabel.setText("Assignment");
-
-            jButtonRandom.setText("");
-            jButtonTargeted.setText("");
-
             numOfAssignmentQuestionsLeft = ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft;
-            System.out.println(numOfAssignmentQuestionsLeft);
-            if (!(numOfAssignmentQuestionsLeft == 0)){
+
+            if (!(numOfAssignmentQuestionsLeft <= 0)){
                 
                 String ButtonText = jButtonSubmit.getText();
                 // this is to move onto the next question
@@ -293,7 +296,8 @@ public class Quizzes extends javax.swing.JFrame {
                     jButtonSubmit.setText("Submit");
                     jLabelMark.setText("");
                     lCorrectAnswer.setText("");
-                    jtxtQuizQuestion.setText(quiz.TargetedQuestions());
+                    TargetedQuiz TQuiz = new TargetedQuiz();
+                    jtxtQuizQuestion.setText(TQuiz.TargetedQuestions());
                 }
                 // user submits answer to be checked 
                 else {
@@ -301,7 +305,7 @@ public class Quizzes extends javax.swing.JFrame {
                     // checks if the answer is correct
                     String Question = jtxtQuizQuestion.getText();
                     String answer = (jtxtUserAnswer.getText());
-                    correct = quiz.CheckTargetedAnswer(answer, Question);
+                    correct = quiz.CheckAnswer(answer, Question);
             
                     // marks the answer 
                     if ( correct == true) {            
@@ -327,8 +331,8 @@ public class Quizzes extends javax.swing.JFrame {
             
                     int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
                     /// get topicID
-                    QuizQuestions quiz = new QuizQuestions();
-                    int topicID = quiz.ReturnTopicID(Question);
+                    TargetedQuiz TQuiz = new TargetedQuiz();
+                    int topicID = TQuiz.ReturnTopicID(Question);
                     /// adds one to the numofquestionsdoen in databse for specific topic
                     quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
                     quiz.updateStats(correct, topicID, Student_id);
@@ -350,7 +354,8 @@ public class Quizzes extends javax.swing.JFrame {
 
                     // parameters, assignmentid assignedid, current num of questions
                     DoAssignment Do = new DoAssignment();
-                    Do.AddOneToQuestionsDone(Assignmentid, AssignedID,ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft);
+                    Do.AddOneToQuestionsDone(Assignmentid, AssignedID,
+                            ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft);
                     
                 }
                 
@@ -379,11 +384,12 @@ public class Quizzes extends javax.swing.JFrame {
                 jLabelMark.setText("");
                 lCorrectAnswer.setText("");
                 if ( targeted == false ) {
-                    quiz = new QuizQuestions();
+                    RandomQuiz quiz = new RandomQuiz();
                     jtxtQuizQuestion.setText(quiz.RandomQuiz());
                 }
                 else {
-                    jtxtQuizQuestion.setText(quiz.TargetedQuestions());
+                    TargetedQuiz TQuiz = new TargetedQuiz();
+                    jtxtQuizQuestion.setText(TQuiz.TargetedQuestions());
                 }
             }
             //this is to 
@@ -395,24 +401,16 @@ public class Quizzes extends javax.swing.JFrame {
                 // need to get rid of any spaces that could be inputted
         
                 if ("".equals(jtxtQuizQuestion.getText())){
-                    JOptionPane.showMessageDialog(this, "Pick Random Or Targeted", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, 
+                            "Pick Random Or Targeted", "Try Again" ,JOptionPane.ERROR_MESSAGE);
             
                 }
                 else if ("".equals(answer)){
-                    JOptionPane.showMessageDialog(this, "Please Enter An Answer", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, 
+                            "Please Enter An Answer", "Try Again" ,JOptionPane.ERROR_MESSAGE);
                 }
                 else{
-                    // this is for the random quiz
-                    // returns 1 if correct
-                    // and returns actual answer
-                    if ( targeted == false) {
-                        correct = quiz.CheckAnswer(answer);
-                    }
-
-                    // this is for specific quiz
-                    else{
-                        correct = quiz.CheckTargetedAnswer(answer, Question);
-                    }
+                    correct = quiz.CheckAnswer( answer,Question);
             
                     if ( correct == true) {            
                         jLabelMark.setText("Marked: Correct");
@@ -435,8 +433,8 @@ public class Quizzes extends javax.swing.JFrame {
             
                     int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
                     /// get topicID
-                    QuizQuestions quiz = new QuizQuestions();
-                    int topicID = quiz.ReturnTopicID(Question);
+                    TargetedQuiz TQuiz = new TargetedQuiz();
+                    int topicID = TQuiz.ReturnTopicID(Question);
                     /// adds one to the numofquestionsdoen in databse for specific topic
                     quiz.AddOneToNumOfQuestionsDone(topicID, Student_id);
                     quiz.updateStats(correct, topicID, Student_id);
@@ -463,13 +461,14 @@ public class Quizzes extends javax.swing.JFrame {
 
     private void jButtonRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRandomActionPerformed
         targeted = false;
+        RandomQuiz quiz = new RandomQuiz();
         jtxtQuizQuestion.setText(quiz.RandomQuiz());
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRandomActionPerformed
 
     private void jButtonTargetedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTargetedActionPerformed
         targeted = true; 
-        jtxtQuizQuestion.setText(quiz.TargetedQuestions());
+        TargetedQuiz TQuiz = new TargetedQuiz();
+        jtxtQuizQuestion.setText(TQuiz.TargetedQuestions());
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTargetedActionPerformed
 
