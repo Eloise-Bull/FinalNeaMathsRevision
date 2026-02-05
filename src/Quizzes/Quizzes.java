@@ -7,6 +7,7 @@ import StudentHome.StudentHome;
 import Login.Login;
 import java.util.ArrayList;
 import ViewAssignmentsScreen.ViewAssignmentsScreen;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -71,13 +72,11 @@ public class Quizzes extends javax.swing.JFrame {
         jPanelCorrrectOrWrong = new javax.swing.JPanel();
         jLabelMark = new javax.swing.JLabel();
         jFinishQuiz = new javax.swing.JButton();
-        jWarning = new javax.swing.JLabel();
         lCorrectAnswer = new javax.swing.JLabel();
 
         jButton2.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -251,15 +250,6 @@ public class Quizzes extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 46, 27, 0);
         getContentPane().add(jFinishQuiz, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.gridwidth = 15;
-        gridBagConstraints.ipadx = 345;
-        gridBagConstraints.ipady = 12;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 37, 0, 0);
-        getContentPane().add(jWarning, gridBagConstraints);
 
         lCorrectAnswer.setText("Correct Answer: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -285,15 +275,14 @@ public class Quizzes extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtQuizQuestionActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
-        jWarning.setText("");
         // checks if it is an assignment 
         // if assignment - it uses the same screen it just has it to the set topic and count down of questions
         if (ToDoAssignmnet){
-            
+            jQuizzesLabel.setText("Assignment");
+
             jButtonRandom.setText("");
             jButtonTargeted.setText("");
-            jQuizzesLabel.setText("Assignment");
-            
+
             numOfAssignmentQuestionsLeft = ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft;
             System.out.println(numOfAssignmentQuestionsLeft);
             if (!(numOfAssignmentQuestionsLeft == 0)){
@@ -377,15 +366,9 @@ public class Quizzes extends javax.swing.JFrame {
                 this.dispose();
                 
             }
-            
-            
         }
         
-        
-        
-        
-        
-        
+
         
         // this means it is not an assignment and just a normal quiz 
         else {
@@ -412,10 +395,11 @@ public class Quizzes extends javax.swing.JFrame {
                 // need to get rid of any spaces that could be inputted
         
                 if ("".equals(jtxtQuizQuestion.getText())){
-                    jWarning.setText("Pick Random Or Targeted");
+                    JOptionPane.showMessageDialog(this, "Pick Random Or Targeted", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+            
                 }
                 else if ("".equals(answer)){
-                    jWarning.setText("Please Enter An Answer"); 
+                    JOptionPane.showMessageDialog(this, "Please Enter An Answer", "Try Again" ,JOptionPane.ERROR_MESSAGE);
                 }
                 else{
                     // this is for the random quiz
@@ -532,7 +516,6 @@ public class Quizzes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelStats;
     private javax.swing.JPanel jPanelCorrrectOrWrong;
     private javax.swing.JLabel jQuizzesLabel;
-    private javax.swing.JLabel jWarning;
     private javax.swing.JLabel jtxtCheatToGetAnswer;
     private javax.swing.JButton jtxtHome;
     private javax.swing.JTextField jtxtQuizQuestion;

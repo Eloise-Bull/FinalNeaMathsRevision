@@ -5,7 +5,12 @@
 package TeacherSetResources;
 import Login.Login;
 import TeacherHome.TeacherHome;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
+import javax.swing.JOptionPane;
+import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  *
@@ -224,20 +229,37 @@ public class TeacherSetResources extends javax.swing.JFrame {
     //fix whatever ive messed up here probs the or could be an and by accidnet and like it just kinda froze/ crashed a little fix it 
     // or the scanner ?? bro idk 
     private void jAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAssignActionPerformed
-        int resourceNum = Integer.valueOf(jResourceNum.getText());
-        
-        String TypeOfResource = jPickResourceType.getSelectedItem().toString();
         String Duedate = jDueDate.getText();
-        int ClassId = Login.InfoOfUserForThisLoginSession.UserClassID ;
-        AssigningAResource.SetResourceToClassOrStudent(TypeOfResource,resourceNum,ClassId,Duedate );
-        jResourceNum.setText("");
-        jDueDate.setText("");
         
-        
+        // checks it is in correct format
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-mm-dd", Locale.UK);
+        if (dateFormatter.equals(Duedate)){
+            // checks deadline is after todays date
+            LocalDate today = LocalDate.now();
+            LocalDate Deadline = LocalDate.parse(Duedate);
 
-        // make eaher type in due date
-        // class id make it a global variable.
-        // TODO add your handling code here:
+            boolean After = Deadline.isAfter(today);
+            if (After){
+                int resourceNum = Integer.parseInt(jResourceNum.getText());
+
+                String TypeOfResource = jPickResourceType.getSelectedItem().toString();
+
+                int ClassId = Login.InfoOfUserForThisLoginSession.UserClassID ;
+                AssigningAResource.SetResourceToClassOrStudent(TypeOfResource,resourceNum,ClassId,Duedate );
+                jResourceNum.setText("");
+                jDueDate.setText("");
+                JOptionPane.showMessageDialog(this, "Assignment set", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Deadline must be after todays date", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+                jDueDate.setText("");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Date must be in correct format", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+            jDueDate.setText("");
+            
+        }
     }//GEN-LAST:event_jAssignActionPerformed
 
     private void jBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackButtonActionPerformed

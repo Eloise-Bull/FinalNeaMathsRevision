@@ -7,6 +7,7 @@ import StudentHome.StudentHome;
 import javax.swing.table.DefaultTableModel;
 import Login.Login;
 import Quizzes.Quizzes;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 /**
  *
@@ -92,7 +93,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
 
         jLabel3.setText("Double click an assignment to complete it or access a resource.");
 
-        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DueNext", "Completed", "Uncompleted" }));
+        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DueNext", "Overdue", "Completed", "Uncompleted" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,8 +159,16 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         else if ("Uncompleted".equals(Sort)){
             AssignmentsTable = GettingAssignmentsForTheTable.RowsInTable(studentid,false);
         }
-        else {
+        else if ("DueNext".equals(Sort)){
             AssignmentsTable = GettingAssignmentsForTheTable.DueNext(studentid);
+        }
+        else {
+            // overdue 
+            LocalDate today = LocalDate.now();
+            // use the date run through my Sql anc get the over due ones
+            // do the same for the teachers one 
+            // orders from least overdue to most 
+            
         }
         jTableAssignments.setModel(AssignmentsTable);
     }//GEN-LAST:event_jButton1ActionPerformed
