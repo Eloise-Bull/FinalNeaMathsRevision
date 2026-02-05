@@ -17,27 +17,29 @@ public class Quizzes extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Quizzes.class.getName());
     private QuizQuestions quiz;
     private boolean targeted;
+    boolean ToDoAssignmnet;
     /**
      * Creates new form Quizzes
      */
     
     public static class QuizDetails{
-        // for own quizzes
+        // for personal set quizzes
         public static ArrayList<String> ListOfQuestionsWrong = new ArrayList(); 
         public static ArrayList<String> ListOfAnswers = new ArrayList(); 
         public static ArrayList<String> ListOfUserAnswers = new ArrayList(); 
         public static Float CurrentStats;
         public static int questionsDone;
         public static String RealAnswer;
-        // for assignments 
-        public static int QuestionsLeft;
-        public static Boolean Assignment;
     }
     
+
     public Quizzes() {
         initComponents();   
         targeted = false;
         quiz = new QuizQuestions();
+        
+        ToDoAssignmnet = ViewAssignmentsScreen.InfoForAssignment.Assignment;
+        ViewAssignmentsScreen.InfoForAssignment.Assignment = false;
         
         // resets the variables
         DoAssignment Assign = new DoAssignment();
@@ -285,7 +287,7 @@ public class Quizzes extends javax.swing.JFrame {
         jWarning.setText("");
         // checks if it is an assignment 
         // if assignment - it uses the same screen it just has it to the set topic and count down of questions
-        if (QuizDetails.Assignment){
+        if (ToDoAssignmnet){
             
             jButtonRandom.setText("");
             jButtonTargeted.setText("");

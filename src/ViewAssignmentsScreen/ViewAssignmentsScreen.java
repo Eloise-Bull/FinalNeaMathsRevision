@@ -23,6 +23,8 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
     public class InfoForAssignment{
         public static int Assignmentid;
         public static int Assignedid;
+        public static boolean Assignment;
+        public static int NumOfAssignmentQuestionsLeft;
     }
 
     /**
