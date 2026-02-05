@@ -128,7 +128,7 @@ public class GettingAssignmentsForTheTable {
                     + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
                     + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
                     + "WHERE Student_id = " +StudentID 
-                    + " ORDER BY DueDate DESC LIMIT 1");
+                    + " AND Done = false ORDER BY DueDate DESC LIMIT 1");
 
             while (results.next()){
                 int AssignmentID = results.getInt("AssignmentInfo_Id");
@@ -183,6 +183,22 @@ public class GettingAssignmentsForTheTable {
             return -1;
         }
     }
-    
-    
+    //////////////// marking assignment as done ( reosurce)
+    ///
+    public boolean setAssignmentToDoneResource(int AssingmentId, int AssignedID){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            statement.execute("UPDATE Assigned SET Done = TRUE "
+                    + "WHERE AssignedId =" + AssignedID
+                    + " AND AssignmentInfoId = " + AssingmentId);
+            return true;
+        }
+        
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+    }
+
 }

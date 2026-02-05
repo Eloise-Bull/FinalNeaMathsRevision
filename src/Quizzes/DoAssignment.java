@@ -50,7 +50,7 @@ public class DoAssignment {
     public void setAssignmentToDone(int AssingmentId, int AssignedID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            statement.executeQuery("UPDATE Assigned SET Done = TRUE "
+            statement.execute("UPDATE Assigned SET Done = TRUE "
                     + "WHERE AssignedId =" + AssignedID
                     + " AND AssignmentInfoId = " + AssingmentId);
         }

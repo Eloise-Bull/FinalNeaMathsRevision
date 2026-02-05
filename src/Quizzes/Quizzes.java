@@ -41,7 +41,7 @@ public class Quizzes extends javax.swing.JFrame {
         
         ToDoAssignmnet = ViewAssignmentsScreen.InfoForAssignment.Assignment;
         ViewAssignmentsScreen.InfoForAssignment.Assignment = false;
-
+        System.out.println(ToDoAssignmnet);
         // resets the variables
         DoAssignment Assign = new DoAssignment();
         Assign.ResetVariables();
@@ -295,7 +295,7 @@ public class Quizzes extends javax.swing.JFrame {
             jQuizzesLabel.setText("Assignment");
             
             numOfAssignmentQuestionsLeft = ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft;
-            
+            System.out.println(numOfAssignmentQuestionsLeft);
             if (!(numOfAssignmentQuestionsLeft == 0)){
                 
                 String ButtonText = jButtonSubmit.getText();

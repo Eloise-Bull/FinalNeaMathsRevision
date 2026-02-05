@@ -293,7 +293,7 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
                             "Confirm" ,JOptionPane.YES_NO_OPTION)){
                         boolean Success = SeeSetAssignmentsFromDatabase.DeleteAssignment(AssignmentID);
                         if (Success) {
-                            JOptionPane.showMessageDialog(this, "Assignment deleted", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "Assignment done", "Success" ,JOptionPane.INFORMATION_MESSAGE);
                         }
                         else {
                             JOptionPane.showMessageDialog(this, "Failed", "" ,JOptionPane.ERROR_MESSAGE);

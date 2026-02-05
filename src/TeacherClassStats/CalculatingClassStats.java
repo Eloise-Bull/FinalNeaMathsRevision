@@ -145,14 +145,14 @@ public class CalculatingClassStats {
             if ( Results.next()){
                 // means there is a username so get their stats
                 ResultSet results = statement.executeQuery("SELECT Score, username, S_Name, Topic FROM TopicStats ts JOIN Student s "
-                    + "ON ts.Student_id = s.Student_id JOIN Topic t ON ts.Topic_id = t.Topic_id  WHERE s.Class_id = "+ ClassID +" "
-                            + "ORDER BY s.S_Name ASC ");
+                    + "ON ts.Student_id = s.Student_id JOIN Topic t ON ts.Topic_id = t.Topic_id WHERE s.Class_id = "+ ClassID +" "
+                            + " ORDER BY s.S_Name ASC ");
                 while (results.next()){
                 String Topic = results.getString("Topic");
                 String NAME = results.getString("S_name");
                 Float Score = results.getFloat("Score");
                 String Username = results.getString("username");
-                
+                System.out.println(Topic +NAME + Score+ Username);
                 StatsTable.addRow(new Object [] {Username ,NAME,  Topic, Score}); 
                 }
             }
@@ -160,12 +160,14 @@ public class CalculatingClassStats {
                 // its a topic not a username 
                 ResultSet results = statement.executeQuery("SELECT Score, username, S_Name, Topic FROM TopicStats ts JOIN Student s "
                     + "ON ts.Student_id = s.Student_id JOIN Topic t ON ts.Topic_id = t.Topic_id  WHERE s.Class_id = "+ ClassID +" "
-                            + "ORDER BY s.S_Name ASC ");
+                            + " ORDER BY s.S_Name ASC ");
+                
                 while (results.next()){
                 String Topic = results.getString("Topic");
                 String NAME = results.getString("S_name");
                 Float Score = results.getFloat("Score");
                 String Username = results.getString("username");
+                System.out.println(Topic +NAME + Score+ Username);
                 
                 StatsTable.addRow(new Object [] {Username ,NAME,  Topic, Score}); 
                 }
@@ -177,5 +179,4 @@ public class CalculatingClassStats {
             return null;
         }
     }
-    
 }
