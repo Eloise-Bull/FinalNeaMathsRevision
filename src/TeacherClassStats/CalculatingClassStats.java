@@ -31,7 +31,10 @@ public class CalculatingClassStats {
     
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /// creates an array list for the student stats so i can calculate the averages of a class
+    
+    ///Did this to calculate class average
+    ///
+    /// /// creates an array list for the student stats so i can calculate the averages of a class
 
     // returns the array for the stats. temporaty storage, a float cause stats = decimal
     // temporary class_id = set to one cause then i can test wihtout them loging in         

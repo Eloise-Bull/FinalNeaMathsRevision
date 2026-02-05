@@ -24,6 +24,8 @@ public class GettingAssignmentsForTheTable {
     ///  this does the table contents basically pulls from database important things about the stats
     /// reused and edited code from teacehr stats package
     ///
+    ///
+    ///// this is for both uncompleted assignments and completed
         
     public static DefaultTableModel RowsInTable(int StudentID, boolean completed){
 
@@ -37,7 +39,6 @@ public class GettingAssignmentsForTheTable {
             AssignmentTable.addColumn("resource");
             AssignmentTable.addColumn("Num Of Questions done");
             AssignmentTable.addColumn("Num of quiz questions");
-            AssignmentTable.addColumn("Num Of Questions done");
             AssignmentTable.addColumn("Done");
             AssignmentTable.addColumn("DueDate");
         }
@@ -100,6 +101,7 @@ public class GettingAssignmentsForTheTable {
         
     }
     
+    // outputs the assignment thats next due for that student 
     public static DefaultTableModel DueNext(int StudentID){
 
         DefaultTableModel AssignmentTable = new DefaultTableModel();
@@ -154,7 +156,8 @@ public class GettingAssignmentsForTheTable {
     }
     
     
-
+    
+    
     //////////////// getting the num of questions to do
     ///
     public static int questionsLeftToDo(int AssignmentID, int AssignedID){

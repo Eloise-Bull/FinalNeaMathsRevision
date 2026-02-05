@@ -4,6 +4,7 @@
  */
 package SignUp;
 import Login.Login;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -59,13 +60,11 @@ public class SignUp extends javax.swing.JFrame {
         jtxtClassCode = new javax.swing.JTextField();
         jtxtSchool = new javax.swing.JTextField();
         jLSchool = new javax.swing.JLabel();
-        LWarning = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 255));
-        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -300,11 +299,6 @@ public class SignUp extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(21, 84, 0, 0);
         getContentPane().add(jLSchool, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(LWarning, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -345,31 +339,32 @@ public class SignUp extends javax.swing.JFrame {
         // check username is unique - not used as the primary key or anything just to distinquish 
         
         if ((name.length()==0) || (Username.length()==0) || (Email.length()==0)||(Password.length()==0) || (CheckPassword.length()==0)){
-            LWarning.setText("All fields must be filled");
+            JOptionPane.showMessageDialog(this, "All fields must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
         else if (!( Password.equals(CheckPassword))) {
-            LWarning.setText("Passwords don't match");
+            JOptionPane.showMessageDialog(this, "Passwords don't match", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+            
         }
         //else if ( check.UniquenessCheck(user, Username) == true) {
             
         //}
         else if (("Student".equals(user)) & (Classcode.length()==0)){
-                LWarning.setText("Classcode must be filled");
+            JOptionPane.showMessageDialog(this, "Classcode must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
         else if ("Teacher".equals(user) & (School.length()==0)){
-            LWarning.setText("School must be filled");
+            JOptionPane.showMessageDialog(this, "School must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         } 
         else if ( user == null) {
-            LWarning.setText("Pick Teacher or Student");
+            JOptionPane.showMessageDialog(this, "Pick Teacher or Student", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
         // password password123??
         // numbers and a cap and symbol?? 
         else if (Username.length()>20){
-            LWarning.setText("Password must be less than 20 characters");
+            JOptionPane.showMessageDialog(this, "Username must be less than 20 characters", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         } 
         else {
             if ( "Student".equals(user)){
-                Boolean worked = check.AddStudent(name, Username, Email, Password, Integer.valueOf(Classcode));
+                Boolean worked = check.AddStudent(name, Username, Email, Password, Integer.parseInt(Classcode));
                 System.out.println(worked);
                 if (worked){
                     Login ToLoginScreen = new Login();  
@@ -377,7 +372,7 @@ public class SignUp extends javax.swing.JFrame {
                     this.dispose();
                 }
                 else {
-                    LWarning.setText("There has been an issue please retry");
+                    JOptionPane.showMessageDialog(this, "There has been an issue please retry", "Try Again" ,JOptionPane.ERROR_MESSAGE);
                     jtxtName.setText("");
                     jtxtUsername.setText("");
                     jtxtEmail.setText("");
@@ -393,8 +388,15 @@ public class SignUp extends javax.swing.JFrame {
                 ToLoginScreen.setVisible(true);
                 this.dispose();
             }
-            
-        }
+                JOptionPane.showMessageDialog(this, "There has been an issue please retry", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+                jtxtName.setText("");
+                jtxtUsername.setText("");
+                jtxtEmail.setText("");
+                jtxtClassCode.setText("");
+                jtxtSchool.setText("");
+                jtxtPassword.setText("");
+                jtxtCheckpassword.setText("");
+            }
         
     }//GEN-LAST:event_jbuttonSubmitActionPerformed
 
@@ -447,7 +449,6 @@ public class SignUp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JTellUserInfo;
-    private javax.swing.JLabel LWarning;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonBack;
     private javax.swing.JLabel jLClassCode;

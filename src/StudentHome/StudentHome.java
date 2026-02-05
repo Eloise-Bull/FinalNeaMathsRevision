@@ -154,8 +154,6 @@ public class StudentHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbuttonQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonQuizActionPerformed
-        Quizzes.QuizDetails.Assignment = false;
-        
         Quizzes QuizButton = new Quizzes();
         QuizButton.setVisible(true);
         this.dispose();

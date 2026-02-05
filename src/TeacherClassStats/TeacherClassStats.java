@@ -65,8 +65,8 @@ public class TeacherClassStats extends javax.swing.JFrame {
         jLabelClassStats = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableStats = new javax.swing.JTable();
-        jComboBox = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        jComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -107,6 +107,8 @@ public class TeacherClassStats extends javax.swing.JFrame {
             }
         });
 
+        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,10 +143,13 @@ public class TeacherClassStats extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addGap(19, 19, 19)
                 .addComponent(jLabelClassStats)
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -161,10 +166,17 @@ public class TeacherClassStats extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String HowToSort = jComboBox.getSelectedItem().toString();
         int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
-        
         DefaultTableModel ClassStatsTable = new DefaultTableModel();
-        CalculatingClassStats Stats = new CalculatingClassStats();
-        ClassStatsTable = Stats.GetTheStatsForUsernameOrTopic(ClassID, HowToSort);
+        
+        if ("All".equals(HowToSort)){
+            
+            CalculatingClassStats Stats = new CalculatingClassStats();
+            ClassStatsTable = Stats.RowsInTable(ClassID);
+        } else{
+            CalculatingClassStats Stats = new CalculatingClassStats();
+            ClassStatsTable = Stats.GetTheStatsForUsernameOrTopic(ClassID, HowToSort);
+        }
+        
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

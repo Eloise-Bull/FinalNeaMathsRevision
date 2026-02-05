@@ -33,6 +33,20 @@ public class DoAssignment {
         
     }
     
+    // adds on the the num of assigned quesitons done for an assignment
+    public void AddOneToQuestionsDone(int AssingmentId, int AssignedID,int CurrentNumOfQuestions){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            statement.executeQuery("UPDATE Assigned SET NumOfQuestionsDone =  " + CurrentNumOfQuestions
+                    + "WHERE AssignedId =" + AssignedID
+                    + " AND AssignmentInfoId = " + AssingmentId);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+ 
     public void setAssignmentToDone(int AssingmentId, int AssignedID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();

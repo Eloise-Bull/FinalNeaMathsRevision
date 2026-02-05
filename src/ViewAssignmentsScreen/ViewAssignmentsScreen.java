@@ -195,8 +195,12 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
                 // already have Assignmentid,Assignedid, StudentID
                 // get the NumOfQuestionsLeftToDo
                 int QuestionsLeftToDo = GettingAssignmentsForTheTable.questionsLeftToDo(AssignmentID,AssignedID);
-                Quizzes.QuizDetails.QuestionsLeft = QuestionsLeftToDo;
-                Quizzes.QuizDetails.Assignment = true;
+                // sets assginment true so when i go to quizzes it will do the assignment
+                ViewAssignmentsScreen.InfoForAssignment.Assignment = true;
+                ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft = QuestionsLeftToDo;
+                
+
+
                 // sends to Quzzes screen
                 Quizzes QuizButton = new Quizzes();
                 QuizButton.setVisible(true);

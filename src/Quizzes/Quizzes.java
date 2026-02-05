@@ -18,6 +18,7 @@ public class Quizzes extends javax.swing.JFrame {
     private QuizQuestions quiz;
     private boolean targeted;
     boolean ToDoAssignmnet;
+    int numOfAssignmentQuestionsLeft;
     /**
      * Creates new form Quizzes
      */
@@ -40,7 +41,7 @@ public class Quizzes extends javax.swing.JFrame {
         
         ToDoAssignmnet = ViewAssignmentsScreen.InfoForAssignment.Assignment;
         ViewAssignmentsScreen.InfoForAssignment.Assignment = false;
-        
+
         // resets the variables
         DoAssignment Assign = new DoAssignment();
         Assign.ResetVariables();
@@ -292,10 +293,10 @@ public class Quizzes extends javax.swing.JFrame {
             jButtonRandom.setText("");
             jButtonTargeted.setText("");
             jQuizzesLabel.setText("Assignment");
-            int AssignmentQuestioncount = QuizDetails.QuestionsLeft;
-            if (!(AssignmentQuestioncount == 0)){
-                
-                
+            
+            numOfAssignmentQuestionsLeft = ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft;
+            
+            if (!(numOfAssignmentQuestionsLeft == 0)){
                 
                 String ButtonText = jButtonSubmit.getText();
                 // this is to move onto the next question
@@ -329,7 +330,7 @@ public class Quizzes extends javax.swing.JFrame {
                     // amount of questions done
                     QuizDetails.questionsDone = count - 1;
                     // questions left to do 
-                    jLabelQuestion.setText("Questions left: " + AssignmentQuestioncount);
+                    jLabelQuestion.setText("Questions left: " + numOfAssignmentQuestionsLeft);
                     float stats = QuizQuestions.CountingQuizStats(count-1,correct, false);
                     // updates the temp stored data of this quiz
                     QuizDetails.CurrentStats = stats;
@@ -348,10 +349,20 @@ public class Quizzes extends javax.swing.JFrame {
                     //jLabelQuestion.setText("Question: " + ( num + 1 ));
                     jButtonSubmit.setText("Next");
                     
+                    // updates the num of questions left to do
+                    ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft = ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft - 1;
+                    
+                    // update database 
+                    // change num of quesitons done
                     
                     
-                    QuizDetails.QuestionsLeft = AssignmentQuestioncount - 1;
-                    // insert into database the new Quiz number
+                    int Assignmentid = ViewAssignmentsScreen.InfoForAssignment.Assignmentid;
+                    int AssignedID = ViewAssignmentsScreen.InfoForAssignment.Assignedid;
+
+                    // parameters, assignmentid assignedid, current num of questions
+                    DoAssignment Do = new DoAssignment();
+                    Do.AddOneToQuestionsDone(Assignmentid, AssignedID,ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft);
+                    
                 }
                 
             }
