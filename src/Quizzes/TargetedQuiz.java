@@ -18,9 +18,28 @@ import java.util.Random;
  */
 public class TargetedQuiz {
     // uses the random number to get the question. 
-    public String TargetedQuestions(){
+    public String TargetedQuestions(Boolean Assignment, String Topic){
         ArrayList<String> TopicQuestionsList = new ArrayList<>();
-        int CurrentTopicId = TargetedQuiz.ReturnTopicID();
+        int CurrentTopicId;
+        if (Assignment){
+            try (Connection connection = TheConnectionToDatabase()){
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery("SELECT Topic_id FROM Topic WHERE Topic = '" + Topic + "';");
+                if (results.next()){
+                   CurrentTopicId = results.getInt("Topic_id");
+                }
+                else {
+                    CurrentTopicId = -1;
+                }
+            }catch(Exception e) {
+                e.printStackTrace();
+                CurrentTopicId = -1;
+            }
+        }
+        else {
+            CurrentTopicId = TargetedQuiz.ReturnTopicID();
+        }
+        
         TopicQuestionsList = SpecificTopicQuestions(CurrentTopicId);
         int size =(TopicQuestionsList).size();
         ///// gets random number within the range of questions within that topic

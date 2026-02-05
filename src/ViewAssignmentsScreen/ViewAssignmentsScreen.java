@@ -32,6 +32,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         public static int Assignedid;
         public static boolean Assignment;
         public static int NumOfAssignmentQuestionsLeft;
+        public static String Topic;
     }
 
     /**
@@ -184,6 +185,8 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
 
             int IdRow = jTableAssignments.rowAtPoint(evt.getPoint());
             String assignedAndAssignmentInfoid = (String)jTableAssignments.getValueAt(IdRow, 0);
+            // need topic to make quiz assignments correspond to topic
+            String TopicInTable = (String)jTableAssignments.getValueAt(IdRow, 1);
             int ResourceRow = jTableAssignments.rowAtPoint(evt.getPoint());
 
             // gets assingm3net id and assigned id 1
@@ -192,6 +195,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
             int AssignedID = Integer.valueOf(parts[1]);
             InfoForAssignment.Assignmentid = AssignmentID;
             InfoForAssignment.Assignedid = AssignedID;
+            InfoForAssignment.Topic = TopicInTable;
 
             if (!(jTableAssignments.getValueAt(ResourceRow, 2) == null)){
                 // Do resource

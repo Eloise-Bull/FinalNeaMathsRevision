@@ -52,6 +52,16 @@ public class Quizzes extends javax.swing.JFrame {
             jQuizzesLabel.setText("Assignment");
             jButtonRandom.setVisible(false);
             jButtonTargeted.setVisible(false);
+            String TopicForAssignment = ViewAssignmentsScreen.InfoForAssignment.Topic;
+            if ("All".equals(TopicForAssignment)){
+                // do a random quiz for this
+                RandomQuiz Randomquiz = new RandomQuiz();
+                jtxtQuizQuestion.setText(Randomquiz.RandomQuiz());
+            }
+            else {
+                TargetedQuiz TQuiz = new TargetedQuiz();
+                jtxtQuizQuestion.setText(TQuiz.TargetedQuestions(true, TopicForAssignment));
+            }
         }
     }
     /**
@@ -71,7 +81,6 @@ public class Quizzes extends javax.swing.JFrame {
         jtxtUserAnswer = new javax.swing.JTextField();
         jButtonSubmit = new javax.swing.JButton();
         jtxtHome = new javax.swing.JButton();
-        jtxtCheatToGetAnswer = new javax.swing.JLabel();
         jLabelQuestion = new javax.swing.JLabel();
         jLabelStats = new javax.swing.JLabel();
         jButtonRandom = new javax.swing.JRadioButton();
@@ -158,11 +167,6 @@ public class Quizzes extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(62, 49, 0, 0);
         getContentPane().add(jtxtHome, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(jtxtCheatToGetAnswer, gridBagConstraints);
 
         jLabelQuestion.setText("Question: 1");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -296,8 +300,18 @@ public class Quizzes extends javax.swing.JFrame {
                     jButtonSubmit.setText("Submit");
                     jLabelMark.setText("");
                     lCorrectAnswer.setText("");
-                    TargetedQuiz TQuiz = new TargetedQuiz();
-                    jtxtQuizQuestion.setText(TQuiz.TargetedQuestions());
+                    
+                    String TopicForAssignment = ViewAssignmentsScreen.InfoForAssignment.Topic;
+                    if ("All".equals(TopicForAssignment)){
+                        // do a random quiz for this
+                        RandomQuiz quiz = new RandomQuiz();
+                        jtxtQuizQuestion.setText(quiz.RandomQuiz());
+                    }
+                    else {
+                        TargetedQuiz TQuiz = new TargetedQuiz();
+                        jtxtQuizQuestion.setText(TQuiz.TargetedQuestions(true, TopicForAssignment));
+                    }
+                    
                 }
                 // user submits answer to be checked 
                 else {
@@ -389,7 +403,7 @@ public class Quizzes extends javax.swing.JFrame {
                 }
                 else {
                     TargetedQuiz TQuiz = new TargetedQuiz();
-                    jtxtQuizQuestion.setText(TQuiz.TargetedQuestions());
+                    jtxtQuizQuestion.setText(TQuiz.TargetedQuestions(false, null));
                 }
             }
             //this is to 
@@ -468,7 +482,7 @@ public class Quizzes extends javax.swing.JFrame {
     private void jButtonTargetedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTargetedActionPerformed
         targeted = true; 
         TargetedQuiz TQuiz = new TargetedQuiz();
-        jtxtQuizQuestion.setText(TQuiz.TargetedQuestions());
+        jtxtQuizQuestion.setText(TQuiz.TargetedQuestions(false, null));
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTargetedActionPerformed
 
@@ -515,7 +529,6 @@ public class Quizzes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelStats;
     private javax.swing.JPanel jPanelCorrrectOrWrong;
     private javax.swing.JLabel jQuizzesLabel;
-    private javax.swing.JLabel jtxtCheatToGetAnswer;
     private javax.swing.JButton jtxtHome;
     private javax.swing.JTextField jtxtQuizQuestion;
     private javax.swing.JTextField jtxtUserAnswer;
