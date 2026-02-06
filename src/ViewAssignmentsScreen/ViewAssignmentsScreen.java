@@ -94,7 +94,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
 
         jLabel3.setText("Double click an assignment to complete it or access a resource.");
 
-        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DueNext", "Overdue", "Completed", "Uncompleted" }));
+        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DueNext", "Overdue", "All", "Completed", "Uncompleted" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,9 +163,13 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         else if ("DueNext".equals(Sort)){
             AssignmentsTable = GettingAssignmentsForTheTable.DueNext(studentid);
         }
+        else if ("All".equals(Sort)){
+            AssignmentsTable = GettingAssignmentsForTheTable.AllAssignments(studentid);
+        }
         else {
             // overdue 
             LocalDate today = LocalDate.now();
+            AssignmentsTable = GettingAssignmentsForTheTable.OverDue(studentid,today);
             // use the date run through my Sql anc get the over due ones
             // do the same for the teachers one 
             // orders from least overdue to most 
@@ -178,6 +182,8 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         // uses mouse handler 
         // click select to do assignment 
         
+        
+        // to fix check if it is done or not and then do && done
         if (( evt.getClickCount() == 2) && "Uncompleted".equals((String) jComboBox.getSelectedItem())) {
             
             // this gets the row youve clicked on
@@ -224,7 +230,7 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
                         GettingAssignmentsForTheTable mark = new GettingAssignmentsForTheTable();
                         boolean Success = mark.setAssignmentToDoneResource(AssignmentID,AssignedID);
                         if (Success) {
-                            JOptionPane.showMessageDialog(this, "Assignment deleted", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "Assignment Completed", "Success" ,JOptionPane.INFORMATION_MESSAGE);
                         }
                         else {
                             JOptionPane.showMessageDialog(this, "Something went wrong please try again", "" ,JOptionPane.ERROR_MESSAGE);
@@ -240,11 +246,10 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
                     // get assignments info 
                     // already have Assignmentid,Assignedid, StudentID
                     // get the NumOfQuestionsLeftToDo
-                    int QuestionsLeftToDo = GettingAssignmentsForTheTable.questionsLeftToDo(AssignmentID,AssignedID);
-                    System.out.println(QuestionsLeftToDo);
+                    GettingAssignmentsForTheTable.questionsLeftToDo(AssignmentID,AssignedID);
                     // sets assginment true so when i go to quizzes it will do the assignment
                     ViewAssignmentsScreen.InfoForAssignment.Assignment = true;
-                    ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft = QuestionsLeftToDo;
+                    
                     // sends to Quzzes screen
                     Quizzes QuizButton = new Quizzes();
                     QuizButton.setVisible(true);

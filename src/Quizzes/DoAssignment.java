@@ -28,12 +28,12 @@ public class DoAssignment {
         
     }
  
-    public void setAssignmentToDone(int AssingmentId, int AssignedID){
+    public void setAssignmentToDone(int AssignmentId, int AssignedID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
             statement.execute("UPDATE Assigned SET Done = TRUE "
                     + "WHERE AssignedId =" + AssignedID
-                    + " AND AssignmentInfoId = " + AssingmentId);
+                    + " AND AssignmentInfoId = " + AssignmentId);
         }
         catch (Exception e) {
             e.printStackTrace();

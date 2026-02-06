@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
 
 /**
  *
@@ -50,7 +51,6 @@ public class GettingAssignmentsForTheTable {
             AssignmentTable.addColumn("Num of quiz questions");
             AssignmentTable.addColumn("Done");
             AssignmentTable.addColumn("DueDate");
-            AssignmentTable.addColumn("Do");
         }
         
 
@@ -79,7 +79,7 @@ public class GettingAssignmentsForTheTable {
                 if (!completed) {
                     if (!Done) {
                         AssignmentTable.addRow(new Object [] {Assignedid+"-"+Assignemntinfoid, Topic,Resource,QuestionsDone,NumOfQuizQuestions,
-                        completed,DueDate,"Select"}); 
+                        completed,DueDate}); 
                     }   
                 }
                 else{
@@ -139,6 +139,55 @@ public class GettingAssignmentsForTheTable {
                 String Resource = results.getString("Resource");
                 int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
                 int NumOfQuestionsDone = results.getInt("NumOfQuestionsDone");
+                String DueDate = results.getString("DueDate");
+                String completed = "Not Done";
+                AssignmentTable.addRow(new Object [] {AssignmentID+"-"+AssignedID,Username,Name,Topic,Resource,NumOfQuestionsDone, NumOfQuizQuestions,completed,DueDate });
+            }
+            return AssignmentTable;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static DefaultTableModel AllAssignments(int StudentID){
+
+        DefaultTableModel AssignmentTable = new DefaultTableModel();
+
+        // kept columns in order the whole class so as to not mess around the 
+        AssignmentTable.addColumn("Id");
+        AssignmentTable.addColumn("Username");
+        AssignmentTable.addColumn("Name");
+        AssignmentTable.addColumn("Topic");
+        AssignmentTable.addColumn("resource");
+        AssignmentTable.addColumn("Num Of Questions done");
+        AssignmentTable.addColumn("Num of quiz questions");
+        AssignmentTable.addColumn("Done");
+        AssignmentTable.addColumn("DueDate");
+        
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
+            //then orders by topic
+            // i also put the statement over 3 lines cause it was soo long
+            ResultSet results = statement.executeQuery("SELECT AssignmentInfo_Id, AssignedId, username, S_Name, Title, Resource, NumOfQuestionsDone, NumOfQuizQuestions,"
+                    + " Done, DueDate FROM Assigned a "
+                    + "JOIN Student s ON a.StudentId = s.Student_id "
+                    + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
+                    + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
+                    + "WHERE Student_id = " +StudentID 
+                    + " ORDER BY DueDate");
+
+            while (results.next()){
+                int AssignmentID = results.getInt("AssignmentInfo_Id");
+                int AssignedID = results.getInt("AssignedId");
+                String Username = results.getString("username");
+                String Name = results.getString("S_Name");
+                String Topic = results.getString("Title");
+                String Resource = results.getString("Resource");
+                int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
+                int NumOfQuestionsDone = results.getInt("NumOfQuestionsDone");
                 Boolean Done = results.getBoolean("Done");
                 String DueDate = results.getString("DueDate");
                 String completed = "Not Done";
@@ -156,7 +205,58 @@ public class GettingAssignmentsForTheTable {
     }
     
     
-    
+    public static DefaultTableModel OverDue(int StudentID, LocalDate Date){
+
+        DefaultTableModel AssignmentTable = new DefaultTableModel();
+
+        // kept columns in order the whole class so as to not mess around the 
+        AssignmentTable.addColumn("Id");
+        AssignmentTable.addColumn("Username");
+        AssignmentTable.addColumn("Name");
+        AssignmentTable.addColumn("Topic");
+        AssignmentTable.addColumn("resource");
+        AssignmentTable.addColumn("Num Of Questions done");
+        AssignmentTable.addColumn("Num of quiz questions");
+        AssignmentTable.addColumn("Done");
+        AssignmentTable.addColumn("DueDate");
+        
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
+            //then orders by topic
+            // i also put the statement over 3 lines cause it was soo long
+            ResultSet results = statement.executeQuery("SELECT AssignmentInfo_Id, AssignedId, username, S_Name, Title, Resource, NumOfQuestionsDone, NumOfQuizQuestions,"
+                    + " Done, DueDate FROM Assigned a "
+                    + "JOIN Student s ON a.StudentId = s.Student_id "
+                    + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
+                    + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
+                    + "WHERE Student_id = " +StudentID 
+                    + " AND Done = false AND DueDate < '"+Date+"' ORDER BY DueDate");
+
+            while (results.next()){
+                int AssignmentID = results.getInt("AssignmentInfo_Id");
+                int AssignedID = results.getInt("AssignedId");
+                String Username = results.getString("username");
+                String Name = results.getString("S_Name");
+                String Topic = results.getString("Title");
+                String Resource = results.getString("Resource");
+                int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
+                int NumOfQuestionsDone = results.getInt("NumOfQuestionsDone");
+                Boolean Done = results.getBoolean("Done");
+                String DueDate = results.getString("DueDate");
+                String completed = "Not Done";
+                if (Done) {
+                    completed = "Done";
+                }
+                AssignmentTable.addRow(new Object [] {AssignmentID+"-"+AssignedID,Username,Name,Topic,Resource,NumOfQuestionsDone, NumOfQuizQuestions,completed,DueDate });
+            }
+            return AssignmentTable;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
     //////////////// getting the num of questions to do
     ///
@@ -171,11 +271,13 @@ public class GettingAssignmentsForTheTable {
                     + "WHERE ai.AssignmentInfo_id = " + AssignmentID
                     + " AND a.AssignedId = " + AssignedID);
             if (results.next()){
-                int NumOfQuestionsDone= results.getInt("NumOfQuestionsDone");
+                int NumOfQuestionsDone = results.getInt("NumOfQuestionsDone");
                 int NumOfQuizQuestionsSet =results.getInt("NumOfQuizQuestions");
+
                 QuestionsLeftToDo = NumOfQuizQuestionsSet - NumOfQuestionsDone;
-               
             }
+            //updates the questions left to do 
+            ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft = QuestionsLeftToDo;
             return QuestionsLeftToDo;
         }
         catch (Exception e) {
@@ -188,7 +290,7 @@ public class GettingAssignmentsForTheTable {
     public boolean setAssignmentToDoneResource(int AssingmentId, int AssignedID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            statement.execute("UPDATE Assigned SET Done = TRUE "
+            statement.execute("UPDATE Assigned SET Done = 1 "
                     + "WHERE AssignedId =" + AssignedID
                     + " AND AssignmentInfoId = " + AssingmentId);
             return true;

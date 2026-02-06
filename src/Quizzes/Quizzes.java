@@ -19,7 +19,6 @@ public class Quizzes extends javax.swing.JFrame {
     private QuizQuestions quiz;
     private boolean targeted;
     boolean ToDoAssignmnet;
-    int numOfAssignmentQuestionsLeft;
     /**
      * Creates new form Quizzes
      */
@@ -290,7 +289,7 @@ public class Quizzes extends javax.swing.JFrame {
         // if assignment - it uses the same screen it just has it to the set topic and count down of questions
 
         if (ToDoAssignmnet){
-            numOfAssignmentQuestionsLeft = ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft;
+            int numOfAssignmentQuestionsLeft = ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft;
 
             if (!(numOfAssignmentQuestionsLeft <= 0)){
                 
@@ -300,7 +299,7 @@ public class Quizzes extends javax.swing.JFrame {
                     jButtonSubmit.setText("Submit");
                     jLabelMark.setText("");
                     lCorrectAnswer.setText("");
-                    
+                    // checks what topic the assignments on 
                     String TopicForAssignment = ViewAssignmentsScreen.InfoForAssignment.Topic;
                     if ("All".equals(TopicForAssignment)){
                         // do a random quiz for this
@@ -311,7 +310,7 @@ public class Quizzes extends javax.swing.JFrame {
                         TargetedQuiz TQuiz = new TargetedQuiz();
                         jtxtQuizQuestion.setText(TQuiz.TargetedQuestions(true, TopicForAssignment));
                     }
-                    
+
                 }
                 // user submits answer to be checked 
                 else {
@@ -320,7 +319,6 @@ public class Quizzes extends javax.swing.JFrame {
                     String Question = jtxtQuizQuestion.getText();
                     String answer = (jtxtUserAnswer.getText());
                     correct = quiz.CheckAnswer(answer, Question);
-            
                     // marks the answer 
                     if ( correct == true) {            
                         jLabelMark.setText("Marked: Correct");
@@ -331,7 +329,6 @@ public class Quizzes extends javax.swing.JFrame {
                         String QuizQuestion = jtxtQuizQuestion.getText();
                         QuizDetails.ListOfQuestionsWrong.add(QuizQuestion);
                     }
-           
                     int count = QuizQuestions.count(false);
                     // -1 cause it displays the current questions ur on not hte one youve done
                     // amount of questions done
@@ -361,16 +358,14 @@ public class Quizzes extends javax.swing.JFrame {
                     
                     // update database 
                     // change num of quesitons done
-                    
-                    
+
                     int Assignmentid = ViewAssignmentsScreen.InfoForAssignment.Assignmentid;
                     int AssignedID = ViewAssignmentsScreen.InfoForAssignment.Assignedid;
-
+                    
                     // parameters, assignmentid assignedid, current num of questions
                     DoAssignment Do = new DoAssignment();
-                    Do.AddOneToQuestionsDone(Assignmentid, AssignedID,
-                            ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft);
-                    
+                    Do.AddOneToQuestionsDone(Assignmentid, AssignedID,ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft);
+                    Do. setAssignmentToDone (Assignmentid, AssignedID);
                 }
                 
             }
