@@ -22,9 +22,9 @@ public class TeacherRemovePeople extends javax.swing.JFrame {
     public TeacherRemovePeople() {
         initComponents();
         int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
-        ArrayList<String> ListOfTopics = GetOrChangeUserInfo.SetBox(ClassID);
-        for (int i = 0; i < ListOfTopics.size(); i ++ ){
-            jComboBoxNames.addItem(ListOfTopics.get(i));
+        ArrayList<String> ListOfPupils = GetOrChangeUserInfo.SetBox(ClassID);
+        for (int i = 0; i < ListOfPupils.size(); i ++ ){
+            jComboBoxNames.addItem(ListOfPupils.get(i));
         }
     }
 
@@ -99,7 +99,9 @@ public class TeacherRemovePeople extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         String Pupil = jComboBoxNames.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(this, "Are you Sure you would like to remove : " +Pupil," REMOVE " ,JOptionPane.YES_NO_OPTION);
+        if ( JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Are you Sure you would like to remove : " +Pupil," REMOVE " ,JOptionPane.YES_NO_OPTION)){
+            GetOrChangeUserInfo.DeletePupil(Pupil);
+        }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

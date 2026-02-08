@@ -51,16 +51,7 @@ public class Quizzes extends javax.swing.JFrame {
             jQuizzesLabel.setText("Assignment");
             jButtonRandom.setVisible(false);
             jButtonTargeted.setVisible(false);
-            String TopicForAssignment = ViewAssignmentsScreen.InfoForAssignment.Topic;
-            if ("All".equals(TopicForAssignment)){
-                // do a random quiz for this
-                RandomQuiz Randomquiz = new RandomQuiz();
-                jtxtQuizQuestion.setText(Randomquiz.RandomQuiz());
-            }
-            else {
-                TargetedQuiz TQuiz = new TargetedQuiz();
-                jtxtQuizQuestion.setText(TQuiz.TargetedQuestions(true, TopicForAssignment));
-            }
+            jButtonSubmit.setText("Start");
         }
     }
     /**
@@ -295,7 +286,7 @@ public class Quizzes extends javax.swing.JFrame {
                 
                 String ButtonText = jButtonSubmit.getText();
                 // this is to move onto the next question
-                if ("Next".equals(ButtonText)) {
+                if ("Next".equals(ButtonText) || "Start".equals(ButtonText)) {
                     jButtonSubmit.setText("Submit");
                     jLabelMark.setText("");
                     lCorrectAnswer.setText("");
@@ -353,8 +344,6 @@ public class Quizzes extends javax.swing.JFrame {
                     //jLabelQuestion.setText("Question: " + ( num + 1 ));
                     jButtonSubmit.setText("Next");
                     
-                    // updates the num of questions left to do
-                    ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft = ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft - 1;
                     
                     // update database 
                     // change num of quesitons done
@@ -365,11 +354,10 @@ public class Quizzes extends javax.swing.JFrame {
                     // parameters, assignmentid assignedid, current num of questions
                     DoAssignment Do = new DoAssignment();
                     Do.AddOneToQuestionsDone(Assignmentid, AssignedID,ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft);
-                    Do. setAssignmentToDone (Assignmentid, AssignedID);
                 }
                 
             }
-            else{
+            else {
                 // set assignment to done cause there is no questions left
                 DoAssignment DoAssigned = new DoAssignment();
                 DoAssigned.setAssignmentToDone(ViewAssignmentsScreen.InfoForAssignment.Assignmentid,

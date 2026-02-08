@@ -106,9 +106,9 @@ public class GetOrChangeUserInfo {
         ArrayList<String> ListOfNames = new ArrayList<>();
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT S_Name FROM Student WHERE Class_id = " + ClassID);
+            ResultSet results = statement.executeQuery("SELECT username FROM Student WHERE Class_id = " + ClassID);
             while (results.next()){
-                String Name = results.getString("S_Name");
+                String Name = results.getString("username");
                 ListOfNames.add(Name);
             }
             return ListOfNames;
@@ -116,6 +116,18 @@ public class GetOrChangeUserInfo {
         catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+    
+    public boolean DeletePupil(int ClassId, String Username) {
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            statement.execute("");
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

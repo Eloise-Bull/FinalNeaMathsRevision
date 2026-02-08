@@ -180,11 +180,12 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
 
     private void AssignmentWhenClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AssignmentWhenClicked
         // uses mouse handler 
-        // click select to do assignment 
+        // double click 
         
         
         // to fix check if it is done or not and then do && done
-        if (( evt.getClickCount() == 2) && "Uncompleted".equals((String) jComboBox.getSelectedItem())) {
+
+        if (( evt.getClickCount() == 2)) {
             
             // this gets the row youve clicked on
             /// ROW STARTS AT ZERO
@@ -195,68 +196,72 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
             String TopicInTable = (String)jTableAssignments.getValueAt(IdRow, 1);
             int ResourceRow = jTableAssignments.rowAtPoint(evt.getPoint());
 
-            // gets assingm3net id and assigned id 1
-            String[] parts = assignedAndAssignmentInfoid.split("-");
-            int AssignmentID = Integer.valueOf(parts[0]);
-            int AssignedID = Integer.valueOf(parts[1]);
-            InfoForAssignment.Assignmentid = AssignmentID;
-            InfoForAssignment.Assignedid = AssignedID;
-            InfoForAssignment.Topic = TopicInTable;
+            String done = (String)jTableAssignments.getValueAt(IdRow, 5);
+            if ("Not Done".equals (done)){
+                // gets assingm3net id and assigned id 1
+                String[] parts = assignedAndAssignmentInfoid.split("-");
+                int AssignmentID = Integer.valueOf(parts[0]);
+                int AssignedID = Integer.valueOf(parts[1]);
+                InfoForAssignment.Assignmentid = AssignmentID;
+                InfoForAssignment.Assignedid = AssignedID;
+                InfoForAssignment.Topic = TopicInTable;
 
-            if (!(jTableAssignments.getValueAt(ResourceRow, 2) == null)){
-                // Do resource
-                String[] Options = new String[2];
-                Options[0] = "Open Resource";
-                Options[1] = "Mark Assignment As Complete";
-                int choice = JOptionPane.showOptionDialog(null, "What would you like to do ?","",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null,Options,Options[1]);
-                // choice 0 is Open Resource
-                if(choice == 0){
-                    String Resource = (String)jTableAssignments.getValueAt(ResourceRow, 2);
-                    try {
-                        java.awt.Desktop.getDesktop().browse(new java.net.URI(Resource));
-                        // maybe add a panel thats like click if u have watched the video 
-                        // sets the assignment to done then 
-                    }
-                    catch ( Exception e ){
-                        // brings up neew temp screen
-                        javax.swing.JOptionPane.showMessageDialog(this, "Invalid URL");
-                    } 
-                }
-                // choice 1 = mark resource as done
-                else if ( choice == 1){
-                    if (JOptionPane.YES_OPTION ==JOptionPane.showConfirmDialog(this, "Are you sure you would like to mark this assignment as complete?",
-                            "Confirm" ,JOptionPane.YES_NO_OPTION)){
-                        GettingAssignmentsForTheTable mark = new GettingAssignmentsForTheTable();
-                        boolean Success = mark.setAssignmentToDoneResource(AssignmentID,AssignedID);
-                        if (Success) {
-                            JOptionPane.showMessageDialog(this, "Assignment Completed", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                if (!(jTableAssignments.getValueAt(ResourceRow, 2) == null)){
+                    // Do resource
+                    String[] Options = new String[2];
+                    Options[0] = "Open Resource";
+                    Options[1] = "Mark Assignment As Complete";
+                    int choice = JOptionPane.showOptionDialog(null, "What would you like to do ?","",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null,Options,Options[1]);
+                    // choice 0 is Open Resource
+                    if(choice == 0){
+                        String Resource = (String)jTableAssignments.getValueAt(ResourceRow, 2);
+                        try {
+                            java.awt.Desktop.getDesktop().browse(new java.net.URI(Resource));
+                            // maybe add a panel thats like click if u have watched the video 
+                            // sets the assignment to done then 
                         }
-                        else {
-                            JOptionPane.showMessageDialog(this, "Something went wrong please try again", "" ,JOptionPane.ERROR_MESSAGE);
-                        }
-                    }   
+                        catch ( Exception e ){
+                            // brings up neew temp screen
+                            javax.swing.JOptionPane.showMessageDialog(this, "Invalid URL");
+                        } 
                     }
-                        
-                }
-                
-            else {
-                if (JOptionPane.YES_OPTION ==JOptionPane.showConfirmDialog(this, "Are You Sure You Would Like To Complete Quiz Assignment?",
-                            "Confirm" ,JOptionPane.YES_NO_OPTION)){
-                    // get assignments info 
-                    // already have Assignmentid,Assignedid, StudentID
-                    // get the NumOfQuestionsLeftToDo
-                    GettingAssignmentsForTheTable.questionsLeftToDo(AssignmentID,AssignedID);
-                    // sets assginment true so when i go to quizzes it will do the assignment
-                    ViewAssignmentsScreen.InfoForAssignment.Assignment = true;
-                    
-                    // sends to Quzzes screen
-                    Quizzes QuizButton = new Quizzes();
-                    QuizButton.setVisible(true);
-                    this.dispose(); 
+                    // choice 1 = mark resource as done
+                    else if ( choice == 1){
+                        if (JOptionPane.YES_OPTION ==JOptionPane.showConfirmDialog(this, "Are you sure you would like to mark this assignment as complete?",
+                                "Confirm" ,JOptionPane.YES_NO_OPTION)){
+                            GettingAssignmentsForTheTable mark = new GettingAssignmentsForTheTable();
+                            boolean Success = mark.setAssignmentToDoneResource(AssignmentID,AssignedID);
+                            if (Success) {
+                                JOptionPane.showMessageDialog(this, "Assignment Completed", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(this, "Something went wrong please try again", "" ,JOptionPane.ERROR_MESSAGE);
+                            }
+                        }   
+                        }
+
+                    }
+
+                else {
+                    if (JOptionPane.YES_OPTION ==JOptionPane.showConfirmDialog(this, "Are You Sure You Would Like To Complete Quiz Assignment?",
+                                "Confirm" ,JOptionPane.YES_NO_OPTION)){
+                        // get assignments info 
+                        // already have Assignmentid,Assignedid, StudentID
+                        // get the NumOfQuestionsLeftToDo
+                        GettingAssignmentsForTheTable.questionsLeftToDo(AssignmentID,AssignedID);
+                        // sets assginment true so when i go to quizzes it will do the assignment
+                        ViewAssignmentsScreen.InfoForAssignment.Assignment = true;
+
+                        // sends to Quzzes screen
+                        Quizzes QuizButton = new Quizzes();
+                        QuizButton.setVisible(true);
+                        this.dispose(); 
+                    }
                 }
             }
         }
+            
     }//GEN-LAST:event_AssignmentWhenClicked
 
     /**

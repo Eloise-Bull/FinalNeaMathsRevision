@@ -232,33 +232,25 @@ public class TeacherSetResources extends javax.swing.JFrame {
         String Duedate = jDueDate.getText();
         
         // checks it is in correct format
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-mm-dd", Locale.UK);
-        if (dateFormatter.equals(Duedate)){
-            // checks deadline is after todays date
-            LocalDate today = LocalDate.now();
-            LocalDate Deadline = LocalDate.parse(Duedate);
+        // checks deadline is after todays date
+        LocalDate today = LocalDate.now();
+        LocalDate Deadline = LocalDate.parse(Duedate);
 
-            boolean After = Deadline.isAfter(today);
-            if (After){
-                int resourceNum = Integer.parseInt(jResourceNum.getText());
+        boolean After = Deadline.isAfter(today);
+        if (After){
+            int resourceNum = Integer.parseInt(jResourceNum.getText());
 
-                String TypeOfResource = jPickResourceType.getSelectedItem().toString();
+            String TypeOfResource = jPickResourceType.getSelectedItem().toString();
 
-                int ClassId = Login.InfoOfUserForThisLoginSession.UserClassID ;
-                AssigningAResource.SetResourceToClassOrStudent(TypeOfResource,resourceNum,ClassId,Duedate );
-                jResourceNum.setText("");
-                jDueDate.setText("");
-                JOptionPane.showMessageDialog(this, "Assignment set", "Success" ,JOptionPane.INFORMATION_MESSAGE);
-            }
-            else {
-                JOptionPane.showMessageDialog(this, "Deadline must be after todays date", "Try Again" ,JOptionPane.ERROR_MESSAGE);
-                jDueDate.setText("");
-            }
+            int ClassId = Login.InfoOfUserForThisLoginSession.UserClassID ;
+            AssigningAResource.SetResourceToClassOrStudent(TypeOfResource,resourceNum,ClassId,Duedate );
+            jResourceNum.setText("");
+            jDueDate.setText("");
+            JOptionPane.showMessageDialog(this, "Assignment set", "Success" ,JOptionPane.INFORMATION_MESSAGE);
         }
         else {
-            JOptionPane.showMessageDialog(this, "Date must be in correct format", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Deadline must be after todays date", "Try Again" ,JOptionPane.ERROR_MESSAGE);
             jDueDate.setText("");
-            
         }
     }//GEN-LAST:event_jAssignActionPerformed
 

@@ -18,8 +18,8 @@ public class DoAssignment {
     public void AddOneToQuestionsDone(int AssingmentId, int AssignedID,int CurrentNumOfQuestions){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            statement.executeQuery("UPDATE Assigned SET NumOfQuestionsDone =  " + CurrentNumOfQuestions
-                    + "WHERE AssignedId =" + AssignedID
+            statement.execute("UPDATE Assigned SET NumOfQuestionsDone =  " + CurrentNumOfQuestions
+                    + " WHERE AssignedId =" + AssignedID
                     + " AND AssignmentInfoId = " + AssingmentId);
         }
         catch (Exception e) {
