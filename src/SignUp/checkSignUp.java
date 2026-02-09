@@ -21,22 +21,21 @@ public class checkSignUp {
         //////////////// STUDENT
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            statement.execute("INSERT INTO Student ( S_name, username,email, password_hash, Class_id) VALUES ( '" + name+ "','" + Username +"','" + Email + "','"+Password  + "'," + ClassCode + ")");        
+            boolean worked = statement.execute("INSERT INTO Student ( S_name, username,email, password_hash, Class_id) VALUES ( '" + name+ "','" + Username +"','" + Email + "','"+Password  + "'," + ClassCode + ")");        
             int StudentID = getLastInsertedID();
             // get num of topics so and for all topics set stats to zero so that then targeted works straight away
             ArrayList<Integer> Topics = returnTopicIds();
             
-            if ( StudentID== 0) {
-                return false;
-                // if its zero then it didnt manage to get the student id and thats not good
-            }
-            else {
+            if (worked) {
                 for ( int i = 0; i <= Topics.size()-1; i++){
                     statement.execute("INSERT INTO TopicStats(Student_id, Topic_id, Score, questions_done, NumOfCorrectAnswers) VALUES (" + StudentID +"," + Topics.get(i) + ",0,0,0)");
                     System.out.println(Topics.get(i));
                 }
                 return true;
                 
+            }
+            else {
+                return false;
             }
             
             

@@ -22,8 +22,6 @@ public class SignUp extends javax.swing.JFrame {
     }
     
     private static String user;
-    private Boolean checkPasswrod = false;
-    private String Username = "";
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,7 +52,6 @@ public class SignUp extends javax.swing.JFrame {
         jLabelUsername = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jtxtUsername = new javax.swing.JTextField();
-        jWarning = new javax.swing.JLabel();
         jLClassCode = new javax.swing.JLabel();
         jtxtClassCode = new javax.swing.JTextField();
         jtxtSchool = new javax.swing.JTextField();
@@ -129,10 +126,6 @@ public class SignUp extends javax.swing.JFrame {
 
         jLSchool.setText("School :");
 
-        jgetPassword.setText("jPasswordField1");
-
-        jConfirmPassword.setText("jPasswordField2");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,7 +134,6 @@ public class SignUp extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelUsername)
                     .addComponent(jLabel7)
-                    .addComponent(jWarning)
                     .addComponent(JTellUserInfo)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(180, 180, 180)
@@ -185,8 +177,8 @@ public class SignUp extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtxtUsername)
-                            .addComponent(jgetPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                            .addComponent(jConfirmPassword))))
+                            .addComponent(jgetPassword)
+                            .addComponent(jConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))))
                 .addGap(49, 49, 49))
         );
         layout.setVerticalGroup(
@@ -195,7 +187,6 @@ public class SignUp extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelUsername)
                     .addComponent(jLabel7)
-                    .addComponent(jWarning)
                     .addComponent(JTellUserInfo))
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,16 +249,18 @@ public class SignUp extends javax.swing.JFrame {
 
     private void jRadioStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioStudentActionPerformed
         user = "Student";    
-        jLClassCode.setText("Class Code: ");
-        jLSchool.setText("");
-        // TODO add your handling code here:
+        jLClassCode.setVisible(true);
+        jtxtClassCode.setVisible(true);
+        jLSchool.setVisible(false);
+        jtxtSchool.setVisible(false);
     }//GEN-LAST:event_jRadioStudentActionPerformed
 
     private void jRadioTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioTeacherActionPerformed
         user = "Teacher";  
-        jLClassCode.setText("");
-        jLSchool.setText("School:");
-        // TODO add your handling code here:
+        jLClassCode.setVisible(false);
+        jtxtClassCode.setVisible(false);
+        jLSchool.setVisible(true);
+        jtxtSchool.setVisible(true);
     }//GEN-LAST:event_jRadioTeacherActionPerformed
 
     private void jbuttonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonSubmitActionPerformed
@@ -286,7 +279,7 @@ public class SignUp extends javax.swing.JFrame {
         String Passwordhash = BCrypt.hashpw(passwordString, BCrypt.gensalt());
         
         int passwordLength = Password.length;
-        int ConfirmpasswordLength = Password.length;
+        int ConfirmpasswordLength = CheckPassword.length;
         boolean SamePassword = false;
         if (Arrays.equals(Password,CheckPassword)){
             SamePassword = true;
@@ -294,6 +287,19 @@ public class SignUp extends javax.swing.JFrame {
         // empty the char[]
         Arrays.fill(Password, '\0');
         Arrays.fill(CheckPassword, '\0');
+        
+        // need to check classcode is an integer before i make it one
+        // need to use try / catch 
+        // cant have it between ifs
+        boolean CanBeInteger;
+        try {
+            int value = Integer.parseInt(Classcode);
+            CanBeInteger = true;
+        }
+        catch (NumberFormatException e){
+            CanBeInteger = false;
+        }
+        
         
         // checks all nesassary boxes are filled out
         if ((name.length()==0) || (Username.length()==0) || (Email.length()==0)||(passwordLength==0) || (ConfirmpasswordLength==0)){
@@ -310,14 +316,17 @@ public class SignUp extends javax.swing.JFrame {
         else if (!(check.UsernameUniquenessCheck(user,Username ))){
             JOptionPane.showMessageDialog(this, "Please username must be unique", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
-        // checks that the classcode actually exsits
-        else if (("Student".equals(user)) & !(check.CheckClassCodeExists(Integer.parseInt(Classcode)))) {
-            JOptionPane.showMessageDialog(this, "Classcode does not exist", "Try Again" ,JOptionPane.ERROR_MESSAGE);
-        }
-        else if (("Student".equals(user)) & (Classcode.length()==0)){
+        else if (("Student".equals(user)) && (Classcode.length()==0)){
             JOptionPane.showMessageDialog(this, "Classcode must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
-        else if ("Teacher".equals(user) & (School.length()==0)){
+        else if (!CanBeInteger){
+            JOptionPane.showMessageDialog(this, "Classcode must be a number", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+        }
+        // checks that the classcode actually exsits
+        else if (("Student".equals(user)) && !(check.CheckClassCodeExists(Integer.parseInt(Classcode)))) {
+            JOptionPane.showMessageDialog(this, "Classcode does not exist", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+        }
+        else if ("Teacher".equals(user) && (School.length()==0)){
             JOptionPane.showMessageDialog(this, "School must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         } 
         else if ( user == null) {
@@ -426,7 +435,6 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioStudent;
     private javax.swing.JRadioButton jRadioTeacher;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JLabel jWarning;
     private javax.swing.JButton jbuttonSubmit;
     private javax.swing.JPasswordField jgetPassword;
     private javax.swing.JTextField jtxtClassCode;
