@@ -39,7 +39,7 @@ public class Quizzes extends javax.swing.JFrame {
         targeted = false;
         quiz = new QuizQuestions();
         
-        // resets the variables
+        // resets the quiz variables
         DoAssignment Assign = new DoAssignment();
         Assign.ResetVariables();
         
@@ -266,13 +266,11 @@ public class Quizzes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtxtUserAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtUserAnswerActionPerformed
-        //take user input then 
-        //boolean check = CheckAnswers(3,5);
+
     }//GEN-LAST:event_jtxtUserAnswerActionPerformed
 
     private void jtxtQuizQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtQuizQuestionActionPerformed
-        
-        // move to the main when u get the connection to work 
+
     }//GEN-LAST:event_jtxtQuizQuestionActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
@@ -280,9 +278,8 @@ public class Quizzes extends javax.swing.JFrame {
         // if assignment - it uses the same screen it just has it to the set topic and count down of questions
 
         if (ToDoAssignmnet){
-            int numOfAssignmentQuestionsLeft = ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft;
-
-            if (!(numOfAssignmentQuestionsLeft <= 0)){
+            // checks theres questions left in the assignment
+            if (!(ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft <= 0)){
                 
                 String ButtonText = jButtonSubmit.getText();
                 // this is to move onto the next question
@@ -306,6 +303,8 @@ public class Quizzes extends javax.swing.JFrame {
                 // user submits answer to be checked 
                 else {
                     boolean correct;
+                    // does the questions left count
+                    ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft = ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft - 1;
                     // checks if the answer is correct
                     String Question = jtxtQuizQuestion.getText();
                     String answer = (jtxtUserAnswer.getText());
@@ -323,10 +322,10 @@ public class Quizzes extends javax.swing.JFrame {
                     int count = QuizQuestions.count(false);
                     // -1 cause it displays the current questions ur on not hte one youve done
                     // amount of questions done
-                    QuizDetails.questionsDone = count - 1;
+                    QuizDetails.questionsDone = count;
                     // questions left to do 
-                    jLabelQuestion.setText("Questions left: " + numOfAssignmentQuestionsLeft);
-                    float stats = QuizQuestions.CountingQuizStats(count-1,correct, false);
+                    jLabelQuestion.setText("Questions left: " + ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft);
+                    float stats = QuizQuestions.CountingQuizStats(count,correct, false);
                     // updates the temp stored data of this quiz
                     QuizDetails.CurrentStats = stats;
                     jLabelStats.setText ("Stats: " + stats + "%");
@@ -353,7 +352,7 @@ public class Quizzes extends javax.swing.JFrame {
                     
                     // parameters, assignmentid assignedid, current num of questions
                     DoAssignment Do = new DoAssignment();
-                    Do.AddOneToQuestionsDone(Assignmentid, AssignedID,ViewAssignmentsScreen.InfoForAssignment.NumOfAssignmentQuestionsLeft);
+                    Do.AddOneToQuestionsDone(Assignmentid, AssignedID);
                 }
                 
             }
@@ -420,10 +419,8 @@ public class Quizzes extends javax.swing.JFrame {
            
                     int count = QuizQuestions.count(false);
                     // -1 cause it displays the current questions ur on not hte one youve done
-                    QuizDetails.questionsDone = count - 1;
-            
-                    jLabelQuestion.setText("Question: " + count);
-                    float stats = QuizQuestions.CountingQuizStats(count-1,correct, false);
+                    QuizDetails.questionsDone = count;
+                    float stats = QuizQuestions.CountingQuizStats(count ,correct, false);
                     // updates the temp stored data of this quiz
                     QuizDetails.CurrentStats = stats;
                     jLabelStats.setText ("Stats: " + stats + "%");

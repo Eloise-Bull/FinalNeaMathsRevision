@@ -98,9 +98,11 @@ public class TeacherRemovePeople extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // fix 
+        
         String Pupil = jComboBoxNames.getSelectedItem().toString();
         if ( JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Are you Sure you would like to remove : " +Pupil," REMOVE " ,JOptionPane.YES_NO_OPTION)){
-            GetOrChangeUserInfo.DeletePupil(Pupil);
+            //GetOrChangeUserInfo.DeletePupil(Pupil);
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 

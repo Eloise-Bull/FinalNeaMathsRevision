@@ -55,8 +55,8 @@ public class GettingAssignmentsForTheTable {
                     + "WHERE s.Student_id = " +StudentID+" ORDER BY DueDate ASC;");
 
             while (results.next()){
-                int Assignedid = results.getInt("AssignedId");
-                int Assignemntinfoid = results.getInt("AssignmentInfo_Id");
+                int AssignmentID = results.getInt("AssignmentInfo_Id");
+                int AssignedID = results.getInt("AssignedId");
                 String Topic = results.getString("Title");
                 String Resource = results.getString("Resource");
                 int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
@@ -70,13 +70,13 @@ public class GettingAssignmentsForTheTable {
                 }
                 if (!completed) {
                     if (!Done) {
-                        AssignmentTable.addRow(new Object [] {Assignedid+"-"+Assignemntinfoid, Topic,Resource,QuestionsDone,NumOfQuizQuestions,
+                        AssignmentTable.addRow(new Object [] {AssignmentID+"-"+AssignedID, Topic,Resource,QuestionsDone,NumOfQuizQuestions,
                         done,DueDate}); 
                     }   
                 }
                 else{
                     if (Done) {
-                        AssignmentTable.addRow(new Object [] {Assignedid+"-"+Assignemntinfoid, Topic,Resource,QuestionsDone,NumOfQuizQuestions,
+                        AssignmentTable.addRow(new Object [] {AssignmentID+"-"+AssignedID, Topic,Resource,QuestionsDone,NumOfQuizQuestions,
                         done,DueDate });
                         
                     }

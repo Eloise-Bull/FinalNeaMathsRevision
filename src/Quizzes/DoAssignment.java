@@ -15,10 +15,10 @@ import java.sql.Statement;
 public class DoAssignment {
     
     // adds on the the num of assigned quesitons done for an assignment
-    public void AddOneToQuestionsDone(int AssingmentId, int AssignedID,int CurrentNumOfQuestions){
+    public void AddOneToQuestionsDone(int AssingmentId, int AssignedID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            statement.execute("UPDATE Assigned SET NumOfQuestionsDone =  " + CurrentNumOfQuestions
+            statement.execute("UPDATE Assigned SET NumOfQuestionsDone = IFNULL(NumOfQuestionsDone, 0) + 1 "
                     + " WHERE AssignedId =" + AssignedID
                     + " AND AssignmentInfoId = " + AssingmentId);
         }

@@ -119,6 +119,13 @@ public class GetOrChangeUserInfo {
         }
     }
     
+    
+    
+    
+    
+    
+    
+    //// delete ??
     public boolean DeletePupil(int ClassId, String Username) {
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
