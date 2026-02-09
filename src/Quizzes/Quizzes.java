@@ -434,8 +434,7 @@ public class Quizzes extends javax.swing.JFrame {
                     quiz.updateStats(correct, topicID, Student_id);
                     lCorrectAnswer.setText("Correct Answer: "  + QuizDetails.RealAnswer );
                     jtxtUserAnswer.setText("");
-                    //int num = Integer.valueOf(jLabelQuestion.getText());
-                    //jLabelQuestion.setText("Question: " + ( num + 1 ));
+                    
                     jButtonSubmit.setText("Next");
                 }
             

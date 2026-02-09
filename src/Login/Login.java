@@ -6,7 +6,9 @@ package Login;
 import StudentHome.StudentHome;
 import SignUp.LoginOrSignUp;
 import TeacherHome.TeacherHome;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
+import org.mindrot.jbcrypt.BCrypt;
 /**
  *
  * @author elois
@@ -208,7 +210,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtUsernameActionPerformed
 
     private void jtxtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPasswordActionPerformed
-        jtxtPassword.getPassword();
+
     }//GEN-LAST:event_jtxtPasswordActionPerformed
 
     private void jtxtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSubmitActionPerformed
@@ -216,35 +218,30 @@ public class Login extends javax.swing.JFrame {
         // resets the important data incase people log out then log back in as someone else.
 
         String usernameInputed = jtxtUsername.getText();
-        String passwordEntered = jtxtPassword.getText();
+        char[] passwordEntered = jtxtPassword.getPassword();
+        // need to convert to a strign cause thats what the hash thing needs
+        String passwordString = new String(passwordEntered);
+        String Passwordhash = BCrypt.hashpw(passwordString, BCrypt.gensalt());
+        
+        // empty the char[]
+        Arrays.fill(passwordEntered, '\0');
+        
+        
         CheckLoginDetails check = new CheckLoginDetails();
-        int UsernameId = check.checkUsernameReturnID(usernameInputed,user);
-        int PasswordId = check.checkPasswordReturnID(passwordEntered,user);
+        boolean CheckUsernameAndPassword = check.checkPasswordReturnID(usernameInputed,user,Passwordhash);
 
-        // getting user id so can use in later methods when accessing database
-
-        // comparing data check its correct before login
-        boolean CheckDetails= false;
         // || = or is syntax
         // could change to add two more if statments so they know if username or passwords is incorrect. security issie ??
         if ("".equals(user)) {
             JOptionPane.showMessageDialog(this, "Select Student or Teacher", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
-        else if ((UsernameId == -1) || (PasswordId == -1 )){
-            JOptionPane.showMessageDialog(this, "Either Password, Username or User is incorrect", "Try Again" ,JOptionPane.ERROR_MESSAGE);
-            jtxtPassword.setText("");
-        }
-        else if ( UsernameId == PasswordId) {
-            CheckDetails = true;
-        }
-        else {
+        else if (!CheckUsernameAndPassword){
             JOptionPane.showMessageDialog(this, "Username and Password do not match", "Try Again" ,JOptionPane.ERROR_MESSAGE);
             jtxtPassword.setText("");
         }
-
-        // if correct takes user to correct screen.
-        InfoOfUserForThisLoginSession.userType = user;
-        if ( CheckDetails == true) {
+        else {
+            InfoOfUserForThisLoginSession.userType = user;
+            int UsernameId = check.ReturnUsernameID(usernameInputed,user);
             if ("Student".equals(user)) {
                 InfoOfUserForThisLoginSession.StudentId = UsernameId;
                 // check. etc is the method used to get the class id using the usernameid
@@ -260,7 +257,7 @@ public class Login extends javax.swing.JFrame {
                 ToTeacherScreen.setVisible(true);
                 this.dispose();
             }
-        }
+        }        
     }//GEN-LAST:event_jtxtSubmitActionPerformed
 
     /**

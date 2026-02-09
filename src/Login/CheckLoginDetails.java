@@ -8,17 +8,15 @@ import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+import org.mindrot.jbcrypt.BCrypt;
 /**
  *
  * @author elois
  */
 public class CheckLoginDetails {
     
-    // return id compare id to password id thats returned. make false = -1 cause not true. 
-    // currently just returns if present in table 
-    // when compare do if username id = password id AS LONG AS id =! -1 
-    public int checkUsernameReturnID(String enteredUsername, String user){
+    // gets username id for either teacher or student as i will need it for later
+    public int ReturnUsernameID(String enteredUsername, String user){
         
         if ("Student".equals(user)) {
             try (Connection connection = TheConnectionToDatabase()){
@@ -64,24 +62,24 @@ public class CheckLoginDetails {
             
     }
     
-    // smae code swap out the username and stuff for password
-    // need to encrypt code but thats laters problem.
-    public int checkPasswordReturnID(String enteredPassword, String user){
+    // basically gets the stored hash from where it = the entered username 
+    public boolean checkPasswordReturnID(String EnteredUsername, String user, String EnteredPasswordHash){
        if ("Student".equals(user)) {
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery("SELECT Student_id FROM Student WHERE password_hash = " + "'" +  enteredPassword + "'");
+                ResultSet results = statement.executeQuery("SELECT password_hash FROM Student WHERE username = " + "'" +  EnteredUsername + "'");
                 if (results.next()){
-                    int id = results.getInt("Student_id");
-                    return id; 
+                    String PasswordHash = results.getString("password_hash");
+                    boolean correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
+                    return correctPassword;
                 }
                 else {
-                    return -1;
+                    return false;
                 }
             }
             catch (Exception e) {
                 e.printStackTrace();
-                return -1;
+                return false;
             }
 
         }
@@ -89,23 +87,24 @@ public class CheckLoginDetails {
         if ("Teacher".equals(user)) {
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery("SELECT Teacher_id FROM Teacher WHERE password_hash = " + "'" + enteredPassword + "'");
+                ResultSet results = statement.executeQuery("SELECT password_hash FROM Teacher WHERE username = " + "'" + EnteredUsername + "'");
                 if (results.next()){
-                    int id = results.getInt("Teacher_id");
-                    return id; 
+                    String PasswordHash = results.getString("password_hash");
+                    boolean correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
+                    return correctPassword;
                 }
                 else {
-                    return -1;
+                    return false;
                 }
             }
             catch (Exception e) {
                 e.printStackTrace();
-                return -1;
+                return false;
             }
 
         }
         else {
-            return -1;
+            return false;
         }
             
             

@@ -4,7 +4,9 @@
  */
 package SignUp;
 import Login.Login;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -32,7 +34,6 @@ public class SignUp extends javax.swing.JFrame {
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel3 = new javax.swing.JLabel();
@@ -44,9 +45,7 @@ public class SignUp extends javax.swing.JFrame {
         jtxtName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jtxtPassword = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jtxtCheckpassword = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtxtEmail = new javax.swing.JTextField();
         jbuttonSubmit = new javax.swing.JButton();
@@ -60,24 +59,17 @@ public class SignUp extends javax.swing.JFrame {
         jtxtClassCode = new javax.swing.JTextField();
         jtxtSchool = new javax.swing.JTextField();
         jLSchool = new javax.swing.JLabel();
+        jgetPassword = new javax.swing.JPasswordField();
+        jConfirmPassword = new javax.swing.JPasswordField();
 
         jLabel3.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 255));
         setResizable(false);
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Sign Up");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 25;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(43, 4, 0, 0);
-        getContentPane().add(jLabel1, gridBagConstraints);
 
         jButtonBack.setText("Back");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
@@ -85,12 +77,6 @@ public class SignUp extends javax.swing.JFrame {
                 jButtonBackActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 45;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(43, 87, 0, 49);
-        getContentPane().add(jButtonBack, gridBagConstraints);
 
         buttonGroup1.add(jRadioStudent);
         jRadioStudent.setText("Student");
@@ -99,14 +85,6 @@ public class SignUp extends javax.swing.JFrame {
                 jRadioStudentActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.ipadx = 34;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(43, 84, 0, 0);
-        getContentPane().add(jRadioStudent, gridBagConstraints);
 
         buttonGroup1.add(jRadioTeacher);
         jRadioTeacher.setText("Teacher");
@@ -115,95 +93,20 @@ public class SignUp extends javax.swing.JFrame {
                 jRadioTeacherActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 45;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 33;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(43, 61, 0, 49);
-        getContentPane().add(jRadioTeacher, gridBagConstraints);
 
         jtxtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtNameActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 20;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 26;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 123;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 46, 0, 49);
-        getContentPane().add(jtxtName, gridBagConstraints);
 
         jLabel2.setText("Username :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.ipadx = 54;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 84, 0, 0);
-        getContentPane().add(jLabel2, gridBagConstraints);
 
         jLabel4.setText("Password :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 37;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(32, 84, 0, 0);
-        getContentPane().add(jLabel4, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 20;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 26;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 123;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(29, 46, 0, 49);
-        getContentPane().add(jtxtPassword, gridBagConstraints);
 
         jLabel5.setText("Check Password :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 84, 0, 0);
-        getContentPane().add(jLabel5, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 20;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridwidth = 26;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 123;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 46, 0, 49);
-        getContentPane().add(jtxtCheckpassword, gridBagConstraints);
 
         jLabel6.setText("Email :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 13;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 84, 0, 0);
-        getContentPane().add(jLabel6, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 20;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 26;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 123;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 46, 0, 49);
-        getContentPane().add(jtxtEmail, gridBagConstraints);
 
         jbuttonSubmit.setText("Submit");
         jbuttonSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -211,94 +114,138 @@ public class SignUp extends javax.swing.JFrame {
                 jbuttonSubmitActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 18;
-        gridBagConstraints.gridwidth = 11;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(46, 10, 133, 0);
-        getContentPane().add(jbuttonSubmit, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(jLabel7, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(JTellUserInfo, gridBagConstraints);
 
         jLabelUsername.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(jLabelUsername, gridBagConstraints);
 
         jLabel8.setText("Name :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 84, 0, 0);
-        getContentPane().add(jLabel8, gridBagConstraints);
 
         jtxtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtUsernameActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 20;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 26;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 123;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 46, 0, 49);
-        getContentPane().add(jtxtUsername, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(jWarning, gridBagConstraints);
 
         jLClassCode.setText("Class Code:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 84, 0, 0);
-        getContentPane().add(jLClassCode, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 20;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.gridwidth = 26;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 123;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 46, 0, 49);
-        getContentPane().add(jtxtClassCode, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 20;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridwidth = 26;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 123;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 46, 0, 49);
-        getContentPane().add(jtxtSchool, gridBagConstraints);
 
         jLSchool.setText("School :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 84, 0, 0);
-        getContentPane().add(jLSchool, gridBagConstraints);
+
+        jgetPassword.setText("jPasswordField1");
+
+        jConfirmPassword.setText("jPasswordField2");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelUsername)
+                    .addComponent(jLabel7)
+                    .addComponent(jWarning)
+                    .addComponent(JTellUserInfo)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(jLabel1)
+                        .addGap(87, 87, 87)
+                        .addComponent(jButtonBack))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jRadioStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(149, 149, 149)
+                        .addComponent(jRadioTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel8)
+                        .addGap(120, 120, 120)
+                        .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)
+                        .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLSchool)
+                        .addGap(116, 116, 116)
+                        .addComponent(jtxtSchool, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLClassCode)
+                        .addGap(98, 98, 98)
+                        .addComponent(jtxtClassCode, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(jbuttonSubmit))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtxtUsername)
+                            .addComponent(jgetPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                            .addComponent(jConfirmPassword))))
+                .addGap(49, 49, 49))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelUsername)
+                    .addComponent(jLabel7)
+                    .addComponent(jWarning)
+                    .addComponent(JTellUserInfo))
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jButtonBack))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioStudent)
+                    .addComponent(jRadioTeacher))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel8))
+                    .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel6))
+                    .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel2))
+                    .addComponent(jtxtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jgetPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLSchool))
+                    .addComponent(jtxtSchool, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLClassCode))
+                    .addComponent(jtxtClassCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addComponent(jbuttonSubmit))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -330,24 +277,43 @@ public class SignUp extends javax.swing.JFrame {
         String Classcode = jtxtClassCode.getText();
         String School = jtxtSchool.getText();
         // change later so its better
-        String Password = jtxtPassword.getText();
-        String CheckPassword = jtxtCheckpassword.getText();
+        char[] Password = jgetPassword.getPassword();
+        char[] CheckPassword = jConfirmPassword.getPassword();
         // i used this in the else if statement to check if username = unique
         checkSignUp check = new checkSignUp();
         
-
-        // check username is unique - not used as the primary key or anything just to distinquish 
+        String passwordString = new String(Password);
+        String Passwordhash = BCrypt.hashpw(passwordString, BCrypt.gensalt());
         
-        if ((name.length()==0) || (Username.length()==0) || (Email.length()==0)||(Password.length()==0) || (CheckPassword.length()==0)){
+        int passwordLength = Password.length;
+        int ConfirmpasswordLength = Password.length;
+        boolean SamePassword = false;
+        if (Arrays.equals(Password,CheckPassword)){
+            SamePassword = true;
+        }
+        // empty the char[]
+        Arrays.fill(Password, '\0');
+        Arrays.fill(CheckPassword, '\0');
+        
+        // checks all nesassary boxes are filled out
+        if ((name.length()==0) || (Username.length()==0) || (Email.length()==0)||(passwordLength==0) || (ConfirmpasswordLength==0)){
             JOptionPane.showMessageDialog(this, "All fields must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
-        else if (!( Password.equals(CheckPassword))) {
+        else if (!SamePassword) {
             JOptionPane.showMessageDialog(this, "Passwords don't match", "Try Again" ,JOptionPane.ERROR_MESSAGE);
-            
         }
-        //else if ( check.UniquenessCheck(user, Username) == true) {
-            
-        //}
+        else if (passwordLength < 6){
+            JOptionPane.showMessageDialog(this, "Password must be more than 6 characters", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+        }
+        // check username is unique to the user table
+        // check username is unique - not used as the primary key or anything just to distinquish 
+        else if (!(check.UsernameUniquenessCheck(user,Username ))){
+            JOptionPane.showMessageDialog(this, "Please username must be unique", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+        }
+        // checks that the classcode actually exsits
+        else if (("Student".equals(user)) & !(check.CheckClassCodeExists(Integer.parseInt(Classcode)))) {
+            JOptionPane.showMessageDialog(this, "Classcode does not exist", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+        }
         else if (("Student".equals(user)) & (Classcode.length()==0)){
             JOptionPane.showMessageDialog(this, "Classcode must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
@@ -357,15 +323,12 @@ public class SignUp extends javax.swing.JFrame {
         else if ( user == null) {
             JOptionPane.showMessageDialog(this, "Pick Teacher or Student", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
-        // password password123??
-        // numbers and a cap and symbol?? 
         else if (Username.length()>20){
             JOptionPane.showMessageDialog(this, "Username must be less than 20 characters", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         } 
         else {
             if ( "Student".equals(user)){
-                Boolean worked = check.AddStudent(name, Username, Email, Password, Integer.parseInt(Classcode));
-                System.out.println(worked);
+                Boolean worked = check.AddStudent(name, Username, Email, Passwordhash, Integer.parseInt(Classcode));
                 if (worked){
                     Login ToLoginScreen = new Login();  
                     ToLoginScreen.setVisible(true);
@@ -378,38 +341,35 @@ public class SignUp extends javax.swing.JFrame {
                     jtxtEmail.setText("");
                     jtxtClassCode.setText("");
                     jtxtSchool.setText("");
-                    jtxtPassword.setText("");
-                    jtxtCheckpassword.setText("");
+                    jgetPassword.setText("");
+                    jConfirmPassword.setText("");
                 }
             }
             if ( "Teacher".equals(user)){
-                check.AddTeacher(name, Username, Email,  Password, School);
+                check.AddTeacher(name, Username, Email,  Passwordhash, School);
                 Login ToLoginScreen = new Login();  
                 ToLoginScreen.setVisible(true);
                 this.dispose();
             }
+            else {
                 JOptionPane.showMessageDialog(this, "There has been an issue please retry", "Try Again" ,JOptionPane.ERROR_MESSAGE);
                 jtxtName.setText("");
                 jtxtUsername.setText("");
                 jtxtEmail.setText("");
                 jtxtClassCode.setText("");
                 jtxtSchool.setText("");
-                jtxtPassword.setText("");
-                jtxtCheckpassword.setText("");
+                jgetPassword.setText("");
+                jConfirmPassword.setText("");
             }
-        
+        }
     }//GEN-LAST:event_jbuttonSubmitActionPerformed
 
     private void jtxtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtNameActionPerformed
-        Username = jtxtName.getText();
-        if (Username.length() < 5 ){
-            jLabelUsername.setText("Username must be larger than 5 characters");
-        }
-                // TODO add your handling code here:
+
     }//GEN-LAST:event_jtxtNameActionPerformed
 
     private void jtxtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtUsernameActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jtxtUsernameActionPerformed
 
     /**
@@ -451,6 +411,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel JTellUserInfo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonBack;
+    private javax.swing.JPasswordField jConfirmPassword;
     private javax.swing.JLabel jLClassCode;
     private javax.swing.JLabel jLSchool;
     private javax.swing.JLabel jLabel1;
@@ -467,11 +428,10 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel jWarning;
     private javax.swing.JButton jbuttonSubmit;
-    private javax.swing.JTextField jtxtCheckpassword;
+    private javax.swing.JPasswordField jgetPassword;
     private javax.swing.JTextField jtxtClassCode;
     private javax.swing.JTextField jtxtEmail;
     private javax.swing.JTextField jtxtName;
-    private javax.swing.JTextField jtxtPassword;
     private javax.swing.JTextField jtxtSchool;
     private javax.swing.JTextField jtxtUsername;
     // End of variables declaration//GEN-END:variables

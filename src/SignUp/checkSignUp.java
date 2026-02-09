@@ -14,14 +14,6 @@ import java.util.ArrayList;
  *
  * @author 4-EBULL
  */
-
-// maybe do the methods return true or false for student as id might not work
-
-
-
-
-
-
 public class checkSignUp {
     public Boolean AddStudent(String name, String Username, String Email, String Password, int ClassCode ){
         
@@ -121,30 +113,52 @@ public class checkSignUp {
     ///// check username is unique
     ///
     ///
-    public boolean UniquenessCheck(String user,String EnteredUsername ){
+    public boolean UsernameUniquenessCheck(String user,String EnteredUsername ){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT Count(*) FROM "+ user +" WHERE Username = '" + EnteredUsername+ "'");
-            if (results.next()){
-                int count = results.getInt(1);
-                if (count > 0){
+            ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
+                    + "SELECT 1 FROM "+user+" WHERE username = '"+ EnteredUsername+"')");
+            if (Results.next()){
+                // if =1 then there is already a username like it so return false
+                if (Results.getInt(1)==1){
                     return false;
                 }
-                else{ 
-                return true;
+                else {
+                    return true;
                 }
-            } 
+            }
             else {
                 return false;
             }
-            
         }
         catch (Exception e) {
             e.printStackTrace();
-            // false as smth went  bad
             return false;
-        }    
+        }
     }
     
-    
+    // check classc code exists
+    public boolean CheckClassCodeExists(int Classcode ){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
+                    + "SELECT 1 FROM Class WHERE Class_id = '"+ Classcode+"')");
+            if (Results.next()){
+                // if =1 then there is already a username like it so return false
+                if (Results.getInt(1)==1){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
