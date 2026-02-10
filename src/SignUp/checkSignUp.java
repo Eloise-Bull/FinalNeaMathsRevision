@@ -21,24 +21,19 @@ public class checkSignUp {
         //////////////// STUDENT
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            boolean worked = statement.execute("INSERT INTO Student ( S_name, username,email, password_hash, Class_id) VALUES ( '" + name+ "','" + Username +"','" + Email + "','"+Password  + "'," + ClassCode + ")");        
+            int rowsAffected = statement.executeUpdate("INSERT INTO Student ( S_name, username,email, password_hash, Class_id) VALUES ( '" + name+ "','" + Username +"','" + Email + "','"+Password  + "'," + ClassCode + ")");        
             int StudentID = getLastInsertedID();
             // get num of topics so and for all topics set stats to zero so that then targeted works straight away
             ArrayList<Integer> Topics = returnTopicIds();
             
-            if (worked) {
+            if (rowsAffected > 0) {
                 for ( int i = 0; i <= Topics.size()-1; i++){
                     statement.execute("INSERT INTO TopicStats(Student_id, Topic_id, Score, questions_done, NumOfCorrectAnswers) VALUES (" + StudentID +"," + Topics.get(i) + ",0,0,0)");
                     System.out.println(Topics.get(i));
                 }
                 return true;
-                
             }
-            else {
-                return false;
-            }
-            
-            
+            return false;
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -87,7 +82,7 @@ public class checkSignUp {
     ///
     ///
     ///    
-    public void AddTeacher(String name, String Username, String Email, String Password, String School ){
+    public boolean AddTeacher(String name, String Username, String Email, String Password, String School ){
         
         
         //////////////// TEACHER 
@@ -100,11 +95,16 @@ public class checkSignUp {
             if (results.next()){
                /// this should get the teacher last ~instered in and then get theyre id so i can add to class
                 int TeacherId = results.getInt("id");
-                statement.execute("INSERT INTO Class (Teacher_id, School) VALUES ('" + TeacherId + "',' " + School + "')"); 
+                int rowsAffected = statement.executeUpdate("INSERT INTO Class (Teacher_id, School) VALUES ('" + TeacherId + "',' " + School + "')"); 
+                if (rowsAffected > 0) {
+                    return true;
+                }
             }
+            return false;
         }
         catch(Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
     
@@ -117,6 +117,29 @@ public class checkSignUp {
             Statement statement = connection.createStatement();
             ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
                     + "SELECT 1 FROM "+user+" WHERE username = '"+ EnteredUsername+"')");
+            if (Results.next()){
+                // if =1 then there is already a username like it so return false
+                if (Results.getInt(1)==1){
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean EmailUniquenessCheck(String user,String EnteredEmail ){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
+                    + "SELECT 1 FROM "+user+" WHERE Email = '"+ EnteredEmail+"')");
             if (Results.next()){
                 // if =1 then there is already a username like it so return false
                 if (Results.getInt(1)==1){

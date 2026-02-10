@@ -293,7 +293,7 @@ public class SignUp extends javax.swing.JFrame {
         // cant have it between ifs
         boolean CanBeInteger;
         try {
-            int value = Integer.parseInt(Classcode);
+            Integer.valueOf(Classcode);
             CanBeInteger = true;
         }
         catch (NumberFormatException e){
@@ -305,6 +305,9 @@ public class SignUp extends javax.swing.JFrame {
         if ((name.length()==0) || (Username.length()==0) || (Email.length()==0)||(passwordLength==0) || (ConfirmpasswordLength==0)){
             JOptionPane.showMessageDialog(this, "All fields must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
+        else if ( "".equals(user)) {
+            JOptionPane.showMessageDialog(this, "Pick Teacher or Student", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+        }
         else if (!SamePassword) {
             JOptionPane.showMessageDialog(this, "Passwords don't match", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
@@ -315,6 +318,9 @@ public class SignUp extends javax.swing.JFrame {
         // check username is unique - not used as the primary key or anything just to distinquish 
         else if (!(check.UsernameUniquenessCheck(user,Username ))){
             JOptionPane.showMessageDialog(this, "Please username must be unique", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+        }
+        else if (!(check.EmailUniquenessCheck(user,Email ))){
+            JOptionPane.showMessageDialog(this, "This Email already has an account", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
         else if (("Student".equals(user)) && (Classcode.length()==0)){
             JOptionPane.showMessageDialog(this, "Classcode must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
@@ -329,9 +335,6 @@ public class SignUp extends javax.swing.JFrame {
         else if ("Teacher".equals(user) && (School.length()==0)){
             JOptionPane.showMessageDialog(this, "School must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         } 
-        else if ( user == null) {
-            JOptionPane.showMessageDialog(this, "Pick Teacher or Student", "Try Again" ,JOptionPane.ERROR_MESSAGE);
-        }
         else if (Username.length()>20){
             JOptionPane.showMessageDialog(this, "Username must be less than 20 characters", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         } 
@@ -339,6 +342,7 @@ public class SignUp extends javax.swing.JFrame {
             if ( "Student".equals(user)){
                 Boolean worked = check.AddStudent(name, Username, Email, Passwordhash, Integer.parseInt(Classcode));
                 if (worked){
+                    
                     Login ToLoginScreen = new Login();  
                     ToLoginScreen.setVisible(true);
                     this.dispose();
@@ -354,11 +358,25 @@ public class SignUp extends javax.swing.JFrame {
                     jConfirmPassword.setText("");
                 }
             }
-            if ( "Teacher".equals(user)){
-                check.AddTeacher(name, Username, Email,  Passwordhash, School);
-                Login ToLoginScreen = new Login();  
-                ToLoginScreen.setVisible(true);
-                this.dispose();
+            else if ( "Teacher".equals(user)){
+                boolean worked = check.AddTeacher(name, Username, Email,  Passwordhash, School);
+                if (worked){
+
+                    Login ToLoginScreen = new Login();  
+                    ToLoginScreen.setVisible(true);
+                    this.dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "There has been an issue please retry", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+                    jtxtName.setText("");
+                    jtxtUsername.setText("");
+                    jtxtEmail.setText("");
+                    jtxtClassCode.setText("");
+                    jtxtSchool.setText("");
+                    jgetPassword.setText("");
+                    jConfirmPassword.setText("");
+                }
+                
             }
             else {
                 JOptionPane.showMessageDialog(this, "There has been an issue please retry", "Try Again" ,JOptionPane.ERROR_MESSAGE);

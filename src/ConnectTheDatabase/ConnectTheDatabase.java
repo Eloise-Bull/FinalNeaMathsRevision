@@ -30,12 +30,13 @@ public class ConnectTheDatabase {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); 
             Connection connection = DriverManager.getConnection(url, user, password);
-            System.out.println("conection good");
+            if (connection == null){
+                return null;
+            }
             return connection;
         } catch (Exception e){
             // stack trace shows errors 
             e.printStackTrace();
-            System.out.println("not successful");
             return null;
         }
     }
