@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -140,6 +141,65 @@ public class GetOrChangeUserInfo {
         }
     }
     
+    // check password when they wanna change it they need their old password to compare and then they can change 
+    // basically gets the stored hash from where it = the entered username 
+    public boolean checkPasswordToOldOne(String user, int UserID, String EnteredPasswordHash){
+       if ("Student".equals(user)) {
+            try (Connection connection = TheConnectionToDatabase()){
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery("SELECT password_hash FROM Student WHERE Student_id = " +  UserID);
+                if (results.next()){
+                    String PasswordHash = results.getString("password_hash");
+                    boolean correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
+                    return correctPassword;
+                }
+                else {
+                    return false;
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+
+        }
+
+        if ("Teacher".equals(user)) {
+            try (Connection connection = TheConnectionToDatabase()){
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery("SELECT password_hash FROM Teacher WHERE Teacher_id = " + UserID);
+                if (results.next()){
+                    String PasswordHash = results.getString("password_hash");
+                    boolean correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
+                    return correctPassword;
+                }
+                else {
+                    return false;
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+
+        }
+        else {
+            return false;
+        }
+    }
+    /// change password
+    public boolean ChangePassword(String User, String PasswordHash, int ID){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            statement.execute("UPDATE " + User + " SET password_hash = '" + PasswordHash + "' WHERE "+User+"_id = " + ID);
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     //// delete ??
     public boolean DeletePupil(int ClassId, String Username) {
         try (Connection connection = TheConnectionToDatabase()){
