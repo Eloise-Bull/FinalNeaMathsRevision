@@ -101,6 +101,27 @@ public class GetOrChangeUserInfo {
             return false;
         }
     }
+    
+    
+    public boolean ChangeClassCode(String User, int ClassCode, int ID){
+        try (Connection connection = TheConnectionToDatabase()){
+            Statement statement = connection.createStatement();
+            ResultSet Results = statement.executeQuery("SELECT EXISTS (SELECT 1 FROM Class WHERE Class_id = '"+ ClassCode+"')");
+            if (Results.next()){
+                // if = 1 then = good cause we want it to exsist 
+                if (Results.getInt(1)==1){
+                                        // is unique 
+                    statement.execute("UPDATE " + User + " SET Class_id = '" + ClassCode + "' WHERE "+User+"_id = " + ID);
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     // for combo bow gives list of students
     public static ArrayList<String> SetBox(int ClassID){
         ArrayList<String> ListOfNames = new ArrayList<>();
@@ -118,12 +139,6 @@ public class GetOrChangeUserInfo {
             return null;
         }
     }
-    
-    
-    
-    
-    
-    
     
     //// delete ??
     public boolean DeletePupil(int ClassId, String Username) {

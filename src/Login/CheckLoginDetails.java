@@ -63,7 +63,7 @@ public class CheckLoginDetails {
     }
     
     // basically gets the stored hash from where it = the entered username 
-    public boolean checkPasswordReturnID(String EnteredUsername, String user, String EnteredPasswordHash){
+    public boolean checkPassword(String EnteredUsername, String user, String EnteredPasswordHash){
        if ("Student".equals(user)) {
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();

@@ -16,8 +16,6 @@ import java.util.ArrayList;
  */
 public class checkSignUp {
     public Boolean AddStudent(String name, String Username, String Email, String Password, int ClassCode ){
-        
-        
         //////////////// STUDENT
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();

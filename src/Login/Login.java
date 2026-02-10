@@ -228,7 +228,7 @@ public class Login extends javax.swing.JFrame {
         
         
         CheckLoginDetails check = new CheckLoginDetails();
-        boolean CheckUsernameAndPassword = check.checkPasswordReturnID(usernameInputed,user,Passwordhash);
+        boolean CheckUsernameAndPassword = check.checkPassword(usernameInputed,user,Passwordhash);
 
         // || = or is syntax
         // could change to add two more if statments so they know if username or passwords is incorrect. security issie ??

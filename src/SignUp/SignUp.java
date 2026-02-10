@@ -242,9 +242,9 @@ public class SignUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
-    LoginOrSignUp ToFirstScreen = new LoginOrSignUp();  
-    ToFirstScreen.setVisible(true);
-    this.dispose();    // TODO add your handling code here:
+        LoginOrSignUp ToFirstScreen = new LoginOrSignUp();  
+        ToFirstScreen.setVisible(true);
+        this.dispose();    
     }//GEN-LAST:event_jButtonBackActionPerformed
 
     private void jRadioStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioStudentActionPerformed

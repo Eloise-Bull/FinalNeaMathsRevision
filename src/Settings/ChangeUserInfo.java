@@ -134,12 +134,9 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             }
         }
         else if ("Email".equals(WhatToChange)){
-            System.out.println("OPTION");
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Confirm this is your new email :" + UserInput,
                             "Confirm" ,JOptionPane.YES_NO_OPTION)){
-                System.out.println("AFTER OPTION");
                 boolean Success = change.ChangeEmail(userType, UserInput, id);
-                System.out.println(Success);
                 if (Success){
                     JOptionPane.showMessageDialog(this, "Change Successful.", 
                         "Email Updated" ,JOptionPane.INFORMATION_MESSAGE);
@@ -150,7 +147,36 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                 }
                 jChangeUsername.setText("");
             }
-            
+            else if ("Class".equals(WhatToChange)){
+                
+                if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Confirm this is your Class Code :" + UserInput,
+                            "Confirm" ,JOptionPane.YES_NO_OPTION)){
+                    // check it is definetly an integer before i change the type
+                    boolean CanBeInteger;
+                    try {
+                        Integer.valueOf(UserInput);
+                        CanBeInteger = true;
+                    }
+                    catch (NumberFormatException e){
+                        CanBeInteger = false;
+                    }
+                    
+                    if (!CanBeInteger){
+                        JOptionPane.showMessageDialog(this, "Class Code must be an integer",
+                                "Email Updated" ,JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    }
+                    boolean Success = change.ChangeClassCode(userType, UserInput, id);
+                if (Success){
+                    JOptionPane.showMessageDialog(this, "Change Successful.", 
+                        "Email Updated" ,JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Change Unsuccessful. Email must not already have an account", 
+                        "Try Again" ,JOptionPane.ERROR_MESSAGE);
+                }
+                jChangeUsername.setText("");
+            }
                         
         }    
         
