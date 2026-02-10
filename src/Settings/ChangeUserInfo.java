@@ -37,7 +37,8 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             jChange.setText("Change Class");
         }
         if ("Password".equals(WhatToChange)){
-            jChange.setText("Change Password. Enter old Password. Then type out the one wone twice");
+            jChange.setText("Change Password");
+            jInstructions.setText("Enter old Password. Then type out the new one twice");
             jOriginalPassword.setVisible(true);
             jPasswordField.setVisible(true);
             jConfirmPasswordField.setVisible(true);
@@ -61,6 +62,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
         jOriginalPassword = new javax.swing.JPasswordField();
         jConfirmPasswordField = new javax.swing.JPasswordField();
         jPasswordField = new javax.swing.JPasswordField();
+        jInstructions = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -82,12 +84,6 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             }
         });
 
-        jOriginalPassword.setText("jPasswordField1");
-
-        jConfirmPasswordField.setText("jPasswordField2");
-
-        jPasswordField.setText("jPasswordField1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,7 +103,8 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                             .addComponent(jChangeUsername)
                             .addComponent(jOriginalPassword)
                             .addComponent(jConfirmPasswordField)
-                            .addComponent(jPasswordField))))
+                            .addComponent(jPasswordField)
+                            .addComponent(jInstructions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(57, 75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -117,9 +114,11 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jChange)
                     .addComponent(jButton1))
-                .addGap(44, 44, 44)
+                .addGap(22, 22, 22)
+                .addComponent(jInstructions)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jOriginalPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,10 +198,10 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                     boolean Success = change.ChangeClassCode(userType, Integer.parseInt(UserInput), id);
                     if (Success){
                     JOptionPane.showMessageDialog(this, "Change Successful.", 
-                        "Email Updated" ,JOptionPane.INFORMATION_MESSAGE);
+                        "Class Code Updated" ,JOptionPane.INFORMATION_MESSAGE);
                     }
                     else{
-                        JOptionPane.showMessageDialog(this, "Change Unsuccessful. Email must not already have an account", 
+                        JOptionPane.showMessageDialog(this, "Change Unsuccessful. Class code doesnt exist", 
                             "Try Again" ,JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -212,7 +211,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             
         else if ("Password".equals(WhatToChange)) {
             char[] OriginalPassword = jOriginalPassword.getPassword();
-            char[] Password = jOriginalPassword.getPassword();
+            char[] Password = jPasswordField.getPassword();
             char[] CheckPassword = jConfirmPasswordField.getPassword();
 
             String passwordString = new String(Password);
@@ -292,6 +291,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
     private javax.swing.JLabel jChange;
     private javax.swing.JTextField jChangeUsername;
     private javax.swing.JPasswordField jConfirmPasswordField;
+    private javax.swing.JLabel jInstructions;
     private javax.swing.JPasswordField jOriginalPassword;
     private javax.swing.JPasswordField jPasswordField;
     // End of variables declaration//GEN-END:variables

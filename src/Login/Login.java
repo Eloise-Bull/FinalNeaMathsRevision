@@ -245,14 +245,16 @@ public class Login extends javax.swing.JFrame {
             if ("Student".equals(user)) {
                 InfoOfUserForThisLoginSession.StudentId = UsernameId;
                 // check. etc is the method used to get the class id using the usernameid
-                InfoOfUserForThisLoginSession.UserClassID = check.getClassIdStudent(UsernameId);
+                int classID = check.getClassIdStudent(UsernameId);
+                InfoOfUserForThisLoginSession.UserClassID = classID;
                 StudentHome ToStudentScreen = new StudentHome();
                 ToStudentScreen.setVisible(true);
                 this.dispose();
             }
             if ("Teacher".equals(user)) {
                 InfoOfUserForThisLoginSession.TeacherId = UsernameId;
-                InfoOfUserForThisLoginSession.UserClassID = check.getClassIdTeacher(UsernameId);
+                int classID = check.getClassIdTeacher(UsernameId);
+                InfoOfUserForThisLoginSession.UserClassID = classID;
                 TeacherHome ToTeacherScreen = new TeacherHome();
                 ToTeacherScreen.setVisible(true);
                 this.dispose();

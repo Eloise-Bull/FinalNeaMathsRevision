@@ -376,6 +376,7 @@ public class Quizzes extends javax.swing.JFrame {
             String ButtonText = jButtonSubmit.getText();
             // this is to move onto the next question
             if ("Next".equals(ButtonText)) {
+                jLabelQuestion.setVisible(true);
                 jButtonSubmit.setText("Submit");
                 jLabelMark.setText("");
                 lCorrectAnswer.setText("");
@@ -420,6 +421,9 @@ public class Quizzes extends javax.swing.JFrame {
                     int count = QuizQuestions.count(false);
                     // -1 cause it displays the current questions ur on not hte one youve done
                     QuizDetails.questionsDone = count;
+                    jLabelQuestion.setText("Question: "+ String.valueOf(count + 1));
+                    // basically i cant have count before i 'decalre it' so im havign it chang it down here then making the label visible up there
+                    jLabelQuestion.setVisible(false);
                     float stats = QuizQuestions.CountingQuizStats(count ,correct, false);
                     // updates the temp stored data of this quiz
                     QuizDetails.CurrentStats = stats;
