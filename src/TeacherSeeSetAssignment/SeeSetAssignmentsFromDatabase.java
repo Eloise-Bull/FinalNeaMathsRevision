@@ -26,7 +26,6 @@ public class SeeSetAssignmentsFromDatabase {
 
         DefaultTableModel AssignmentTable = new DefaultTableModel();
         
-        
         // due next needs ot be after or = to today. so i need todays date 
         LocalDate today = LocalDate.now();
         // kept columns in order the whole class so as to not mess around the 
@@ -51,7 +50,7 @@ public class SeeSetAssignmentsFromDatabase {
                     + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
                     + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
                     + "WHERE ai.ClassID = " + ClassID + " AND ai.DueDate = ( SELECT DueDate FROM AssignmentInfo "
-                    + "WHERE ClassID = " + ClassID + " AND DueDate >= '"+today+"' ORDER BY DueDate DESC LIMIT 1)");
+                    + "WHERE ClassID = " + ClassID + " AND DueDate >= '"+today+"' ORDER BY DueDate ASC LIMIT 1)");
 
             while (results.next()){
                 int AssignmentID = results.getInt("AssignmentInfo_Id");
@@ -266,6 +265,8 @@ public class SeeSetAssignmentsFromDatabase {
 
         // kept columns in order the whole class so as to not mess around the 
         AssignmentTable.addColumn("Id");
+        AssignmentTable.addColumn("Username");
+        AssignmentTable.addColumn("Name");
         AssignmentTable.addColumn("Topic");
         AssignmentTable.addColumn("resource");
         AssignmentTable.addColumn("Num Of Questions done");
@@ -278,17 +279,19 @@ public class SeeSetAssignmentsFromDatabase {
             // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
             //then orders by topic
             // i also put the statement over 3 lines cause it was soo long
-            ResultSet results = statement.executeQuery("SELECT AssignmentInfo_Id, AssignedId, Title, Resource, NumOfQuestionsDone, NumOfQuizQuestions,"
+            ResultSet results = statement.executeQuery("SELECT AssignmentInfo_Id, AssignedId, username, S_Name,Title, Resource, NumOfQuestionsDone, NumOfQuizQuestions,"
                     + " Done, DueDate FROM Assigned a "
                     + "JOIN Student s ON a.StudentId = s.Student_id "
                     + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
                     + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
                     + "WHERE s.Class_id = " + ClassID 
-                    + " AND Done = false AND DueDate < '"+Date+"' ORDER BY DueDate");
+                    + " AND Done = false AND DueDate < '"+Date+"' ORDER BY DueDate DESC");
 
             while (results.next()){
                 int AssignmentID = results.getInt("AssignmentInfo_Id");
                 int AssignedID = results.getInt("AssignedId");
+                String username = results.getString("username");
+                String S_Name = results.getString("S_Name");
                 String Topic = results.getString("Title");
                 String Resource = results.getString("Resource");
                 int NumOfQuizQuestions = results.getInt("NumOfQuizQuestions");
@@ -299,7 +302,7 @@ public class SeeSetAssignmentsFromDatabase {
                 if (Done) {
                     completed = "Done";
                 }
-                AssignmentTable.addRow(new Object [] {AssignmentID+"-"+AssignedID,Topic,Resource,NumOfQuestionsDone, NumOfQuizQuestions,completed,DueDate });
+                AssignmentTable.addRow(new Object [] {AssignmentID+"-"+AssignedID,username,S_Name,Topic,Resource,NumOfQuestionsDone, NumOfQuizQuestions,completed,DueDate });
             }
             return AssignmentTable;
         }

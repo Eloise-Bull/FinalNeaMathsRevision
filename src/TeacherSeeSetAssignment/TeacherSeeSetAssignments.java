@@ -25,6 +25,11 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         for (int i = 0; i < ListOfUsernames.size(); i ++ ){
             ComboBox.addItem(ListOfUsernames.get(i));
         }
+         // sort by date and then limit one 
+         // sets the table to the due next assignments 
+        DefaultTableModel AssignmentsTable = new DefaultTableModel();
+        AssignmentsTable = SeeSetAssignmentsFromDatabase.DueNext(ClassID);
+        jAssignmentsTable.setModel(AssignmentsTable);
     }
 
     /**

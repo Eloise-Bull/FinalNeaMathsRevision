@@ -36,7 +36,7 @@ public class TeacherClassStats extends javax.swing.JFrame {
             jComboBox.addItem(ListOfTopics.get(i));
         }
         
-        ArrayList<String> ListOfUsernames = CalculatingClassStats.SetUsernamesForBox(ClassID);
+        ArrayList<String> ListOfUsernames = CalculatingClassStats.SetNamesForBox(ClassID);
         for (int i = 0; i < ListOfUsernames.size(); i ++ ){
             jComboBox.addItem(ListOfUsernames.get(i));
         }

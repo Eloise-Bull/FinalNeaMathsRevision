@@ -110,7 +110,7 @@ public class CalculatingClassStats {
             return null;
         }
     }
-    public static ArrayList<String> SetUsernamesForBox(int ClassID){
+    public static ArrayList<String> SetNamesForBox(int ClassID){
         ArrayList<String> ListOfTopicNames = new ArrayList<>();
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
@@ -140,34 +140,39 @@ public class CalculatingClassStats {
             // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever class 
             //teacher was and then orders by name so that the students names / scores and stuff are together
             // i also put the statement over 3 lines cause it was soo long
+            
+            // checks if its a topic in topic
             ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
-                    + "SELECT 1 FROM Student WHERE username = '"+ HowToSort+"')");
-            if ( Results.next()){
-                // means there is a username so get their stats
-                ResultSet results = statement.executeQuery("SELECT Score, username, S_Name, Topic FROM TopicStats ts JOIN Student s "
-                    + "ON ts.Student_id = s.Student_id JOIN Topic t ON ts.Topic_id = t.Topic_id WHERE s.Class_id = "+ ClassID +" "
-                            + " ORDER BY s.S_Name ASC ");
+                    + "SELECT 1 FROM Topic WHERE Topic = '"+ HowToSort+"')");
+            if ( Results.next() && Results.getBoolean(1)){
+                Statement st = connection.createStatement();
+                ResultSet results = st.executeQuery("SELECT Score, username, S_Name, Topic FROM TopicStats ts JOIN Student s "
+                    + "ON ts.Student_id = s.Student_id JOIN Topic t ON ts.Topic_id = t.Topic_id "
+                        + "WHERE s.Class_id = "+ ClassID +" AND t.Topic = '" + HowToSort
+                            + "' ORDER BY s.S_Name ASC ");
+                
                 while (results.next()){
                 String Topic = results.getString("Topic");
-                String NAME = results.getString("S_name");
+                String NAME = results.getString("S_Name");
                 Float Score = results.getFloat("Score");
                 String Username = results.getString("username");
-                System.out.println(Topic +NAME + Score+ Username);
+
                 StatsTable.addRow(new Object [] {Username ,NAME,  Topic, Score}); 
                 }
             }
             else {
-                // its a topic not a username 
-                ResultSet results = statement.executeQuery("SELECT Score, username, S_Name, Topic FROM TopicStats ts JOIN Student s "
-                    + "ON ts.Student_id = s.Student_id JOIN Topic t ON ts.Topic_id = t.Topic_id  WHERE s.Class_id = "+ ClassID +" "
-                            + " ORDER BY s.S_Name ASC ");
                 
-                while (results.next()){
-                String Topic = results.getString("Topic");
-                String NAME = results.getString("S_name");
-                Float Score = results.getFloat("Score");
-                String Username = results.getString("username");
-                System.out.println(Topic +NAME + Score+ Username);
+                // means there is a username so get their stats
+                Statement Statement = connection.createStatement();
+                ResultSet rs = Statement.executeQuery("SELECT Score, username, S_Name, Topic "
+                    + "FROM TopicStats ts JOIN Student s ON ts.Student_id = s.Student_id "
+                    + "JOIN Topic t ON ts.Topic_id = t.Topic_id WHERE s.Class_id = "+ClassID+" "
+                    + "AND s.S_Name = '"+HowToSort+"' ORDER BY s.S_Name ASC");
+                while (rs.next()){
+                String Topic = rs.getString("Topic");
+                String NAME = rs.getString("S_name");
+                Float Score = rs.getFloat("Score");
+                String Username = rs.getString("username");
                 
                 StatsTable.addRow(new Object [] {Username ,NAME,  Topic, Score}); 
                 }
