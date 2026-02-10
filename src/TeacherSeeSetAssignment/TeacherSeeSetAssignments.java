@@ -6,6 +6,7 @@ package TeacherSeeSetAssignment;
 import Login.Login;
 import Settings.ChangeUserInfo;
 import TeacherHome.TeacherHome;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -110,7 +111,7 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(18, 26, 50, 26);
         getContentPane().add(jScrollPane2, gridBagConstraints);
 
-        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DueNext", "Uncompleted", "Completed", "All" }));
+        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DueNext", "OverDue", "Uncompleted", "Completed", "All" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -170,30 +171,33 @@ public class TeacherSeeSetAssignments extends javax.swing.JFrame {
         
         String HowToSort = ComboBox.getSelectedItem().toString();
         int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+        DefaultTableModel AssignmentsTable = new DefaultTableModel();
+        // need date for overdue and due next
+        LocalDate today = LocalDate.now();
         
         if ("DueNext".equals(HowToSort)){
              // sort by date and then limit one 
-            
-            DefaultTableModel AssignmentsTable = new DefaultTableModel();
             AssignmentsTable = SeeSetAssignmentsFromDatabase.DueNext(ClassID);
             jAssignmentsTable.setModel(AssignmentsTable);
             
-           
         }    
+        else if ("OverDue".equals(HowToSort)){
+            
+            AssignmentsTable = SeeSetAssignmentsFromDatabase.OverDue(ClassID, today);
+            jAssignmentsTable.setModel(AssignmentsTable);
+
+        }   
         else if ("Uncompleted".equals(HowToSort)|| "Completed".equals(HowToSort)){
             // this fills in the table
-            DefaultTableModel AssignmentsTable = new DefaultTableModel();
             AssignmentsTable = SeeSetAssignmentsFromDatabase.BothCompletedAndUncompletedAssignmentsTable(ClassID, HowToSort);
             jAssignmentsTable.setModel(AssignmentsTable);
         }
         else if ("All".equals(HowToSort)){
             
-            DefaultTableModel AssignmentsTable = new DefaultTableModel();
             AssignmentsTable = SeeSetAssignmentsFromDatabase.AllAssignments(ClassID);
             jAssignmentsTable.setModel(AssignmentsTable);
         }
         else{
-            DefaultTableModel AssignmentsTable = new DefaultTableModel();
             // in this context howToSort is the Student USerrname 
             AssignmentsTable = SeeSetAssignmentsFromDatabase.SpecificStudentAssignment(HowToSort, ClassID);
             jAssignmentsTable.setModel(AssignmentsTable);

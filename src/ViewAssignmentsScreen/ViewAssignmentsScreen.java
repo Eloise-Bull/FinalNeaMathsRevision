@@ -150,7 +150,10 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //completed = true means that its the doen assignments
-        // add into table   
+        // add into table
+        // need the dates for overdue and due next ( due next has to be after or equal to today )
+        LocalDate today = LocalDate.now();
+        
         int studentid = Login.InfoOfUserForThisLoginSession.StudentId;
         String Sort = (String) jComboBox.getSelectedItem();
         DefaultTableModel AssignmentsTable = new DefaultTableModel();
@@ -168,7 +171,6 @@ public class ViewAssignmentsScreen extends javax.swing.JFrame {
         }
         else {
             // overdue 
-            LocalDate today = LocalDate.now();
             AssignmentsTable = GettingAssignmentsForTheTable.OverDue(studentid,today);
             // use the date run through my Sql anc get the over due ones
             // do the same for the teachers one 

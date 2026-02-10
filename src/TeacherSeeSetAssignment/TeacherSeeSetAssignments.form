@@ -87,11 +87,12 @@
     <Component class="javax.swing.JComboBox" name="ComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="5">
             <StringItem index="0" value="DueNext"/>
-            <StringItem index="1" value="Uncompleted"/>
-            <StringItem index="2" value="Completed"/>
-            <StringItem index="3" value="All"/>
+            <StringItem index="1" value="OverDue"/>
+            <StringItem index="2" value="Uncompleted"/>
+            <StringItem index="3" value="Completed"/>
+            <StringItem index="4" value="All"/>
           </StringArray>
         </Property>
       </Properties>
