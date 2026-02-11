@@ -39,8 +39,6 @@ public class GetOrChangeUserInfo {
                 
                 arrayForDetails[0] = Username;
                 arrayForDetails[1] = Email;
-
-
             }
             return arrayForDetails;
             
@@ -102,27 +100,7 @@ public class GetOrChangeUserInfo {
             return false;
         }
     }
-    
-    
-    public boolean ChangeClassCode(String User, int ClassCode, int ID){
-        try (Connection connection = TheConnectionToDatabase()){
-            Statement statement = connection.createStatement();
-            ResultSet Results = statement.executeQuery("SELECT EXISTS (SELECT 1 FROM Class WHERE Class_id = '"+ ClassCode+"')");
-            if (Results.next()){
-                // if = 1 then = good cause we want it to exsist 
-                if (Results.getInt(1)==1){
-                                        // is unique 
-                    statement.execute("UPDATE " + User + " SET Class_id = '" + ClassCode + "' WHERE "+User+"_id = " + ID);
-                    return true;
-                }
-            }
-            return false;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+
     // for combo bow gives list of students
     public static ArrayList<String> SetBox(int ClassID){
         ArrayList<String> ListOfNames = new ArrayList<>();
@@ -143,19 +121,17 @@ public class GetOrChangeUserInfo {
     
     // check password when they wanna change it they need their old password to compare and then they can change 
     // basically gets the stored hash from where it = the entered username 
-    public boolean checkPasswordToOldOne(String user, int UserID, String EnteredPasswordHash){
-       if ("Student".equals(user)) {
+    public boolean checkPasswordToOldOne(String user, int UserID, String EnteredPassword){
+        if ("Student".equals(user)) {
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();
                 ResultSet results = statement.executeQuery("SELECT password_hash FROM Student WHERE Student_id = " +  UserID);
                 if (results.next()){
                     String PasswordHash = results.getString("password_hash");
-                    boolean correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
+                    boolean correctPassword = BCrypt.checkpw(EnteredPassword,PasswordHash);
                     return correctPassword;
                 }
-                else {
-                    return false;
-                }
+                return false;
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -167,15 +143,13 @@ public class GetOrChangeUserInfo {
         if ("Teacher".equals(user)) {
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery("SELECT password_hash FROM Teacher WHERE Teacher_id = " + UserID);
+                ResultSet results = statement.executeQuery("SELECT password_hash FROM Teacher WHERE Teacher _id = " +  UserID);
                 if (results.next()){
                     String PasswordHash = results.getString("password_hash");
-                    boolean correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
+                    boolean correctPassword = BCrypt.checkpw(EnteredPassword,PasswordHash);
                     return correctPassword;
                 }
-                else {
-                    return false;
-                }
+                return false;
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -185,7 +159,7 @@ public class GetOrChangeUserInfo {
         }
         else {
             return false;
-        }
+        }           
     }
     /// change password
     public boolean ChangePassword(String User, String PasswordHash, int ID){
@@ -201,10 +175,10 @@ public class GetOrChangeUserInfo {
     }
 
     //// delete Account
-    public boolean DeleteAccount(int ClassId, String Username) {
+    public boolean DeleteAccount(int UserID, String User) {
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            statement.execute("");
+            statement.execute("DELETE FROM " + User + " WHERE " + User +"_id = " + UserID);
             return true;
         }
         catch (Exception e) {

@@ -63,49 +63,41 @@ public class CheckLoginDetails {
     }
     
     // basically gets the stored hash from where it = the entered username 
-    public boolean checkPassword(String EnteredUsername, String user, String EnteredPasswordHash){
-       if ("Student".equals(user)) {
-            boolean correctPassword = false;
+    public boolean checkPassword(String EnteredUsername, String user, String EnteredPassword){
+        if ("Student".equals(user)) {
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery("SELECT password_hash FROM Student WHERE username = " + "'" +  EnteredUsername + "'");
+                ResultSet results = statement.executeQuery("SELECT password_hash FROM Student WHERE username = '" +  EnteredUsername + "'");
                 if (results.next()){
                     String PasswordHash = results.getString("password_hash");
-                    correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
+                    boolean correctPassword = BCrypt.checkpw(EnteredPassword,PasswordHash);
+                    return correctPassword;
                 }
             }
             catch (Exception e) {
                 e.printStackTrace();
-            }
-            finally {
-                return correctPassword;
+                return false;
             }
 
         }
 
         if ("Teacher".equals(user)) {
-            boolean correctPassword = false;
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery("SELECT password_hash FROM Teacher WHERE username = " + "'" + EnteredUsername + "'");
+                ResultSet results = statement.executeQuery("SELECT password_hash FROM Teacher WHERE username = '" +  EnteredUsername + "'");
                 if (results.next()){
                     String PasswordHash = results.getString("password_hash");
-                    correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
+                    boolean correctPassword = BCrypt.checkpw(EnteredPassword,PasswordHash);
+                    return correctPassword;
                 }
             }
             catch (Exception e) {
                 e.printStackTrace();
-            }
-            finally {
-                return correctPassword;
+                return false;
             }
 
         }
-        else {
-            return false;
-        }
-            
-            
+        return false;
     }
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////

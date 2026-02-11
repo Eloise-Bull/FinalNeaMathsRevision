@@ -4,7 +4,6 @@
  */
 package StudentStatsScreen;
 
-import ConnectTheDatabase.ConnectTheDatabase;
 import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -76,8 +75,9 @@ public class StatsCalculatorForScreen {
             // i also put the statement over 3 lines cause it was soo long
             ResultSet results = statement.executeQuery("SELECT Topic, Score, questions_done, NumOfCorrectAnswers FROM TopicStats ts "
                     + "JOIN Student s "
-                    + "ON ts.Student_id = s.Student_id JOIN Topic t ON ts.Topic_id = t.Topic_id  WHERE s.Student_id = "+ StudentID +" "
-                            + "ORDER BY t.Topic ASC ");
+                    + "ON ts.Student_id = s.Student_id JOIN Topic t "
+                    + "ON ts.Topic_id = t.Topic_id  WHERE s.Student_id = "+ StudentID +" "
+                    + "ORDER BY t.Topic ASC ");
 
             while (results.next()){
                 String Topic = results.getString("Topic");

@@ -325,7 +325,7 @@ public class SignUp extends javax.swing.JFrame {
         else if (("Student".equals(user)) && (Classcode.length()==0)){
             JOptionPane.showMessageDialog(this, "Classcode must be filled", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
-        else if (!CanBeInteger){
+        else if (!CanBeInteger &&("Student".equals(user))){
             JOptionPane.showMessageDialog(this, "Classcode must be a number", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
         // checks that the classcode actually exsits

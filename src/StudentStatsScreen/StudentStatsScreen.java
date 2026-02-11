@@ -21,9 +21,9 @@ public class StudentStatsScreen extends javax.swing.JFrame {
         jtxtOverallStats.setText("Overall Statitsics : " + String.valueOf(StatsCalculatorForScreen.CalculatingAverageStats()) + " %");
         
         // this is for the table
-        int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
+        int StudentID = Login.InfoOfUserForThisLoginSession.StudentId;
         DefaultTableModel StatsTable = new DefaultTableModel();
-        StatsTable = StatsCalculatorForScreen.RowsInTable(ClassID);
+        StatsTable = StatsCalculatorForScreen.RowsInTable(StudentID);
         jStatsTable.setModel(StatsTable);
     }
     

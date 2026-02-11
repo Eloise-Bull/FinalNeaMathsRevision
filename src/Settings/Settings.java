@@ -54,7 +54,6 @@ public class Settings extends javax.swing.JFrame {
         jtxtClass = new javax.swing.JTextField();
         jChangePassword = new javax.swing.JButton();
         jChangeUsername = new javax.swing.JButton();
-        jChangeClass = new javax.swing.JButton();
         jChangeEmail = new javax.swing.JButton();
         jtxtHome = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -99,13 +98,6 @@ public class Settings extends javax.swing.JFrame {
             }
         });
 
-        jChangeClass.setText("Change");
-        jChangeClass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jChangeClassActionPerformed(evt);
-            }
-        });
-
         jChangeEmail.setText("Change");
         jChangeEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,44 +124,42 @@ public class Settings extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(jLabel1)
-                .addGap(51, 51, 51)
-                .addComponent(jtxtHome))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jtxtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jChangeUsername))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jtxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jChangePassword))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jChangeEmail))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtxtClass, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(114, 114, 114)
+                        .addComponent(jLabel1)
+                        .addGap(74, 74, 74)
+                        .addComponent(jtxtHome))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jtxtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(jChangeClass))))
+                        .addComponent(jChangeUsername))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jtxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jChangePassword))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jChangeEmail))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jtxtClass, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jtxtHome)))
-                .addGap(52, 52, 52)
+                    .addComponent(jtxtHome)
+                    .addComponent(jLabel1))
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtxtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -188,11 +178,7 @@ public class Settings extends javax.swing.JFrame {
                         .addGap(9, 9, 9)
                         .addComponent(jChangeEmail)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtClass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jChangeClass)))
+                .addComponent(jtxtClass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(28, 28, 28))
@@ -225,22 +211,6 @@ public class Settings extends javax.swing.JFrame {
             this.dispose();
         }   
     }//GEN-LAST:event_jtxtHomeActionPerformed
-
-    private void jChangeClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeClassActionPerformed
-        WhatToChange.WhatToChange = "Class";
-
-        String User = Login.InfoOfUserForThisLoginSession.userType ;
-        if (User.equals("Teacher")){
-            TeacherRemovePeople ToNewScreen = new TeacherRemovePeople();  
-            ToNewScreen.setVisible(true);
-            this.dispose();
-        }
-        else{
-            ChangeUserInfo ToNextScreen = new ChangeUserInfo();  
-            ToNextScreen.setVisible(true);
-            this.dispose();
-        }   
-    }//GEN-LAST:event_jChangeClassActionPerformed
 
     private void jChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangePasswordActionPerformed
         WhatToChange.WhatToChange = "Password";
@@ -300,7 +270,6 @@ public class Settings extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jChangeClass;
     private javax.swing.JButton jChangeEmail;
     private javax.swing.JButton jChangePassword;
     private javax.swing.JButton jChangeUsername;

@@ -5,7 +5,7 @@
 package Settings;
 
 import Login.Login;
-import Settings.GetOrChangeUserInfo;
+import SignUp.LoginOrSignUp;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import org.mindrot.jbcrypt.BCrypt;
@@ -33,8 +33,8 @@ public class ChangeUserInfo extends javax.swing.JFrame {
         else if ("Email".equals(WhatToChange)){
             jChange.setText("Change Email");
         }
-        else if ("Class".equals(WhatToChange)){
-            jChange.setText("Change Class");
+        else if ("Delete Account".equals(WhatToChange)){
+            jChange.setText("Delete Account");
         }
         else if ("Password".equals(WhatToChange)){
             jChange.setText("Change Password");
@@ -43,9 +43,6 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             jPasswordField.setVisible(true);
             jConfirmPasswordField.setVisible(true);
             jChangeUsername.setVisible(false);
-        }
-        else if ("Delete Account".equals(WhatToChange)){
-            jChange.setText("Delete Account");
         }
     }
 
@@ -179,37 +176,20 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                 jChangeUsername.setText("");
             }
         }
-        else if ("Class".equals(WhatToChange)){
+        else if ("Delete Account".equals(WhatToChange)){
 
-            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Confirm this is your Class Code :" + UserInput,
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Are You Sure You Would Like To Delete Your Account",
                         "Confirm" ,JOptionPane.YES_NO_OPTION)){
-                // check it is definetly an integer before i change the type
-                boolean CanBeInteger;
-                try {
-                    Integer.valueOf(UserInput);
-                    CanBeInteger = true;
-                }
-                catch (NumberFormatException e){
-                    CanBeInteger = false;
-                }
-
-                if (!CanBeInteger){
-                    JOptionPane.showMessageDialog(this, "Class Code must be an integer",
-                            "Try Again" ,JOptionPane.ERROR_MESSAGE);
+                boolean success = change.DeleteAccount(id, userType);
+                if (success) {
+                    LoginOrSignUp BackScreen = new LoginOrSignUp();
+                    BackScreen.setVisible(true);
+                    this.dispose();  
                 }
                 else {
-                    boolean Success = change.ChangeClassCode(userType, Integer.parseInt(UserInput), id);
-                    if (Success){
-                    JOptionPane.showMessageDialog(this, "Change Successful.", 
-                        "Class Code Updated" ,JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(this, "Change Unsuccessful. Class code doesnt exist", 
-                            "Try Again" ,JOptionPane.ERROR_MESSAGE);
-                    }
+                    JOptionPane.showConfirmDialog(this, "Account Wasn't Deleted","Try Again" ,JOptionPane.ERROR_MESSAGE);
                 }
             }
-            jChangeUsername.setText("");
         }
             
         else if ("Password".equals(WhatToChange)) {
@@ -221,7 +201,6 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             String Passwordhash = BCrypt.hashpw(passwordString, BCrypt.gensalt());
             
             String OriginalpasswordString = new String(OriginalPassword);
-            String OriginalPasswordhash = BCrypt.hashpw(passwordString, BCrypt.gensalt());
             
             int passwordLength = Password.length;
             int ConfirmpasswordLength = CheckPassword.length;
@@ -235,7 +214,8 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             Arrays.fill(OriginalPassword, '\0');
             // check original password = the one in database
             GetOrChangeUserInfo changeInfo = new GetOrChangeUserInfo();
-            boolean correctOldPassword = changeInfo.checkPasswordToOldOne(userType, id,OriginalPasswordhash);
+            // EnteredPassword,PasswordHash
+            boolean correctOldPassword = changeInfo.checkPasswordToOldOne(userType, id, OriginalpasswordString);
             if (!correctOldPassword){
                 JOptionPane.showMessageDialog(this, "Change Unsuccessful. The Original Password is incorrect", 
                             "Try Again" ,JOptionPane.ERROR_MESSAGE);
@@ -253,6 +233,8 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             else {
                 // can change password.
                 changeInfo.ChangePassword(userType,Passwordhash, id);
+                JOptionPane.showMessageDialog(this, "Password Changed", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+                
             }
         }  
         else if ("Delete Account".equals(WhatToChange)){

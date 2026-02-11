@@ -217,18 +217,16 @@ public class Login extends javax.swing.JFrame {
         // getting all detail need to comapare data
         // resets the important data incase people log out then log back in as someone else.
 
-        String usernameInputed = jtxtUsername.getText();
+        String usernameInputed = jtxtUsername.getText().trim();
         char[] passwordEntered = jtxtPassword.getPassword();
         // need to convert to a strign cause thats what the hash thing needs
-        String passwordString = new String(passwordEntered);
-        String Passwordhash = BCrypt.hashpw(passwordString, BCrypt.gensalt());
-        
+        String passwordString = new String(passwordEntered);        
         // empty the char[]
         Arrays.fill(passwordEntered, '\0');
         
         
         CheckLoginDetails check = new CheckLoginDetails();
-        boolean CheckUsernameAndPassword = check.checkPassword(usernameInputed,user,Passwordhash);
+        boolean CheckUsernameAndPassword = check.checkPassword(usernameInputed,user,passwordString);
 
         // || = or is syntax
         // could change to add two more if statments so they know if username or passwords is incorrect. security issie ??
