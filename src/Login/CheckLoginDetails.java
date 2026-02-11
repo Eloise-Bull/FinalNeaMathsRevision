@@ -65,41 +65,39 @@ public class CheckLoginDetails {
     // basically gets the stored hash from where it = the entered username 
     public boolean checkPassword(String EnteredUsername, String user, String EnteredPasswordHash){
        if ("Student".equals(user)) {
+            boolean correctPassword = false;
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();
                 ResultSet results = statement.executeQuery("SELECT password_hash FROM Student WHERE username = " + "'" +  EnteredUsername + "'");
                 if (results.next()){
                     String PasswordHash = results.getString("password_hash");
-                    boolean correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
-                    return correctPassword;
-                }
-                else {
-                    return false;
+                    correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
                 }
             }
             catch (Exception e) {
                 e.printStackTrace();
-                return false;
+            }
+            finally {
+                return correctPassword;
             }
 
         }
 
         if ("Teacher".equals(user)) {
+            boolean correctPassword = false;
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();
                 ResultSet results = statement.executeQuery("SELECT password_hash FROM Teacher WHERE username = " + "'" + EnteredUsername + "'");
                 if (results.next()){
                     String PasswordHash = results.getString("password_hash");
-                    boolean correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
-                    return correctPassword;
-                }
-                else {
-                    return false;
+                    correctPassword = BCrypt.checkpw(PasswordHash,EnteredPasswordHash);
                 }
             }
             catch (Exception e) {
                 e.printStackTrace();
-                return false;
+            }
+            finally {
+                return correctPassword;
             }
 
         }

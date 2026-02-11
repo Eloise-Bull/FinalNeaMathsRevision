@@ -5,11 +5,12 @@
 package TeacherSetResources;
 import Login.Login;
 import TeacherHome.TeacherHome;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+// both imports  used to check the format of the date 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ArrayList;
-import java.util.Locale;
 import javax.swing.JOptionPane;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
 
 /**
@@ -235,23 +236,43 @@ public class TeacherSetResources extends javax.swing.JFrame {
         // checks deadline is after todays date
         LocalDate today = LocalDate.now();
         LocalDate Deadline = LocalDate.parse(Duedate);
-
-        boolean After = Deadline.isAfter(today);
-        if (After){
-            int resourceNum = Integer.parseInt(jResourceNum.getText());
-
-            String TypeOfResource = jPickResourceType.getSelectedItem().toString();
-
-            int ClassId = Login.InfoOfUserForThisLoginSession.UserClassID ;
-            AssigningAResource.SetResourceToClassOrStudent(TypeOfResource,resourceNum,ClassId,Duedate );
-            jResourceNum.setText("");
-            jDueDate.setText("");
-            JOptionPane.showMessageDialog(this, "Assignment set", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+        
+        // check formatt of the date is correct 
+        SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        // so that java doesnt change the date 
+        // takes what the users put 
+        DateFormat.setLenient(false);
+        boolean Format = false;
+        try {
+            // trying against the formatt 
+            // formatt check
+            DateFormat.parse(Duedate);
+            Format = true;
         }
-        else {
-            JOptionPane.showMessageDialog(this, "Deadline must be after todays date", "Try Again" ,JOptionPane.ERROR_MESSAGE);
-            jDueDate.setText("");
+        catch (ParseException e) {
+            // not in the correct format 
+            JOptionPane.showMessageDialog(this, "Date must be in the format : YYYY-MM-DD", "Try Again" ,JOptionPane.ERROR_MESSAGE);
         }
+        
+        if (Format){
+            boolean After = Deadline.isAfter(today);
+            if (After){
+                int resourceNum = Integer.parseInt(jResourceNum.getText());
+
+                String TypeOfResource = jPickResourceType.getSelectedItem().toString();
+
+                int ClassId = Login.InfoOfUserForThisLoginSession.UserClassID ;
+                AssigningAResource.SetResourceToClassOrStudent(TypeOfResource,resourceNum,ClassId,Duedate );
+                jResourceNum.setText("");
+                jDueDate.setText("");
+                JOptionPane.showMessageDialog(this, "Assignment set", "Success" ,JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Deadline must be after todays date", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+                jDueDate.setText("");
+            }
+        }
+            
     }//GEN-LAST:event_jAssignActionPerformed
 
     private void jBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackButtonActionPerformed

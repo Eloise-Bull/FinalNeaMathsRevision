@@ -3,14 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package TeacherSetQuiz;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import Login.Login;
 import TeacherHome.TeacherHome;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 import javax.swing.JOptionPane;
 
 /**
@@ -175,34 +173,40 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         LocalDate today = LocalDate.now();
         LocalDate Deadline = LocalDate.parse(DueDate);
 
-        boolean After = Deadline.isAfter(today);
-        if (After){ 
-            int NumOfQuestions = Integer.parseInt(jNumberInput.getText());  
-            int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID ;
+        // check formatt of the date is correct 
+        SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        // so that java doesnt change the date 
+        // takes what the users put 
+        DateFormat.setLenient(false);
+        boolean Format = false;
+        try {
+            // trying against the formatt 
+            // formatt check
+            DateFormat.parse(DueDate);
+            Format = true;
+        }
+        catch (ParseException e) {
+            // not in the correct format 
+            JOptionPane.showMessageDialog(this, "Date must be in the format : YYYY-MM-DD", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if (Format){
+        
+            boolean After = Deadline.isAfter(today);
+            if (After){ 
+                int NumOfQuestions = Integer.parseInt(jNumberInput.getText());  
+                int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID ;
 
-            String Topic = jTopics.getSelectedItem().toString();
-            AssigningQuiz.PuttingQuizDataIntoDataBase(NumOfQuestions,ClassID,DueDate,Topic);
-            jNumberInput.setText("");
-            jdueDate.setText("");
+                String Topic = jTopics.getSelectedItem().toString();
+                AssigningQuiz.PuttingQuizDataIntoDataBase(NumOfQuestions,ClassID,DueDate,Topic);
+                jNumberInput.setText("");
+                jdueDate.setText("");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Deadline must be after todays date", "Try Again" ,JOptionPane.ERROR_MESSAGE);
+                jdueDate.setText("");
+            }
         }
-        else {
-            JOptionPane.showMessageDialog(this, "Deadline must be after todays date", "Try Again" ,JOptionPane.ERROR_MESSAGE);
-            jdueDate.setText("");
-        }
-        
-        // validate the date
-        
-        //DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-mm-dd", Locale.UK);
-        //if (dateFormatter.equals(DueDate)){
-            // checks deadline is after todays date
-            
-                
-        //}
-        //else {
-        //    JOptionPane.showMessageDialog(this, "Date must be in correct format", "Try Again" ,JOptionPane.ERROR_MESSAGE);
-        //    jdueDate.setText("");
-            
-        //}
         
     }//GEN-LAST:event_jAssignButtonActionPerformed
 
