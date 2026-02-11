@@ -36,13 +36,16 @@ public class ChangeUserInfo extends javax.swing.JFrame {
         else if ("Class".equals(WhatToChange)){
             jChange.setText("Change Class");
         }
-        if ("Password".equals(WhatToChange)){
+        else if ("Password".equals(WhatToChange)){
             jChange.setText("Change Password");
             jInstructions.setText("Enter old Password. Then type out the new one twice");
             jOriginalPassword.setVisible(true);
             jPasswordField.setVisible(true);
             jConfirmPasswordField.setVisible(true);
             jChangeUsername.setVisible(false);
+        }
+        else if ("Delete Account".equals(WhatToChange)){
+            jChange.setText("Delete Account");
         }
     }
 
@@ -252,6 +255,9 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                 changeInfo.ChangePassword(userType,Passwordhash, id);
             }
         }  
+        else if ("Delete Account".equals(WhatToChange)){
+            
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
