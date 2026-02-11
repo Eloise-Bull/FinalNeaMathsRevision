@@ -176,10 +176,11 @@ public class QuizQuestions {
     public String QuizQuestionAnswersToCorrectFormat(String Answer){
         Answer = Answer.toLowerCase();
         String[] parts = Answer.split(" ");
-        String PutAnswerBackTogether = null;
-        for ( int i = 0; i < parts.length - 1; i ++){
+        String PutAnswerBackTogether = "";
+        for ( int i = 0; i < parts.length; i ++){
             PutAnswerBackTogether = PutAnswerBackTogether + parts[i] ;
         }
+        System.out.println(PutAnswerBackTogether);
         return PutAnswerBackTogether;
     }
 

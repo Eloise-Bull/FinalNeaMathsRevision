@@ -310,8 +310,8 @@ public class Quizzes extends javax.swing.JFrame {
                     String answer = (jtxtUserAnswer.getText());
                     // i wanna make it so its lower case and no spaces so that if the user puts that in it doent mark it as wrong when its the right answer
                     QuizQuestions Answer = new QuizQuestions();
-                    Answer.QuizQuestionAnswersToCorrectFormat(answer);
-                    correct = quiz.CheckAnswer(answer, Question);
+                    String CorrectFormattedAnswer = Answer.QuizQuestionAnswersToCorrectFormat(answer);
+                    correct = quiz.CheckAnswer(CorrectFormattedAnswer, Question);
                     // marks the answer 
                     if ( correct == true) {            
                         jLabelMark.setText("Marked: Correct");
@@ -410,10 +410,13 @@ public class Quizzes extends javax.swing.JFrame {
                             "Please Enter An Answer", "Try Again" ,JOptionPane.ERROR_MESSAGE);
                 }
                 else{
-                    correct = quiz.CheckAnswer( answer,Question);
+                    
                     // i wanna make it so its lower case and no spaces so that if the user puts that in it doent mark it as wrong when its the right answer
                     QuizQuestions Answer = new QuizQuestions();
                     Answer.QuizQuestionAnswersToCorrectFormat(answer);
+                    String CorrectFormattedAnswer = Answer.QuizQuestionAnswersToCorrectFormat(answer);
+                    
+                    correct = quiz.CheckAnswer( CorrectFormattedAnswer,Question);
             
                     if ( correct == true) {            
                         jLabelMark.setText("Marked: Correct");
