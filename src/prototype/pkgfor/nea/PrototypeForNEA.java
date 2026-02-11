@@ -14,7 +14,7 @@ public class PrototypeForNEA {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        
         LoginOrSignUp ToFirstScreen = new LoginOrSignUp();  
         ToFirstScreen.setVisible(true);
     }

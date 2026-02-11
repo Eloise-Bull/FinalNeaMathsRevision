@@ -308,6 +308,9 @@ public class Quizzes extends javax.swing.JFrame {
                     // checks if the answer is correct
                     String Question = jtxtQuizQuestion.getText();
                     String answer = (jtxtUserAnswer.getText());
+                    // i wanna make it so its lower case and no spaces so that if the user puts that in it doent mark it as wrong when its the right answer
+                    QuizQuestions Answer = new QuizQuestions();
+                    Answer.QuizQuestionAnswersToCorrectFormat(answer);
                     correct = quiz.CheckAnswer(answer, Question);
                     // marks the answer 
                     if ( correct == true) {            
@@ -408,6 +411,9 @@ public class Quizzes extends javax.swing.JFrame {
                 }
                 else{
                     correct = quiz.CheckAnswer( answer,Question);
+                    // i wanna make it so its lower case and no spaces so that if the user puts that in it doent mark it as wrong when its the right answer
+                    QuizQuestions Answer = new QuizQuestions();
+                    Answer.QuizQuestionAnswersToCorrectFormat(answer);
             
                     if ( correct == true) {            
                         jLabelMark.setText("Marked: Correct");

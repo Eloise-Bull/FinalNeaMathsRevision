@@ -7,6 +7,7 @@ import static ConnectTheDatabase.ConnectTheDatabase.TheConnectionToDatabase;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -171,5 +172,16 @@ public class QuizQuestions {
             e.printStackTrace();
         }
     } 
+    
+    // get rid of UpperCase and spaces
+    public String QuizQuestionAnswersToCorrectFormat(String Answer){
+        Answer = Answer.toLowerCase();
+        String[] parts = Answer.split(" ");
+        String PutAnswerBackTogether = null;
+        for ( int i = 0; i < parts.length - 1; i ++){
+            PutAnswerBackTogether = PutAnswerBackTogether + parts[i] ;
+        }
+        return PutAnswerBackTogether;
+    }
 
 }
