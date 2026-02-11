@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Random;
+import Quizzes.Quizzes.QuizDetails;
 
 /**
  *
@@ -23,7 +24,12 @@ public class RandomQuiz {
     public String RandomQuiz(){
         int num = RandomNumForQuiz();
         String Question = RandomQuiz.ArrayListQuestions().get(num);
-        return Question;
+        if (Question.equals(Quizzes.QuizDetails.LastQuestionAnswered)) {
+            return RandomQuiz();
+        }
+        else{
+            return Question;
+        }
     }  
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
