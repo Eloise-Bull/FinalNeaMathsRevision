@@ -235,7 +235,6 @@ public class TeacherSetResources extends javax.swing.JFrame {
         // checks it is in correct format
         // checks deadline is after todays date
         LocalDate today = LocalDate.now();
-        LocalDate Deadline = LocalDate.parse(Duedate);
         
         // check formatt of the date is correct 
         SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-mm-dd");
@@ -255,6 +254,7 @@ public class TeacherSetResources extends javax.swing.JFrame {
         }
         
         if (Format){
+            LocalDate Deadline = LocalDate.parse(Duedate);
             boolean After = Deadline.isAfter(today);
             if (After){
                 int resourceNum = Integer.parseInt(jResourceNum.getText());

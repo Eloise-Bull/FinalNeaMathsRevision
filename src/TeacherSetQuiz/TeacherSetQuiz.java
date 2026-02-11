@@ -171,7 +171,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         String DueDate = jdueDate.getText();
         
         LocalDate today = LocalDate.now();
-        LocalDate Deadline = LocalDate.parse(DueDate);
+        
 
         // check formatt of the date is correct 
         SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-mm-dd");
@@ -191,7 +191,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         }
         
         if (Format){
-        
+            LocalDate Deadline = LocalDate.parse(DueDate);
             boolean After = Deadline.isAfter(today);
             if (After){ 
                 int NumOfQuestions = Integer.parseInt(jNumberInput.getText());  
