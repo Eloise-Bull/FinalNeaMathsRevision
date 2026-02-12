@@ -62,7 +62,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 16;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(36, 54, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(21, 54, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
         jTopics.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -76,7 +76,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 70, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 39, 0, 0);
         getContentPane().add(jTopics, gridBagConstraints);
 
         jAssignButton.setText("Assign");
@@ -91,7 +91,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 7;
         gridBagConstraints.ipadx = 102;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(72, 7, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(47, 4, 88, 0);
         getContentPane().add(jAssignButton, gridBagConstraints);
 
         jButton2.setText("Back");
@@ -105,7 +105,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(38, 31, 0, 36);
+        gridBagConstraints.insets = new java.awt.Insets(23, 34, 0, 5);
         getContentPane().add(jButton2, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -114,7 +114,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 284;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 70, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 39, 0, 0);
         getContentPane().add(jNumberInput, gridBagConstraints);
 
         jLabel2.setText("Choose the number of questions desired: ");
@@ -123,7 +123,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(56, 70, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(56, 39, 0, 0);
         getContentPane().add(jLabel2, gridBagConstraints);
 
         jLabel3.setText("Topic for Questions:");
@@ -133,7 +133,7 @@ public class TeacherSetQuiz extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 21;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 70, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 39, 0, 0);
         getContentPane().add(jLabel3, gridBagConstraints);
 
         jDueDateLabel.setText("Due Date ( YYYY-MM-DD):");

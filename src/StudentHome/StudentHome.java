@@ -43,6 +43,7 @@ public class StudentHome extends javax.swing.JFrame {
         jbuttonLogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -51,9 +52,8 @@ public class StudentHome extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(87, 223, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(90, 212, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
         jbuttonQuiz.setText("QUIZ");
@@ -69,10 +69,10 @@ public class StudentHome extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 323;
+        gridBagConstraints.ipadx = 319;
         gridBagConstraints.ipady = 36;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 97, 0, 80);
+        gridBagConstraints.insets = new java.awt.Insets(39, 95, 0, 0);
         getContentPane().add(jbuttonQuiz, gridBagConstraints);
 
         jbuttonResources.setText("RESOURCES");
@@ -85,10 +85,10 @@ public class StudentHome extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 323;
+        gridBagConstraints.ipadx = 320;
         gridBagConstraints.ipady = 36;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 97, 0, 80);
+        gridBagConstraints.insets = new java.awt.Insets(18, 95, 0, 0);
         getContentPane().add(jbuttonResources, gridBagConstraints);
 
         jbuttonAssignments.setText("ASSIGNMENTS");
@@ -101,10 +101,10 @@ public class StudentHome extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 308;
+        gridBagConstraints.ipadx = 305;
         gridBagConstraints.ipady = 40;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 97, 0, 80);
+        gridBagConstraints.insets = new java.awt.Insets(18, 95, 0, 0);
         getContentPane().add(jbuttonAssignments, gridBagConstraints);
 
         jbuttonStats.setText("STATISTICS");
@@ -117,10 +117,10 @@ public class StudentHome extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 327;
+        gridBagConstraints.ipadx = 325;
         gridBagConstraints.ipady = 44;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 97, 0, 80);
+        gridBagConstraints.insets = new java.awt.Insets(18, 95, 0, 0);
         getContentPane().add(jbuttonStats, gridBagConstraints);
 
         jbuttonSettings.setText("SETTINGS");
@@ -133,10 +133,10 @@ public class StudentHome extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 335;
+        gridBagConstraints.ipadx = 333;
         gridBagConstraints.ipady = 44;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 97, 11, 80);
+        gridBagConstraints.insets = new java.awt.Insets(18, 95, 17, 0);
         getContentPane().add(jbuttonSettings, gridBagConstraints);
 
         jbuttonLogOut.setText("Log Out");
@@ -148,8 +148,10 @@ public class StudentHome extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(74, 61, 0, 80);
+        gridBagConstraints.insets = new java.awt.Insets(96, 63, 0, 87);
         getContentPane().add(jbuttonLogOut, gridBagConstraints);
 
         pack();

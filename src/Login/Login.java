@@ -8,7 +8,6 @@ import SignUp.LoginOrSignUp;
 import TeacherHome.TeacherHome;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
-import org.mindrot.jbcrypt.BCrypt;
 /**
  *
  * @author elois
@@ -69,12 +68,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 15;
-        gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(125, 10, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(75, 84, 0, 54);
         getContentPane().add(jButtonBack, gridBagConstraints);
 
         buttonGroup1.add(jRadioButton1);
@@ -88,7 +85,7 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(17, 85, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 85, 0, 0);
         getContentPane().add(jRadioButton1, gridBagConstraints);
 
         buttonGroup1.add(jRadioButton2);
@@ -99,11 +96,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(17, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 92, 0, 54);
         getContentPane().add(jRadioButton2, gridBagConstraints);
 
         jtxtUsername.setForeground(new java.awt.Color(255, 102, 204));
@@ -115,11 +111,11 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 25;
-        gridBagConstraints.ipadx = 256;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.ipadx = 329;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 85, 0, 82);
+        gridBagConstraints.insets = new java.awt.Insets(12, 85, 0, 54);
         getContentPane().add(jtxtUsername, gridBagConstraints);
 
         jtxtPassword.setForeground(new java.awt.Color(255, 102, 204));
@@ -131,11 +127,11 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 25;
-        gridBagConstraints.ipadx = 256;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.ipadx = 329;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 85, 0, 82);
+        gridBagConstraints.insets = new java.awt.Insets(6, 85, 0, 54);
         getContentPane().add(jtxtPassword, gridBagConstraints);
 
         jtxtLogin.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
@@ -143,18 +139,18 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.ipadx = 104;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipady = 28;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(75, 26, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(75, 70, 0, 0);
         getContentPane().add(jtxtLogin, gridBagConstraints);
 
         jLabel2.setText("Username");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 177;
         gridBagConstraints.ipady = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -169,7 +165,7 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 120;
         gridBagConstraints.ipady = 24;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 85, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(8, 85, 0, 0);
         getContentPane().add(jLabel3, gridBagConstraints);
 
         jtxtSubmit.setText("Submit");
@@ -181,11 +177,11 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 28;
         gridBagConstraints.ipady = -3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 46, 66, 0);
+        gridBagConstraints.insets = new java.awt.Insets(27, 73, 43, 0);
         getContentPane().add(jtxtSubmit, gridBagConstraints);
 
         pack();

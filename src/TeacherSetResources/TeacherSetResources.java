@@ -8,7 +8,6 @@ import TeacherHome.TeacherHome;
 import java.text.ParseException;
 // both imports  used to check the format of the date 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
@@ -31,6 +30,8 @@ public class TeacherSetResources extends javax.swing.JFrame {
         for (int i = 0; i < ListOfTopics.size(); i ++ ){
             jPickResourceType.addItem(ListOfTopics.get(i));
         }
+        String ResourceType = jPickResourceType.getSelectedItem().toString();
+        jResourceList.setModel(AssigningAResource.ResourceListToScreen(ResourceType));
         
     }
     String Resource = null;
@@ -69,10 +70,10 @@ public class TeacherSetResources extends javax.swing.JFrame {
         jLabel1.setText("Set Resources");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(25, 3, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(68, 89, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
         jPickResourceType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
@@ -82,11 +83,11 @@ public class TeacherSetResources extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(23, 89, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(49, 89, 0, 0);
         getContentPane().add(jPickResourceType, gridBagConstraints);
 
         jButton1.setText("Choose");
@@ -96,12 +97,11 @@ public class TeacherSetResources extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridx = 15;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(23, 29, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(51, 29, 0, 97);
         getContentPane().add(jButton1, gridBagConstraints);
 
         jResourceList.setForeground(new java.awt.Color(0, 153, 255));
@@ -113,24 +113,25 @@ public class TeacherSetResources extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jResourceList);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 15;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 274;
         gridBagConstraints.ipady = 114;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 89, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(12, 89, 0, 97);
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
         jLabel2.setText("Resources: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 89, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(33, 89, 0, 0);
         getContentPane().add(jLabel2, gridBagConstraints);
 
         jAssign.setText("Assign");
@@ -140,11 +141,11 @@ public class TeacherSetResources extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(41, 35, 52, 0);
+        gridBagConstraints.insets = new java.awt.Insets(41, 35, 19, 0);
         getContentPane().add(jAssign, gridBagConstraints);
 
         jResourceNum.addActionListener(new java.awt.event.ActionListener() {
@@ -153,22 +154,22 @@ public class TeacherSetResources extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 15;
         gridBagConstraints.ipadx = 226;
         gridBagConstraints.ipady = 17;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 89, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 89, 0, 97);
         getContentPane().add(jResourceNum, gridBagConstraints);
 
         jLabel3.setText("Select Resource (  Select Number ) : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 89, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 89, 0, 0);
         getContentPane().add(jLabel3, gridBagConstraints);
 
         jBackButton.setText("Back");
@@ -178,40 +179,36 @@ public class TeacherSetResources extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 14;
+        gridBagConstraints.gridx = 15;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(31, 28, 0, 27);
+        gridBagConstraints.insets = new java.awt.Insets(74, 29, 0, 97);
         getContentPane().add(jBackButton, gridBagConstraints);
 
         jDueDate.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 10;
         gridBagConstraints.ipadx = 59;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 95, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 2, 0, 97);
         getContentPane().add(jDueDate, gridBagConstraints);
 
         jLabel4.setText("Due Date ( YYYY-MM-DD):");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 77, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 77, 0, 97);
         getContentPane().add(jLabel4, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.ipadx = 105;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 0);
         getContentPane().add(jRetryInput, gridBagConstraints);
 
         pack();
@@ -271,8 +268,7 @@ public class TeacherSetResources extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Deadline must be after todays date", "Try Again" ,JOptionPane.ERROR_MESSAGE);
                 jDueDate.setText("");
             }
-        }
-            
+        }           
     }//GEN-LAST:event_jAssignActionPerformed
 
     private void jBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackButtonActionPerformed

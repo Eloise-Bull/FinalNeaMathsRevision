@@ -23,6 +23,9 @@ public class Resources extends javax.swing.JFrame {
         for (int i = 0; i < ListOfTopics.size(); i ++ ){
             jComboBoxTopics.addItem(ListOfTopics.get(i));
         }
+        String ResourceType = jComboBoxTopics.getSelectedItem().toString();
+        ListModel<String> URLS = AssigningAResource.ResourceListToScreen(ResourceType);
+        jResourceList.setModel(URLS);
     }
     
     

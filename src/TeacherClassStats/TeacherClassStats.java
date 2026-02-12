@@ -131,11 +131,11 @@ public class TeacherClassStats extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 351;
-        gridBagConstraints.ipady = 122;
+        gridBagConstraints.ipady = 134;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(18, 12, 0, 21);
+        gridBagConstraints.insets = new java.awt.Insets(28, 12, 26, 21);
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
         jButton2.setText("Select");
