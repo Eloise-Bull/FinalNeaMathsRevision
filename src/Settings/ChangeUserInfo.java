@@ -35,6 +35,11 @@ public class ChangeUserInfo extends javax.swing.JFrame {
         }
         else if ("Delete Account".equals(WhatToChange)){
             jChange.setText("Delete Account");
+            jOriginalPassword.setVisible(false);
+            jPasswordField.setVisible(false);
+            jConfirmPasswordField.setVisible(false);
+            jChangeUsername.setVisible(false);
+            jSubmitButton.setText("Delete");
         }
         else if ("Password".equals(WhatToChange)){
             jChange.setText("Change Password");
@@ -58,7 +63,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
         jChange = new javax.swing.JLabel();
         jChangeUsername = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jSubmitButton = new javax.swing.JButton();
         jOriginalPassword = new javax.swing.JPasswordField();
         jConfirmPasswordField = new javax.swing.JPasswordField();
         jPasswordField = new javax.swing.JPasswordField();
@@ -77,10 +82,10 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Submit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jSubmitButton.setText("Submit");
+        jSubmitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jSubmitButtonActionPerformed(evt);
             }
         });
 
@@ -92,7 +97,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(223, 223, 223)
-                        .addComponent(jButton2))
+                        .addComponent(jSubmitButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -125,7 +130,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jConfirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(jSubmitButton)
                 .addGap(33, 33, 33))
         );
 
@@ -133,7 +138,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubmitButtonActionPerformed
         int StudentId = Login.InfoOfUserForThisLoginSession.StudentId;
         int TeacherID = Login.InfoOfUserForThisLoginSession.TeacherId;
         String userType = Login.InfoOfUserForThisLoginSession.userType ;
@@ -177,8 +182,11 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             }
         }
         else if ("Delete Account".equals(WhatToChange)){
-
-            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Are You Sure You Would Like To Delete Your Account",
+            String TeacherMessage = "";
+            if ("Teacher".equals(userType)){
+                TeacherMessage = "Even Though It Will Delete Your Student's Accounts As Well";
+            }
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Are You Sure You Would Like To Delete Your Account" + TeacherMessage,
                         "Confirm" ,JOptionPane.YES_NO_OPTION)){
                 boolean success = change.DeleteAccount(id, userType);
                 if (success) {
@@ -237,10 +245,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                 
             }
         }  
-        else if ("Delete Account".equals(WhatToChange)){
-            
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jSubmitButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Settings viewSettings = new Settings();
@@ -275,12 +280,12 @@ public class ChangeUserInfo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jChange;
     private javax.swing.JTextField jChangeUsername;
     private javax.swing.JPasswordField jConfirmPasswordField;
     private javax.swing.JLabel jInstructions;
     private javax.swing.JPasswordField jOriginalPassword;
     private javax.swing.JPasswordField jPasswordField;
+    private javax.swing.JButton jSubmitButton;
     // End of variables declaration//GEN-END:variables
 }

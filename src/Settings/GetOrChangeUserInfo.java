@@ -182,7 +182,9 @@ public class GetOrChangeUserInfo {
             Statement statement = connection.createStatement();
             
             if ("Student".equals(User)){
-                statement.execute("DELETE FROM " + User + " WHERE " + User +"_id = " + UserID);
+                statement.execute("DELETE FROM TopicStats WHERE Student_id = "+ UserID +"; "
+                        + "DELETE FROM Assigned WHERE StudentId = "+ UserID +"; "
+                                + "DELETE FROM Student WHERE Student_id = "+ UserID);
                 return true;
             }
             else{
