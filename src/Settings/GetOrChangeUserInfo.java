@@ -175,11 +175,20 @@ public class GetOrChangeUserInfo {
     }
 
     //// delete Account
+    ///when deleting student account need to get rid of Student, TopicStats, Assigned
+    /// teacher get rid of students, assignment info, assigned
     public boolean DeleteAccount(int UserID, String User) {
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            statement.execute("DELETE FROM " + User + " WHERE " + User +"_id = " + UserID);
-            return true;
+            
+            if ("Student".equals(User)){
+                statement.execute("DELETE FROM " + User + " WHERE " + User +"_id = " + UserID);
+                return true;
+            }
+            else{
+                statement.execute("DELETE FROM " + User + " WHERE " + User +"_id = " + UserID);
+                return true;
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
