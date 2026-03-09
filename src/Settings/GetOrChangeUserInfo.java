@@ -182,13 +182,18 @@ public class GetOrChangeUserInfo {
             Statement statement = connection.createStatement();
             
             if ("Student".equals(User)){
-                statement.execute("DELETE FROM TopicStats WHERE Student_id = "+ UserID +"; "
-                        + "DELETE FROM Assigned WHERE StudentId = "+ UserID +"; "
-                                + "DELETE FROM Student WHERE Student_id = "+ UserID);
+                statement.executeUpdate("DELETE FROM TopicStats WHERE Student_id = "+ UserID);
+                statement.executeUpdate("DELETE FROM Assigned WHERE StudentId = "+ UserID);
+                statement.executeUpdate("DELETE FROM Student WHERE Student_id = "+ UserID);
                 return true;
             }
             else{
-                statement.execute("DELETE FROM " + User + " WHERE " + User +"_id = " + UserID);
+                statement.executeUpdate("DELETE FROM TopicStats WHERE Student_id IN ( SELECT Student_id FROM Teacher"+ UserID);
+                statement.executeUpdate("DELETE FROM Assigned WHERE StudentId = "+ UserID);
+                statement.executeUpdate("DELETE FROM Student WHERE Student_id = "+ UserID);
+                statement.execute("DELETE FROM Teacher");
+                statement.execute("DELETE FROM Teacher");
+                statement.execute("DELETE FROM Teacher WHERE Teacher_id = " + UserID);
                 return true;
             }
         }

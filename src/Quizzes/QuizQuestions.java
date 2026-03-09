@@ -180,7 +180,6 @@ public class QuizQuestions {
         for ( int i = 0; i < parts.length; i ++){
             PutAnswerBackTogether = PutAnswerBackTogether + parts[i] ;
         }
-        System.out.println(PutAnswerBackTogether);
         return PutAnswerBackTogether;
     }
 
