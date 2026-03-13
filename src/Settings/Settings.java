@@ -34,6 +34,9 @@ public class Settings extends javax.swing.JFrame {
         jtxtUsername.setText("Username : " + DataArray[0]);
         jtxtEmail.setText("Email : " + DataArray[1]);
         jtxtClass.setText("Class : " + ClassID );
+        if ( "Teacher".equals(userType)){
+            jDelete.setVisible(false);
+        }
         
     }
 
@@ -56,7 +59,7 @@ public class Settings extends javax.swing.JFrame {
         jChangeUsername = new javax.swing.JButton();
         jChangeEmail = new javax.swing.JButton();
         jtxtHome = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jDelete = new javax.swing.JButton();
 
         jTextField2.setEditable(false);
         jTextField2.setText("jTextField1");
@@ -112,10 +115,10 @@ public class Settings extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Delete Account");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jDelete.setText("Delete Account");
+        jDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jDeleteActionPerformed(evt);
             }
         });
 
@@ -148,7 +151,7 @@ public class Settings extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(jDelete)
                             .addComponent(jtxtClass, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -180,7 +183,7 @@ public class Settings extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jtxtClass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jDelete)
                 .addGap(28, 28, 28))
         );
 
@@ -227,12 +230,12 @@ public class Settings extends javax.swing.JFrame {
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jChangeEmailActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
         WhatToChange.WhatToChange = "Delete Account";
         ChangeUserInfo ToNextScreen = new ChangeUserInfo();  
         ToNextScreen.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,10 +273,10 @@ public class Settings extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jChangeEmail;
     private javax.swing.JButton jChangePassword;
     private javax.swing.JButton jChangeUsername;
+    private javax.swing.JButton jDelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jtxtClass;

@@ -180,22 +180,13 @@ public class GetOrChangeUserInfo {
     public boolean DeleteAccount(int UserID, String User) {
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
-            
             if ("Student".equals(User)){
                 statement.executeUpdate("DELETE FROM TopicStats WHERE Student_id = "+ UserID);
                 statement.executeUpdate("DELETE FROM Assigned WHERE StudentId = "+ UserID);
                 statement.executeUpdate("DELETE FROM Student WHERE Student_id = "+ UserID);
                 return true;
             }
-            else{
-                statement.executeUpdate("DELETE FROM TopicStats WHERE Student_id IN ( SELECT Student_id FROM Teacher"+ UserID);
-                statement.executeUpdate("DELETE FROM Assigned WHERE StudentId = "+ UserID);
-                statement.executeUpdate("DELETE FROM Student WHERE Student_id = "+ UserID);
-                statement.execute("DELETE FROM Teacher");
-                statement.execute("DELETE FROM Teacher");
-                statement.execute("DELETE FROM Teacher WHERE Teacher_id = " + UserID);
-                return true;
-            }
+            return false;
         }
         catch (Exception e) {
             e.printStackTrace();

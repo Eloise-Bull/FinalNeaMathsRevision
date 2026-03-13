@@ -182,11 +182,8 @@ public class ChangeUserInfo extends javax.swing.JFrame {
             }
         }
         else if ("Delete Account".equals(WhatToChange)){
-            String TeacherMessage = "";
-            if ("Teacher".equals(userType)){
-                TeacherMessage = "Even Though It Will Delete Your Student's Accounts As Well";
-            }
-            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Are You Sure You Would Like To Delete Your Account" + TeacherMessage,
+
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Are You Sure You Would Like To Delete Your Account",
                         "Confirm" ,JOptionPane.YES_NO_OPTION)){
                 boolean success = change.DeleteAccount(id, userType);
                 if (success) {
