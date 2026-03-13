@@ -42,7 +42,6 @@ public class VeiwResources {
             }
             
             // need to reset count as when i was clicking button multiple times the count was still adding up
-            System.out.println(count);
             count = 0;
             return ResourceList;
             

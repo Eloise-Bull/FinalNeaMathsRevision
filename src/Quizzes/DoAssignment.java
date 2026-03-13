@@ -27,7 +27,7 @@ public class DoAssignment {
         }
         
     }
- 
+    // marks assignment as done on database 
     public void setAssignmentToDone(int AssignmentId, int AssignedID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();

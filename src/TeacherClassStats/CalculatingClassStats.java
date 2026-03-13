@@ -18,6 +18,8 @@ public class CalculatingClassStats {
     private static float AverageClass;
     
     public static float CalculatingAverageClassStats(){
+        // uses method to get a list of all students statistics for each topic 
+        // then calculates the everage
         ArrayList<Float> AllStudents = ArrayListStudentStats();
         int count = 0;
         for ( int i = 0; i < AllStudents.size(); i ++){

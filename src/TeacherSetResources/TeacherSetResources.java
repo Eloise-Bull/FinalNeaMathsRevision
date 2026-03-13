@@ -215,17 +215,15 @@ public class TeacherSetResources extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //wanna use button to set the resource type to be the one from the slected box
+        //set the resource type to be the one from the slected box
         String ResourceType = jPickResourceType.getSelectedItem().toString();
         jResourceList.setModel(AssigningAResource.ResourceListToScreen(ResourceType));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPickResourceTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPickResourceTypeActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jPickResourceTypeActionPerformed
-////////////////////////////////////////////////////////////////////
-    //fix whatever ive messed up here probs the or could be an and by accidnet and like it just kinda froze/ crashed a little fix it 
-    // or the scanner ?? bro idk 
+
     private void jAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAssignActionPerformed
         String Duedate = jDueDate.getText();
         
@@ -259,7 +257,7 @@ public class TeacherSetResources extends javax.swing.JFrame {
                 String TypeOfResource = jPickResourceType.getSelectedItem().toString();
 
                 int ClassId = Login.InfoOfUserForThisLoginSession.UserClassID ;
-                AssigningAResource.SetResourceToClassOrStudent(TypeOfResource,resourceNum,ClassId,Duedate );
+                AssigningAResource.SetResourceToClass(TypeOfResource,resourceNum,ClassId,Duedate );
                 jResourceNum.setText("");
                 jDueDate.setText("");
                 JOptionPane.showMessageDialog(this, "Assignment set", "Success" ,JOptionPane.INFORMATION_MESSAGE);

@@ -14,6 +14,8 @@ import java.sql.Statement;
  * @author elois
  */
 public class QuizOutputClass {
+    
+    // returns the topic for the question so that topic stats - in database - can be accurately updated 
     public String ReturnTopic(String Question){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();

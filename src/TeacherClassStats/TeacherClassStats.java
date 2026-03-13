@@ -42,14 +42,6 @@ public class TeacherClassStats extends javax.swing.JFrame {
         }
     }
     
-
-    public void putDataIntoTable(){
-        DefaultTableModel model = (DefaultTableModel) jTableStats.getModel();
-        ArrayList<Float> Stats = CalculatingClassStats.ArrayListStudentStats();
-        for ( int i = 1; i < Stats.size(); i++)
-            model.addRow(new Object[] {Stats.get(i)});
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -174,7 +166,7 @@ public class TeacherClassStats extends javax.swing.JFrame {
         String HowToSort = jComboBox.getSelectedItem().toString();
         int ClassID = Login.InfoOfUserForThisLoginSession.UserClassID;
         DefaultTableModel ClassStatsTable = new DefaultTableModel();
-        System.out.println(HowToSort);
+        // how to sort is either "all", a topic, or a student name
         if ("All".equals(HowToSort)){
             CalculatingClassStats Stats = new CalculatingClassStats();
             ClassStatsTable = Stats.RowsInTable(ClassID);

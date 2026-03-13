@@ -16,7 +16,7 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author 4-EBULL
  */
 public class GetOrChangeUserInfo {
-    // finish the array
+    // this is used ot ge tthe outputs displayed wen the setting sscreen is opened email and username
     public String[] GetUserInfo(int ClassID, String User, int Studentid,int TeacherId){
         String[] arrayForDetails = new String[2];
         int id;
@@ -55,7 +55,7 @@ public class GetOrChangeUserInfo {
             ResultSet Results = statement.executeQuery("SELECT EXISTS ( "
                     + "SELECT 1 FROM "+User+" WHERE username = '"+ Username+"')");
             if (Results.next()){
-                // if =1 then there is already a username like it so return false
+                // if = 1 then there is already a username like it so return false
                 if (Results.getInt(1)==1){
                     return false;
                 }
@@ -176,7 +176,7 @@ public class GetOrChangeUserInfo {
 
     //// delete Account
     ///when deleting student account need to get rid of Student, TopicStats, Assigned
-    /// teacher get rid of students, assignment info, assigned
+    ///// need to delete in specific order because of foregin keys / relationships etc. topic stats, assigned and then student
     public boolean DeleteAccount(int UserID, String User) {
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();

@@ -161,38 +161,35 @@ public class TeacherHome extends javax.swing.JFrame {
     private void jBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackButtonActionPerformed
         Login logout = new Login();
         logout.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();       
     }//GEN-LAST:event_jBackButtonActionPerformed
 
     private void jButtonQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuizActionPerformed
 
         TeacherSetQuiz ToScreen = new TeacherSetQuiz();
         ToScreen.setVisible(true);
-        this.dispose();// TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButtonQuizActionPerformed
 
     private void jButtonResourcesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResourcesActionPerformed
         TeacherSetResources viewResources = new TeacherSetResources();
         viewResources.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();       
     }//GEN-LAST:event_jButtonResourcesActionPerformed
 
     private void jButtonSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSettingsActionPerformed
         Settings viewSettings = new Settings();
         viewSettings.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();       
     }//GEN-LAST:event_jButtonSettingsActionPerformed
 
     private void jButtonAssignedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignedActionPerformed
- 
         TeacherSeeSetAssignments viewAssigned = new TeacherSeeSetAssignments();
         viewAssigned.setVisible(true);
         this.dispose();
-// TODO add your handling code here:
     }//GEN-LAST:event_jButtonAssignedActionPerformed
 
     private void jButtonStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStatsActionPerformed
-
         TeacherClassStats viewAssigned = new TeacherClassStats();
         viewAssigned.setVisible(true);
         this.dispose();

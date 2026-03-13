@@ -19,7 +19,7 @@ public class AssigningQuiz {
         private static int NumOfStudents;
         private static int AssignmentIdLastUpdated;
         
-        
+    // is used for the combo box shows all topics     
     public ArrayList<String> TopicsForDropDownBox(){
         ArrayList<String> TopicList = new ArrayList<>();
         try (Connection connection = TheConnectionToDatabase()){
@@ -64,7 +64,7 @@ public class AssigningQuiz {
             if (results.next()){
                AssignmentIdLastUpdated = results.getInt("id");
             }
-            // for each studenet in class x insert assigned    
+            // for each student in class x insert assigned    
             //insert assigned id assignnmentinfo id form last code, teacher id and false.
             // as login doesnt work yet ive temp set teach id to 1.
             for ( int i = 0; i < NumOfStudents; i++) {

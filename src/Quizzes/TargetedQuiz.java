@@ -17,7 +17,7 @@ import java.util.Random;
  * @author elois
  */
 public class TargetedQuiz {
-    // uses the random number to get the question. 
+    // uses the random number to get the question from the list of specific topic questions
     public String TargetedQuestions(Boolean Assignment, String Topic){
         ArrayList<String> TopicQuestionsList = new ArrayList<>();
         int CurrentTopicId;
@@ -51,8 +51,9 @@ public class TargetedQuiz {
     
     /////////////////////////////////////////////////////////////////////////////////////////////////
     ///THIS WHOLE SECTIONS IS TO CALCULATE THE STATS FOR EACH TOPIC FOR THE STUDNET 
-    ///
-    ///
+ 
+    
+   
     ///return topicID for question
     public int ReturnTopicID(String Question){
         try (Connection connection = TheConnectionToDatabase()){
@@ -72,7 +73,7 @@ public class TargetedQuiz {
     ///
     ///
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // for the specific questions thingy it return the the topic id
+    // for the specific questions thingy it return the the topic id that the topic score is the worst for
     public static int ReturnTopicID(){
         int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
         try (Connection connection = TheConnectionToDatabase()){

@@ -462,25 +462,28 @@ public class Quizzes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     private void jtxtHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtHomeActionPerformed
+        // go to the home screen
         StudentHome submitButton = new StudentHome();  
         submitButton.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();        
     }//GEN-LAST:event_jtxtHomeActionPerformed
 
     private void jButtonRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRandomActionPerformed
+        // if change radio button it changes the question
         targeted = false;
         RandomQuiz quiz = new RandomQuiz();
         jtxtQuizQuestion.setText(quiz.RandomQuiz());
     }//GEN-LAST:event_jButtonRandomActionPerformed
 
     private void jButtonTargetedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTargetedActionPerformed
+        // if change radio button it changes the question
         targeted = true; 
         TargetedQuiz TQuiz = new TargetedQuiz();
         jtxtQuizQuestion.setText(TQuiz.TargetedQuestions(false, null));
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTargetedActionPerformed
 
     private void jFinishQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFinishQuizActionPerformed
+        // buttons for when they finish quiz takes them to new screen that displays the results of quiz
         QuizOutput NewScreen = new QuizOutput();  
         NewScreen.setVisible(true);
         this.dispose();

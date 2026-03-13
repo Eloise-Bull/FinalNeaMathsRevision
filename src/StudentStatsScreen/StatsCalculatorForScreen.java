@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class StatsCalculatorForScreen {
     
+    // returns the list of all the students scores for each topic to later calucalte their average statistic 
     public static ArrayList<Float> averageStatsForStudent(int StudentID){
         ArrayList<Float> StatsList = new ArrayList<>();
         try (Connection connection = TheConnectionToDatabase()){
@@ -35,12 +36,10 @@ public class StatsCalculatorForScreen {
         }
         
     }
-    
+    // uses the list of topic stats to calculat ethe average statistic for the student - to 2 dp
     public static float CalculatingAverageStats(){
         int Student_id = Login.InfoOfUserForThisLoginSession.StudentId ;
-        System.out.println(Student_id);
         ArrayList<Float> AllStats = averageStatsForStudent(Student_id);
-        System.out.println(AllStats);
         float AverageStats = 0;
         int count = 0;
         for ( int i = 0; i < AllStats.size(); i ++){

@@ -30,6 +30,7 @@ public class Settings extends javax.swing.JFrame {
         String userType = Login.InfoOfUserForThisLoginSession.userType ;
         String[] DataArray = new String[3];
         GetOrChangeUserInfo get = new GetOrChangeUserInfo();
+        // data array just holds the username and email for the user to be displayed on screeen
         DataArray = get.GetUserInfo(ClassID,userType,StudentId,TeacherID);
         jtxtUsername.setText("Username : " + DataArray[0]);
         jtxtEmail.setText("Email : " + DataArray[1]);
@@ -204,6 +205,7 @@ public class Settings extends javax.swing.JFrame {
 
     private void jtxtHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtHomeActionPerformed
         String User = Login.InfoOfUserForThisLoginSession.userType ;
+        // if statments as the back button needs to go to the correct screen 
         if (User.equals("Teacher")){
             TeacherHome ToTeacherScreen = new TeacherHome();  
             ToTeacherScreen.setVisible(true);
@@ -220,14 +222,14 @@ public class Settings extends javax.swing.JFrame {
         WhatToChange.WhatToChange = "Password";
         ChangeUserInfo ToNextScreen = new ChangeUserInfo();  
         ToNextScreen.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();        
     }//GEN-LAST:event_jChangePasswordActionPerformed
 
     private void jChangeEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeEmailActionPerformed
         WhatToChange.WhatToChange = "Email";
         ChangeUserInfo ToNextScreen = new ChangeUserInfo();  
         ToNextScreen.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();        
     }//GEN-LAST:event_jChangeEmailActionPerformed
 
     private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed

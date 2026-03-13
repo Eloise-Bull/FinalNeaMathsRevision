@@ -19,6 +19,8 @@ public class AssigningAResource {
     private static int AssignmentIdLastUpdated;
     private static int NumOfStudents;
     
+    // for list. if all outputs all the resources 
+    // else it deos them by topic
     public static ListModel<String> ResourceListToScreen(String ResourceType){
         DefaultListModel<String> ResourceList = new DefaultListModel<>();
         try (Connection connection = TheConnectionToDatabase()){
@@ -41,7 +43,6 @@ public class AssigningAResource {
             }
             
             // need to reset count as when i was clicking button multiple times the count was still adding up
-            System.out.println(count);
             count = 0;
             return ResourceList;
             
@@ -53,8 +54,8 @@ public class AssigningAResource {
         
         
     }
-    
-    public static void SetResourceToClassOrStudent(String ResourceType, int num, int classID, String DueDate){
+    //. assigns reosurce to class
+    public static void SetResourceToClass(String ResourceType, int num, int classID, String DueDate){
         
         ArrayList<String> List = new ArrayList<>();
         String resource = null;
@@ -82,10 +83,7 @@ public class AssigningAResource {
         catch (Exception e) {
             e.printStackTrace();
         }
-        
-        /////////////////////////////////////////////////////////////////////////////////////
-        // this may just return the resourceID 0 ???? CHECK WHEN FICED THE DATABASE TABLE 
-        
+
         int resourceID = 0;
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();

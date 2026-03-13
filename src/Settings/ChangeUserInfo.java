@@ -27,6 +27,8 @@ public class ChangeUserInfo extends javax.swing.JFrame {
         jPasswordField.setVisible(false);
         jConfirmPasswordField.setVisible(false);
         String WhatToChange = Settings.WhatToChange.WhatToChange ;
+        
+        // the if statments set the layout of the screen as ive reused it for all the changes need to be made in settings
         if ("Username".equals(WhatToChange)){
             jChange.setText("Change Username");
         }
@@ -139,10 +141,12 @@ public class ChangeUserInfo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubmitButtonActionPerformed
+        // get ids from login class
         int StudentId = Login.InfoOfUserForThisLoginSession.StudentId;
         int TeacherID = Login.InfoOfUserForThisLoginSession.TeacherId;
         String userType = Login.InfoOfUserForThisLoginSession.userType ;
         int id;
+        // now can use one variable instead of continuously using if statments to see which user it is
         if ("Student".equals(userType)){
             id = StudentId;
         }
@@ -241,6 +245,7 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Password Changed", "Success" ,JOptionPane.INFORMATION_MESSAGE);
                 
             }
+            // after change passwords fields reset
             jOriginalPassword.setText("");
             jPasswordField.setText("");
             jConfirmPasswordField.setText("");

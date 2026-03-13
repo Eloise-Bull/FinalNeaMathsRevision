@@ -19,6 +19,7 @@ public class Resources extends javax.swing.JFrame {
      */
     public Resources() {
         initComponents();
+        // for combo box lists the topics to chose from 
         ArrayList<String> ListOfTopics = VeiwResources.SetBox();
         for (int i = 0; i < ListOfTopics.size(); i ++ ){
             jComboBoxTopics.addItem(ListOfTopics.get(i));

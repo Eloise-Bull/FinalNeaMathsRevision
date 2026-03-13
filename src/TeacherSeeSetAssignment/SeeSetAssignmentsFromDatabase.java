@@ -312,6 +312,7 @@ public class SeeSetAssignmentsFromDatabase {
         }
     }
         
+    // is added to the combo box
     public static ArrayList<String> SetBox(int ClassID){
         ArrayList<String> ListOfTopicNames = new ArrayList<>();
         try (Connection connection = TheConnectionToDatabase()){
@@ -329,6 +330,7 @@ public class SeeSetAssignmentsFromDatabase {
         }
     }
     
+    // returns true if works. and will display an error message to the user if not
     public static Boolean UpdateDateForAssignment(int days, int AssignmentID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
@@ -342,6 +344,7 @@ public class SeeSetAssignmentsFromDatabase {
         }
     }
     
+    // returns true if works. and will display an error message to the user if not
     public static Boolean DeleteAssignment(int AssignmentID){
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();

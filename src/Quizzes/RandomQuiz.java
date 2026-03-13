@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Random;
-import Quizzes.Quizzes.QuizDetails;
 
 /**
  *
@@ -52,6 +51,7 @@ public class RandomQuiz {
         }
         
     }
+    // uses import to get a random number in range of the amount of questions it has
     private int RandomNumForQuiz(){
         int size =(RandomQuiz.ArrayListQuestions()).size();
         Random random = new Random();

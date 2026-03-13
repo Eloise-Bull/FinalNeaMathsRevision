@@ -23,6 +23,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
     }
 
+    // public class to pull later holds nescassary info on current user
     public class InfoOfUserForThisLoginSession{
         public static String userType = "";
         public static int UserClassID = -1;
@@ -188,13 +189,14 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        // goes to next screen 
         LoginOrSignUp BackScreen = new LoginOrSignUp();
         BackScreen.setVisible(true);
-        this.dispose();            // TODO add your handling code here:
+        this.dispose();            
     }//GEN-LAST:event_jButtonBackActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        user = "Student";        // TODO add your handling code here:
+        user = "Student";        
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
