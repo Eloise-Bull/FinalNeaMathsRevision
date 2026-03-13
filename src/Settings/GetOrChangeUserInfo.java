@@ -140,10 +140,10 @@ public class GetOrChangeUserInfo {
 
         }
 
-        if ("Teacher".equals(user)) {
+        else if ("Teacher".equals(user)) {
             try (Connection connection = TheConnectionToDatabase()){
                 Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery("SELECT password_hash FROM Teacher WHERE Teacher _id = " +  UserID);
+                ResultSet results = statement.executeQuery("SELECT password_hash FROM Teacher WHERE Teacher_id = " +  UserID);
                 if (results.next()){
                     String PasswordHash = results.getString("password_hash");
                     boolean correctPassword = BCrypt.checkpw(EnteredPassword,PasswordHash);

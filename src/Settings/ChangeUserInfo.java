@@ -241,6 +241,9 @@ public class ChangeUserInfo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Password Changed", "Success" ,JOptionPane.INFORMATION_MESSAGE);
                 
             }
+            jOriginalPassword.setText("");
+            jPasswordField.setText("");
+            jConfirmPasswordField.setText("");
         }  
     }//GEN-LAST:event_jSubmitButtonActionPerformed
 
