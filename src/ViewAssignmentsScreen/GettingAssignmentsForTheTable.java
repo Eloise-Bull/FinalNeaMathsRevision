@@ -107,6 +107,9 @@ public class GettingAssignmentsForTheTable {
         AssignmentTable.addColumn("Done");
         AssignmentTable.addColumn("DueDate");
         
+        // due next needs ot be after or = to today. so i need todays date 
+        LocalDate today = LocalDate.now();
+        
         try (Connection connection = TheConnectionToDatabase()){
             Statement statement = connection.createStatement();
             // so basicallt it gets from 3 different tables and JOINS them and then uses where class from whatever studentid is  
@@ -118,7 +121,7 @@ public class GettingAssignmentsForTheTable {
                     + "JOIN AssignmentInfo ai ON a.AssignmentInfoId = ai.AssignmentInfo_id "
                     + "LEFT JOIN Resources r ON ai.ResourceID = r.ResourceId "
                     + "WHERE Student_id = " +StudentID 
-                    + " AND Done = false ORDER BY DueDate DESC LIMIT 1");
+                    + " AND Done = false AND DueDate >= '"+today+"'ORDER BY DueDate ASC LIMIT 1");
 
             while (results.next()){
                 int AssignmentID = results.getInt("AssignmentInfo_Id");
