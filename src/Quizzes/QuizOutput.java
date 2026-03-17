@@ -57,6 +57,7 @@ public class QuizOutput extends javax.swing.JFrame {
         Quizzes.QuizDetails.ListOfAnswers.clear();
         Quizzes.QuizDetails.ListOfQuestionsWrong.clear();
         Quizzes.QuizDetails.CurrentStats = null;
+        Quizzes.QuizDetails.ListOfUserAnswers.clear();
         Quizzes.QuizDetails.questionsDone = 0;
     }
     
