@@ -101,24 +101,7 @@ public class GetOrChangeUserInfo {
         }
     }
 
-    // for combo bow gives list of students
-    public static ArrayList<String> SetBox(int ClassID){
-        ArrayList<String> ListOfNames = new ArrayList<>();
-        try (Connection connection = TheConnectionToDatabase()){
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT username FROM Student WHERE Class_id = " + ClassID);
-            while (results.next()){
-                String Name = results.getString("username");
-                ListOfNames.add(Name);
-            }
-            return ListOfNames;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    
+
     // check password when they wanna change it they need their old password to compare and then they can change 
     // basically gets the stored hash from where it = the entered username 
     public boolean checkPasswordToOldOne(String user, int UserID, String EnteredPassword){
