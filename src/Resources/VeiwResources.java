@@ -28,16 +28,16 @@ public class VeiwResources {
                 ResultSet results = statement.executeQuery("SELECT Resource FROM Resources;");
                 while (results.next()){
                     count = count + 1;
-                    String StatsValue = results.getString("Resource");
-                    ResourceList.addElement(count +": " +StatsValue);
+                    String Resource = results.getString("Resource");
+                    ResourceList.addElement(count +": " +Resource);
                 }
             }
             else {
                 ResultSet results = statement.executeQuery("SELECT Resource FROM Resources WHERE Topic_Id = ( SELECT Topic_Id FROM Topic WHERE Topic ='" + ResourceType + "');");
                 while (results.next()){
                     count = count + 1;
-                    String StatsValue = results.getString("Resource");
-                    ResourceList.addElement(count + ": " +StatsValue);
+                    String Resource = results.getString("Resource");
+                    ResourceList.addElement(count + ": " +Resource);
                 }
             }
             
