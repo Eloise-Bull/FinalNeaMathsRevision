@@ -45,8 +45,8 @@ public class AssigningQuiz {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery("SELECT Student_Id FROM Student WHERE Class_Id = '" + ClassID + "'");
             while (results.next()){
-                String StatsValue = results.getString("Student_Id");
-                StudentList.add(StatsValue);
+                String StudentID = results.getString("Student_Id");
+                StudentList.add(StudentID);
             }
             NumOfStudents = StudentList.size();
         }
