@@ -29,16 +29,16 @@ public class AssigningAResource {
                 ResultSet results = statement.executeQuery("SELECT Resource FROM Resources;");
                 while (results.next()){
                     count = count + 1;
-                    String StatsValue = results.getString("Resource");
-                    ResourceList.addElement(count +": " +StatsValue);
+                    String Resource = results.getString("Resource");
+                    ResourceList.addElement(count +": " +Resource);
                 }
             }
             else {
                 ResultSet results = statement.executeQuery("SELECT Resource FROM Resources WHERE Topic_Id = ( SELECT Topic_Id FROM Topic WHERE Topic ='" + ResourceType + "');");
                 while (results.next()){
                     count = count + 1;
-                    String StatsValue = results.getString("Resource");
-                    ResourceList.addElement(count + ": " +StatsValue);
+                    String Resource = results.getString("Resource");
+                    ResourceList.addElement(count + ": " +Resource);
                 }
             }
             
@@ -64,8 +64,8 @@ public class AssigningAResource {
             if ( "All".equals(ResourceType) ){
                 ResultSet results = statement.executeQuery("SELECT Resource FROM Resources;");
                 while (results.next()){
-                    String StatsValue = results.getString("Resource");
-                    List.add(StatsValue);
+                    String Resource = results.getString("Resource");
+                    List.add(Resource);
                 }
                 // its minus one cause the displayed number is count + 1 for the first item. 
                 resource = List.get(num - 1);
@@ -73,8 +73,8 @@ public class AssigningAResource {
             else {
                 ResultSet results = statement.executeQuery("SELECT Resource FROM Resources WHERE Topic_Id = ( SELECT Topic_Id FROM Topic WHERE Topic ='" + ResourceType + "');");
                 while (results.next()){
-                    String StatsValue = results.getString("Resource");
-                    List.add(StatsValue);
+                    String Resource = results.getString("Resource");
+                    List.add(Resource);
                 }
                 // its minus one cause the displayed number is count + 1 for the first item. 
                 resource = List.get(num - 1);
@@ -102,8 +102,8 @@ public class AssigningAResource {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery("SELECT Student_Id FROM Student WHERE Class_Id = '" + classID + "'");
             while (results.next()){
-                String StatsValue = results.getString("Student_Id");
-                StudentList.add(StatsValue);
+                String StudentId = results.getString("Student_Id");
+                StudentList.add(StudentId);
             }
             NumOfStudents = StudentList.size();
         }
